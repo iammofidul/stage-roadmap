@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage App - 3-Month Product Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .amplitude-note {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .amplitude-note h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .amplitude-note p {
+            color: #856404;
+            font-size: 1em;
+        }
+
+        .funnel-snapshot {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .funnel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .funnel-card {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+            border-left: 5px solid #e74c3c;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .funnel-card.warning {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            border-left-color: #ff9800;
+        }
+
+        .funnel-card.success {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border-left-color: #4caf50;
+        }
+
+        .funnel-metric {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+
+        .funnel-label {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .initiative-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .initiative-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .initiative-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .initiative-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.3em;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .initiative-title {
+            font-size: 1.6em;
+            color: #2c3e50;
+            font-weight: bold;
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .initiative-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .badge-week {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .badge-team {
+            background: #f3e5f5;
+            color: #6a1b9a;
+        }
+
+        .badge-impact {
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-size: 1em;
+        }
+
+        .user-type-badge {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .user-type-badge h4 {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .amplitude-reference {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f3e5f5;
+            border-radius: 6px;
+        }
+
+        .amplitude-reference h4 {
+            font-size: 0.9em;
+            color: #6a1b9a;
+            margin-bottom: 8px;
+        }
+
+        .amplitude-reference p {
+            margin: 0;
+            color: #6a1b9a;
+            font-size: 0.9em;
+            line-height: 1.8;
+        }
+
+        .amplitude-reference strong {
+            font-weight: 600;
+        }
+
+        .why-section {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .why-section h4 {
+            color: #e65100;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .current-data {
+            background: #ffebee;
+            border-left: 4px solid #d32f2f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .current-data h4 {
+            color: #c62828;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .data-point {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ffcdd2;
+        }
+
+        .data-point:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .data-value {
+            font-weight: bold;
+            color: #d32f2f;
+        }
+
+        .expected-impact {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .expected-impact h4 {
+            color: #2e7d32;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .impact-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .impact-arrow {
+            color: #4caf50;
+            font-size: 1.5em;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .before-value {
+            background: #ffcdd2;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #c62828;
+        }
+
+        .after-value {
+            background: #c8e6c9;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .what-we-do {
+            margin: 20px 0;
+        }
+
+        .what-we-do h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .action-list {
+            list-style: none;
+        }
+
+        .action-list li {
+            padding: 12px 0 12px 30px;
+            position: relative;
+            line-height: 1.6;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .action-list li:last-child {
+            border-bottom: none;
+        }
+
+        .action-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .month-block {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-top: 5px solid #667eea;
+        }
+
+        .month-block h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .month-initiatives {
+            list-style: none;
+        }
+
+        .month-initiatives li {
+            background: white;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            font-size: 0.95em;
+        }
+
+        .stats-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .funnel-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Stage App: 3-Month Product Roadmap</h1>
+            <p>Data-Driven Strategy to Improve Retention & Trial Conversion</p>
+            <p style="margin-top: 10px; opacity: 0.9;">Team: 7 Flutter Developers | Duration: Feb - Apr 2026</p>
+        </header>
+
+        <!-- Amplitude Note -->
+        <div class="amplitude-note">
+            <h3>📊 Note: Amplitude Chart References</h3>
+            <p>Chart IDs throughout this document reference Amplitude funnels and analytics. Access your Amplitude dashboard directly to view these charts using the provided Chart IDs.</p>
+        </div>
+
+        <!-- Current Funnel State -->
+        <div class="funnel-snapshot">
+            <h2 class="section-title">📊 Current Funnel State (Last 30 Days - Amplitude Data)</h2>
+            <div class="funnel-grid">
+                <div class="funnel-card">
+                    <div class="funnel-label">🚨 Paywall Conversion (BIGGEST PROBLEM)</div>
+                    <div class="funnel-metric">27.5%</div>
+                    <p>909K users view paywall → 272K activate trial<br><strong>72.5% drop-off</strong> at critical moment</p>
+                </div>
+
+                <div class="funnel-card">
+                    <div class="funnel-label">💔 Trial Day-7 Retention (CATASTROPHIC)</div>
+                    <div class="funnel-metric">3.3%</div>
+                    <p>Only 8.2K out of 248K trial users retained<br><strong>96.7% churn</strong> within trial period</p>
+                </div>
+
+                <div class="funnel-card warning">
+                    <div class="funnel-label">📉 D0 Consumption (DECLINING)</div>
+                    <div class="funnel-metric">66-84%</div>
+                    <p>Dropped from 90% (early Jan) to 66% (late Jan)<br><strong>Losing 16-34%</strong> on first day</p>
+                </div>
+
+                <div class="funnel-card warning">
+                    <div class="funnel-label">⚠️ 90% Video Completion</div>
+                    <div class="funnel-metric">55%</div>
+                    <p>Half of users don't finish videos<br><strong>Engagement drop-off</strong> mid-content</p>
+                </div>
+
+                <div class="funnel-card warning">
+                    <div class="funnel-label">🏠 Home → Playback (10 min window)</div>
+                    <div class="funnel-metric">64%</div>
+                    <p>36% land on home but don't watch<br><strong>Discovery/motivation</strong> problem</p>
+                </div>
+
+                <div class="funnel-card success">
+                    <div class="funnel-label">✅ Login Success (STRONG)</div>
+                    <div class="funnel-metric">86%</div>
+                    <p>Not a problem area<br>No optimization needed</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Overview -->
+        <div class="section">
+            <h2 class="section-title">📅 3-Month Timeline Overview</h2>
+            <div class="timeline">
+                <div class="month-block">
+                    <h3>Month 1: Analytics Foundation</h3>
+                    <ul class="month-initiatives">
+                        <li>Cross-feature journey tracking</li>
+                        <li>Video completion optimization</li>
+                        <li>Special access funnel tracking</li>
+                    </ul>
+                </div>
+                <div class="month-block">
+                    <h3>Month 2: Conversion Optimization</h3>
+                    <ul class="month-initiatives">
+                        <li>Spin wheel → payment funnel</li>
+                        <li>Boost variant optimization</li>
+                        <li>Home screen discovery</li>
+                        <li>Resume trial incentives</li>
+                        <li>Post-payment engagement</li>
+                    </ul>
+                </div>
+                <div class="month-block">
+                    <h3>Month 3: Scale & Personalization</h3>
+                    <ul class="month-initiatives">
+                        <li>Internal monitoring dashboard</li>
+                        <li>Lapsed user win-back</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expected Results -->
+        <div class="stats-summary">
+            <h2 style="margin-bottom: 10px;">🎯 Expected Results After 3 Months</h2>
+            <p style="opacity: 0.9;">Conservative, achievable targets based on optimization efforts</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Paywall Conversion</div>
+                    <div class="stat-value">27.5% → 32%</div>
+                    <div style="margin-top: 10px; font-size: 0.9em;">+4.5pp improvement</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">D0 Consumption</div>
+                    <div class="stat-value">66% → 75%</div>
+                    <div style="margin-top: 10px; font-size: 0.9em;">+9pp improvement</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Trial D7 Retention</div>
+                    <div class="stat-value">3.3% → 6%</div>
+                    <div style="margin-top: 10px; font-size: 0.9em;">+82% increase</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">90% Video Completion</div>
+                    <div class="stat-value">55% → 62%</div>
+                    <div style="margin-top: 10px; font-size: 0.9em;">+7pp improvement</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Home → Playback</div>
+                    <div class="stat-value">64% → 74%</div>
+                    <div style="margin-top: 10px; font-size: 0.9em;">+10pp improvement</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Month 1 Initiatives -->
+        <div class="section">
+            <h2 class="section-title" style="border-color: #e74c3c; color: #e74c3c;">Month 1: Analytics Foundation</h2>
+
+            <!-- Initiative 1 -->
+            <div class="initiative-card">
+                <div class="initiative-header">
+                    <div class="initiative-number">#1</div>
+                    <div class="initiative-title">Cross-Feature Journey Tracking</div>
+                </div>
+                <div class="initiative-meta">
+                    <span class="badge badge-week">Week 1-2</span>
+                    <span class="badge badge-team">2 Developers</span>
+                    <span class="badge badge-impact">Foundation for All Analytics</span>
+                </div>
+
+                <div class="user-type-badge">
+                    <h4>🎯 Target Users:</h4>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <span class="badge" style="background: #e3f2fd; color: #1565c0;">all users</span>
+                    </div>
+                </div>
+
+                <div class="amplitude-reference">
+                    <h4>📊 Amplitude Data Reference:</h4>
+                    <p>
+                        <strong>Chart:</strong> Trial Retention Chart<br>
+                        <strong>Chart ID:</strong> 1y0ta29d<br>
+                        <strong>Current Rate:</strong> D7: 3.3%
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <strong>Chart:</strong> Paywall Conversion Funnel<br>
+                        <strong>Chart ID:</strong> six7gquy<br>
+                        <strong>Current Rate:</strong> 27.5%
+                    </p>
+                </div>
+
+                <div class="current-data">
+                    <h4>📉 Current Problem:</h4>
+                    <div class="data-point">
+                        <span class="data-label">Can we track users from special access to payment?</span>
+                        <span class="data-value">NO</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Do we know which feature sequence converts best?</span>
+                        <span class="data-value">NO</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Can we measure: "Users who unlock special access have X% higher retention"?</span>
+                        <span class="data-value">NO</span>
+                    </div>
+                </div>
+
+                <div class="why-section">
+                    <h4>🎯 Why This Initiative?</h4>
+                    <p><strong>The Problem:</strong> Features (special access, spin wheel) track events independently. We can't answer critical questions like:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>"Do users who unlock special access convert to paid at higher rates?"</li>
+                        <li>"Does Special Access → Payment convert better than Spin Wheel → Payment?"</li>
+                        <li>"What's the typical trial user journey from activation to payment?"</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>The Solution:</strong> Add a unique journey ID to every trial user that links all their events. This creates a "breadcrumb trail" from trial start to payment (or churn).</p>
+                </div>
+
+                <div class="what-we-do">
+                    <h4>✅ What We'll Do:</h4>
+                    <ul class="action-list">
+                        <li>Generate unique journey ID when user activates trial</li>
+                        <li>Add journey ID to all feature events: special access claims, spin wheel interactions, payment attempts</li>
+                        <li>Create milestone events: special access claim, spin wheel claim, first payment attempt</li>
+                        <li>Store journey ID locally so it persists across app sessions</li>
+                    </ul>
+                </div>
+
+                <div class="expected-impact">
+                    <h4>📈 How This Improves Funnels:</h4>
+                    <p><strong>Direct Impact:</strong> No immediate funnel improvement (this is infrastructure)</p>
+                    <p style="margin-top: 10px;"><strong>Enables Future Wins:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Identify high-converting feature sequences → prioritize showing those</li>
+                        <li>Find drop-off points in journey → fix them</li>
+                        <li>Measure: "Users who claim special access on Day 1 have 40% higher D7 retention" → optimize timing</li>
+                        <li>All Month 2-3 optimizations depend on this tracking</li>
+                    </ul>
+                    <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 6px;"><strong>Why First?</strong> Without journey tracking, we're flying blind. This unlocks data-driven decisions for everything else.</p>
+                </div>
+            </div>
+
+            <!-- Initiative 2 -->
+            <div class="initiative-card">
+                <div class="initiative-header">
+                    <div class="initiative-number">#2</div>
+                    <div class="initiative-title">Video Completion Rate Optimization</div>
+                </div>
+                <div class="initiative-meta">
+                    <span class="badge badge-week">Week 2-4</span>
+                    <span class="badge badge-team">2 Developers</span>
+                    <span class="badge badge-impact">+7pp Video Completion</span>
+                </div>
+
+                <div class="user-type-badge">
+                    <h4>🎯 Target Users:</h4>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <span class="badge" style="background: #e3f2fd; color: #1565c0;">trial_active</span>
+                        <span class="badge" style="background: #e3f2fd; color: #1565c0;">subscription_active</span>
+                    </div>
+                </div>
+
+                <div class="amplitude-reference">
+                    <h4>📊 Amplitude Data Reference:</h4>
+                    <p>
+                        <strong>Chart:</strong> 90% Video Completion Chart<br>
+                        <strong>Chart ID:</strong> q2dd1ib2<br>
+                        <strong>Current Rate:</strong> 55%
+                    </p>
+                </div>
+
+                <div class="current-data">
+                    <h4>📉 Current Amplitude Data:</h4>
+                    <div class="data-point">
+                        <span class="data-label">Users who start videos</span>
+                        <span class="data-value">204,259</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Users who reach 90% completion</span>
+                        <span class="data-value">113,229 (55%)</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Drop-off before completion</span>
+                        <span class="data-value">91,030 users (45%)</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Median time to start playback</span>
+                        <span class="data-value">24 seconds (TOO SLOW)</span>
+                    </div>
+                </div>
+
+                <div class="why-section">
+                    <h4>🎯 Why This Initiative?</h4>
+                    <p><strong>The Problem:</strong> <strong>45% of users abandon videos</strong> before 90% completion. This is a retention killer because:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Users who complete videos have <strong>2-3x higher Day-7 retention</strong></li>
+                        <li>Incomplete videos = unsatisfied users = churn</li>
+                        <li>You're losing engagement from half your active users</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Root Causes:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Slow start:</strong> 24 second median wait time → users give up</li>
+                        <li><strong>Lost context:</strong> User starts video, exits app, forgets what they were watching</li>
+                        <li><strong>Friction:</strong> No easy way to continue where they left off</li>
+                        <li><strong>No momentum:</strong> Video ends → user has to manually find next content → drops off</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>The Solution:</strong> Reduce friction at every step of the viewing experience.</p>
+                </div>
+
+                <div class="what-we-do">
+                    <h4>✅ What We'll Do:</h4>
+                    <ul class="action-list">
+                        <li><strong>Resume Watching Banner on Home:</strong> If user has partially watched videos (10-80% complete), show prominent banner with thumbnail + progress bar → One-tap to continue</li>
+                        <li><strong>Auto-Play Next Content:</strong> When video ends, show 5-second countdown to next episode/recommendation → Removes manual search friction</li>
+                        <li><strong>Skip Intro Button:</strong> For series content, detect intro section (first 60-90 seconds) → Show "Skip Intro" button → Get to content faster</li>
+                        <li><strong>Optimize Buffering:</strong> Reduce initial buffering from 24s → <3s → Track and measure startup time improvements</li>
+                        <li><strong>Progress Bars on Thumbnails:</strong> Show visual progress on all content cards (e.g., "75% watched" badge) → User remembers what they were watching</li>
+                    </ul>
+                </div>
+
+                <div class="expected-impact">
+                    <h4>📈 How This Improves Funnels:</h4>
+
+                    <p><strong>Video Completion Funnel Impact:</strong></p>
+                    <div class="impact-item">
+                        <span class="before-value">Video Start → 90%: 55%</span>
+                        <span class="impact-arrow">→</span>
+                        <span class="after-value">Video Start → 90%: 62%</span>
+                    </div>
+                    <div style="margin-top: 10px; padding: 10px; background: #e8f5e9; border-radius: 6px;">
+                        <strong>Result:</strong> +7pp improvement = 14,314 more users completing videos (per month)
+                    </div>
+
+                    <p style="margin-top: 20px;"><strong>Downstream Funnel Effects:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>D0 Consumption:</strong> Resume banner helps lapsed D0 users return → 66% → 68% (+2pp)</li>
+                        <li><strong>Trial D1 Retention:</strong> Users who complete 2+ videos have 35% higher D1 retention → 27% → 30% (+3pp)</li>
+                        <li><strong>Engagement Depth:</strong> Auto-play next increases videos per session → Higher engagement score → Better retention</li>
+                    </ul>
+
+                    <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 6px;"><strong>Why Prioritize?</strong> Video completion is a leading indicator of retention. Fix this early → compound effects throughout trial period.</p>
+                </div>
+            </div>
+
+            <!-- Initiative 3 -->
+            <div class="initiative-card">
+                <div class="initiative-header">
+                    <div class="initiative-number">#3</div>
+                    <div class="initiative-title">Special Access Complete Funnel Tracking</div>
+                </div>
+                <div class="initiative-meta">
+                    <span class="badge badge-week">Week 3-4</span>
+                    <span class="badge badge-team">2 Developers</span>
+                    <span class="badge badge-impact">Measure SA Effectiveness</span>
+                </div>
+
+                <div class="user-type-badge">
+                    <h4>🎯 Target Users:</h4>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <span class="badge" style="background: #e3f2fd; color: #1565c0;">non_subscriber</span>
+                    </div>
+                </div>
+
+                <div class="amplitude-reference">
+                    <h4>📊 Amplitude Data Reference:</h4>
+                    <p>
+                        <strong>Chart:</strong> Paywall Conversion Funnel<br>
+                        <strong>Chart ID:</strong> six7gquy<br>
+                        <strong>Current Rate:</strong> 27.5%
+                    </p>
+                    <p style="margin-top: 10px;">
+                        <strong>Chart:</strong> D0 Consumption Chart<br>
+                        <strong>Chart ID:</strong> qfskz34k<br>
+                        <strong>Current Rate:</strong> 66-84%
+                    </p>
+                </div>
+
+                <div class="current-data">
+                    <h4>📉 Current Measurement Gap:</h4>
+                    <div class="data-point">
+                        <span class="data-label">Special access offers shown</span>
+                        <span class="data-value">UNKNOWN</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Claim rate (offer → claim)</span>
+                        <span class="data-value">UNKNOWN</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Watch rate (claim → video start)</span>
+                        <span class="data-value">UNKNOWN</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Completion rate (start → 90%)</span>
+                        <span class="data-value">UNKNOWN</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Payment conversion (SA → paid)</span>
+                        <span class="data-value">UNKNOWN</span>
+                    </div>
+                </div>
+
+                <div class="why-section">
+                    <h4>🎯 Why This Initiative?</h4>
+                    <p><strong>The Problem:</strong> Special Access is a <strong>premium engagement feature</strong> but you have NO VISIBILITY into its effectiveness:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>You know users see offers, but not HOW MANY claim them</li>
+                        <li>Don't know if claimed special access leads to higher retention</li>
+                        <li>Can't measure: "Special access on Day 1 vs Day 3 - which converts better?"</li>
+                        <li>Missing: Drop-off analysis (where do users abandon?)</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>Business Critical:</strong> If special access is a retention driver, you need to:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Show it to more users (if it works)</li>
+                        <li>Show it at optimal time (Day 0? Day 1? Day 3?)</li>
+                        <li>Fix drop-offs (if claim rate is low, optimize offer)</li>
+                        <li>Prove ROI: "Special access users convert at X% higher rate"</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>The Solution:</strong> Track complete funnel from offer shown to payment conversion.</p>
+                </div>
+
+                <div class="what-we-do">
+                    <h4>✅ What We'll Do:</h4>
+                    <ul class="action-list">
+                        <li><strong>Complete Funnel Events:</strong> Track 5-step funnel: Offer shown → Offer claimed → Video started → Video 90% → Video completed</li>
+                        <li><strong>Content Context:</strong> Add content ID, title, genre to all events → Know which content works best</li>
+                        <li><strong>Timing Analysis:</strong> Track which trial day special access was claimed (Day 0, 1, 2...7) → Find optimal timing</li>
+                        <li><strong>Claim Speed:</strong> Track seconds between offer shown and claim button pressed → Measure urgency</li>
+                        <li><strong>Payment Correlation:</strong> Track if user paid within 7 days of claiming special access → Prove conversion lift</li>
+                        <li><strong>Trigger Source:</strong> Was special access shown by manual trigger or back-press experiment? → Measure which source works best</li>
+                    </ul>
+                </div>
+
+                <div class="expected-impact">
+                    <h4>📈 How This Improves Funnels:</h4>
+
+                    <p><strong>No Immediate Funnel Impact (Measurement Setup)</strong></p>
+
+                    <p style="margin-top: 15px;"><strong>Enables These Critical Decisions:</strong></p>
+
+                    <p style="margin-top: 15px;"><strong>Decision 1: Should we show special access to more users?</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>If claim rate >40% AND claimers have +30% higher D7 retention → Yes, expand</li>
+                        <li>If claim rate <20% OR no retention lift → No, optimize or deprioritize</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Decision 2: When should we show special access?</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>Compare: Day 0 claims vs Day 1 claims vs Day 3 claims → Retention difference?</li>
+                        <li>If Day 1 claimers have best retention → Optimize for Day 1 display</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Decision 3: Which content should we offer?</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>If action content has 60% completion but drama has 85% → Offer drama content</li>
+                        <li>Match content genre to user's preferences</li>
+                    </ul>
+
+                    <p style="margin-top: 20px;"><strong>Projected Impact (After Optimization in Month 2-3):</strong></p>
+                    <div style="margin-top: 10px; padding: 15px; background: #e8f5e9; border-radius: 6px;">
+                        <strong>If special access works:</strong> Expand to more users → Trial D7 retention +1-2pp<br>
+                        <strong>If special access doesn't work:</strong> Deprioritize → Free up dev time for higher-ROI features<br>
+                        <strong>Either way:</strong> Data-driven decision instead of guess
+                    </div>
+
+                    <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 6px;"><strong>Why Now?</strong> Special access is a major engagement bet. Without data, you're flying blind. Measure first, optimize second.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Month 2 Preview -->
+        <div class="section" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+            <h2 class="section-title" style="color: #f39c12;">Month 2 Preview: Conversion & Engagement (Week 5-8)</h2>
+            <p style="font-size: 1.1em; color: #666; margin-bottom: 20px;">With analytics foundation from Month 1, we'll optimize conversion funnels</p>
+
+            <ul style="list-style: none; margin-left: 0;">
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
+                    <strong>#4: Spin Wheel → Payment Optimization</strong> (Week 5-6, 2 devs) - A/B test timer duration & offer types, add urgency UI (+3pp conversion)<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: non_subscriber | Amplitude Chart ID: six7gquy</span>
+                </li>
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
+                    <strong>#5: Boost Variant Optimization</strong> (Week 5-7, 2 devs) - Smart selection (Commitment for dropoffs, Discovery for completers) (+4pp engagement)<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: trial_active | Amplitude Chart IDs: 1y0ta29d, qfskz34k</span>
+                </li>
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
+                    <strong>#6: Home Discovery Optimization</strong> (Week 6-8, 3 devs) - Continue watching row, quick picks, personalized order (+5pp home → playback)<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: all users | Amplitude Chart ID: hux9brmh</span>
+                </li>
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
+                    <strong>#7: Resume Trial Incentives</strong> (Week 7-8, 2 devs) - Discount offers, watch history, "what's new" (-3pp trial churn)<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: trial_over, subscription_over | Amplitude Chart ID: 1y0ta29d</span>
+                </li>
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
+                    <strong>#8: Post-Payment Engagement</strong> (Week 8, 2 devs) - Enhanced success screen, immediate watch CTA (+6pp D1 retention)<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: trial_active (newly activated) | Amplitude Chart ID: 1y0ta29d</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Month 3 Preview -->
+        <div class="section" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);">
+            <h2 class="section-title" style="color: #27ae60;">Month 3 Preview: Scale & Personalization (Week 9-12)</h2>
+            <p style="font-size: 1.1em; color: #666; margin-bottom: 20px;">Data-driven optimization and scaling what works</p>
+
+            <ul style="list-style: none; margin-left: 0;">
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #27ae60;">
+                    <strong>#9: Internal Monitoring Dashboard</strong> (Week 9-10, 2 devs) - Real-time metrics, alerts, Sankey journey diagram<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: all users (team tool) | Amplitude: All charts integrated</span>
+                </li>
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #27ae60;">
+                    <strong>#10: Lapsed User Win-Back</strong> (Week 11-12, 3 devs) - Takeover screen, incentives, deep links (Win back 10% lapsed users)<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: trial_over, subscription_over | Amplitude Chart ID: 1y0ta29d</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Bottom Line Impact -->
+        <div class="stats-summary">
+            <h2 style="margin-bottom: 20px;">💰 Bottom Line: Business Impact</h2>
+            <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin-top: 20px;">
+                <h3 style="margin-bottom: 15px;">With 900K Monthly Paywall Views:</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                    <div>
+                        <h4 style="opacity: 0.8;">Current State:</h4>
+                        <ul style="margin-top: 10px; line-height: 2;">
+                            <li>Trial activations: 248K (27.5%)</li>
+                            <li>D0 watching: 164K (66%)</li>
+                            <li>D7 retained: 8.2K (3.3%)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="opacity: 0.8;">After 3 Months:</h4>
+                        <ul style="margin-top: 10px; line-height: 2;">
+                            <li>Trial activations: 288K (32%) <strong>→ +40K trials</strong></li>
+                            <li>D0 watching: 216K (75%) <strong>→ +52K engaged</strong></li>
+                            <li>D7 retained: 17.3K (6%) <strong>→ +9.1K retained</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.2); border-radius: 8px;">
+                    <h3>Revenue Impact (Conservative):</h3>
+                    <p style="margin-top: 10px; font-size: 1.1em;">If 20% of D7 retained convert to paid: <strong>+1,820 paid subscribers/month</strong></p>
+                    <p style="margin-top: 10px; font-size: 1.1em;">At ₹500/month ARPU: <strong>+₹910K MRR (~$11K MRR)</strong></p>
+                    <p style="margin-top: 10px; font-size: 1.3em; font-weight: bold;">Annual impact: <strong>~₹10.9M ARR (~$131K ARR)</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; padding: 40px 20px; color: #666; margin-top: 40px; border-top: 2px solid #dee2e6;">
+            <p><strong>Stage App 3-Month Product Roadmap</strong></p>
+            <p>Data-Driven Strategy Based on Amplitude Funnel Analysis</p>
+            <p style="margin-top: 15px;">Generated: January 30, 2026</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Each initiative backed by current funnel data and clear improvement path</p>
+        </footer>
+    </div>
+</body>
+</html>

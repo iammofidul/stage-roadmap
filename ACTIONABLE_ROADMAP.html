@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage App - Actionable 3-Month Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .task-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-left: 6px solid #667eea;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left-color: #764ba2;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .task-number {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 1.1em;
+        }
+
+        .task-title {
+            font-size: 1.4em;
+            color: #2c3e50;
+            font-weight: bold;
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .badge-week {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-devs {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .badge-impact {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .task-description {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        .task-section-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .task-list {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .task-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .task-list li:last-child {
+            border-bottom: none;
+        }
+
+        .task-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 10px;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .code-snippet {
+            background: #f8f9fa;
+            border-left: 3px solid #667eea;
+            padding: 12px 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+
+        .file-path {
+            background: #fff3cd;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        .acceptance-criteria {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .acceptance-criteria h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .month-column {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 4px solid #667eea;
+        }
+
+        .month-column h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .month-tasks {
+            list-style: none;
+        }
+
+        .month-tasks li {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            font-size: 0.95em;
+        }
+
+        .dependencies {
+            background: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .dependencies h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Stage App: Actionable 3-Month Roadmap</h1>
+            <p>Specific, Executable Tasks | 7 Flutter Developers | Feb - Apr 2026</p>
+        </header>
+
+        <!-- High-Level Timeline -->
+        <div class="section">
+            <h2 class="section-title">📅 12-Week Timeline Overview</h2>
+            <div class="timeline">
+                <div class="month-column">
+                    <h3>Month 1 (Weeks 1-4)</h3>
+                    <ul class="month-tasks">
+                        <li>Task 1: Cross-feature journey tracking</li>
+                        <li>Task 2: Engagement orchestrator service</li>
+                        <li>Task 3: Video player completion optimization</li>
+                        <li>Task 4: Medal unlock analytics enhancement</li>
+                        <li>Task 5: Special access funnel tracking</li>
+                    </ul>
+                </div>
+                <div class="month-column">
+                    <h3>Month 2 (Weeks 5-8)</h3>
+                    <ul class="month-tasks">
+                        <li>Task 6: Spin wheel conversion optimization</li>
+                        <li>Task 7: Boost features sequencing</li>
+                        <li>Task 8: Home to playback optimization</li>
+                        <li>Task 9: Resume trial incentive messaging</li>
+                        <li>Task 10: Post-payment engagement flow</li>
+                    </ul>
+                </div>
+                <div class="month-column">
+                    <h3>Month 3 (Weeks 9-12)</h3>
+                    <ul class="month-tasks">
+                        <li>Task 11: Trial journey dashboard (internal)</li>
+                        <li>Task 12: Cross-feature A/B test framework</li>
+                        <li>Task 13: Personalized home screen rows</li>
+                        <li>Task 14: Lapsed trial win-back campaign</li>
+                        <li>Task 15: Medal-based content recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Month 1 Tasks -->
+        <div class="section">
+            <h2 class="section-title" style="border-color: #e74c3c; color: #e74c3c;">Month 1: Analytics & Orchestration</h2>
+
+            <!-- Task 1 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 1</div>
+                    <div class="task-title">Implement Unified Trial Journey Tracking</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 1-2</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">Foundation for all analytics</span>
+                </div>
+                <div class="task-description">
+                    Add trial_journey_id to track users across medal system → spin wheel → special access → payment.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Add UUID field <code>trial_journey_id</code> to AppRepository user model</li>
+                    <li>Generate journey ID when trial_activated event fires (backend already sends this)</li>
+                    <li>Persist journey_id in local storage (SharedPreferences)</li>
+                    <li>Add journey_id to BaseEvent class as common property</li>
+                    <li>Update all analytics events to include trial_journey_id: medal events, special_access events, spin_wheel events, payment events</li>
+                    <li>Create journey milestone events: first_medal_unlock, special_access_claim, spin_wheel_claim, first_payment_attempt</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/app/data/repositories/app_repository.dart</div>
+                <div class="file-path">lib/app/data/services/analytics.dart</div>
+                <div class="file-path">lib/trial_onboarding/analytics/content_onboarding_analytics_events.dart</div>
+                <div class="file-path">lib/special_access/analytics/special_access_analytics.dart</div>
+                <div class="file-path">lib/spin_wheel/analytics/spin_wheel_analytics_helper.dart</div>
+                <div class="file-path">lib/payment/data/services/payment_events.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Every trial user has unique trial_journey_id from activation</li>
+                        <li>All medal, special access, spin wheel, payment events include journey_id</li>
+                        <li>Can query Amplitude for journey: trial_activated → milestone_1 → milestone_2 → payment</li>
+                        <li>Journey ID persists across app sessions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 2 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 2</div>
+                    <div class="task-title">Build Engagement Orchestrator Service</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 2-4</span>
+                    <span class="badge badge-devs">3 Devs</span>
+                    <span class="badge badge-impact">Prevents feature conflicts</span>
+                </div>
+                <div class="task-description">
+                    Create service to coordinate when to show medal prompts, special access offers, spin wheel, and boost features.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Create EngagementOrchestratorService with @injectable annotation</li>
+                    <li>Define EngagementFeature enum: medal, specialAccess, spinWheel, commitmentBoost, discoveryBoost</li>
+                    <li>Define UserEngagementState enum: new, exploring, engaged, at_risk, lapsed</li>
+                    <li>Build feature priority queue: Medal > SpecialAccess > SpinWheel > Boost</li>
+                    <li>Implement cooldown manager: Store last_shown_timestamp for each feature in SharedPreferences</li>
+                    <li>Add shouldShowFeature(EngagementFeature feature) method that checks: priority, cooldown (6h min), user state, competing features</li>
+                    <li>Create recordFeatureShown(EngagementFeature feature) to update cooldown</li>
+                    <li>Add getNextRecommendedFeature() method based on user journey stage</li>
+                    <li>Fire orchestration_decision event with properties: feature_chosen, reason, user_state, competing_features</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Create:</div>
+                <div class="file-path">lib/features/engagement_orchestrator/data/services/engagement_orchestrator_service.dart</div>
+                <div class="file-path">lib/features/engagement_orchestrator/domain/models/engagement_feature.dart</div>
+                <div class="file-path">lib/features/engagement_orchestrator/domain/models/user_engagement_state.dart</div>
+                <div class="file-path">lib/features/engagement_orchestrator/analytics/orchestration_events.dart</div>
+
+                <div class="task-section-title">📁 Files to Modify (Integration):</div>
+                <div class="file-path">lib/trial_onboarding/logic/content_onboarding/content_onboarding_cubit.dart</div>
+                <div class="file-path">lib/special_access/logic/special_access_cubit.dart</div>
+                <div class="file-path">lib/spin_wheel/logic/spin_wheel_cubit.dart</div>
+                <div class="file-path">lib/boost_content_discovery/logic/boost_content_discovery_cubit.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Medal system consults orchestrator before showing prompt</li>
+                        <li>Special access consults orchestrator before displaying offer</li>
+                        <li>Spin wheel only shows if no higher-priority feature active</li>
+                        <li>Boost features respect 6h cooldown between any feature display</li>
+                        <li>Can track in Amplitude: which feature won when multiple were eligible</li>
+                    </ul>
+                </div>
+
+                <div class="dependencies">
+                    <h4>⚠️ Dependencies:</h4>
+                    <ul class="task-list">
+                        <li>Requires Task 1 (trial_journey_id) for journey stage calculation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 3 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 3</div>
+                    <div class="task-title">Video Player 90% Completion Optimization</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 2-3</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">+7pp completion rate</span>
+                </div>
+                <div class="task-description">
+                    Reduce friction preventing users from watching 90%+ of videos. Target: 55% → 62%.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Add "Resume Watching" banner on home screen: If user has unfinished videos (watched 10-80%), show banner with thumbnail + progress bar + "Continue" CTA</li>
+                    <li>Implement Watch Next auto-play: After video ends, show 5-second countdown with next episode/recommended content, allow cancel</li>
+                    <li>Add Skip Intro button: Detect intro patterns (first 60-90 seconds of series episodes), show "Skip Intro" button in player controls</li>
+                    <li>Optimize initial buffering: Track consumption_video_start_time event, measure time from user tap to playback start, optimize to <3 seconds</li>
+                    <li>Add progress indicators on thumbnails: Show watched percentage on all content cards (e.g., "75% watched" badge), green progress bar on thumbnail bottom</li>
+                    <li>Fix quality auto-switching: Track quality_change events with reason (manual vs auto), reduce aggressive downscaling on borderline connections</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/consumption/logic/cubit/consumption_cubit.dart</div>
+                <div class="file-path">lib/consumption/ui/screens/consumption_screen.dart</div>
+                <div class="file-path">lib/consumption/ui/widgets/player_controls.dart</div>
+                <div class="file-path">lib/home/ui/widgets/content_card.dart</div>
+                <div class="file-path">lib/home/ui/widgets/resume_watching_banner.dart (NEW)</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Resume watching banner shows if user has 1+ unfinished videos</li>
+                        <li>Watch Next auto-play countdown appears after video ends</li>
+                        <li>Skip Intro button shows for series content (detect via episode_number property)</li>
+                        <li>Average video start time < 3 seconds (track consumption_start_time)</li>
+                        <li>90% completion rate increases from 55% → 62%+ within 2 weeks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 4 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 4</div>
+                    <div class="task-title">Medal Unlock Analytics Enhancement</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 3-4</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">Deep medal insights</span>
+                </div>
+                <div class="task-description">
+                    Add granular properties to medal events to analyze unlock patterns and correlation with retention.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Add to onboarding_medal_unlock event: medal_type (first_download, first_watchlist, first_share), medal_number (1st, 2nd, 3rd medal unlocked), unlock_time_seconds (time since trial activation), trial_day (0, 1, 2...7)</li>
+                    <li>Track medal_unlock_sequence property: Ordered list of medals unlocked (e.g., "download,watchlist,share")</li>
+                    <li>Add medal_journey_completion_time: Total time to unlock all available medals</li>
+                    <li>Create medal_abandonment event: Fire if user unlocked 1 medal but didn't unlock any more within 24h</li>
+                    <li>Track medal_to_payment_conversion: Did user pay within 7 days? Add payment_converted property to medal events</li>
+                    <li>Add category_preference property: Which content category led to medal unlock (action, drama, comedy, etc.)</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/trial_onboarding/analytics/content_onboarding_analytics_events.dart</div>
+                <div class="file-path">lib/trial_onboarding/logic/content_onboarding/content_onboarding_cubit.dart</div>
+                <div class="file-path">lib/trial_onboarding/data/repositories/content_onboarding_repository_impl.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>All medal unlock events include 6 new properties (type, number, time, day, sequence, category)</li>
+                        <li>Can query Amplitude: "Users who unlocked 3 medals in <2h have X% higher retention"</li>
+                        <li>Medal abandonment event fires 24h after last unlock if journey incomplete</li>
+                        <li>Can measure: medal unlock speed correlation with payment conversion</li>
+                    </ul>
+                </div>
+
+                <div class="dependencies">
+                    <h4>⚠️ Dependencies:</h4>
+                    <ul class="task-list">
+                        <li>Requires Task 1 (trial_journey_id) for sequence tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 5 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 5</div>
+                    <div class="task-title">Special Access Complete Funnel Tracking</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 3-4</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">Measure SA effectiveness</span>
+                </div>
+                <div class="task-description">
+                    Track complete special access funnel: offer shown → claimed → video started → 90% completed.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Add content_id, content_title, content_genre to ALL special_access events</li>
+                    <li>Track trial_day_claimed: Which day of trial was special access claimed (0-7)</li>
+                    <li>Track special_access_source: orchestrator, manual_trigger, back_press_experiment</li>
+                    <li>Create complete funnel event sequence: special_access_offer_view → special_access_offer_claimed → special_access_video_start → special_access_video_90_percent → special_access_video_completed</li>
+                    <li>Add time_to_claim: Seconds between offer shown and claim button pressed</li>
+                    <li>Track did_lead_to_payment: Boolean property, did user pay within 7 days of claiming special access</li>
+                    <li>Unify analytics: Merge regular special access and micro-drama special access event schemas (currently separate)</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/special_access/analytics/special_access_analytics.dart</div>
+                <div class="file-path">lib/special_access/logic/special_access_cubit.dart</div>
+                <div class="file-path">lib/micro_drama_special_access/analytics/micro_drama_special_access_analytics.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Complete funnel tracked: offer → claim → start → 90% → complete</li>
+                        <li>Can measure drop-off at each step in Amplitude</li>
+                        <li>Can answer: "Users who claim special access on Day 0 vs Day 3 have X% different retention"</li>
+                        <li>Can answer: "Special access claims lead to X% payment conversion within 7 days"</li>
+                        <li>Regular and micro-drama special access have unified event schema</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Month 2 Tasks -->
+        <div class="section">
+            <h2 class="section-title" style="border-color: #f39c12; color: #f39c12;">Month 2: Feature Optimization & Sequencing</h2>
+
+            <!-- Task 6 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 6</div>
+                    <div class="task-title">Spin Wheel Conversion Funnel Optimization</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 5-6</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">+3pp spin → payment</span>
+                </div>
+                <div class="task-description">
+                    Measure and optimize spin wheel → payment conversion. Currently unknown if it works.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Track complete funnel: spin_wheel_viewed → spin_wheel_spun → spin_wheel_offer_claimed → payment_initiated → payment_success</li>
+                    <li>Add drop-off tracking: spin_wheel_dismiss_reason (timer_expired, back_pressed, not_interested)</li>
+                    <li>A/B test timer duration: Test 5min vs 10min vs 15min claim windows, track conversion for each</li>
+                    <li>Test offer types: 30% discount vs flat ₹99 off vs "1 month free content", track which converts best</li>
+                    <li>Add urgency UI: When <2 min remaining, show pulsing timer + "Offer expiring soon!" message</li>
+                    <li>Track spin_to_payment_time: How long from spin to actual payment (seconds)</li>
+                    <li>Add retry logic: If payment fails, show "Try again" button with same spin reward</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/spin_wheel/logic/spin_wheel_cubit.dart</div>
+                <div class="file-path">lib/spin_wheel/ui/screens/spin_wheel_screen.dart</div>
+                <div class="file-path">lib/spin_wheel/analytics/spin_wheel_analytics_helper.dart</div>
+                <div class="file-path">lib/payment/ui/screens/payment_screen.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Can measure exact drop-off at each funnel step</li>
+                        <li>A/B test running: 3 timer variants, 3 offer variants</li>
+                        <li>Urgency messaging shows when <2 min remaining</li>
+                        <li>Spin → payment conversion improves by 3pp+ within 2 weeks</li>
+                        <li>Failed payments can retry without losing spin reward</li>
+                    </ul>
+                </div>
+
+                <div class="dependencies">
+                    <h4>⚠️ Dependencies:</h4>
+                    <ul class="task-list">
+                        <li>Requires Task 2 (orchestrator) to prevent spin wheel conflicts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 7 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 7</div>
+                    <div class="task-title">Boost Features Sequential Trigger Logic</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 5-7</span>
+                    <span class="badge badge-devs">3 Devs</span>
+                    <span class="badge badge-impact">+4pp engagement</span>
+                </div>
+                <div class="task-description">
+                    Coordinate Commitment Boost and Discovery Boost via orchestrator. Prevent overlaps.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Integrate CommitmentBoostCubit with EngagementOrchestrator: Before showing boost, call orchestrator.shouldShowFeature(commitmentBoost)</li>
+                    <li>Integrate DiscoveryBoostCubit with EngagementOrchestrator: Same check before display</li>
+                    <li>Define trigger rules in orchestrator: Show CommitmentBoost ONLY IF watched_videos < 2 AND no_special_access_active AND last_boost_shown > 6h ago</li>
+                    <li>Define trigger rules: Show DiscoveryBoost ONLY IF inactive_duration > 24h AND no_other_feature_active AND last_boost_shown > 6h ago</li>
+                    <li>Track boost_trigger_reason event property: low_watch_count, inactive_24h, category_not_explored</li>
+                    <li>A/B test boost timing: Show immediately vs 30min delay vs next_session, measure engagement lift</li>
+                    <li>Track boost_to_engagement: Did boost lead to +1 video watched within 1h? Track success rate</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/boost_content_discovery/logic/boost_content_discovery_cubit.dart</div>
+                <div class="file-path">lib/boost_content_discovery/logic/commitment_boost_cubit.dart</div>
+                <div class="file-path">lib/boost_content_discovery/analytics/boost_analytics.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Boost features consult orchestrator before showing</li>
+                        <li>No boost shown if special access or spin wheel active</li>
+                        <li>Commitment boost only for low-engagement users (<2 videos)</li>
+                        <li>Discovery boost only for inactive users (>24h gap)</li>
+                        <li>Can measure: boost_shown → engagement_increase correlation</li>
+                        <li>Engagement lift +4pp for users who see boost vs control</li>
+                    </ul>
+                </div>
+
+                <div class="dependencies">
+                    <h4>⚠️ Dependencies:</h4>
+                    <ul class="task-list">
+                        <li>Requires Task 2 (orchestrator) to be complete</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 8 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 8</div>
+                    <div class="task-title">Home to Playback Start Optimization</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 6-7</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">+5pp home → playback</span>
+                </div>
+                <div class="task-description">
+                    Reduce 36% drop-off between landing on home and starting playback (within 10 min). Target: 64% → 69%.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Add "Continue Watching" row at top of home: Show 3-5 partially watched videos with progress bars, make row persistent (always visible)</li>
+                    <li>Add "Quick Picks" carousel for trial users: Show <10 min content (shorts, clips, trailers) as first row, track quick_pick_clicked vs regular_content_clicked conversion</li>
+                    <li>Personalize row order: If user unlocked "Action" medal, show action content in top 2 rows, use medal preferences to reorder home rows</li>
+                    <li>Add auto-play preview on hover/long-press: 3-second video preview when user holds on thumbnail, track preview_to_playback conversion</li>
+                    <li>Optimize thumbnail quality: Ensure all thumbnails load <1 second, use progressive loading (blur → sharp)</li>
+                    <li>Track home_scroll_depth: How far did user scroll before exiting? Optimize content placement</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/home/logic/home_cubit.dart</div>
+                <div class="file-path">lib/home/ui/screens/home_screen.dart</div>
+                <div class="file-path">lib/home/ui/widgets/content_row.dart</div>
+                <div class="file-path">lib/home/ui/widgets/quick_picks_row.dart (NEW)</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>"Continue Watching" row shows at top if user has 1+ partial videos</li>
+                        <li>"Quick Picks" carousel shows for trial users (duration <10 min content)</li>
+                        <li>Home rows reordered based on medal preferences (action fans see action first)</li>
+                        <li>Video preview plays on long-press (3 seconds)</li>
+                        <li>Home → playback conversion improves 64% → 69%+ within 2 weeks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 9 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 9</div>
+                    <div class="task-title">Resume Trial Incentive Messaging</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 7-8</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">-3pp trial churn</span>
+                </div>
+                <div class="task-description">
+                    Enhance basic resume trial banners with incentive offers and personalized messaging.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Add discount offer to resume_trial popup: "Resume for ₹99 (50% off normal ₹199 price)", test 30% vs 50% vs flat ₹50 off</li>
+                    <li>Show user's watch history: "Pick up where you left off: [Last watched show thumbnail + title]", add "Continue Watching" CTA</li>
+                    <li>Add "What's new" section: Show 2-3 newly added content items since user lapsed, "You missed: [New content highlights]"</li>
+                    <li>Test urgency messaging: "48h only" limited-time offer vs "Just for you" personalized offer, measure conversion difference</li>
+                    <li>Track resume_trial_funnel: popup_shown → resume_clicked → payment_initiated → payment_success</li>
+                    <li>Add resume_source property: Was popup triggered by consumption_screen, home_screen, or deeplink?</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/resume_trial/ui/widgets/resume_trial_popup.dart</div>
+                <div class="file-path">lib/resume_trial/logic/resume_trial_cubit.dart</div>
+                <div class="file-path">lib/resume_trial/analytics/resume_trial_events.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Resume trial popup shows discount offer (test 3 variants)</li>
+                        <li>User's last watched content displayed with thumbnail</li>
+                        <li>"What's new" section shows 2-3 recent additions</li>
+                        <li>Urgency messaging A/B test running (48h vs personalized)</li>
+                        <li>Complete funnel tracked: popup → click → payment → success</li>
+                        <li>Trial churn reduces by 3pp (lapsed users who come back and pay)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 10 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 10</div>
+                    <div class="task-title">Post-Payment Immediate Engagement</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 7-8</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">+6pp D1 retention</span>
+                </div>
+                <div class="task-description">
+                    Improve trial Day-1 retention (currently 27%) by engaging users immediately after payment.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Enhance payment_success_screen: Add personalized "Watch Now" carousel (3-5 recommended videos based on medal preferences)</li>
+                    <li>Add large "Start Watching" CTA button: Direct playback of top recommendation (no extra taps)</li>
+                    <li>Show trial countdown: "7 days remaining - Explore unlimited content", create urgency to start watching</li>
+                    <li>Add "Your Trial Benefits" section: List what user unlocked (offline downloads, 4K quality, ad-free, multi-device)</li>
+                    <li>Track post_payment_engagement: Did user click "Watch Now" within 5 min of payment success?</li>
+                    <li>Track time_to_first_watch: Seconds between payment_success and consumption_video_start</li>
+                    <li>Measure: Users who watch within 1h of payment have X% higher D7 retention</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/payment/ui/screens/payment_success_screen/payment_success_screen.dart</div>
+                <div class="file-path">lib/payment/data/services/payment_events.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Payment success screen shows personalized recommendations</li>
+                        <li>Large "Start Watching" CTA with direct playback (1-tap)</li>
+                        <li>Trial countdown visible (7 days remaining)</li>
+                        <li>"Your Trial Benefits" section displayed</li>
+                        <li>post_payment_first_watch tracked within 1h window</li>
+                        <li>Trial D1 retention improves from 27% → 33%+ (6pp lift)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Month 3 Tasks -->
+        <div class="section">
+            <h2 class="section-title" style="border-color: #27ae60; color: #27ae60;">Month 3: Data-Driven Optimization & Scaling</h2>
+
+            <!-- Task 11 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 11</div>
+                    <div class="task-title">Trial Journey Internal Dashboard</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 9-11</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">Real-time monitoring</span>
+                </div>
+                <div class="task-description">
+                    Build internal dashboard (web or Flutter admin) for monitoring trial funnel health in real-time.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Choose tech stack: Flutter web OR React dashboard, decide based on team expertise</li>
+                    <li>Integrate Amplitude Chart API: Use REST API to fetch chart data (paywall conversion, D0-D7 retention, medal unlocks)</li>
+                    <li>Build real-time metrics cards: Trial activations (today), D0 consumption %, Medal unlock rate, Special access claims, Spin wheel conversions, Payment success rate</li>
+                    <li>Add cohort comparison: Today vs Yesterday vs Last Week (show % change for each metric)</li>
+                    <li>Build Sankey diagram: Visualize journey flow (Trial → Medal → SpecialAccess/SpinWheel → Payment)</li>
+                    <li>Add alert system: Send Slack message OR email if D0 consumption drops below 70% OR paywall conversion drops below 25%</li>
+                    <li>Add drill-down capability: Click metric to see breakdown by source, device, region</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Create:</div>
+                <div class="file-path">dashboard_web/ (if Flutter web) OR dashboard/ (if React)</div>
+                <div class="file-path">dashboard/services/amplitude_api_service.dart</div>
+                <div class="file-path">dashboard/widgets/metric_card.dart</div>
+                <div class="file-path">dashboard/widgets/sankey_diagram.dart</div>
+                <div class="file-path">dashboard/services/alert_service.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Dashboard accessible via web URL (internal only)</li>
+                        <li>Shows 6+ real-time metrics refreshing every 5 minutes</li>
+                        <li>Cohort comparison working (today vs yesterday vs last week)</li>
+                        <li>Sankey diagram visualizes trial → medal → payment journey</li>
+                        <li>Alert fires to Slack when D0 consumption <70% OR paywall <25%</li>
+                        <li>Can drill down into any metric by source/device/region</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 12 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 12</div>
+                    <div class="task-title">Cross-Feature A/B Test Framework</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 9-11</span>
+                    <span class="badge badge-devs">3 Devs</span>
+                    <span class="badge badge-impact">Test sequences</span>
+                </div>
+                <div class="task-description">
+                    Test feature sequences (Medal → SpecialAccess vs Medal → SpinWheel) not just individual features.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Extend EngagementOrchestrator with ExperimentConfig: Define test variants (e.g., sequenceA: Medal→SpecialAccess, sequenceB: Medal→SpinWheel, control: Random)</li>
+                    <li>Integrate with ExperimentationService (StatsigSDK): Assign users to experiment cohorts on trial activation</li>
+                    <li>Test Experiment 1 - Feature Sequence: A: Medal→SpecialAccess, B: Medal→SpinWheel, C: Medal→Boost, measure: D7 retention, payment conversion</li>
+                    <li>Test Experiment 2 - Special Access Timing: A: Day 0, B: Day 1, C: Day 2, measure: claim rate, watch completion, retention</li>
+                    <li>Test Experiment 3 - Boost vs SpinWheel: For low-engagement users, A: Show Boost, B: Show SpinWheel, measure: engagement lift, payment conversion</li>
+                    <li>Track experiment_variant property in all events: User cohort (sequenceA, sequenceB, control)</li>
+                    <li>Build experiment results aggregator: Calculate retention % and payment % by variant</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/engagement_orchestrator/data/services/engagement_orchestrator_service.dart</div>
+                <div class="file-path">lib/engagement_orchestrator/domain/models/experiment_config.dart (NEW)</div>
+                <div class="file-path">lib/experimentation/experimentation_service.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>3 experiments running: Feature Sequence, Special Access Timing, Boost vs SpinWheel</li>
+                        <li>All events include experiment_variant property</li>
+                        <li>Can query Amplitude: "Variant A has X% retention vs Variant B Y%"</li>
+                        <li>Experiment results auto-calculated weekly (retention %, payment %)</li>
+                        <li>Winning variant identified within 2 weeks (statistical significance)</li>
+                    </ul>
+                </div>
+
+                <div class="dependencies">
+                    <h4>⚠️ Dependencies:</h4>
+                    <ul class="task-list">
+                        <li>Requires Task 2 (orchestrator) to implement sequence logic</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 13 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 13</div>
+                    <div class="task-title">Medal-Driven Home Screen Personalization</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 10-12</span>
+                    <span class="badge badge-devs">3 Devs</span>
+                    <span class="badge badge-impact">+5pp discovery</span>
+                </div>
+                <div class="task-description">
+                    Use medal preferences to personalize home screen content rows and recommendations.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Extract medal category preferences: When user unlocks medal, store content_category (action, drama, comedy, horror, romance) in user profile</li>
+                    <li>Build preference scoring: Count medal unlocks per category, create preference_score (e.g., action: 3 medals, drama: 1 medal = action preferred)</li>
+                    <li>Reorder home rows dynamically: If user has high action preference, move "Action Movies" row to top 2 positions, deprioritize categories with 0 medals</li>
+                    <li>Add "Because you unlocked X medal" row: Show 5-10 recommendations from medal's category with explanation header</li>
+                    <li>Personalize "Trending" row: Filter trending content by user's preferred categories (50% preferred + 50% general trending)</li>
+                    <li>Track personalization_impact: Does personalized home have higher click rate vs non-personalized? Compare trial users with medals vs without</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/home/logic/home_cubit.dart</div>
+                <div class="file-path">lib/home/data/repositories/home_repository_impl.dart</div>
+                <div class="file-path">lib/trial_onboarding/logic/content_onboarding/content_onboarding_cubit.dart</div>
+                <div class="file-path">lib/app/data/models/user_preferences.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Medal unlocks stored in user preference profile (category + count)</li>
+                        <li>Home rows reordered based on medal preferences (preferred categories first)</li>
+                        <li>"Because you unlocked [Medal Name]" row shows on home screen</li>
+                        <li>Trending row filtered 50% by user preferences</li>
+                        <li>Can measure: Personalized home has +5pp higher click rate</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 14 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 14</div>
+                    <div class="task-title">Lapsed Trial Win-Back Campaign</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 10-12</span>
+                    <span class="badge badge-devs">2 Devs</span>
+                    <span class="badge badge-impact">Win back 10% lapsed</span>
+                </div>
+                <div class="task-description">
+                    Target users who activated trial but lapsed (no activity 48h+). Win them back with incentives.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Identify lapsed users: Query for trial_activated users with last_activity_timestamp > 48h ago AND subscription_status = lapsedTrial</li>
+                    <li>Build deep link campaign: Generate personalized deep links with discount offers (₹99 trial restart)</li>
+                    <li>Create in-app takeover screen: If lapsed user opens app, show full-screen "We miss you" offer before home screen</li>
+                    <li>Show watch history: "Your favorites are waiting: [3 thumbnails of last watched content]"</li>
+                    <li>Add social proof: "12K users watched [content] this week while you were away"</li>
+                    <li>Track lapsed_user_funnel: takeover_shown → offer_clicked → payment_initiated → reactivated</li>
+                    <li>Test 3 offer variants: 50% off vs Free 3 days vs Content unlock, measure reactivation rate</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Create:</div>
+                <div class="file-path">lib/features/lapsed_trial_winback/ (NEW feature module)</div>
+                <div class="file-path">lib/features/lapsed_trial_winback/ui/screens/lapsed_user_takeover_screen.dart</div>
+                <div class="file-path">lib/features/lapsed_trial_winback/logic/lapsed_user_cubit.dart</div>
+                <div class="file-path">lib/features/lapsed_trial_winback/analytics/lapsed_user_analytics.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Lapsed users identified daily (query: last_activity > 48h)</li>
+                        <li>Full-screen takeover shows on app open for lapsed users</li>
+                        <li>User's watch history displayed (last 3 watched items)</li>
+                        <li>Social proof message included ("12K users watching...")</li>
+                        <li>3 offer variants A/B testing (50% off vs Free 3d vs Unlock)</li>
+                        <li>10%+ of lapsed users reactivate within 7 days of campaign</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Task 15 -->
+            <div class="task-card">
+                <div class="task-header">
+                    <div class="task-number">Task 15</div>
+                    <div class="task-title">Medal-Based Content Recommendations</div>
+                </div>
+                <div class="task-meta">
+                    <span class="badge badge-week">Week 11-12</span>
+                    <span class="badge badge-devs">3 Devs</span>
+                    <span class="badge badge-impact">+4pp engagement</span>
+                </div>
+                <div class="task-description">
+                    Enhance recommendation engine to use medal unlock patterns for better personalization.
+                </div>
+
+                <div class="task-section-title">🎯 Specific Actions:</div>
+                <ul class="task-list">
+                    <li>Build medal-based recommendation algorithm: Input: User's unlocked medals + categories, Output: Weighted content recommendations (high weight for medal categories)</li>
+                    <li>Add medal context to API calls: When fetching recommendations, pass user's medal_categories as filter parameter</li>
+                    <li>Boost medal category content: If user unlocked "Action" medal, action content gets 2x weight in recommendation score</li>
+                    <li>Track recommendation_source property: medal_based vs genre_based vs trending vs collaborative_filtering</li>
+                    <li>Measure recommendation quality: Track medal_recommendation_click_rate vs general_recommendation_click_rate, compare engagement</li>
+                    <li>A/B test recommendation mix: 100% medal-based vs 70% medal + 30% discovery vs 50/50, find optimal balance</li>
+                </ul>
+
+                <div class="task-section-title">📁 Files to Modify:</div>
+                <div class="file-path">lib/home/data/repositories/home_repository_impl.dart</div>
+                <div class="file-path">lib/recommendations/services/recommendation_engine.dart</div>
+                <div class="file-path">lib/trial_onboarding/data/repositories/content_onboarding_repository_impl.dart</div>
+
+                <div class="acceptance-criteria">
+                    <h4>✅ Acceptance Criteria:</h4>
+                    <ul class="task-list">
+                        <li>Recommendation algorithm includes medal categories as input</li>
+                        <li>Medal category content weighted 2x in recommendations</li>
+                        <li>All recommendation events include recommendation_source property</li>
+                        <li>A/B test running: 3 recommendation mix variants</li>
+                        <li>Medal-based recommendations have 4pp+ higher engagement vs generic</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <h2 class="section-title">📊 Expected Cumulative Impact</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #667eea; color: white;">
+                        <th style="padding: 15px; text-align: left;">Metric</th>
+                        <th style="padding: 15px; text-align: center;">Baseline</th>
+                        <th style="padding: 15px; text-align: center;">Month 1</th>
+                        <th style="padding: 15px; text-align: center;">Month 2</th>
+                        <th style="padding: 15px; text-align: center;">Month 3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 15px;">Paywall Conversion</td>
+                        <td style="padding: 15px; text-align: center;">27.5%</td>
+                        <td style="padding: 15px; text-align: center;">27.5%</td>
+                        <td style="padding: 15px; text-align: center;">30% (+2.5pp)</td>
+                        <td style="padding: 15px; text-align: center; font-weight: bold; color: #27ae60;">32% (+4.5pp)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 15px;">D0 Consumption</td>
+                        <td style="padding: 15px; text-align: center;">66%</td>
+                        <td style="padding: 15px; text-align: center;">70% (+4pp)</td>
+                        <td style="padding: 15px; text-align: center;">73% (+7pp)</td>
+                        <td style="padding: 15px; text-align: center; font-weight: bold; color: #27ae60;">75% (+9pp)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 15px;">Trial D7 Retention</td>
+                        <td style="padding: 15px; text-align: center;">3.3%</td>
+                        <td style="padding: 15px; text-align: center;">3.8% (+0.5pp)</td>
+                        <td style="padding: 15px; text-align: center;">5% (+1.7pp)</td>
+                        <td style="padding: 15px; text-align: center; font-weight: bold; color: #27ae60;">6% (+2.7pp)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <td style="padding: 15px;">90% Video Completion</td>
+                        <td style="padding: 15px; text-align: center;">55%</td>
+                        <td style="padding: 15px; text-align: center;">62% (+7pp)</td>
+                        <td style="padding: 15px; text-align: center;">62%</td>
+                        <td style="padding: 15px; text-align: center; font-weight: bold; color: #27ae60;">62%</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px;">Home → Playback</td>
+                        <td style="padding: 15px; text-align: center;">64%</td>
+                        <td style="padding: 15px; text-align: center;">64%</td>
+                        <td style="padding: 15px; text-align: center;">69% (+5pp)</td>
+                        <td style="padding: 15px; text-align: center; font-weight: bold; color: #27ae60;">74% (+10pp)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer style="text-align: center; padding: 40px 20px; color: #666; margin-top: 40px; border-top: 2px solid #dee2e6;">
+            <p><strong>Stage App - Actionable 3-Month Roadmap</strong></p>
+            <p>15 Specific Tasks | No Vague "Optimizations" | All Executable</p>
+            <p style="margin-top: 15px;">Generated: January 30, 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
