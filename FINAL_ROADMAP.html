@@ -104,6 +104,38 @@
             letter-spacing: 0.5px;
         }
 
+        .funnel-card-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 12px;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85em;
+            transition: background 0.3s;
+        }
+
+        .funnel-card-link:hover {
+            background: #c0392b;
+        }
+
+        .funnel-card.warning .funnel-card-link {
+            background: #ff9800;
+        }
+
+        .funnel-card.warning .funnel-card-link:hover {
+            background: #f57c00;
+        }
+
+        .funnel-card.success .funnel-card-link {
+            background: #4caf50;
+        }
+
+        .funnel-card.success .funnel-card-link:hover {
+            background: #388e3c;
+        }
+
         .section {
             background: white;
             padding: 30px;
@@ -229,6 +261,22 @@
 
         .amplitude-reference strong {
             font-weight: 600;
+        }
+
+        .amplitude-link {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: #6a1b9a;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85em;
+            transition: background 0.3s;
+        }
+
+        .amplitude-link:hover {
+            background: #4a148c;
         }
 
         .why-section {
@@ -445,7 +493,7 @@
         <!-- Amplitude Note -->
         <div class="amplitude-note">
             <h3>📊 Note: Amplitude Chart References</h3>
-            <p>Chart IDs throughout this document reference Amplitude funnels and analytics. Access your Amplitude dashboard directly to view these charts using the provided Chart IDs.</p>
+            <p>Chart IDs throughout this document reference Amplitude funnels and analytics. Click the "Open in Amplitude" buttons to view these charts directly in your Amplitude dashboard.</p>
         </div>
 
         <!-- Current Funnel State -->
@@ -456,36 +504,48 @@
                     <div class="funnel-label">🚨 Paywall Conversion (BIGGEST PROBLEM)</div>
                     <div class="funnel-metric">27.5%</div>
                     <p>909K users view paywall → 272K activate trial<br><strong>72.5% drop-off</strong> at critical moment</p>
+                    <p style="margin-top: 8px; font-size: 0.85em; color: #666;">Chart ID: lidh9clj</p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/lidh9clj/edit/g5xiauf9" target="_blank" class="funnel-card-link">🔗 Open in Amplitude</a>
                 </div>
 
                 <div class="funnel-card">
                     <div class="funnel-label">💔 Trial Day-7 Retention (CATASTROPHIC)</div>
                     <div class="funnel-metric">3.3%</div>
                     <p>Only 8.2K out of 248K trial users retained<br><strong>96.7% churn</strong> within trial period</p>
+                    <p style="margin-top: 8px; font-size: 0.85em; color: #666;">Chart ID: 0fdjwdly</p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/0fdjwdly/edit/fvk09nv2" target="_blank" class="funnel-card-link">🔗 Open in Amplitude</a>
                 </div>
 
                 <div class="funnel-card warning">
                     <div class="funnel-label">📉 D0 Consumption (DECLINING)</div>
                     <div class="funnel-metric">66-84%</div>
                     <p>Dropped from 90% (early Jan) to 66% (late Jan)<br><strong>Losing 16-34%</strong> on first day</p>
+                    <p style="margin-top: 8px; font-size: 0.85em; color: #666;">Chart ID: p9n3yedy</p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/p9n3yedy/edit/dfwca13u" target="_blank" class="funnel-card-link">🔗 Open in Amplitude</a>
                 </div>
 
                 <div class="funnel-card warning">
                     <div class="funnel-label">⚠️ 90% Video Completion</div>
                     <div class="funnel-metric">55%</div>
                     <p>Half of users don't finish videos<br><strong>Engagement drop-off</strong> mid-content</p>
+                    <p style="margin-top: 8px; font-size: 0.85em; color: #666;">Chart ID: olmj7eh1</p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/olmj7eh1/edit/ns7sqp1f" target="_blank" class="funnel-card-link">🔗 Open in Amplitude</a>
                 </div>
 
                 <div class="funnel-card warning">
                     <div class="funnel-label">🏠 Home → Playback (10 min window)</div>
                     <div class="funnel-metric">64%</div>
                     <p>36% land on home but don't watch<br><strong>Discovery/motivation</strong> problem</p>
+                    <p style="margin-top: 8px; font-size: 0.85em; color: #666;">Chart ID: qxatpaww</p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/qxatpaww/edit/qxatpaww" target="_blank" class="funnel-card-link">🔗 Open in Amplitude</a>
                 </div>
 
                 <div class="funnel-card success">
                     <div class="funnel-label">✅ Login Success (STRONG)</div>
                     <div class="funnel-metric">86%</div>
                     <p>Not a problem area<br>No optimization needed</p>
+                    <p style="margin-top: 8px; font-size: 0.85em; color: #666;">Chart ID: kj3fgru8</p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/kj3fgru8/edit/kj3fgru8" target="_blank" class="funnel-card-link">🔗 Open in Amplitude</a>
                 </div>
             </div>
         </div>
@@ -563,12 +623,12 @@
             <div class="initiative-card">
                 <div class="initiative-header">
                     <div class="initiative-number">#1</div>
-                    <div class="initiative-title">Cross-Feature Journey Tracking</div>
+                    <div class="initiative-title">Journey Tracking Enhancements (2-3 Missing Properties Only)</div>
                 </div>
                 <div class="initiative-meta">
-                    <span class="badge badge-week">Week 1-2</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">Foundation for All Analytics</span>
+                    <span class="badge badge-week">Week 1 (2-3 days)</span>
+                    <span class="badge badge-team">1 Developer</span>
+                    <span class="badge badge-impact">Add 3 Missing Journey Properties</span>
                 </div>
 
                 <div class="user-type-badge">
@@ -581,65 +641,171 @@
                 <div class="amplitude-reference">
                     <h4>📊 Amplitude Data Reference:</h4>
                     <p>
-                        <strong>Chart:</strong> Trial Retention Chart<br>
-                        <strong>Chart ID:</strong> 1y0ta29d<br>
-                        <strong>Current Rate:</strong> D7: 3.3%
-                    </p>
-                    <p style="margin-top: 10px;">
-                        <strong>Chart:</strong> Paywall Conversion Funnel<br>
-                        <strong>Chart ID:</strong> six7gquy<br>
+                        <strong>Chart:</strong> Paywall Funnel<br>
+                        <strong>Chart ID:</strong> lidh9clj<br>
                         <strong>Current Rate:</strong> 27.5%
                     </p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/lidh9clj/edit/g5xiauf9" target="_blank" class="amplitude-link">🔗 Open in Amplitude</a>
+                </div>
+
+                <div class="amplitude-reference">
+                    <h4>📊 Amplitude Data Reference:</h4>
+                    <p>
+                        <strong>Chart:</strong> Trial Retention (TR)<br>
+                        <strong>Chart ID:</strong> 0fdjwdly<br>
+                        <strong>Current Rate:</strong> D7: 3.3%
+                    </p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/0fdjwdly/edit/fvk09nv2" target="_blank" class="amplitude-link">🔗 Open in Amplitude</a>
                 </div>
 
                 <div class="current-data">
-                    <h4>📉 Current Problem:</h4>
+                    <h4>✅ Journey Tracking Status (90% Complete):</h4>
+
+                    <p style="margin: 10px 0; padding: 10px; background: #e8f5e9; border-radius: 6px; font-size: 0.95em;">
+                        <strong>✅ Already Tracked in ALL Events:</strong> user_id, device_id, amplitude_id (SDK), event_id, campaign_data (campaign_name, af_channel, ad_set_name, ad_group_name), deeplink, subscription_status, special_access_user_state, app_version, platform, dialect, country, acquisition_type
+                    </p>
+
+                    <p style="margin: 10px 0; font-size: 0.9em; color: #666;">
+                        <strong>Users CAN be tracked across features</strong> using user_id + amplitude_id. Amplitude SDK automatically stitches events into user journeys.
+                    </p>
+
+                    <p style="margin: 15px 0 10px 0; padding: 10px; background: #fff3cd; border-radius: 6px; font-size: 0.95em;">
+                        <strong>⚠️ 3 Missing Properties (Gaps):</strong>
+                    </p>
+
                     <div class="data-point">
-                        <span class="data-label">Can we track users from special access to payment?</span>
-                        <span class="data-value">NO</span>
+                        <span class="data-label">1. Feature source for conversions</span>
+                        <span class="data-value">❌ Payment events don't track "came_from_special_access" or "came_from_spin_wheel"</span>
                     </div>
                     <div class="data-point">
-                        <span class="data-label">Do we know which feature sequence converts best?</span>
-                        <span class="data-value">NO</span>
+                        <span class="data-label">2. Trial start date</span>
+                        <span class="data-value">❌ Can't do cohort analysis (D0, D1, D7 retention by trial day)</span>
                     </div>
                     <div class="data-point">
-                        <span class="data-label">Can we measure: "Users who unlock special access have X% higher retention"?</span>
-                        <span class="data-value">NO</span>
+                        <span class="data-label">3. Explicit session_id in events</span>
+                        <span class="data-value">⚠️ Amplitude SDK has it internally, but not in event properties for custom analysis</span>
                     </div>
                 </div>
 
                 <div class="why-section">
                     <h4>🎯 Why This Initiative?</h4>
-                    <p><strong>The Problem:</strong> Features (special access, spin wheel) track events independently. We can't answer critical questions like:</p>
+                    <p><strong>Good News:</strong> Journey tracking infrastructure is <strong>90% complete</strong>. ALL events already include:</p>
                     <ul style="margin-top: 10px; margin-left: 20px;">
-                        <li>"Do users who unlock special access convert to paid at higher rates?"</li>
-                        <li>"Does Special Access → Payment convert better than Spin Wheel → Payment?"</li>
-                        <li>"What's the typical trial user journey from activation to payment?"</li>
+                        <li>✅ user_id + amplitude_id → Users tracked across all features</li>
+                        <li>✅ Amplitude SDK session tracking → Journey stitching automatic</li>
+                        <li>✅ Campaign data → Attribution source tracked</li>
+                        <li>✅ Deeplink → Entry point tracked</li>
+                        <li>✅ subscription_status → User lifecycle state tracked</li>
                     </ul>
-                    <p style="margin-top: 15px;"><strong>The Solution:</strong> Add a unique journey ID to every trial user that links all their events. This creates a "breadcrumb trail" from trial start to payment (or churn).</p>
+
+                    <p style="margin-top: 15px;"><strong>Remaining Gaps (3 Properties):</strong></p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>Feature Attribution:</strong> Payment events don't track which feature drove conversion (e.g., "special_access", "spin_wheel", "direct")</li>
+                        <li><strong>Trial Cohort:</strong> No trial_start_date property → Can't do D0/D1/D7 cohort analysis in Amplitude</li>
+                        <li><strong>Session ID:</strong> Amplitude has it internally, but not exposed in event properties for custom queries</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>The Solution:</strong> Add 3 properties to existing events (no new infrastructure needed).</p>
+
+                    <p style="margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 6px;">
+                        <strong>Why It's Easy:</strong> EventsHelper.sendEvents() already includes 20+ properties in ALL events automatically. We just add 3 more to the getUserCommonPropertyNewInfra() method.
+                    </p>
                 </div>
 
                 <div class="what-we-do">
-                    <h4>✅ What We'll Do:</h4>
+                    <h4>✅ What We'll Do (3 Property Additions Only):</h4>
+
+                    <p style="margin: 10px 0; padding: 10px; background: #e8f5e9; border-radius: 6px; font-size: 0.95em;">
+                        <strong>✅ Infrastructure Complete:</strong> EventsHelper.sendEvents() → AnalyticsManager.logEvent() → getUserCommonPropertyNewInfra() already adds 20+ properties to ALL events. Just extend this method.
+                    </p>
+
                     <ul class="action-list">
-                        <li>Generate unique journey ID when user activates trial</li>
-                        <li>Add journey ID to all feature events: special access claims, spin wheel interactions, payment attempts</li>
-                        <li>Create milestone events: special access claim, spin wheel claim, first payment attempt</li>
-                        <li>Store journey ID locally so it persists across app sessions</li>
+                        <li><strong>ADD Property 1: feature_source (Conversion Attribution)</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Add <code>feature_source</code> property to payment and trial activation events</li>
+                                <li>Track: "special_access", "spin_wheel", "home_banner", "direct", "deeplink"</li>
+                                <li>Store last feature interaction in Preferences (like ContentTracker.getLastVisitedContent())</li>
+                                <li>Update on: special_access_offer_click, spin_wheel_claim, direct_paywall_view</li>
+                                <li>Include in: trial_activated, payment_initiated, subscription_success events</li>
+                                <li><strong>Implementation:</strong> 1 day (add preference storage + event property logic)</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>ADD Property 2: trial_start_date (Cohort Analysis)</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Add <code>trial_start_date</code> (timestamp) to ALL events for trial users</li>
+                                <li>Store in Preferences when subscription_status changes to "trial_active"</li>
+                                <li>Include in getUserCommonPropertyNewInfra() for trial_active and trial_over users</li>
+                                <li>Enables Amplitude cohort queries: "Users who started trial on Jan 25 → D7 retention?"</li>
+                                <li><strong>Implementation:</strong> 0.5 day (add preference + property to common util)</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>ADD Property 3: session_id (Optional - Cross-Platform Analysis)</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Add explicit <code>session_id</code> property to ALL events</li>
+                                <li>Generate UUID on app start, persist in memory only (cleared on app kill)</li>
+                                <li>Include in getUserCommonPropertyNewInfra() method</li>
+                                <li>Enables custom session analysis outside Amplitude's automatic session tracking</li>
+                                <li><strong>Implementation:</strong> 0.5 day (generate + include in events)</li>
+                                <li><strong>Note:</strong> Low priority - Amplitude already provides session tracking</li>
+                            </ul>
+                        </li>
                     </ul>
+
+                    <p style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 6px;">
+                        <strong>Total Effort:</strong> 2-3 days for 1 developer (down from 2 weeks because infrastructure exists). Just adding properties to existing flow.
+                    </p>
+
+                    <p style="margin-top: 10px; padding: 10px; background: #e3f2fd; border-radius: 6px; font-size: 0.9em;">
+                        <strong>📍 File to Edit:</strong> <code>/lib/utils/events/events_util.dart</code> (Line 924-1025: getUserCommonPropertyNewInfra method)<br>
+                        <strong>Pattern:</strong> Add new properties alongside existing user_id, device_id, campaign_data properties
+                    </p>
                 </div>
 
                 <div class="expected-impact">
                     <h4>📈 How This Improves Funnels:</h4>
-                    <p><strong>Direct Impact:</strong> No immediate funnel improvement (this is infrastructure)</p>
-                    <p style="margin-top: 10px;"><strong>Enables Future Wins:</strong></p>
-                    <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li>Identify high-converting feature sequences → prioritize showing those</li>
-                        <li>Find drop-off points in journey → fix them</li>
-                        <li>Measure: "Users who claim special access on Day 1 have 40% higher D7 retention" → optimize timing</li>
-                        <li>All Month 2-3 optimizations depend on this tracking</li>
+
+                    <p><strong>Direct Impact:</strong> No immediate funnel improvement (these are analytics properties)</p>
+
+                    <p style="margin-top: 15px;"><strong>What These 3 Properties Enable:</strong></p>
+
+                    <p style="margin-top: 15px;"><strong>Property 1: feature_source → Conversion Attribution</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>Answer: "Do users who claim Special Access convert at higher rates?" (Yes/No + %)</li>
+                        <li>Answer: "Which feature drives most trials: Special Access (9.15% activate) vs Spin Wheel vs Direct Paywall?"</li>
+                        <li>Amplitude query: <code>trial_activated WHERE feature_source = "special_access"</code> → Measure conversion rate</li>
+                        <li>Enables: Feature-level ROI analysis → Prioritize high-converting features</li>
                     </ul>
-                    <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 6px;"><strong>Why First?</strong> Without journey tracking, we're flying blind. This unlocks data-driven decisions for everything else.</p>
+
+                    <p style="margin-top: 15px;"><strong>Property 2: trial_start_date → Cohort Analysis</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>Answer: "D0 consumption rate by trial start date?" (Track daily trends)</li>
+                        <li>Answer: "D7 retention for users who started trial on Jan 25?" (Cohort-specific retention)</li>
+                        <li>Amplitude query: <code>D7 retention WHERE trial_start_date = "2026-01-25"</code> → Cohort comparison</li>
+                        <li>Enables: A/B test analysis by cohort → "Did the Jan 25 product change improve D7 retention?"</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Property 3: session_id → Session-Level Analysis</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li>Answer: "How many features did user interact with in single session?" (Feature engagement depth)</li>
+                        <li>Answer: "Session duration from home → paywall view → payment?" (Time to convert)</li>
+                        <li>Custom analysis outside Amplitude's automatic session tracking</li>
+                        <li>Low priority: Amplitude already provides session tracking via SDK</li>
+                    </ul>
+
+                    <p style="margin-top: 20px;"><strong>Example Analysis After Implementation:</strong></p>
+                    <div style="margin-top: 10px; padding: 15px; background: #e8f5e9; border-radius: 6px; font-size: 0.95em;">
+                        <strong>Question:</strong> "Does Special Access increase trial retention?"<br><br>
+                        <strong>Amplitude Query (Enabled by feature_source + trial_start_date):</strong><br>
+                        1. Cohort A: Users WHERE feature_source = "special_access" AND trial_start_date = Last 30 days<br>
+                        2. Cohort B: Users WHERE feature_source != "special_access" AND trial_start_date = Last 30 days<br>
+                        3. Compare: D7 retention for Cohort A vs Cohort B<br><br>
+                        <strong>Current Data Suggests:</strong> SA users activate at 9.15% (+4pp) BUT cancel at 3.84% (+1.67pp)<br>
+                        <strong>With These Properties:</strong> Can prove net effect on D7 retention and LTV
+                    </div>
+
+                    <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 6px;"><strong>Why First?</strong> Special Access analysis (#3) needs feature_source to answer "does SA improve retention?". Video optimization (#2) needs trial_start_date for cohort comparison. These 3 properties unlock all Month 2-3 feature optimizations.</p>
                 </div>
             </div>
 
@@ -647,10 +813,10 @@
             <div class="initiative-card">
                 <div class="initiative-header">
                     <div class="initiative-number">#2</div>
-                    <div class="initiative-title">Video Completion Rate Optimization</div>
+                    <div class="initiative-title">Video Completion Optimization (Buffering + Progress UI Only)</div>
                 </div>
                 <div class="initiative-meta">
-                    <span class="badge badge-week">Week 2-4</span>
+                    <span class="badge badge-week">Week 2-3 (8-11 days)</span>
                     <span class="badge badge-team">2 Developers</span>
                     <span class="badge badge-impact">+7pp Video Completion</span>
                 </div>
@@ -666,10 +832,11 @@
                 <div class="amplitude-reference">
                     <h4>📊 Amplitude Data Reference:</h4>
                     <p>
-                        <strong>Chart:</strong> 90% Video Completion Chart<br>
-                        <strong>Chart ID:</strong> q2dd1ib2<br>
+                        <strong>Chart:</strong> 90% Completion (Subscription Active)<br>
+                        <strong>Chart ID:</strong> olmj7eh1<br>
                         <strong>Current Rate:</strong> 55%
                     </p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/olmj7eh1/edit/ns7sqp1f" target="_blank" class="amplitude-link">🔗 Open in Amplitude</a>
                 </div>
 
                 <div class="current-data">
@@ -711,14 +878,44 @@
                 </div>
 
                 <div class="what-we-do">
-                    <h4>✅ What We'll Do:</h4>
+                    <h4>✅ What We'll Do (Only Missing Features):</h4>
+
+                    <p style="margin: 10px 0; padding: 10px; background: #e8f5e9; border-radius: 6px;">
+                        <strong>✅ Already Implemented:</strong> Resume Watching (ContinueWatchingBloc + UI), Auto-Play Next (WatchNextNudge with 60s countdown), Skip Intro Button (skip_intro_button.dart). These are fully functional in production.
+                    </p>
+
+                    <p style="margin: 10px 0 15px 0; font-size: 0.95em; color: #666;">
+                        <strong>Gap Analysis:</strong> 3 of 5 features already exist. Only need buffering optimization and thumbnail progress indicators.
+                    </p>
+
                     <ul class="action-list">
-                        <li><strong>Resume Watching Banner on Home:</strong> If user has partially watched videos (10-80% complete), show prominent banner with thumbnail + progress bar → One-tap to continue</li>
-                        <li><strong>Auto-Play Next Content:</strong> When video ends, show 5-second countdown to next episode/recommendation → Removes manual search friction</li>
-                        <li><strong>Skip Intro Button:</strong> For series content, detect intro section (first 60-90 seconds) → Show "Skip Intro" button → Get to content faster</li>
-                        <li><strong>Optimize Buffering:</strong> Reduce initial buffering from 24s → <3s → Track and measure startup time improvements</li>
-                        <li><strong>Progress Bars on Thumbnails:</strong> Show visual progress on all content cards (e.g., "75% watched" badge) → User remembers what they were watching</li>
+                        <li style="text-decoration: line-through; opacity: 0.5;"><strong>Resume Watching Banner:</strong> ✅ ALREADY EXISTS - ContinueWatchingBloc fetches partially watched content, displays with progress bars</li>
+                        <li style="text-decoration: line-through; opacity: 0.5;"><strong>Auto-Play Next Content:</strong> ✅ ALREADY EXISTS - WatchNextNudge shows countdown in last 60s, auto-redirects to next content</li>
+                        <li style="text-decoration: line-through; opacity: 0.5;"><strong>Skip Intro Button:</strong> ✅ ALREADY EXISTS - skip_intro_button.dart detects intro segments, jumps to introEndTime</li>
+
+                        <li><strong>Optimize Video Buffering (NEW):</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Current: 24s median startup time (TOO SLOW)</li>
+                                <li>Target: <3s initial buffering</li>
+                                <li>Actions: Optimize video CDN settings, implement adaptive bitrate selection, preload next chunk</li>
+                                <li>Track: Add <code>video_startup_time</code> to playback events</li>
+                                <li>Implementation: 5-7 days (requires CDN config + player optimization)</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>Progress Badges on Thumbnails (NEW):</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Add visual "X% watched" badge overlay on all content cards</li>
+                                <li>Show progress bar on thumbnail for partially watched content (10-90%)</li>
+                                <li>Update: Home screen, search results, recommendation trays</li>
+                                <li>Implementation: 3-4 days (UI updates across multiple screens)</li>
+                            </ul>
+                        </li>
                     </ul>
+
+                    <p style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 6px;">
+                        <strong>Revised Effort:</strong> 8-11 days total (down from 2 weeks) because 60% of features already exist. Focus on buffering optimization and thumbnail UI enhancements only.
+                    </p>
                 </div>
 
                 <div class="expected-impact">
@@ -749,12 +946,12 @@
             <div class="initiative-card">
                 <div class="initiative-header">
                     <div class="initiative-number">#3</div>
-                    <div class="initiative-title">Special Access Complete Funnel Tracking</div>
+                    <div class="initiative-title">Special Access Analytics Enhancements (Missing Tracking Only)</div>
                 </div>
                 <div class="initiative-meta">
-                    <span class="badge badge-week">Week 3-4</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">Measure SA Effectiveness</span>
+                    <span class="badge badge-week">Week 3 (4 days)</span>
+                    <span class="badge badge-team">1 Developer</span>
+                    <span class="badge badge-impact">Add 4 Missing Analytics Dimensions</span>
                 </div>
 
                 <div class="user-type-badge">
@@ -764,108 +961,228 @@
                     </div>
                 </div>
 
-                <div class="amplitude-reference">
-                    <h4>📊 Amplitude Data Reference:</h4>
-                    <p>
-                        <strong>Chart:</strong> Paywall Conversion Funnel<br>
-                        <strong>Chart ID:</strong> six7gquy<br>
+                <div class="amplitude-reference" style="margin-top: 15px; padding: 12px; background: #f3e5f5; border-radius: 6px;">
+                    <h4 style="font-size: 0.9em; color: #6a1b9a; margin-bottom: 8px;">📊 Amplitude Data Reference:</h4>
+
+                    <p style="margin: 0 0 8px 0; color: #6a1b9a; font-size: 0.9em;">
+                        <strong>Primary:</strong> Special Access Dashboard<br>
+                        <strong>Dashboard ID:</strong> 2t19oz3v
+                    </p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/dashboard/2t19oz3v"
+                       target="_blank"
+                       class="amplitude-link"
+                       style="display: inline-block; margin-bottom: 12px; padding: 6px 12px; background: #6a1b9a; color: white; text-decoration: none; border-radius: 4px; font-size: 0.85em;">
+                        🔗 Open Special Access Dashboard
+                    </a>
+
+                    <p style="margin: 12px 0 8px 0; color: #6a1b9a; font-size: 0.85em; font-weight: 600;">
+                        Supporting Charts:
+                    </p>
+                    <p style="margin: 0 0 4px 0; color: #6a1b9a; font-size: 0.9em;">
+                        <strong>Chart:</strong> Paywall Funnel<br>
+                        <strong>Chart ID:</strong> lidh9clj<br>
                         <strong>Current Rate:</strong> 27.5%
                     </p>
-                    <p style="margin-top: 10px;">
-                        <strong>Chart:</strong> D0 Consumption Chart<br>
-                        <strong>Chart ID:</strong> qfskz34k<br>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/lidh9clj/edit/g5xiauf9"
+                       target="_blank"
+                       class="amplitude-link">
+                        🔗 Open Paywall Chart
+                    </a>
+
+                    <p style="margin: 12px 0 4px 0; color: #6a1b9a; font-size: 0.9em;">
+                        <strong>Chart:</strong> D0 Consumption Funnel<br>
+                        <strong>Chart ID:</strong> p9n3yedy<br>
                         <strong>Current Rate:</strong> 66-84%
                     </p>
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/p9n3yedy/edit/dfwca13u"
+                       target="_blank"
+                       class="amplitude-link">
+                        🔗 Open D0 Consumption Chart
+                    </a>
                 </div>
 
                 <div class="current-data">
-                    <h4>📉 Current Measurement Gap:</h4>
+                    <h4>📊 Current Special Access Data (Jan 25-30, 2026):</h4>
+
+                    <p style="margin: 10px 0; padding: 10px; background: #e8f5e9; border-radius: 6px;">
+                        <strong>✅ GOOD NEWS:</strong> Special Access users activate trials at <strong>77.7% HIGHER rate</strong> than non-SA users
+                    </p>
+
                     <div class="data-point">
-                        <span class="data-label">Special access offers shown</span>
-                        <span class="data-value">UNKNOWN</span>
+                        <span class="data-label">SA Trial Activation Rate</span>
+                        <span class="data-value" style="color: #27ae60;">9.15% (1,301 → 119 activated)</span>
                     </div>
                     <div class="data-point">
-                        <span class="data-label">Claim rate (offer → claim)</span>
-                        <span class="data-value">UNKNOWN</span>
+                        <span class="data-label">Non-SA Trial Activation Rate</span>
+                        <span class="data-value">5.15% (738 → 38 activated)</span>
                     </div>
                     <div class="data-point">
-                        <span class="data-label">Watch rate (claim → video start)</span>
-                        <span class="data-value">UNKNOWN</span>
+                        <span class="data-label">Activation Lift from SA</span>
+                        <span class="data-value" style="color: #27ae60; font-weight: bold;">+4pp absolute (+77.7% relative)</span>
+                    </div>
+
+                    <p style="margin: 15px 0 10px 0; padding: 10px; background: #fff3cd; border-radius: 6px;">
+                        <strong>⚠️ CONCERN:</strong> Special Access users have <strong>77% HIGHER cancellation rate</strong>
+                    </p>
+
+                    <div class="data-point">
+                        <span class="data-label">SA Trial Cancellation Rate</span>
+                        <span class="data-value" style="color: #e74c3c;">3.84% (50/1,301 canceled)</span>
                     </div>
                     <div class="data-point">
-                        <span class="data-label">Completion rate (start → 90%)</span>
-                        <span class="data-value">UNKNOWN</span>
+                        <span class="data-label">Non-SA Trial Cancellation Rate</span>
+                        <span class="data-value">2.17% (16/738 canceled)</span>
                     </div>
                     <div class="data-point">
-                        <span class="data-label">Payment conversion (SA → paid)</span>
-                        <span class="data-value">UNKNOWN</span>
+                        <span class="data-label">Cancellation Increase from SA</span>
+                        <span class="data-value" style="color: #e74c3c; font-weight: bold;">+1.67pp absolute (+77% relative)</span>
+                    </div>
+
+                    <div class="data-point" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
+                        <span class="data-label">SA "Reached Final State" (expandable banner viewed)</span>
+                        <span class="data-value">25% activation BUT 25% cancellation (small sample: 16 users)</span>
                     </div>
                 </div>
 
                 <div class="why-section">
                     <h4>🎯 Why This Initiative?</h4>
-                    <p><strong>The Problem:</strong> Special Access is a <strong>premium engagement feature</strong> but you have NO VISIBILITY into its effectiveness:</p>
-                    <ul style="margin-top: 10px; margin-left: 20px;">
-                        <li>You know users see offers, but not HOW MANY claim them</li>
-                        <li>Don't know if claimed special access leads to higher retention</li>
-                        <li>Can't measure: "Special access on Day 1 vs Day 3 - which converts better?"</li>
-                        <li>Missing: Drop-off analysis (where do users abandon?)</li>
-                    </ul>
-                    <p style="margin-top: 15px;"><strong>Business Critical:</strong> If special access is a retention driver, you need to:</p>
+                    <p><strong>The Paradox:</strong> Special Access shows <strong>MIXED RESULTS</strong> that need investigation:</p>
+
+                    <p style="margin-top: 10px; padding: 10px; background: #e8f5e9; border-radius: 6px;">
+                        <strong>✅ The Good:</strong> SA users activate trials at 9.15% vs 5.15% for non-SA (+4pp, +77.7% relative)<br>
+                        → This suggests SA is a powerful conversion tool
+                    </p>
+
+                    <p style="margin-top: 10px; padding: 10px; background: #fff3cd; border-radius: 6px;">
+                        <strong>⚠️ The Concern:</strong> SA users cancel at 3.84% vs 2.17% for non-SA (+1.67pp, +77% relative)<br>
+                        → This suggests SA users might have lower intent or engagement quality
+                    </p>
+
+                    <p style="margin-top: 15px;"><strong>Critical Unknowns:</strong></p>
                     <ul style="margin-left: 20px; margin-top: 10px;">
-                        <li>Show it to more users (if it works)</li>
-                        <li>Show it at optimal time (Day 0? Day 1? Day 3?)</li>
-                        <li>Fix drop-offs (if claim rate is low, optimize offer)</li>
-                        <li>Prove ROI: "Special access users convert at X% higher rate"</li>
+                        <li><strong>WHY do SA users cancel more?</strong> Are they just trying free content then leaving?</li>
+                        <li><strong>Which SA content converts best?</strong> Is it specific genres or shows that retain users?</li>
+                        <li><strong>WHEN to show SA?</strong> Does Day 0 vs Day 1 vs Day 3 timing affect retention?</li>
+                        <li><strong>What's the net effect?</strong> Does the +4pp activation outweigh the +1.67pp cancellation?</li>
+                        <li><strong>Drop-off points:</strong> Where do users abandon? Offer shown → claimed → watched → completed</li>
                     </ul>
-                    <p style="margin-top: 15px;"><strong>The Solution:</strong> Track complete funnel from offer shown to payment conversion.</p>
+
+                    <p style="margin-top: 15px;"><strong>Business Impact:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>If we fix cancellation:</strong> SA could be a major retention lever (scale to more users)</li>
+                        <li><strong>If cancellation is inherent:</strong> Optimize for high-intent users only (tighter targeting)</li>
+                        <li><strong>Without understanding WHY:</strong> We risk scaling a feature that churns users</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>The Solution:</strong> Deep-dive tracking to understand user behavior patterns and optimize accordingly.</p>
                 </div>
 
                 <div class="what-we-do">
-                    <h4>✅ What We'll Do:</h4>
+                    <h4>✅ What We'll Do (Focus on Missing Analytics Only):</h4>
+
+                    <p style="margin: 10px 0; padding: 10px; background: #e8f5e9; border-radius: 6px;">
+                        <strong>✅ Already Implemented:</strong> Special Access has comprehensive analytics with 6+ events (offer_view, offer_click, content_view, widget_view, etc.), content ID tracking, state management, and source tracking. Repository and UI fully functional.
+                    </p>
+
+                    <p style="margin: 10px 0 15px 0; font-size: 0.95em; color: #666;">
+                        <strong>Gap Analysis:</strong> Core feature is complete. Only need to add 4 missing analytics dimensions for the paradox investigation.
+                    </p>
+
                     <ul class="action-list">
-                        <li><strong>Complete Funnel Events:</strong> Track 5-step funnel: Offer shown → Offer claimed → Video started → Video 90% → Video completed</li>
-                        <li><strong>Content Context:</strong> Add content ID, title, genre to all events → Know which content works best</li>
-                        <li><strong>Timing Analysis:</strong> Track which trial day special access was claimed (Day 0, 1, 2...7) → Find optimal timing</li>
-                        <li><strong>Claim Speed:</strong> Track seconds between offer shown and claim button pressed → Measure urgency</li>
-                        <li><strong>Payment Correlation:</strong> Track if user paid within 7 days of claiming special access → Prove conversion lift</li>
-                        <li><strong>Trigger Source:</strong> Was special access shown by manual trigger or back-press experiment? → Measure which source works best</li>
+                        <li><strong>ADD: Video Completion Events (Missing):</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Currently tracked: ✅ Offer shown → ✅ Offer claimed → ✅ Start watching</li>
+                                <li>Add: <code>special_access_video_watched</code> (when playback actually starts)</li>
+                                <li>Add: <code>special_access_video_completed</code> (when user finishes 90%+)</li>
+                                <li>Implementation: 1 day (add 2 events to existing analytics logger)</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>ADD: Trial Day Tracking (Missing):</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Add property: <code>trial_day_claimed</code> (0, 1, 2...7) to all SA events</li>
+                                <li>Add property: <code>account_age_days</code> (days since subscription start)</li>
+                                <li>Calculate: subscription_start_date → claim_date → trial_day</li>
+                                <li>Implementation: 1 day (add 2 properties to event logger)</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>ADD: Claim Speed Metrics (Missing):</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Add: <code>interaction_session_id</code> to link offer_view → offer_click</li>
+                                <li>Add: <code>time_to_claim_seconds</code> (calculated from timestamps)</li>
+                                <li>Store timestamp on offer_view, calculate difference on offer_click</li>
+                                <li>Implementation: 0.5 day (add session ID + timestamp logic)</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>ADD: Payment Conversion Correlation (Missing):</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size: 0.95em;">
+                                <li>Add: <code>claim_id</code> (unique identifier for SA claim) to claim event</li>
+                                <li>Add: <code>special_access_claim_id</code> property to payment events (if claimed in last 7 days)</li>
+                                <li>Add: <code>days_since_sa_claim</code> to payment events</li>
+                                <li>Implementation: 1.5 days (add claim ID + payment event augmentation)</li>
+                            </ul>
+                        </li>
                     </ul>
+
+                    <p style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 6px;">
+                        <strong>Total Effort:</strong> 4 days for 1 developer (analytics enhancements only). Feature already works, just adding missing tracking dimensions.
+                    </p>
                 </div>
 
                 <div class="expected-impact">
                     <h4>📈 How This Improves Funnels:</h4>
 
-                    <p><strong>No Immediate Funnel Impact (Measurement Setup)</strong></p>
+                    <p><strong>Baseline Established:</strong> We now know SA increases activation (+4pp) BUT also increases cancellation (+1.67pp)</p>
 
                     <p style="margin-top: 15px;"><strong>Enables These Critical Decisions:</strong></p>
 
-                    <p style="margin-top: 15px;"><strong>Decision 1: Should we show special access to more users?</strong></p>
+                    <p style="margin-top: 15px;"><strong>Decision 1: Should we scale SA or fix it first?</strong></p>
                     <ul style="margin-left: 20px; margin-top: 5px;">
-                        <li>If claim rate >40% AND claimers have +30% higher D7 retention → Yes, expand</li>
-                        <li>If claim rate <20% OR no retention lift → No, optimize or deprioritize</li>
+                        <li><strong>Scenario A:</strong> Net positive (119 activations - 50 cancellations = 69 net retained) → Cautiously scale</li>
+                        <li><strong>Scenario B:</strong> High churn risk (if D7 retention is lower) → Fix content/targeting first</li>
+                        <li><strong>Need to track:</strong> D7 retention for SA users vs non-SA users to get full picture</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Decision 2: When should we show special access?</strong></p>
+                    <p style="margin-top: 15px;"><strong>Decision 2: Which SA content types retain users best?</strong></p>
                     <ul style="margin-left: 20px; margin-top: 5px;">
-                        <li>Compare: Day 0 claims vs Day 1 claims vs Day 3 claims → Retention difference?</li>
-                        <li>If Day 1 claimers have best retention → Optimize for Day 1 display</li>
+                        <li>Track content ID, genre, and watch completion for SA claims</li>
+                        <li>If specific genres (e.g., drama) have 85% completion vs action's 60% → Prioritize drama</li>
+                        <li>Identify "sticky" content that converts SA users to long-term subscribers</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Decision 3: Which content should we offer?</strong></p>
+                    <p style="margin-top: 15px;"><strong>Decision 3: When to show SA in trial journey?</strong></p>
                     <ul style="margin-left: 20px; margin-top: 5px;">
-                        <li>If action content has 60% completion but drama has 85% → Offer drama content</li>
-                        <li>Match content genre to user's preferences</li>
+                        <li>Current data: Day 0-7 mixed, need to segment by trial day</li>
+                        <li>If Day 1 SA claims have better D7 retention than Day 0 → Delay SA to Day 1</li>
+                        <li>Track: Time from trial start to SA offer → Optimal timing window</li>
                     </ul>
 
-                    <p style="margin-top: 20px;"><strong>Projected Impact (After Optimization in Month 2-3):</strong></p>
+                    <p style="margin-top: 15px;"><strong>Decision 4: What drives the high cancellation rate?</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 5px;">
+                        <li><strong>Hypothesis 1:</strong> Users claim SA just for free content, no intent to pay → Need better targeting</li>
+                        <li><strong>Hypothesis 2:</strong> SA content is low quality → Improve content curation</li>
+                        <li><strong>Hypothesis 3:</strong> SA timing is wrong (too early/late) → Optimize timing</li>
+                        <li>Track claim-to-watch time, watch duration, and subsequent engagement to diagnose</li>
+                    </ul>
+
+                    <p style="margin-top: 20px;"><strong>Projected Impact (After Deep-Dive Analysis & Optimization):</strong></p>
                     <div style="margin-top: 10px; padding: 15px; background: #e8f5e9; border-radius: 6px;">
-                        <strong>If special access works:</strong> Expand to more users → Trial D7 retention +1-2pp<br>
-                        <strong>If special access doesn't work:</strong> Deprioritize → Free up dev time for higher-ROI features<br>
-                        <strong>Either way:</strong> Data-driven decision instead of guess
+                        <strong>Best Case:</strong> Fix cancellation issue → SA activation stays 9.15%, cancellation drops to 2% → Net +5pp trial retention<br>
+                        <strong>Mid Case:</strong> Better targeting → SA activation 7%, cancellation 2.5% → Net +3pp trial retention<br>
+                        <strong>Worst Case:</strong> Cancellation is inherent → Tighten SA targeting to high-intent users only → No net improvement but prevent bad user experience<br>
+                        <strong>Risk if we don't investigate:</strong> Scale a feature that brings in low-quality users → Higher churn, worse unit economics
                     </div>
 
-                    <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 6px;"><strong>Why Now?</strong> Special access is a major engagement bet. Without data, you're flying blind. Measure first, optimize second.</p>
+                    <p style="margin-top: 15px; padding: 15px; background: #fff3cd; border-radius: 6px;"><strong>Why Now?</strong> The data shows a paradox: higher activation BUT higher cancellation. We must understand WHY before scaling SA to more users. This initiative prevents us from scaling a potentially leaky bucket.</p>
+
+                    <p style="margin-top: 15px; padding: 15px; background: #e3f2fd; border-radius: 6px;">
+                        <strong>📊 Data Sources:</strong><br>
+                        • <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/pizolrn2?utm_source=mcp&utm_content=%5BMCP%5D+Claude+Code+%28Amplitude%29" target="_blank" style="color: #1565c0;">TR - SA MahaPunaraJanam</a> (Trial Rate funnel)<br>
+                        • <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/bokepue2?utm_source=mcp&utm_content=%5BMCP%5D+Claude+Code+%28Amplitude%29" target="_blank" style="color: #1565c0;">TCR - SA MahaPunaraJanam</a> (Trial Cancellation Rate funnel)<br>
+                        • <a href="https://app.amplitude.com/analytics/STAGEAPP/dashboard/2t19oz3v" target="_blank" style="color: #1565c0;">Special Access Dashboard</a> (Complete analysis)
+                    </p>
                 </div>
             </div>
         </div>
@@ -878,23 +1195,23 @@
             <ul style="list-style: none; margin-left: 0;">
                 <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
                     <strong>#4: Spin Wheel → Payment Optimization</strong> (Week 5-6, 2 devs) - A/B test timer duration & offer types, add urgency UI (+3pp conversion)<br>
-                    <span style="font-size: 0.9em; color: #666;">Target: non_subscriber | Amplitude Chart ID: six7gquy</span>
+                    <span style="font-size: 0.9em; color: #666;">Target: non_subscriber | Amplitude Chart ID: lidh9clj</span>
                 </li>
                 <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
                     <strong>#5: Boost Variant Optimization</strong> (Week 5-7, 2 devs) - Smart selection (Commitment for dropoffs, Discovery for completers) (+4pp engagement)<br>
-                    <span style="font-size: 0.9em; color: #666;">Target: trial_active | Amplitude Chart IDs: 1y0ta29d, qfskz34k</span>
+                    <span style="font-size: 0.9em; color: #666;">Target: trial_active | Amplitude Chart IDs: 0fdjwdly, p9n3yedy</span>
                 </li>
                 <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
                     <strong>#6: Home Discovery Optimization</strong> (Week 6-8, 3 devs) - Continue watching row, quick picks, personalized order (+5pp home → playback)<br>
-                    <span style="font-size: 0.9em; color: #666;">Target: all users | Amplitude Chart ID: hux9brmh</span>
+                    <span style="font-size: 0.9em; color: #666;">Target: all users | Amplitude Chart ID: qxatpaww</span>
                 </li>
-                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
-                    <strong>#7: Resume Trial Incentives</strong> (Week 7-8, 2 devs) - Discount offers, watch history, "what's new" (-3pp trial churn)<br>
-                    <span style="font-size: 0.9em; color: #666;">Target: trial_over, subscription_over | Amplitude Chart ID: 1y0ta29d</span>
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #27ae60;">
+                    <strong>#7: Resume Trial Incentives</strong> ✅ FEATURE EXISTS - ResumeTrialPopup, ResumeSubscriptionBanner, multiple surfaces already in production<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: trial_over, subscription_over | Optimization only: A/B test offer types, personalize messaging (3-5 days)</span>
                 </li>
-                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #f39c12;">
-                    <strong>#8: Post-Payment Engagement</strong> (Week 8, 2 devs) - Enhanced success screen, immediate watch CTA (+6pp D1 retention)<br>
-                    <span style="font-size: 0.9em; color: #666;">Target: trial_active (newly activated) | Amplitude Chart ID: 1y0ta29d</span>
+                <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #27ae60;">
+                    <strong>#8: Post-Payment Engagement</strong> ✅ FEATURE EXISTS - PaymentSuccessScreen with auto-redirect, countdown timer, recommended content fully functional<br>
+                    <span style="font-size: 0.9em; color: #666;">Target: trial_active (newly activated) | Enhancement only: A/B test countdown duration, content selection logic (2-3 days)</span>
                 </li>
             </ul>
         </div>
@@ -907,11 +1224,11 @@
             <ul style="list-style: none; margin-left: 0;">
                 <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #27ae60;">
                     <strong>#9: Internal Monitoring Dashboard</strong> (Week 9-10, 2 devs) - Real-time metrics, alerts, Sankey journey diagram<br>
-                    <span style="font-size: 0.9em; color: #666;">Target: all users (team tool) | Amplitude: All charts integrated</span>
+                    <span style="font-size: 0.9em; color: #666;">Target: all users (team tool) | Amplitude: All charts integrated (kj3fgru8, 0fdjwdly, p9n3yedy, olmj7eh1, gy3b4s96, qxatpaww, lidh9clj)</span>
                 </li>
                 <li style="padding: 15px; background: white; margin: 10px 0; border-radius: 8px; border-left: 4px solid #27ae60;">
                     <strong>#10: Lapsed User Win-Back</strong> (Week 11-12, 3 devs) - Takeover screen, incentives, deep links (Win back 10% lapsed users)<br>
-                    <span style="font-size: 0.9em; color: #666;">Target: trial_over, subscription_over | Amplitude Chart ID: 1y0ta29d</span>
+                    <span style="font-size: 0.9em; color: #666;">Target: trial_over, subscription_over | Amplitude Chart IDs: 0fdjwdly, gy3b4s96</span>
                 </li>
             </ul>
         </div>
