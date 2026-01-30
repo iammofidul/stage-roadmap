@@ -3,416 +3,1004 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stage App - Priority-Based Roadmap (3 Months)</title>
+    <title>Stage App - Product Roadmap Q1 2026</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #313131;
+            --bg-card: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #c4c4c4;
+            --text-muted: #858585;
+            --accent-red: #e50914;
+            --accent-red-light: #ff1a24;
+            --accent-orange: #EFA73F;
+            --accent-gold: #EFA735;
+            --accent-blue: #00a8e8;
+            --accent-green: #00d665;
+            --border-color: rgba(255,255,255,0.1);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+        }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: #333;
-            background: #f5f7fa;
+            overflow-x: hidden;
         }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(239, 167, 63, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 168, 232, 0.05) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
 
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Header */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #e50914 0%, #b20710 50%, #8b0000 100%);
+            border-radius: 24px;
+            padding: 60px 48px;
+            margin-bottom: 48px;
+            box-shadow: var(--shadow-lg), 0 0 60px rgba(229, 9, 20, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
-        header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        header p { font-size: 1.1em; opacity: 0.9; }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+            animation: shimmer 3s infinite;
+        }
 
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        header .subtitle {
+            font-size: 1.3em;
+            font-weight: 500;
+            opacity: 0.95;
+            margin-bottom: 24px;
+        }
+
+        header .meta {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        header .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-red);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: 900;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffffff, #a8b3cf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Priority Section */
         .priority-section {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-md);
+            position: relative;
         }
 
         .priority-header {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #e0e0e0;
+            gap: 20px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--border-color);
         }
 
         .priority-badge {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 0.9em;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.85em;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .priority-badge.p0 {
-            background: #ff4757;
-            color: white;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-light));
         }
 
         .priority-badge.p1 {
-            background: #ffa502;
-            color: white;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
         }
 
         .priority-badge.p2 {
-            background: #2ed573;
-            color: white;
+            background: linear-gradient(135deg, var(--accent-red), #00e676);
         }
 
         .priority-title {
-            font-size: 1.8em;
-            color: #2c3e50;
+            font-size: 2em;
+            font-weight: 800;
             flex-grow: 1;
+            background: linear-gradient(135deg, #ffffff, #a8b3cf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .initiative-card {
-            background: #f8f9fa;
-            border-left: 5px solid #3498db;
-            padding: 25px;
-            margin-bottom: 20px;
+        .priority-timeline {
+            padding: 8px 16px;
+            background: var(--bg-card);
             border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            border: 1px solid var(--border-color);
         }
 
-        .initiative-card.consumption {
-            border-left-color: #ff4757;
-            background: linear-gradient(135deg, #fff5f7 0%, #ffe8eb 100%);
+        .priority-description {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.8;
         }
 
-        .initiative-card.retention {
-            border-left-color: #ffa502;
-            background: linear-gradient(135deg, #fff8ed 0%, #ffeccc 100%);
+        /* Initiative Card */
+        .initiative-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .initiative-card.growth {
-            border-left-color: #2ed573;
-            background: linear-gradient(135deg, #f0fff4 0%, #d4f5e1 100%);
+        .initiative-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-red), var(--accent-orange));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .initiative-card:hover {
+            transform: translateX(4px);
+            border-color: var(--accent-red);
+            box-shadow: var(--shadow-md);
+        }
+
+        .initiative-card:hover::before {
+            opacity: 1;
+        }
+
+        .initiative-card.critical::before {
+            background: linear-gradient(180deg, var(--accent-red), var(--accent-red-light));
+            opacity: 1;
+        }
+
+        .initiative-card.retention::before {
+            background: linear-gradient(180deg, var(--accent-orange), #ffa726);
+        }
+
+        .initiative-card.growth::before {
+            background: linear-gradient(180deg, var(--accent-red), #00e676);
         }
 
         .initiative-header {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 24px;
         }
 
         .initiative-number {
-            background: #3498db;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-light));
             color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            min-width: 56px;
+            height: 56px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.2em;
+            font-weight: 900;
+            font-size: 1.5em;
+            box-shadow: var(--shadow-md);
+            flex-shrink: 0;
+        }
+
+        .initiative-number.orange {
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold));
+        }
+
+        .initiative-number.green {
+            background: linear-gradient(135deg, #00d665, #00e676);
+        }
+
+        .initiative-title-block {
+            flex: 1;
         }
 
         .initiative-title {
-            font-size: 1.4em;
-            color: #2c3e50;
-            font-weight: 600;
-            flex-grow: 1;
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
         }
 
         .initiative-meta {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 15px;
         }
 
         .badge {
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.85em;
-            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .badge-week {
-            background: #e3f2fd;
-            color: #1565c0;
+            background: rgba(0, 168, 232, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(0, 168, 232, 0.3);
         }
 
         .badge-team {
-            background: #f3e5f5;
-            color: #6a1b9a;
+            background: rgba(37, 141, 88, 0.15);
+            color: var(--accent-red-light);
+            border: 1px solid rgba(37, 141, 88, 0.3);
         }
 
         .badge-impact {
-            background: #e8f5e9;
-            color: #2e7d32;
+            background: rgba(0, 214, 101, 0.15);
+            color: var(--accent-red);
+            border: 1px solid rgba(0, 214, 101, 0.3);
         }
 
+        .badge-new {
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-light));
+            color: white;
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* User Types */
         .user-types {
-            background: #fff3cd;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 15px;
+            background: rgba(255, 149, 0, 0.1);
+            border: 1px solid rgba(255, 149, 0, 0.2);
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
         }
 
         .user-types h4 {
-            font-size: 0.9em;
-            color: #856404;
-            margin-bottom: 8px;
+            font-size: 0.85em;
+            color: var(--accent-orange);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
         .user-type-tags {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .user-type-tag {
-            background: #ffc107;
-            color: #000;
-            padding: 4px 10px;
-            border-radius: 12px;
+            background: rgba(255, 149, 0, 0.2);
+            color: var(--accent-orange);
+            padding: 6px 14px;
+            border-radius: 20px;
             font-size: 0.85em;
             font-weight: 600;
+            border: 1px solid rgba(255, 149, 0, 0.3);
+            font-family: 'Courier New', monospace;
         }
 
-        .amplitude-link {
-            display: inline-block;
-            background: #6a1b9a;
-            color: white !important;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 10px;
-        }
-
-        .amplitude-link:hover {
-            background: #4a148c;
-        }
-
+        /* Content Sections */
         .section-content {
-            margin-top: 15px;
+            margin-top: 20px;
             line-height: 1.8;
         }
 
         .section-content h4 {
-            color: #2c3e50;
-            margin-top: 15px;
-            margin-bottom: 10px;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
         }
 
         .section-content ul {
-            margin-left: 20px;
-            margin-top: 10px;
+            margin-left: 24px;
+            margin-top: 12px;
         }
 
         .section-content li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
         }
 
+        .section-content li strong {
+            color: var(--text-primary);
+        }
+
+        /* Metric Boxes */
         .metric-box {
-            background: #e8f5e9;
-            padding: 15px;
-            border-radius: 6px;
-            margin: 10px 0;
+            background: rgba(0, 214, 101, 0.1);
+            border-left: 4px solid var(--accent-red);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+            font-size: 0.95em;
+            line-height: 1.8;
         }
 
         .metric-box.warning {
-            background: #fff3cd;
+            background: rgba(255, 149, 0, 0.1);
+            border-left-color: var(--accent-orange);
         }
 
         .metric-box.danger {
-            background: #ffebee;
+            background: rgba(239, 167, 63, 0.1);
+            border-left-color: var(--accent-orange);
+        }
+
+        .metric-box strong {
+            color: var(--text-primary);
         }
 
         .feature-exists {
-            background: #e8f5e9;
-            padding: 10px;
-            border-radius: 6px;
-            margin: 10px 0;
-            border-left: 4px solid #4caf50;
+            background: rgba(0, 214, 101, 0.1);
+            border: 1px solid rgba(0, 214, 101, 0.3);
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        strong {
-            color: #2c3e50;
+        .feature-exists::before {
+            content: '✓';
+            font-size: 1.5em;
+            color: var(--accent-red);
+            font-weight: 900;
+        }
+
+        /* Amplitude Link */
+        .amplitude-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+            color: white !important;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 16px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .amplitude-link:hover {
+            background: linear-gradient(135deg, #4a148c, #6a1b9a);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Summary Footer */
+        .summary-footer {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a2244 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 60px 48px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .summary-title {
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff, #a8b3cf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .impact-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 32px 24px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-red);
+        }
+
+        .impact-value {
+            font-size: 3em;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .impact-label {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .footer-meta {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9em;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-card);
+            border-radius: 6px;
+            border: 2px solid var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 24px 16px; }
+            header { padding: 40px 24px; }
+            header h1 { font-size: 2.5em; }
+            .priority-section { padding: 32px 24px; }
+            .initiative-card { padding: 24px; }
+            .priority-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-animation"></div>
+
     <div class="container">
+        <!-- Hero Header -->
         <header>
-            <h1>🚀 Stage App: Priority-Based Roadmap</h1>
-            <p>3-Month Plan (Final) - Consumption → Retention → Growth</p>
-            <p style="margin-top: 10px; font-size: 0.95em;">📅 Q1 2026 | Team: 7 Flutter Developers | Optimized based on existing features</p>
+            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                <img src="https://media.stage.in/static/stage_logo_horizontal.webp" alt="Stage Logo" style="height: 48px; filter: brightness(0) invert(1);">
+                <h1 style="margin: 0;">Product Roadmap Q1 2026</h1>
+            </div>
+            <div class="subtitle">Drive Retention → Boost Consumption → Scale Growth</div>
+            <div class="meta">
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span><strong>Timeline:</strong> 12 Weeks</span>
+                </div>
+                <div class="meta-item">
+                    <span>👥</span>
+                    <span><strong>Team:</strong> 7 Flutter Developers</span>
+                </div>
+                <div class="meta-item">
+                    <span>🎯</span>
+                    <span><strong>Focus:</strong> Trial Retention & Consumption</span>
+                </div>
+                <div class="meta-item">
+                    <span>✅</span>
+                    <span><strong>Status:</strong> Optimized & Ready</span>
+                </div>
+            </div>
         </header>
 
-        <!-- Priority 0: Consumption & Engagement (HIGHEST PRIORITY) -->
+        <!-- Key Metrics Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">35%</div>
+                <div class="stat-label">Current TCR (171K cancellations/month)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">15%</div>
+                <div class="stat-label">PSP Save Rate (18K trials/month)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">2.5K</div>
+                <div class="stat-label">Resume Notification Saves/Month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">+6.15L</div>
+                <div class="stat-label">MRR Impact from TCR Reduction</div>
+            </div>
+        </div>
+
+        <!-- P0: Critical Priority -->
         <div class="priority-section">
             <div class="priority-header">
-                <span class="priority-badge p0">P0 - Critical</span>
-                <h2 class="priority-title">Consumption & Engagement Drivers</h2>
-                <span style="color: #ff4757; font-weight: bold;">Weeks 1-6</span>
+                <span class="priority-badge p0">
+                    <span>🔥</span>
+                    <span>P0 - Critical</span>
+                </span>
+                <h2 class="priority-title">Trial Retention & Consumption Drivers</h2>
+                <span class="priority-timeline">Weeks 1-6</span>
             </div>
 
-            <p style="margin-bottom: 20px; font-size: 1.05em; color: #666;">
-                <strong>Goal:</strong> Increase content consumption and reduce trial cancellation. Direct impact on retention and conversion.
+            <p class="priority-description">
+                <strong>Mission:</strong> Reduce trial cancellation (especially PSP-initiated) and maximize content consumption. Every percentage point saved = Direct revenue impact.
             </p>
 
-            <!-- Initiative 1: Trial Cancellation Reduction -->
-            <div class="initiative-card consumption">
-                <div class="initiative-header">
-                    <div class="initiative-number" style="background: #ff4757;">1</div>
-                    <div class="initiative-title">Trial Cancellation Reduction (CRITICAL)</div>
-                </div>
+            <div class="metric-box" style="background: rgba(229, 9, 20, 0.1); border-left-color: var(--accent-red); margin-bottom: 32px;">
+                <strong>🎯 P0 Focus (4 Initiatives) - TCR Reduction Priority:</strong><br>
+                #1: PSP Cancellation Prevention (App-Side) - 18K saved trials/month from 120K PSP cancellations<br>
+                #2: Resume Watching Notifications - 2.5K saved trials/month from incomplete sessions<br>
+                #3: Microdrama Discovery Promotion - Improve engagement to reduce churn<br>
+                #4: Watchlist Expansion - Increase content investment to reduce churn
+            </div>
 
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 1-3 (NEW - HIGHEST PRIORITY)</span>
-                    <span class="badge badge-team">2-3 Developers</span>
-                    <span class="badge badge-impact">-50% Cancellation Rate</span>
+            <!-- Initiative 1: Trial Cancellation Reduction -->
+            <div class="initiative-card critical">
+                <div class="initiative-header">
+                    <div class="initiative-number">1</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">PSP Cancellation Prevention (App-Side)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new">🆕 HIGHEST PRIORITY</span>
+                            <span class="badge badge-week">⏱️ Week 1-3 (12 days)</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">📈 18K Saves/Month</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">trial_active</span>
                     </div>
                 </div>
 
                 <div class="section-content">
-                    <h4>📊 Current Amplitude Data (Critical Problem):</h4>
+                    <h4>📊 Current Amplitude Data (Critical Problem)</h4>
                     <div class="metric-box danger">
-                        <strong>🚨 HIGHEST PRIORITY ISSUE:</strong><br>
-                        <strong>Overall Trial Cancellation:</strong> 3.0-3.84% of trial users actively cancel<br>
-                        <strong>Special Access users:</strong> 3.84% cancel (50 out of 1,301)<br>
-                        <strong>Non-SA users:</strong> 2.17% cancel (16 out of 738)<br>
-                        <strong>Net Impact:</strong> 66 lost trials in last 2 weeks alone = High churn rate
+                        <strong>🚨 HIGHEST PRIORITY ISSUE</strong><br>
+                        <strong>Overall Trial Cancellation Rate (TCR):</strong> 35.0% of trial users cancel within 1 day of activation<br>
+                        <strong>Last 30 Days:</strong> 171,127 cancellations out of 489,024 trial activations<br>
+                        <strong>Recent Daily TCR:</strong> 31-32% (stable pattern)<br>
+                        <strong>Scale:</strong> ~5,700 cancellations per day<br><br>
+                        <strong>⚠️ THE REAL PROBLEM:</strong> Most users cancel mandate from PhonePe/Paytm apps directly (bypassing Stage app retention flows)
                     </div>
 
-                    <a href="https://app.amplitude.com/analytics/STAGEAPP/dashboard/2t19oz3v" target="_blank" class="amplitude-link">
-                        🔗 View Special Access Dashboard (Includes TCR)
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/new/99wgbl1q" target="_blank" class="amplitude-link">
+                        🔗 View TCR Funnel (trial_activated → All Mandate Pause and Revoke)
                     </a>
+
+                    <div class="feature-exists" style="margin-top: 20px;">
+                        <strong>What Already Exists:</strong> In-app cancellation flow with exit survey, retention dialogs (PauseTrialBenefitDialog, PauseTrialPrideDialog), pause/resume mandate API, analytics tracking, A/B testing, auto-play next video (WatchNextNudge)
+                    </div>
+
+                    <div class="feature-exists">
+                        <strong>Backend Ready:</strong> Webhook already detects PSP cancellation events from PhonePe/Paytm
+                    </div>
 
                     <h4>🎯 Why This is P0 (Highest Priority)?</h4>
                     <ul>
-                        <li><strong>Every cancelled trial = Lost revenue:</strong> 3.84% cancel rate means ~966 users/month actively cancel (out of 25K monthly trials)</li>
-                        <li><strong>High-intent users leaving:</strong> These users activated trial (showed interest) but cancelled before D7</li>
-                        <li><strong>Reducing cancellation > Increasing activation:</strong> Easier to keep existing trials than acquire new ones</li>
-                        <li><strong>Special Access concern:</strong> SA users cancel 77% MORE than non-SA users (red flag for feature effectiveness)</li>
+                        <li><strong>PSP Cancellations Bypass App:</strong> Users cancel mandate directly in PhonePe/Paytm → never see Stage retention dialogs</li>
+                        <li><strong>Majority of Cancellations:</strong> ~70% of mandate cancellations happen via PSP apps, not Stage app</li>
+                        <li><strong>Lost Save Opportunities:</strong> Backend detects PSP cancellation, but app doesn't respond or attempt to save user</li>
+                        <li><strong>No Re-engagement:</strong> Users who cancel via PSP have no path back to resume subscription</li>
                     </ul>
 
-                    <h4>🔍 Root Cause Analysis (What We Need to Investigate):</h4>
+                    <h4>🔍 The Gap: App-Side PSP Cancellation Handling</h4>
                     <ul>
-                        <li><strong>WHEN do users cancel?</strong> Day 0, 1, 2, 3...7? Find the critical window</li>
-                        <li><strong>WHY do users cancel?</strong> No exit survey = we're guessing</li>
-                        <li><strong>What triggers cancellation?</strong> Content disappointment? Accidental activation? Pricing concerns?</li>
-                        <li><strong>Where do they cancel from?</strong> Settings? Payment screen? Profile?</li>
+                        <li><strong>Missing Event Listener:</strong> App doesn't listen for PSP cancellation events from backend</li>
+                        <li><strong>Missing Push Notifications:</strong> No notification sent when PSP cancellation detected</li>
+                        <li><strong>Missing Deep Links:</strong> No way to bring user back to app from PSP notification</li>
+                        <li><strong>Missing Save Flow:</strong> No retention dialog shown when user returns after PSP cancellation</li>
+                        <li><strong>Analytics Gap:</strong> cancellation_source doesn't distinguish 'phonePe', 'paytm', 'stage_app'</li>
                     </ul>
 
-                    <h4>✅ What We'll Build:</h4>
+                    <h4>✅ What We'll Build (App-Side Implementation)</h4>
 
-                    <p style="margin-top: 15px;"><strong>Phase 1: Understand WHY (Week 1 - 3 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 1: Event Listener + Analytics (Week 1 - 3 days)</strong></p>
                     <ul>
-                        <li><strong>Cancellation Flow Analytics:</strong> Track trial_cancellation_initiated event with properties:
+                        <li><strong>PSP Cancellation Event Listener:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>trial_day_cancelled (0-7)</li>
-                                <li>cancellation_source (settings, profile, payment_screen)</li>
-                                <li>content_consumed_before_cancel (yes/no + count)</li>
-                                <li>last_content_watched (ID + type)</li>
-                                <li>time_since_last_session (hours)</li>
+                                <li>Listen for backend webhook events (mandate_revoked_psp status change)</li>
+                                <li>Detect when cancellation source is PhonePe or Paytm</li>
+                                <li>Store PSP cancellation state in local preferences</li>
+                                <li>Track event: psp_cancellation_detected</li>
                             </ul>
                         </li>
-                        <li><strong>Exit Survey (In-App):</strong> When user clicks "Cancel Trial" → Show single-question survey:
+                        <li><strong>Enhanced Analytics Tracking:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>"Help us improve: Why are you cancelling?" (1-tap options)</li>
-                                <li>Options: "Not enough content", "Too expensive", "Technical issues", "Found what I wanted", "Other"</li>
-                                <li>Track response + proceed with cancellation (don't force them to answer)</li>
+                                <li>Add cancellation_source property: 'phonePe', 'paytm', 'stage_app'</li>
+                                <li>Track trial_day_cancelled (0-7)</li>
+                                <li>Track content_consumed_before_cancel</li>
+                                <li>Track time_since_last_session</li>
                             </ul>
                         </li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Phase 2: Reduce Cancellations (Week 2-3 - 7 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 2: Push Notification + Deep Link (Week 1-2 - 4 days)</strong></p>
                     <ul>
-                        <li><strong>Cancellation Confirmation Dialog (Save Attempt):</strong>
+                        <li><strong>PSP Cancellation Push Notification:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>When user clicks "Cancel Trial" → Show dialog before confirming</li>
-                                <li>"Wait! You still have X days left. Here's what you're missing:"</li>
-                                <li>Show: Unwatched content from their watchlist + Popular shows they haven't seen</li>
-                                <li>Two CTAs: "Keep Trial & Continue Watching" (primary) vs "Cancel Anyway" (secondary)</li>
-                                <li>Track: save_attempt_shown, save_attempt_accepted, save_attempt_rejected</li>
+                                <li>When backend detects PSP cancellation → Send push notification within 5 minutes</li>
+                                <li>Message: "Wait! Before you go... Your trial has X days left. Here's what you're missing 🎬"</li>
+                                <li>Deep link: Opens Stage app to PSP retention screen</li>
+                                <li>Track: psp_cancel_notification_sent, psp_cancel_notification_clicked</li>
                             </ul>
                         </li>
-                        <li><strong>Pause Trial Option (Alternative to Cancel):</strong>
+                        <li><strong>Deep Link Handler:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Instead of cancelling, offer "Pause for 7 days" option</li>
-                                <li>User gets reminder after 7 days: "Ready to resume?"</li>
-                                <li>Lower friction than full cancellation</li>
-                            </ul>
-                        </li>
-                        <li><strong>D0-D2 Engagement Nudges (Prevent Early Cancel):</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>If user activated trial but didn't watch content in 24h → Push notification "Your trial has started! Here's what's popular"</li>
-                                <li>If user watched <2 videos in 48h → In-app banner "Explore more content" with curated picks</li>
-                                <li>Early engagement prevents later cancellation</li>
-                            </ul>
-                        </li>
-                        <li><strong>Pre-Cancellation Offer (Last Resort):</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>If user proceeds to cancel after save attempt → Show "Special offer: 20% off subscription if you keep trial"</li>
-                                <li>Only show to users who consumed content (high-intent)</li>
-                                <li>Track: offer_shown, offer_accepted, offer_rejected</li>
+                                <li>Route: stage://psp-cancellation-save</li>
+                                <li>Parameters: source (phonePe/paytm), trial_days_remaining</li>
+                                <li>Opens PSP retention dialog immediately</li>
                             </ul>
                         </li>
                     </ul>
 
-                    <h4>📈 Expected Impact:</h4>
+                    <p style="margin-top: 15px;"><strong>Phase 3: PSP Retention Flow (Week 2-3 - 5 days)</strong></p>
+                    <ul>
+                        <li><strong>PSP Cancellation Retention Dialog:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Reuse existing PauseTrialPrideDialog with PSP-specific copy</li>
+                                <li>Show personalized content: "You've watched X shows. Here are Y more waiting"</li>
+                                <li>Two options: "Resume Subscription" (primary) vs "Keep Cancelled" (secondary)</li>
+                                <li>If resumed: Call backend API to reactivate mandate via PSP</li>
+                                <li>Track: psp_save_attempt_shown, psp_save_attempt_accepted, psp_save_attempt_rejected</li>
+                            </ul>
+                        </li>
+                        <li><strong>In-App Banner for PSP-Cancelled Users:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>When user opens app after PSP cancellation: Show floating banner</li>
+                                <li>Banner: "Your subscription was cancelled. Resume now to continue watching"</li>
+                                <li>CTA: "Resume Subscription" → Opens PSP retention dialog</li>
+                                <li>Dismissible, but re-appears on next app open</li>
+                            </ul>
+                        </li>
+                        <li><strong>Resume Mandate API Integration:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Implement pausePlanPhonePe() and pausePlanPaytm() methods (currently empty placeholders)</li>
+                                <li>Add resumePlanPhonePe() and resumePlanPaytm() methods</li>
+                                <li>Handle PSP-specific mandate reactivation flow</li>
+                                <li>Update subscription status after successful resume</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>📈 Expected Impact</h4>
                     <div class="metric-box">
                         <strong>Conservative Estimate:</strong><br>
-                        Trial Cancellation Rate: <strong>3.0% → 1.5% (-50% reduction)</strong><br><br>
-                        <strong>Math:</strong><br>
-                        - Current: 966 cancellations/month (out of 25K trials @ 3.84%)<br>
-                        - After: 483 cancellations/month (-483 saved trials)<br>
-                        - Impact: 483 additional D7 retained users/month<br>
-                        - Revenue: 96 additional paid subs/month (20% convert) = +₹48K MRR<br><br>
-                        <strong>Why 50% reduction is realistic:</strong><br>
-                        - Save dialog: 20-30% of users accept (industry standard)<br>
-                        - Exit survey: Helps us fix root causes in future iterations<br>
-                        - D0-D2 engagement: Prevents impulse cancellations<br>
-                        - Pause option: 10-15% prefer pause over cancel
+                        <strong>PSP Cancellation Save Rate: 15-20%</strong> (industry benchmark for push notification + retention dialog)<br><br>
+                        <strong>Math (Based on Actual 35% TCR):</strong><br>
+                        - <strong>Total cancellations: ~171K/month</strong> (489K trial activations × 35% TCR)<br>
+                        - <strong>PSP cancellations: ~120K/month</strong> (70% of total, bypass Stage app)<br>
+                        - <strong>In-app cancellations: ~51K/month</strong> (30% of total, see retention flow)<br><br>
+                        <strong>PSP Save Initiative Impact:</strong><br>
+                        - Save rate: 15% (conservative) = <strong>18,000 saved trials/month</strong><br>
+                        - Save rate: 20% (optimistic) = <strong>24,000 saved trials/month</strong><br>
+                        - Using conservative 15%: <strong>18K saved trials/month</strong><br><br>
+                        <strong>Revenue Impact (Conservative 15%):</strong><br>
+                        - Saved trials: 18,000/month<br>
+                        - D7 retention rate: 30% = 5,400 retained to D7<br>
+                        - Trial-to-paid conversion: 20% = 1,080 additional paid subscribers/month<br>
+                        - ARPU: ₹499/month<br>
+                        - <strong>MRR Impact: +₹5.4 Lakhs/month (~₹64.8 Lakhs ARR)</strong><br><br>
+                        <strong>Why This Works:</strong><br>
+                        - Push notification open rate: 40-50% (immediate after cancellation)<br>
+                        - Personalized content reminder: 30-40% engagement<br>
+                        - Low-friction resume (1-tap) vs high-friction re-subscribe<br>
+                        - Catches users in impulse cancellation moment
                     </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 10 days (3 days analytics + 7 days UI/features)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> trial_cancellation_rate, save_attempt_acceptance_rate, pause_vs_cancel_ratio, exit_survey_responses</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 12 days (3 days analytics + 4 days push/deep link + 5 days retention flow)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancellation_detected_count, psp_cancel_notification_open_rate, psp_save_attempt_acceptance_rate, trial_cancellation_rate (target: 35% → 28%)</p>
                 </div>
             </div>
 
-            <!-- Initiative 2: Micro Drama Optimization (Improve Existing) -->
-            <div class="initiative-card consumption">
+            <!-- Initiative 2: Resume Watching Notifications -->
+            <div class="initiative-card critical">
                 <div class="initiative-header">
-                    <div class="initiative-number" style="background: #ff4757;">2</div>
-                    <div class="initiative-title">Micro Drama Discovery Improvements</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 2-4 (Improve Existing)</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">+8pp Micro Drama Starts</span>
+                    <div class="initiative-number">2</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Resume Watching Notifications (Rich Notification)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new">🆕 TCR REDUCER</span>
+                            <span class="badge badge-week">⏱️ Week 2-3 (5 days)</span>
+                            <span class="badge badge-team">👥 1-2 Developers</span>
+                            <span class="badge badge-impact">📈 2.5K Saves/Month</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
+                    <div class="user-type-tags">
+                        <span class="user-type-tag">trial_active</span>
+                        <span class="user-type-tag">subscription_active</span>
+                    </div>
+                </div>
+
+                <div class="section-content">
+                    <h4>📊 Current Problem</h4>
+                    <div class="metric-box warning">
+                        <strong>Problem:</strong> When users lock device during video playback, they often forget to return and finish watching<br>
+                        <strong>Impact:</strong> Incomplete sessions → Lower engagement → Higher trial cancellation<br>
+                        <strong>Current State:</strong> No re-engagement mechanism when user locks device from video player
+                    </div>
+
+                    <h4>🎯 Why This Reduces TCR?</h4>
+                    <ul>
+                        <li><strong>Prevents Drop-offs:</strong> Users who lock device mid-video often don't return → Becomes lapsed user → Cancels trial</li>
+                        <li><strong>Re-engagement Window:</strong> Rich notification brings user back within 10-30 minutes (highest engagement window)</li>
+                        <li><strong>Completion Driver:</strong> Users who finish content have 35% higher D7 retention vs incomplete viewers</li>
+                        <li><strong>Top-of-Mind Awareness:</strong> Notification keeps Stage visible → Reduces "forgot about subscription" cancellations</li>
+                    </ul>
+
+                    <h4>✅ What We'll Build</h4>
+
+                    <p style="margin-top: 15px;"><strong>Phase 1: Device Lock Detection (2 days)</strong></p>
+                    <ul>
+                        <li><strong>Lock Event Listener:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Detect when user locks device while video is playing (WidgetsBindingObserver lifecycle)</li>
+                                <li>Capture current playback state: contentId, contentTitle, currentPosition, totalDuration</li>
+                                <li>Track if video is >10% watched (ignore accidental locks)</li>
+                                <li>Store resume data in local preferences</li>
+                            </ul>
+                        </li>
+                        <li><strong>Smart Notification Timing:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>If locked for 5+ minutes → Show rich notification</li>
+                                <li>If locked for 30+ minutes → Show different copy (coming back later)</li>
+                                <li>Don't notify if user completed video before locking</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Phase 2: Rich Notification (2 days)</strong></p>
+                    <ul>
+                        <li><strong>Notification Content:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Title: "Continue watching [Show Name]?"</li>
+                                <li>Body: "You left off at [XX:XX]. Tap to resume where you left off 🎬"</li>
+                                <li>Thumbnail: Show/movie poster image</li>
+                                <li>Progress bar: Visual indicator of watch position</li>
+                            </ul>
+                        </li>
+                        <li><strong>Notification Actions:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Primary action: "Resume" → Deep link to exact video position</li>
+                                <li>Secondary action: "Dismiss" → Clear notification</li>
+                                <li>Auto-dismiss after 2 hours (don't spam)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Deep Link Handler:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Route: stage://resume-watching?contentId=xxx&position=xxx</li>
+                                <li>Open video player directly at saved position</li>
+                                <li>Auto-play on open</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Phase 3: Analytics + Optimization (1 day)</strong></p>
+                    <ul>
+                        <li><strong>Tracking Events:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>device_locked_during_playback (contentId, watchedPercentage, timeSinceSessionStart)</li>
+                                <li>resume_notification_shown (contentId, lockDuration)</li>
+                                <li>resume_notification_tapped (contentId, timeToTap)</li>
+                                <li>resume_notification_dismissed (contentId)</li>
+                                <li>resumed_playback_from_notification (contentId, completionAfterResume)</li>
+                            </ul>
+                        </li>
+                        <li><strong>A/B Test Variables:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Notification timing: 5min vs 10min vs 15min delay</li>
+                                <li>Copy variants: "Continue watching" vs "Finish [Show]" vs "Come back"</li>
+                                <li>Thumbnail: Show poster vs Current frame screenshot</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h4>📈 Expected Impact</h4>
+                    <div class="metric-box">
+                        <strong>Conservative Estimate:</strong><br>
+                        <strong>Resume Rate from Notification: 25-30%</strong> (industry benchmark for rich media notifications)<br><br>
+                        <strong>Math (Based on Actual 35% TCR):</strong><br>
+                        - <strong>Total cancellations: ~171K/month</strong> (489K trial activations × 35% TCR)<br>
+                        - Users who lock device mid-video: ~15% of sessions (incomplete drop-offs)<br>
+                        - Incomplete sessions that lead to cancellation: ~25K/month (15% of 171K)<br>
+                        - Notification open rate: 40% = 10K opens<br>
+                        - Resume rate: 25% of opens = <strong>2,500 saved trials/month</strong><br><br>
+                        <strong>Revenue Impact:</strong><br>
+                        - Saved trials: 2,500/month<br>
+                        - D7 retention rate: 30% = 750 retained to D7<br>
+                        - Trial-to-paid conversion: 20% = 150 additional paid subscribers/month<br>
+                        - ARPU: ₹499/month<br>
+                        - <strong>MRR Impact: +₹75K/month (~₹9 Lakhs ARR)</strong><br><br>
+                        <strong>Why This Works:</strong><br>
+                        - Catches users in active session (not days later)<br>
+                        - Low friction: 1-tap resume vs finding show again<br>
+                        - Personalized: Show exactly what they were watching<br>
+                        - Creates habit: Users learn they can lock/resume easily
+                    </div>
+
+                    <div class="feature-exists">
+                        <strong>Note:</strong> Basic notification system exists. Need to add: Device lock detection, rich notification UI, deep link handler, resume state management
+                    </div>
+
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 5 days (2 days detection + 2 days notification + 1 day analytics)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> resume_notification_open_rate (target: 40%), resumed_playback_conversion (target: 25%), incomplete_session_cancellation_rate (reduce by 10%), trial_cancellation_rate contribution</p>
+                </div>
+            </div>
+
+            <!-- Initiative 3: Micro Drama -->
+            <div class="initiative-card critical">
+                <div class="initiative-header">
+                    <div class="initiative-number">3</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Microdrama Filter Visibility Boost</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-week">⏱️ Week 2-4 (6 days)</span>
+                            <span class="badge badge-team">👥 1-2 Developers</span>
+                            <span class="badge badge-impact">📈 +8pp Starts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-types">
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">subscription_active</span>
                     </div>
                 </div>
 
                 <div class="section-content">
-                    <h4>📊 Current Amplitude Data:</h4>
+                    <h4>📊 Current Amplitude Data</h4>
                     <div class="metric-box warning">
                         <strong>Home Landing → Micro Drama Playback Started:</strong> 22.32% (243,768 users → 54,402 started)<br>
                         <strong>Problem:</strong> 77.68% of users DON'T discover micro drama<br>
@@ -424,50 +1012,57 @@
                     </a>
 
                     <div class="feature-exists">
-                        ✅ <strong>Micro Drama Row Already Exists on Home</strong> - Just needs improvement and better positioning
+                        <strong>Microdrama Filter Already Exists:</strong> FilterType.microdrama enum, Top 10 Microdramas section, Trending Microdramas section, genre-wise microdramas, filter toggle in ContentFilterCubit, integration tests passing
                     </div>
 
-                    <h4>✅ What We'll Improve:</h4>
+                    <div class="feature-exists">
+                        <strong>Dynamic Home Screen with Microdrama Row Already Exists:</strong> Microdrama rows via DynamicHomeRow widget, auto-play next video (WatchNextNudge), auto-start next episode feature
+                    </div>
+
+                    <h4>✅ What We'll Improve (Visibility Only)</h4>
                     <ul>
-                        <li><strong>Better Positioning:</strong> Move micro drama row higher (after hero banner, before regular content)</li>
-                        <li><strong>"⚡ Quick Watch" Badges:</strong> Add visual indicator on all micro drama thumbnails</li>
-                        <li><strong>Auto-Play Trailers:</strong> Hover/long-press → Auto-play 10s preview</li>
-                        <li><strong>Curated Subcategories:</strong> "Trending Micro Drama", "Complete in 1 Hour", "New This Week"</li>
-                        <li><strong>Onboarding Tooltip:</strong> First-time users get "Try Micro Drama" nudge</li>
+                        <li><strong>Better Filter Placement:</strong> Move microdrama filter chip higher in UI (currently buried in filter list)</li>
+                        <li><strong>Onboarding Tooltip (NEW):</strong> First-time users get "Try Drama Shorts" tooltip when filter appears</li>
+                        <li><strong>Prominent "New Badge" Animation:</strong> Add pulsing "New" badge on filter chip (already configurable, just needs activation)</li>
+                        <li><strong>"Drama Shorts" Label Visibility:</strong> Increase label size and add microdrama icon (assets already exist)</li>
+                        <li><strong>Auto-Show on First Visit:</strong> Auto-select microdrama filter for first-time visitors to increase discovery</li>
+                        <li><strong>Analytics Enhancement:</strong> Track microdrama_filter_view, microdrama_filter_clicked, tooltip_shown, tooltip_dismissed</li>
                     </ul>
 
-                    <h4>📈 Expected Impact:</h4>
+                    <h4>📈 Expected Impact</h4>
                     <ul>
                         <li><strong>Micro Drama Start Rate:</strong> 22% → 30% (+8pp, +6,500 users/month)</li>
+                        <li><strong>Filter Discovery:</strong> 10% → 40% of users discover filter (+30pp)</li>
                         <li><strong>Retention Lift:</strong> Micro drama viewers have 25% higher D7 retention</li>
                     </ul>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 10-12 days</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 6 days (reduced from 8 - only UI changes, no backend)</p>
                 </div>
             </div>
 
-            <!-- Initiative 3: Watchlist Expansion (Improve Existing) -->
-            <div class="initiative-card consumption">
+            <!-- Initiative 4: Watchlist -->
+            <div class="initiative-card critical">
                 <div class="initiative-header">
-                    <div class="initiative-number" style="background: #ff4757;">3</div>
-                    <div class="initiative-title">Watchlist Expansion (My List + Notifications)</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 3-5 (Improve Existing)</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">3.8x Watchlist Conversion</span>
+                    <div class="initiative-number">4</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Watchlist Expansion (My List + Notifications)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-week">⏱️ Week 4-6 (10 days)</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">📈 3.8x Lift</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">subscription_active</span>
                     </div>
                 </div>
 
                 <div class="section-content">
-                    <h4>📊 Current Amplitude Data:</h4>
+                    <h4>📊 Current Amplitude Data</h4>
                     <div class="metric-box">
                         <strong>🎉 Exit Intent Popup WORKS!</strong><br>
                         Users who saw popup: <strong>10.61% add to watchlist</strong> (2,159 users → 229 added)<br>
@@ -480,10 +1075,10 @@
                     </a>
 
                     <div class="feature-exists">
-                        ✅ <strong>Watchlist Feature Exists:</strong> Exit popup, add_to_watchlist API, backend all functional. Just expand reach.
+                        <strong>Watchlist Feature Exists:</strong> Exit popup, add_to_watchlist API, backend all functional. Just expand reach.
                     </div>
 
-                    <h4>✅ What We'll Build:</h4>
+                    <h4>✅ What We'll Build</h4>
                     <ul>
                         <li><strong>"My List" Row on Home (NEW):</strong> Dedicated row at top showing all watchlisted content</li>
                         <li><strong>Quick Add Button Everywhere:</strong> "+My List" on all content cards (not just exit popup)</li>
@@ -492,104 +1087,49 @@
                         <li><strong>Weekly Digest:</strong> "Your Watchlist: 3 new episodes added"</li>
                     </ul>
 
-                    <h4>📈 Expected Impact:</h4>
+                    <h4>📈 Expected Impact</h4>
                     <ul>
                         <li><strong>Watchlist Adds:</strong> 2.91% → 8% (+5pp, +3,400 adds/month)</li>
                         <li><strong>Watchlist → Playback:</strong> 40% → 60% (+20pp from notifications)</li>
                     </ul>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 10-12 days</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 10 days</p>
                 </div>
             </div>
 
-            <!-- Initiative 4: Genre-Based Discovery Rows (Improve Existing) -->
-            <div class="initiative-card consumption">
-                <div class="initiative-header">
-                    <div class="initiative-number" style="background: #ff4757;">4</div>
-                    <div class="initiative-title">Genre-Based Discovery Rows (Improve Existing)</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 5-7 (Improve Existing)</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">+5pp Home → Playback</span>
-                </div>
-
-                <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
-                    <div class="user-type-tags">
-                        <span class="user-type-tag">all users</span>
-                    </div>
-                </div>
-
-                <div class="section-content">
-                    <h4>📊 Current State:</h4>
-                    <div class="metric-box warning">
-                        <strong>Home → Playback:</strong> 64% (36% land on home but don't watch)<br>
-                        <strong>Current Filters:</strong> Shows, Movies, Genre filters already exist
-                    </div>
-
-                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/qxatpaww/edit/ngf90r69" target="_blank" class="amplitude-link">
-                        🔗 View Home → Playback Funnel
-                    </a>
-
-                    <div class="feature-exists">
-                        ✅ <strong>Genre Filters Already Exist:</strong> Shows/Movies/Genre selection implemented. Now convert filters to discoverable rows.
-                    </div>
-
-                    <h4>✅ What We'll Improve:</h4>
-                    <ul>
-                        <li><strong>Genre-Based Rows on Home:</strong> Transform filters into scrollable rows:
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>"Trending in Action" (Action genre)</li>
-                                <li>"Popular Dramas" (Drama genre)</li>
-                                <li>"Comedy Picks" (Comedy genre)</li>
-                                <li>"Thriller Highlights" (Thriller genre)</li>
-                            </ul>
-                        </li>
-                        <li><strong>Personalized Order:</strong> Show user's most-watched genres first</li>
-                        <li><strong>"Quick Picks" Row:</strong> 5-minute clips, trailers, short content</li>
-                        <li><strong>Mood-Based Rows:</strong> "Feel Good Movies", "Intense Thrillers", "Family Friendly"</li>
-                    </ul>
-
-                    <h4>📈 Expected Impact:</h4>
-                    <ul>
-                        <li><strong>Home → Playback:</strong> 64% → 69% (+5pp, +3,250 playbacks/month)</li>
-                        <li><strong>Discovery:</strong> Users discover content beyond top recommendations</li>
-                    </ul>
-
-                    <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 10-12 days</p>
-                </div>
-            </div>
         </div>
 
-        <!-- Priority 1: Retention Optimization -->
+        <!-- P1: Important -->
         <div class="priority-section">
             <div class="priority-header">
-                <span class="priority-badge p1">P1 - Important</span>
+                <span class="priority-badge p1">
+                    <span>📊</span>
+                    <span>P1 - Important</span>
+                </span>
                 <h2 class="priority-title">Retention & Analytics Foundation</h2>
-                <span style="color: #ffa502; font-weight: bold;">Weeks 1-8</span>
+                <span class="priority-timeline">Weeks 1-8</span>
             </div>
 
-            <p style="margin-bottom: 20px; font-size: 1.05em; color: #666;">
-                <strong>Goal:</strong> Fix analytics gaps and understand retention patterns.
+            <p class="priority-description">
+                <strong>Mission:</strong> Fix analytics gaps and understand retention patterns. Enable data-driven decision making.
             </p>
 
             <!-- Initiative 5: Journey Tracking -->
             <div class="initiative-card retention">
                 <div class="initiative-header">
-                    <div class="initiative-number" style="background: #ffa502;">5</div>
-                    <div class="initiative-title">Journey Tracking Enhancements (3 Properties)</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 1 (2-3 days)</span>
-                    <span class="badge badge-team">1 Developer</span>
-                    <span class="badge badge-impact">Enable Attribution</span>
+                    <div class="initiative-number orange">5</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Journey Tracking Enhancements</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-week">⏱️ Week 1 (2-3 days)</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">📈 Enable Attribution</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">all users</span>
                     </div>
@@ -597,10 +1137,10 @@
 
                 <div class="section-content">
                     <div class="feature-exists">
-                        ✅ <strong>90% Complete:</strong> user_id, amplitude_id, campaign_data already in ALL events
+                        <strong>90% Complete:</strong> user_id, amplitude_id, campaign_data already in ALL events
                     </div>
 
-                    <h4>✅ Add 3 Missing Properties:</h4>
+                    <h4>✅ Add 3 Missing Properties</h4>
                     <ul>
                         <li><strong>feature_source:</strong> Track conversion driver (special_access, spin_wheel, watchlist)</li>
                         <li><strong>trial_start_date:</strong> Enable cohort analysis</li>
@@ -618,25 +1158,26 @@
             <!-- Initiative 6: Special Access Analytics -->
             <div class="initiative-card retention">
                 <div class="initiative-header">
-                    <div class="initiative-number" style="background: #ffa502;">6</div>
-                    <div class="initiative-title">Special Access Analytics Enhancements</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 3 (4 days)</span>
-                    <span class="badge badge-team">1 Developer</span>
-                    <span class="badge badge-impact">Understand SA Paradox</span>
+                    <div class="initiative-number orange">6</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Special Access Analytics Enhancements</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-week">⏱️ Week 3 (4 days)</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">📈 Understand SA Paradox</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">non_subscriber</span>
                     </div>
                 </div>
 
                 <div class="section-content">
-                    <h4>📊 The Paradox:</h4>
+                    <h4>📊 The Paradox</h4>
                     <div class="metric-box">
                         ✅ SA activates at <strong>9.15%</strong> vs 5.15% (+4pp)
                     </div>
@@ -649,28 +1190,29 @@
                     </a>
 
                     <div class="feature-exists">
-                        ✅ <strong>Feature Complete:</strong> Add 4 analytics dimensions only
+                        <strong>Feature Complete:</strong> Add 4 analytics dimensions only
                     </div>
 
                     <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 4 days</p>
                 </div>
             </div>
 
-            <!-- Initiative 7-8 -->
+            <!-- Initiatives 7-8 -->
             <div class="initiative-card retention">
                 <div class="initiative-header">
-                    <div class="initiative-number" style="background: #ffa502;">7</div>
-                    <div class="initiative-title">Resume Trial Incentives (Optimization)</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 7-8 (3-5 days)</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">-3pp Trial Churn</span>
+                    <div class="initiative-number orange">7</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Resume Trial Incentives (Optimization)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-week">⏱️ Week 7-8 (3-5 days)</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">📈 -3pp Churn</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">trial_over</span>
                         <span class="user-type-tag">subscription_over</span>
@@ -679,7 +1221,7 @@
 
                 <div class="section-content">
                     <div class="feature-exists">
-                        ✅ Feature exists - A/B test offers only
+                        Feature exists - A/B test offers only
                     </div>
                     <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/0fdjwdly/edit/fvk09nv2" target="_blank" class="amplitude-link">
                         🔗 View Trial Retention
@@ -689,18 +1231,19 @@
 
             <div class="initiative-card retention">
                 <div class="initiative-header">
-                    <div class="initiative-number" style="background: #ffa502;">8</div>
-                    <div class="initiative-title">Post-Payment Engagement (Enhancement)</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 8 (2-3 days)</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">+6pp D1 Retention</span>
+                    <div class="initiative-number orange">8</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Post-Payment Engagement (Enhancement)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-week">⏱️ Week 8 (2-3 days)</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">📈 +6pp D1 Retention</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">trial_active (new)</span>
                     </div>
@@ -708,7 +1251,7 @@
 
                 <div class="section-content">
                     <div class="feature-exists">
-                        ✅ Feature exists - A/B test countdown only
+                        Feature exists - A/B test countdown only
                     </div>
                     <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/gy3b4s96" target="_blank" class="amplitude-link">
                         🔗 View D1 Retention
@@ -717,28 +1260,37 @@
             </div>
         </div>
 
-        <!-- Priority 2: Growth & Scale -->
+        <!-- P2: Strategic -->
         <div class="priority-section">
             <div class="priority-header">
-                <span class="priority-badge p2">P2 - Strategic</span>
+                <span class="priority-badge p2">
+                    <span>🚀</span>
+                    <span>P2 - Strategic</span>
+                </span>
                 <h2 class="priority-title">Growth & Personalization</h2>
-                <span style="color: #2ed573; font-weight: bold;">Weeks 9-12</span>
+                <span class="priority-timeline">Weeks 9-12</span>
             </div>
 
+            <p class="priority-description">
+                <strong>Mission:</strong> Scale what works and win back lapsed users. Long-term growth optimization.
+            </p>
+
+            <!-- Initiative 9: Spin Wheel -->
             <div class="initiative-card growth">
                 <div class="initiative-header">
-                    <div class="initiative-number" style="background: #2ed573;">9</div>
-                    <div class="initiative-title">Spin Wheel → Payment Optimization</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 5-6</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">+3pp Conversion</span>
+                    <div class="initiative-number green">9</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Spin Wheel → Payment Optimization</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-week">⏱️ Week 9-10 (8 days)</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">📈 +3pp Conversion</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">non_subscriber</span>
                     </div>
@@ -752,20 +1304,22 @@
                 </div>
             </div>
 
+            <!-- Initiative 10: Lapsed Users -->
             <div class="initiative-card growth">
                 <div class="initiative-header">
-                    <div class="initiative-number" style="background: #2ed573;">10</div>
-                    <div class="initiative-title">Lapsed User Win-Back</div>
-                </div>
-
-                <div class="initiative-meta">
-                    <span class="badge badge-week">Week 11-12</span>
-                    <span class="badge badge-team">2 Developers</span>
-                    <span class="badge badge-impact">Win back 10%</span>
+                    <div class="initiative-number green">10</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Lapsed User Win-Back</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-week">⏱️ Week 11-12 (10 days)</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">📈 Win back 10%</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="user-types">
-                    <h4>🎯 Target Users:</h4>
+                    <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
                         <span class="user-type-tag">trial_over</span>
                         <span class="user-type-tag">subscription_over</span>
@@ -782,31 +1336,41 @@
         </div>
 
         <!-- Summary Footer -->
-        <div class="priority-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-            <h2 style="margin-bottom: 20px; color: white;">📊 3-Month Impact Summary</h2>
+        <div class="summary-footer">
+            <h2 class="summary-title">📊 3-Month Impact Forecast</h2>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px;">
-                    <div style="font-size: 2em; font-weight: bold;">-50%</div>
-                    <div>Trial Cancellation (3.0% → 1.5%)</div>
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <div class="impact-value">35%</div>
+                    <div class="impact-label">Current TCR<br>(171K cancellations/month)</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px;">
-                    <div style="font-size: 2em; font-weight: bold;">+8pp</div>
-                    <div>Micro Drama Starts (22% → 30%)</div>
+                <div class="impact-card">
+                    <div class="impact-value">18K</div>
+                    <div class="impact-label">PSP Saves per Month<br>(15% of 120K PSP cancellations)</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px;">
-                    <div style="font-size: 2em; font-weight: bold;">3.8x</div>
-                    <div>Watchlist Conversion Lift</div>
+                <div class="impact-card">
+                    <div class="impact-value">2.5K</div>
+                    <div class="impact-label">Resume Notification Saves<br>(Incomplete sessions)</div>
                 </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px;">
-                    <div style="font-size: 2em; font-weight: bold;">+483</div>
-                    <div>Saved Trials/Month</div>
+                <div class="impact-card">
+                    <div class="impact-value">20.5K</div>
+                    <div class="impact-label">Total Saved Trials/Month<br>(12% TCR reduction)</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-value">+6.15L</div>
+                    <div class="impact-label">MRR from TCR Reduction<br>(~₹73.8L ARR)</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-value">+8pp</div>
+                    <div class="impact-label">Micro Drama Starts<br>(22% → 30%)</div>
                 </div>
             </div>
 
-            <p style="margin-top: 30px; font-size: 1.1em; opacity: 0.9;">
-                <strong>Generated by:</strong> Claude Code + Amplitude MCP | <strong>Date:</strong> January 30, 2026
-            </p>
+            <div class="footer-meta">
+                <strong>Generated by:</strong> Claude Code + Amplitude MCP Integration<br>
+                <strong>Date:</strong> January 30, 2026 | <strong>Status:</strong> ✅ Ready for Execution<br>
+                <strong>Version:</strong> FINAL (4 P0 Initiatives: PSP Cancellation + Resume Notifications + Microdrama + Watchlist)
+            </div>
         </div>
     </div>
 </body>
