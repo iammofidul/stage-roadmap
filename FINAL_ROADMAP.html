@@ -20,12 +20,12 @@
             --text-primary: #ffffff;
             --text-secondary: #c4c4c4;
             --text-muted: #858585;
-            --accent-red: #e50914;
-            --accent-red-light: #ff1a24;
+            --accent-green: #258D58;
+            --accent-green-light: #2ea66b;
             --accent-orange: #EFA73F;
             --accent-gold: #EFA735;
             --accent-blue: #00a8e8;
-            --accent-green: #00d665;
+            --accent-green-bright: #00d665;
             --border-color: rgba(255,255,255,0.1);
             --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
             --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
@@ -49,7 +49,7 @@
             height: 100%;
             z-index: 0;
             background:
-                radial-gradient(circle at 20% 30%, rgba(229, 9, 20, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 20% 30%, rgba(37, 141, 88, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(239, 167, 63, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(0, 168, 232, 0.05) 0%, transparent 50%);
             animation: pulse 8s ease-in-out infinite;
@@ -70,11 +70,11 @@
 
         /* Hero Header */
         header {
-            background: linear-gradient(135deg, #e50914 0%, #b20710 50%, #8b0000 100%);
+            background: linear-gradient(135deg, #258D58 0%, #1e7046 50%, #165a36 100%);
             border-radius: 24px;
             padding: 60px 48px;
             margin-bottom: 48px;
-            box-shadow: var(--shadow-lg), 0 0 60px rgba(229, 9, 20, 0.3);
+            box-shadow: var(--shadow-lg), 0 0 60px rgba(37, 141, 88, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -146,7 +146,7 @@
         .stat-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
-            border-color: var(--accent-red);
+            border-color: var(--accent-green);
         }
 
         .stat-card::before {
@@ -156,7 +156,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-orange));
         }
 
         .stat-value {
@@ -209,7 +209,7 @@
         }
 
         .priority-badge.p0 {
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-light));
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-green-light));
         }
 
         .priority-badge.p1 {
@@ -217,7 +217,7 @@
         }
 
         .priority-badge.p2 {
-            background: linear-gradient(135deg, var(--accent-red), #00e676);
+            background: linear-gradient(135deg, var(--accent-green), #00e676);
         }
 
         .priority-title {
@@ -266,14 +266,14 @@
             left: 0;
             width: 6px;
             height: 100%;
-            background: linear-gradient(180deg, var(--accent-red), var(--accent-orange));
+            background: linear-gradient(180deg, var(--accent-green), var(--accent-orange));
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         .initiative-card:hover {
             transform: translateX(4px);
-            border-color: var(--accent-red);
+            border-color: var(--accent-green);
             box-shadow: var(--shadow-md);
         }
 
@@ -282,7 +282,7 @@
         }
 
         .initiative-card.critical::before {
-            background: linear-gradient(180deg, var(--accent-red), var(--accent-red-light));
+            background: linear-gradient(180deg, var(--accent-green), var(--accent-green-light));
             opacity: 1;
         }
 
@@ -291,7 +291,7 @@
         }
 
         .initiative-card.growth::before {
-            background: linear-gradient(180deg, var(--accent-red), #00e676);
+            background: linear-gradient(180deg, var(--accent-green), #00e676);
         }
 
         .initiative-header {
@@ -302,7 +302,7 @@
         }
 
         .initiative-number {
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-light));
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-green-light));
             color: white;
             min-width: 56px;
             height: 56px;
@@ -359,18 +359,18 @@
 
         .badge-team {
             background: rgba(37, 141, 88, 0.15);
-            color: var(--accent-red-light);
+            color: var(--accent-green-light);
             border: 1px solid rgba(37, 141, 88, 0.3);
         }
 
         .badge-impact {
             background: rgba(0, 214, 101, 0.15);
-            color: var(--accent-red);
+            color: var(--accent-green);
             border: 1px solid rgba(0, 214, 101, 0.3);
         }
 
         .badge-new {
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-light));
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-green-light));
             color: white;
             animation: pulse-badge 2s infinite;
         }
@@ -446,7 +446,7 @@
         /* Metric Boxes */
         .metric-box {
             background: rgba(0, 214, 101, 0.1);
-            border-left: 4px solid var(--accent-red);
+            border-left: 4px solid var(--accent-green);
             padding: 20px;
             border-radius: 12px;
             margin: 16px 0;
@@ -482,7 +482,7 @@
         .feature-exists::before {
             content: '✓';
             font-size: 1.5em;
-            color: var(--accent-red);
+            color: var(--accent-green);
             font-weight: 900;
         }
 
@@ -547,14 +547,14 @@
         .impact-card:hover {
             transform: translateY(-4px);
             background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-red);
+            border-color: var(--accent-green);
         }
 
         .impact-value {
             font-size: 3em;
             font-weight: 900;
             margin-bottom: 12px;
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-orange));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -590,7 +590,7 @@
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-red);
+            background: var(--accent-green);
         }
 
         /* Responsive */
@@ -611,7 +611,7 @@
         <!-- Hero Header -->
         <header>
             <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
-                <img src="https://media.stage.in/static/stage_logo_horizontal.webp" alt="Stage Logo" style="height: 48px; filter: brightness(0) invert(1);">
+                <img src="https://media.stage.in/static/stage_logo_horizontal.webp" alt="Stage Logo" style="height: 48px;">
                 <h1 style="margin: 0;">Product Roadmap Q1 2026</h1>
             </div>
             <div class="subtitle">Drive Retention → Boost Consumption → Scale Growth</div>
@@ -670,7 +670,7 @@
                 <strong>Mission:</strong> Reduce trial cancellation (especially PSP-initiated) and maximize content consumption. Every percentage point saved = Direct revenue impact.
             </p>
 
-            <div class="metric-box" style="background: rgba(229, 9, 20, 0.1); border-left-color: var(--accent-red); margin-bottom: 32px;">
+            <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green); margin-bottom: 32px;">
                 <strong>🎯 P0 Focus (4 Initiatives) - TCR Reduction Priority:</strong><br>
                 #1: PSP Cancellation Prevention (App-Side) - 18K saved trials/month from 120K PSP cancellations<br>
                 #2: Resume Watching Notifications - 2.5K saved trials/month from incomplete sessions<br>
