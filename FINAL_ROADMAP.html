@@ -788,8 +788,9 @@
                                 <li>Reuse existing PauseTrialPrideDialog with PSP-specific copy</li>
                                 <li>Show personalized content: "You've watched X shows. Here are Y more waiting"</li>
                                 <li>Two options: "Resume Subscription" (primary) vs "Keep Cancelled" (secondary)</li>
-                                <li>If resumed: Call backend API to reactivate mandate via PSP</li>
+                                <li>If resumed: Call backend API to reactivate mandate via PSP (creates new mandate)</li>
                                 <li>Track: psp_save_attempt_shown, psp_save_attempt_accepted, psp_save_attempt_rejected</li>
+                                <li>Backend tracks: trial_reactivated (on successful new mandate creation)</li>
                             </ul>
                         </li>
                         <li><strong>In-App Banner for PSP-Cancelled Users:</strong>
@@ -804,7 +805,8 @@
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>Implement pausePlanPhonePe() and pausePlanPaytm() methods (currently empty placeholders)</li>
                                 <li>Add resumePlanPhonePe() and resumePlanPaytm() methods</li>
-                                <li>Handle PSP-specific mandate reactivation flow</li>
+                                <li>Handle PSP-specific mandate reactivation flow (new mandate creation)</li>
+                                <li>Backend triggers: trial_reactivated event on successful new mandate registration</li>
                                 <li>Update subscription status after successful resume</li>
                             </ul>
                         </li>
@@ -836,7 +838,7 @@
                     </div>
 
                     <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 12 days (3 days analytics + 4 days push/deep link + 5 days retention flow)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancellation_detected_count, psp_cancel_notification_open_rate, psp_save_attempt_acceptance_rate, trial_cancellation_rate (target: 35% → 28%)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancellation_detected_count, psp_cancel_notification_open_rate, trial_reactivated_count (new mandate registrations), trial_cancellation_rate (target: 35% → 28%)</p>
                 </div>
             </div>
 
@@ -983,11 +985,11 @@
                 <div class="initiative-header">
                     <div class="initiative-number">3</div>
                     <div class="initiative-title-block">
-                        <div class="initiative-title">Microdrama Filter Visibility Boost</div>
+                        <div class="initiative-title">Microdrama Engagement Boost (Comprehensive)</div>
                         <div class="initiative-meta">
-                            <span class="badge badge-week">⏱️ Week 2-4 (6 days)</span>
-                            <span class="badge badge-team">👥 1-2 Developers</span>
-                            <span class="badge badge-impact">📈 +8pp Starts</span>
+                            <span class="badge badge-week">⏱️ Week 2-4 (10 days)</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">📈 +13pp Starts, 2.1x Episodes</span>
                         </div>
                     </div>
                 </div>
@@ -1016,27 +1018,75 @@
                     </div>
 
                     <div class="feature-exists">
-                        <strong>Dynamic Home Screen with Microdrama Row Already Exists:</strong> Microdrama rows via DynamicHomeRow widget, auto-play next video (WatchNextNudge), auto-start next episode feature
+                        <strong>Already Exists:</strong> Microdrama rows (DynamicHomeRow), Continue Watching (exists), Binge Auto-Play (in progress)
                     </div>
 
-                    <h4>✅ What We'll Improve (Visibility Only)</h4>
+                    <h4>✅ What We'll Build (6 Tasks)</h4>
+
+                    <p style="margin-top: 15px;"><strong>Task 1: Filter Visibility Improvements (3 days)</strong></p>
                     <ul>
-                        <li><strong>Better Filter Placement:</strong> Move microdrama filter chip higher in UI (currently buried in filter list)</li>
-                        <li><strong>Onboarding Tooltip (NEW):</strong> First-time users get "Try Drama Shorts" tooltip when filter appears</li>
-                        <li><strong>Prominent "New Badge" Animation:</strong> Add pulsing "New" badge on filter chip (already configurable, just needs activation)</li>
                         <li><strong>"Drama Shorts" Label Visibility:</strong> Increase label size and add microdrama icon (assets already exist)</li>
                         <li><strong>Auto-Show on First Visit:</strong> Auto-select microdrama filter for first-time visitors to increase discovery</li>
-                        <li><strong>Analytics Enhancement:</strong> Track microdrama_filter_view, microdrama_filter_clicked, tooltip_shown, tooltip_dismissed</li>
+                        <li><strong>Analytics Enhancement:</strong> Track microdrama_filter_view, microdrama_filter_clicked</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Task 2: Personalized Microdrama Recommendations (2 days)</strong></p>
+                    <ul>
+                        <li><strong>New Row:</strong> "Microdramas You'll Love" on home screen</li>
+                        <li><strong>Personalization:</strong> Based on viewing history (genre affinity, completion rate, watch time)</li>
+                        <li><strong>Backend:</strong> Query recommendation API with content_type=microdrama filter</li>
+                        <li><strong>Track:</strong> personalized_microdrama_shown, personalized_microdrama_clicked, personalized_conversion_rate</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Task 3: Push Notification for New Microdrama Releases (2 days)</strong></p>
+                    <ul>
+                        <li><strong>Weekly Push:</strong> "3 new microdramas added this week 🎬"</li>
+                        <li><strong>Personalized Notification:</strong> Segment by genre preference from watch history</li>
+                        <li><strong>Deep Link:</strong> Opens microdrama collection page with new releases</li>
+                        <li><strong>Track:</strong> new_microdrama_notification_sent, new_microdrama_notification_clicked, notification_to_playback_rate</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Task 4: "Top 10 Microdramas This Week" Banner (1.5 days)</strong></p>
+                    <ul>
+                        <li><strong>Hero Banner:</strong> Prominent at top of home screen</li>
+                        <li><strong>Content:</strong> Most-watched microdramas with view count (social proof)</li>
+                        <li><strong>UI:</strong> Horizontal carousel with thumbnails + "Trending" badge</li>
+                        <li><strong>Backend:</strong> Query top 10 microdramas by view count (last 7 days)</li>
+                        <li><strong>Track:</strong> top10_microdrama_banner_view, top10_microdrama_clicked, top10_conversion_rate</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Task 5: Microdrama Watch Streak Gamification (2 days)</strong></p>
+                    <ul>
+                        <li><strong>Streak Tracking:</strong> Track consecutive days user watched microdramas</li>
+                        <li><strong>Streak Badge:</strong> Show "🔥 5-day Microdrama Streak!" in home header</li>
+                        <li><strong>Milestones:</strong> Rewards at 7 days, 30 days (badge, push notification)</li>
+                        <li><strong>Reminder Push:</strong> "Don't break your 5-day streak! 🔥"</li>
+                        <li><strong>Track:</strong> microdrama_streak_count, streak_milestone_reached, streak_broken, streak_notification_sent</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Task 6: Analytics Dashboard Integration (0.5 days)</strong></p>
+                    <ul>
+                        <li><strong>Metrics:</strong> Track avg episodes per session, microdrama weekly active users, personalization impact</li>
+                        <li><strong>Funnel:</strong> Discovery → Start → Completion → Retention lift</li>
                     </ul>
 
                     <h4>📈 Expected Impact</h4>
-                    <ul>
-                        <li><strong>Micro Drama Start Rate:</strong> 22% → 30% (+8pp, +6,500 users/month)</li>
-                        <li><strong>Filter Discovery:</strong> 10% → 40% of users discover filter (+30pp)</li>
-                        <li><strong>Retention Lift:</strong> Micro drama viewers have 25% higher D7 retention</li>
-                    </ul>
+                    <div class="metric-box">
+                        <strong>Combined Microdrama Engagement Boost:</strong><br><br>
+                        <strong>Micro Drama Start Rate:</strong> 22% → 35% (+13pp, +10,600 users/month)<br>
+                        <strong>Avg Episodes per Session:</strong> 1.2 → 2.5 (2.1x increase)<br>
+                        <strong>Microdrama Weekly Active Users:</strong> 25% → 40% (+15pp)<br>
+                        <strong>D7 Retention (Microdrama Viewers):</strong> 45% → 55% (+10pp)<br><br>
+                        <strong>Why This Works:</strong><br>
+                        - Personalization drives 35-40% higher engagement<br>
+                        - Social proof (Top 10) creates FOMO and drives discovery<br>
+                        - Push notifications bring users back weekly (habit formation)<br>
+                        - Gamification (streak) increases daily active usage by 20-30%<br>
+                        - Microdrama viewers have 25% higher D7 retention vs non-viewers
+                    </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 6 days (reduced from 8 - only UI changes, no backend)</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 10 days (3d visibility + 2d personalization + 2d push + 1.5d top10 + 2d gamification + 0.5d analytics)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> microdrama_start_rate, episodes_per_session, microdrama_weekly_active_rate, personalization_lift, streak_retention_impact</p>
                 </div>
             </div>
 
@@ -1121,7 +1171,7 @@
                     <div class="initiative-title-block">
                         <div class="initiative-title">Journey Tracking Enhancements</div>
                         <div class="initiative-meta">
-                            <span class="badge badge-week">⏱️ Week 1 (2-3 days)</span>
+                            <span class="badge badge-week">⏱️ Week 1 (1-2 days)</span>
                             <span class="badge badge-team">👥 1 Developer</span>
                             <span class="badge badge-impact">📈 Enable Attribution</span>
                         </div>
@@ -1140,18 +1190,16 @@
                         <strong>90% Complete:</strong> user_id, amplitude_id, campaign_data already in ALL events
                     </div>
 
-                    <h4>✅ Add 3 Missing Properties</h4>
+                    <h4>✅ Add 1 Missing Property</h4>
                     <ul>
-                        <li><strong>feature_source:</strong> Track conversion driver (special_access, spin_wheel, watchlist)</li>
-                        <li><strong>trial_start_date:</strong> Enable cohort analysis</li>
-                        <li><strong>session_id:</strong> Explicit session tracking</li>
+                        <li><strong>feature_source:</strong> Track conversion driver (special_access, spin_wheel)</li>
                     </ul>
 
                     <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/lidh9clj/edit/g5xiauf9" target="_blank" class="amplitude-link">
                         🔗 View Paywall Funnel
                     </a>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 2-3 days</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 1-2 days</p>
                 </div>
             </div>
 
@@ -1204,9 +1252,9 @@
                     <div class="initiative-title-block">
                         <div class="initiative-title">Resume Trial Incentives (Optimization)</div>
                         <div class="initiative-meta">
-                            <span class="badge badge-week">⏱️ Week 7-8 (3-5 days)</span>
-                            <span class="badge badge-team">👥 2 Developers</span>
-                            <span class="badge badge-impact">📈 -3pp Churn</span>
+                            <span class="badge badge-week">⏱️ Week 7-8 (3 days)</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">📈 +15-20% Resume Rate</span>
                         </div>
                     </div>
                 </div>
@@ -1221,43 +1269,68 @@
 
                 <div class="section-content">
                     <div class="feature-exists">
-                        Feature exists - A/B test offers only
+                        <strong>Resume Trial Feature Exists:</strong> Flag-based mandate resume (no pricing change possible - internal backend flag only)
                     </div>
+
+                    <h4>📊 Current State</h4>
+                    <ul>
+                        <li><strong>5 Touchpoints:</strong> Floating banner, bottom sheet, home banners, popup</li>
+                        <li><strong>Existing A/B Test:</strong> Text vs Image layout only</li>
+                        <li><strong>API:</strong> resumePlan() - reverts backend pause flag</li>
+                        <li><strong>Gap:</strong> No conversion tracking, no messaging variants tested</li>
+                    </ul>
+
+                    <h4>✅ What We'll Build (2 Tasks)</h4>
+
+                    <p style="margin-top: 15px;"><strong>Task 1: A/B Test Messaging Variants (2 days)</strong></p>
+                    <ul>
+                        <li><strong>Test 4 Message Variants:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Variant A:</strong> "Resume to continue unlimited streaming" (benefit reminder)</li>
+                                <li><strong>Variant B:</strong> "Continue watching [Last Show]" (personalized content hook)</li>
+                                <li><strong>Variant C:</strong> "Trial expires in 3 days!" (urgency/FOMO)</li>
+                                <li><strong>Variant D:</strong> "Don't lose access" (loss aversion)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Implementation:</strong> Add resume_trial_message_variant to Remote Config</li>
+                        <li><strong>Note:</strong> No pricing changes (just copy testing)</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Task 2: Conversion Tracking (1 day)</strong></p>
+                    <ul>
+                        <li><strong>App Event:</strong> trial_resumed (tracks flag revert API success - internal flag only)</li>
+                        <li><strong>Backend Event:</strong> trial_reactivated (tracked when PSP new mandate registered - actual payment)</li>
+                        <li><strong>Full Funnel:</strong> Widget View → Click → API Call → trial_resumed/trial_reactivated</li>
+                        <li><strong>Metrics:</strong> Conversion rate by message variant, days since pause, pause source (PSP vs In-app)</li>
+                    </ul>
+
+                    <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green); margin-top: 15px;">
+                        <strong>📌 Event Naming Convention:</strong><br>
+                        <strong>trial_resumed:</strong> Flag revert (no payment, internal backend flag only)<br>
+                        <strong>trial_reactivated:</strong> New mandate registration (actual payment via PSP)<br><br>
+                        Use case: trial_resumed for in-app pauses, trial_reactivated for PSP cancellations
+                    </div>
+
+                    <h4>📈 Expected Impact</h4>
+                    <div class="metric-box">
+                        <strong>Resume Flag Revert Rate: +15-20%</strong> (from messaging optimization)<br><br>
+                        <strong>Before:</strong> Single generic message, no conversion tracking<br>
+                        <strong>After:</strong> 4 tested variants, full funnel tracking<br><br>
+                        <strong>Why This Works:</strong><br>
+                        - Right message for right user segment<br>
+                        - Data-driven optimization via conversion tracking<br>
+                        - Identify best-performing variant to scale
+                    </div>
+
                     <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/0fdjwdly/edit/fvk09nv2" target="_blank" class="amplitude-link">
                         🔗 View Trial Retention
                     </a>
+
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 3 days (2 days messaging variants + 1 day conversion tracking)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> trial_resumed_rate (flag revert), trial_reactivated_rate (PSP new mandate), conversion_by_message_variant</p>
                 </div>
             </div>
 
-            <div class="initiative-card retention">
-                <div class="initiative-header">
-                    <div class="initiative-number orange">8</div>
-                    <div class="initiative-title-block">
-                        <div class="initiative-title">Post-Payment Engagement (Enhancement)</div>
-                        <div class="initiative-meta">
-                            <span class="badge badge-week">⏱️ Week 8 (2-3 days)</span>
-                            <span class="badge badge-team">👥 2 Developers</span>
-                            <span class="badge badge-impact">📈 +6pp D1 Retention</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="user-types">
-                    <h4>🎯 Target Users</h4>
-                    <div class="user-type-tags">
-                        <span class="user-type-tag">trial_active (new)</span>
-                    </div>
-                </div>
-
-                <div class="section-content">
-                    <div class="feature-exists">
-                        Feature exists - A/B test countdown only
-                    </div>
-                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/gy3b4s96" target="_blank" class="amplitude-link">
-                        🔗 View D1 Retention
-                    </a>
-                </div>
-            </div>
         </div>
 
         <!-- P2: Strategic -->
@@ -1275,10 +1348,10 @@
                 <strong>Mission:</strong> Scale what works and win back lapsed users. Long-term growth optimization.
             </p>
 
-            <!-- Initiative 9: Spin Wheel -->
+            <!-- Initiative 8: Spin Wheel -->
             <div class="initiative-card growth">
                 <div class="initiative-header">
-                    <div class="initiative-number green">9</div>
+                    <div class="initiative-number green">8</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Spin Wheel → Payment Optimization</div>
                         <div class="initiative-meta">
@@ -1304,35 +1377,6 @@
                 </div>
             </div>
 
-            <!-- Initiative 10: Lapsed Users -->
-            <div class="initiative-card growth">
-                <div class="initiative-header">
-                    <div class="initiative-number green">10</div>
-                    <div class="initiative-title-block">
-                        <div class="initiative-title">Lapsed User Win-Back</div>
-                        <div class="initiative-meta">
-                            <span class="badge badge-week">⏱️ Week 11-12 (10 days)</span>
-                            <span class="badge badge-team">👥 2 Developers</span>
-                            <span class="badge badge-impact">📈 Win back 10%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="user-types">
-                    <h4>🎯 Target Users</h4>
-                    <div class="user-type-tags">
-                        <span class="user-type-tag">trial_over</span>
-                        <span class="user-type-tag">subscription_over</span>
-                    </div>
-                </div>
-
-                <div class="section-content">
-                    <p>Re-engagement campaigns</p>
-                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/0fdjwdly/edit/fvk09nv2" target="_blank" class="amplitude-link">
-                        🔗 View Trial Retention
-                    </a>
-                </div>
-            </div>
         </div>
 
         <!-- Summary Footer -->
@@ -1361,8 +1405,12 @@
                     <div class="impact-label">MRR from TCR Reduction<br>(~₹73.8L ARR)</div>
                 </div>
                 <div class="impact-card">
-                    <div class="impact-value">+8pp</div>
-                    <div class="impact-label">Micro Drama Starts<br>(22% → 30%)</div>
+                    <div class="impact-value">+13pp</div>
+                    <div class="impact-label">Micro Drama Starts<br>(22% → 35%)</div>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-value">2.1x</div>
+                    <div class="impact-label">Episodes per Session<br>(Microdrama viewers)</div>
                 </div>
             </div>
 
