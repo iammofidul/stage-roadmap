@@ -148,7 +148,7 @@
 
 ## 🔄 Files to Update
 
-1. **FINAL_ROADMAP.html** - Update Initiative #1, #2, remove #4, add new #4
+1. **product_roadmap.html** - Update Initiative #1, #2, remove #4, add new #4
 2. **README.md** - Update initiative descriptions to match
 3. **Create:** `PSP_CANCELLATION_ANALYSIS.md` - Technical details for Initiative #1
 

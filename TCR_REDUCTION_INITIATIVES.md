@@ -208,7 +208,7 @@
 
 ## 📂 Related Files
 
-1. **FINAL_ROADMAP.html** - Full product roadmap with all initiatives
+1. **product_roadmap.html** - Full product roadmap with all initiatives
 2. **ROADMAP_UPDATE_NOTES.md** - Codebase exploration findings
 3. **SUBSCRIPTION_STATUS_CORRECTION.md** - User segmentation analysis
 4. **CHANGES_SUMMARY.md** - Roadmap evolution history

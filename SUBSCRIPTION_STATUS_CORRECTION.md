@@ -97,7 +97,7 @@ IF subscriptionStatus == 'subscription_active':
 
 ## 📝 Changes Made to Roadmap
 
-### FINAL_ROADMAP.html - Initiative #2:
+### product_roadmap.html - Initiative #2:
 
 **1. Current Problem Section:**
 - ✅ Changed: "Can user see medal prompt + special access + spin wheel simultaneously?"
@@ -213,6 +213,6 @@ Roadmap corrections validated against:
 
 **Updated:** January 30, 2026
 **Files Modified:**
-- `FINAL_ROADMAP.html` (Initiative #2 corrections)
+- `product_roadmap.html` (Initiative #2 corrections)
 - `README.md` (Summary and Key Strategic Pieces)
 - `SUBSCRIPTION_STATUS_CORRECTION.md` (This file)
