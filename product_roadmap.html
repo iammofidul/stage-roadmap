@@ -638,8 +638,8 @@
         <!-- Key Metrics Stats -->
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-value">35%</div>
-                <div class="stat-label">Current TCR (171K cancellations/month)</div>
+                <div class="stat-value">36%</div>
+                <div class="stat-label">Current TCR Android (116K cancellations/month)</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">15%</div>
@@ -706,10 +706,11 @@
                     <h4>📊 Current Amplitude Data (Critical Problem)</h4>
                     <div class="metric-box danger">
                         <strong>🚨 HIGHEST PRIORITY ISSUE</strong><br>
-                        <strong>Overall Trial Cancellation Rate (TCR):</strong> 35.0% of trial users cancel within 1 day of activation<br>
-                        <strong>Last 30 Days:</strong> 171,127 cancellations out of 489,024 trial activations<br>
-                        <strong>Recent Daily TCR:</strong> 31-32% (stable pattern)<br>
-                        <strong>Scale:</strong> ~5,700 cancellations per day<br><br>
+                        <strong>Overall Trial Cancellation Rate (TCR):</strong> 36.28% of trial users cancel within 1 day of activation<br>
+                        <strong>Last 30 Days (Android):</strong> 115,925 cancellations out of 319,545 trial activations<br>
+                        <strong>Recent Daily TCR:</strong> 36-38% (Jan 27-30: 35.99%, 37.08%, 36.31%, 37.62%)<br>
+                        <strong>Date Range:</strong> Jan 3 - Feb 2, 2026<br>
+                        <strong>Scale:</strong> ~3,860 cancellations per day (Android only)<br><br>
                         <strong>⚠️ THE REAL PROBLEM:</strong> Most users cancel mandate from PhonePe/Paytm apps directly (bypassing STAGE app retention flows)
                     </div>
 
@@ -818,14 +819,14 @@
                     <div class="metric-box">
                         <strong>Conservative Estimate:</strong><br>
                         <strong>PSP Cancellation Save Rate: 15-20%</strong> (industry benchmark for push notification + retention dialog)<br><br>
-                        <strong>Math (Based on Actual 35% TCR):</strong><br>
-                        - <strong>Total cancellations: ~171K/month</strong> (489K trial activations × 35% TCR)<br>
-                        - <strong>PSP cancellations: ~120K/month</strong> (70% of total, bypass STAGE app)<br>
-                        - <strong>In-app cancellations: ~51K/month</strong> (30% of total, see retention flow)<br><br>
+                        <strong>Math (Based on Actual 36.28% TCR - Android Only):</strong><br>
+                        - <strong>Total cancellations: ~116K/month</strong> (319K trial activations × 36.28% TCR)<br>
+                        - <strong>PSP cancellations: ~81K/month</strong> (70% of total, bypass STAGE app)<br>
+                        - <strong>In-app cancellations: ~35K/month</strong> (30% of total, see retention flow)<br><br>
                         <strong>PSP Save Initiative Impact:</strong><br>
-                        - Save rate: 15% (conservative) = <strong>18,000 saved trials/month</strong><br>
-                        - Save rate: 20% (optimistic) = <strong>24,000 saved trials/month</strong><br>
-                        - Using conservative 15%: <strong>18K saved trials/month</strong><br><br>
+                        - Save rate: 15% (conservative) = <strong>12,150 saved trials/month</strong><br>
+                        - Save rate: 20% (optimistic) = <strong>16,200 saved trials/month</strong><br>
+                        - Using conservative 15%: <strong>12K saved trials/month (Android)</strong><br><br>
                         <strong>Revenue Impact (Conservative 15%):</strong><br>
                         - Saved trials: 18,000/month<br>
                         - D7 retention rate: 30% = 5,400 retained to D7<br>
@@ -840,7 +841,7 @@
                     </div>
 
                     <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 12 days (3 days analytics + 4 days push/deep link + 5 days retention flow)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancellation_detected_count, psp_cancel_notification_open_rate, trial_reactivated_count (new mandate registrations), trial_cancellation_rate (target: 35% → 28%)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancellation_detected_count, psp_cancel_notification_open_rate, trial_reactivated_count (new mandate registrations), trial_cancellation_rate (target: 36% → 30% Android)</p>
                 </div>
             </div>
 
@@ -954,16 +955,16 @@
                     <div class="metric-box">
                         <strong>Conservative Estimate:</strong><br>
                         <strong>Resume Rate from Notification: 25-30%</strong> (industry benchmark for rich media notifications)<br><br>
-                        <strong>Math (Based on Actual 35% TCR):</strong><br>
-                        - <strong>Total cancellations: ~171K/month</strong> (489K trial activations × 35% TCR)<br>
+                        <strong>Math (Based on Actual 36.28% TCR - Android Only):</strong><br>
+                        - <strong>Total cancellations: ~116K/month</strong> (319K trial activations × 36.28% TCR)<br>
                         - Users who lock device mid-video: ~15% of sessions (incomplete drop-offs)<br>
-                        - Incomplete sessions that lead to cancellation: ~25K/month (15% of 171K)<br>
-                        - Notification open rate: 40% = 10K opens<br>
-                        - Resume rate: 25% of opens = <strong>2,500 saved trials/month</strong><br><br>
+                        - Incomplete sessions that lead to cancellation: ~17.4K/month (15% of 116K)<br>
+                        - Notification open rate: 40% = 6,960 opens<br>
+                        - Resume rate: 25% of opens = <strong>1,740 saved trials/month (1.7K Android)</strong><br><br>
                         <strong>Revenue Impact:</strong><br>
-                        - Saved trials: 2,500/month<br>
-                        - D7 retention rate: 30% = 750 retained to D7<br>
-                        - Trial-to-paid conversion: 20% = 150 additional paid subscribers/month<br>
+                        - Saved trials: 1,740/month<br>
+                        - D7 retention rate: 30% = 522 retained to D7<br>
+                        - Trial-to-paid conversion: 20% = 104 additional paid subscribers/month<br>
                         - ARPU: ₹499/month<br>
                         - <strong>MRR Impact: +₹75K/month (~₹9 Lakhs ARR)</strong><br><br>
                         <strong>Why This Works:</strong><br>
@@ -1748,8 +1749,8 @@
 
             <div class="impact-grid">
                 <div class="impact-card">
-                    <div class="impact-value">35%</div>
-                    <div class="impact-label">Current TCR<br>(171K cancellations/month)</div>
+                    <div class="impact-value">36%</div>
+                    <div class="impact-label">Current TCR Android<br>(116K cancellations/month)</div>
                 </div>
                 <div class="impact-card">
                     <div class="impact-value">18K</div>
