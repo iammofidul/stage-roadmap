@@ -688,7 +688,7 @@
                         <div class="initiative-title">PSP Cancellation Prevention (App-Side)</div>
                         <div class="initiative-meta">
                             <span class="badge badge-new">🆕 HIGHEST PRIORITY</span>
-                            <span class="badge badge-week">⏱️ Week 1-3 (12 days)</span>
+                            <span class="badge badge-week">⏱️ Week 1-2 (9 days)</span>
                             <span class="badge badge-team">👥 2 Developers</span>
                             <span class="badge badge-impact">📈 18K Saves/Month</span>
                         </div>
@@ -745,27 +745,7 @@
 
                     <h4>✅ What We'll Build (App-Side Implementation)</h4>
 
-                    <p style="margin-top: 15px;"><strong>Phase 1: Event Listener + Analytics (Week 1 - 3 days)</strong></p>
-                    <ul>
-                        <li><strong>PSP Cancellation Event Listener:</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Listen for backend webhook events (mandate_revoked_psp status change)</li>
-                                <li>Detect when cancellation source is PhonePe or Paytm</li>
-                                <li>Store PSP cancellation state in local preferences</li>
-                                <li>Track event: psp_cancellation_detected</li>
-                            </ul>
-                        </li>
-                        <li><strong>Enhanced Analytics Tracking:</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Add cancellation_source property: 'phonePe', 'paytm', 'stage_app'</li>
-                                <li>Track trial_day_cancelled (0-7)</li>
-                                <li>Track content_consumed_before_cancel</li>
-                                <li>Track time_since_last_session</li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <p style="margin-top: 15px;"><strong>Phase 2: Push Notification + Deep Link (Week 1-2 - 4 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 1: Push Notification + Deep Link (Week 1 - 4 days)</strong></p>
                     <ul>
                         <li><strong>PSP Cancellation Push Notification:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
@@ -784,7 +764,7 @@
                         </li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Phase 3: PSP Retention Flow (Week 2-3 - 5 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 2: PSP Retention Flow (Week 2 - 5 days)</strong></p>
                     <ul>
                         <li><strong>PSP Cancellation Retention Dialog:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
@@ -840,7 +820,7 @@
                         - Catches users in impulse cancellation moment
                     </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 12 days (3 days analytics + 4 days push/deep link + 5 days retention flow)</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 9 days (4 days push/deep link + 5 days retention flow)</p>
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancellation_detected_count, psp_cancel_notification_open_rate, trial_reactivated_count (new mandate registrations), trial_cancellation_rate (target: 36% → 30% Android)</p>
                 </div>
             </div>
