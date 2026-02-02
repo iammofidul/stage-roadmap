@@ -688,7 +688,7 @@
                         <div class="initiative-title">PSP Cancellation Prevention (App-Side)</div>
                         <div class="initiative-meta">
                             <span class="badge badge-new">🆕 HIGHEST PRIORITY</span>
-                            <span class="badge badge-week">⏱️ Week 1-2 (9 days)</span>
+                            <span class="badge badge-week">⏱️ Week 1-2 (7 days)</span>
                             <span class="badge badge-team">👥 2 Developers</span>
                             <span class="badge badge-impact">📈 18K Saves/Month</span>
                         </div>
@@ -764,7 +764,7 @@
                         </li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Phase 2: PSP Retention Flow (Week 2 - 5 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 2: PSP Retention Flow + Analytics (Week 2 - 3 days)</strong></p>
                     <ul>
                         <li><strong>PSP Cancellation Retention Dialog:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
@@ -773,24 +773,29 @@
                                 <li>Two options: "Resume Subscription" (primary) vs "Keep Cancelled" (secondary)</li>
                                 <li>If resumed: Call backend API to reactivate mandate via PSP (creates new mandate)</li>
                                 <li>Track: psp_save_attempt_shown, psp_save_attempt_accepted, psp_save_attempt_rejected</li>
-                                <li>Backend tracks: trial_reactivated (on successful new mandate creation)</li>
                             </ul>
                         </li>
-                        <li><strong>In-App Banner for PSP-Cancelled Users:</strong>
+                        <li><strong>✅ In-App Banner for PSP-Cancelled Users (Already Exists):</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>When user opens app after PSP cancellation: Show floating banner</li>
-                                <li>Banner: "Your subscription was cancelled. Resume now to continue watching"</li>
-                                <li>CTA: "Resume Subscription" → Opens PSP retention dialog</li>
-                                <li>Dismissible, but re-appears on next app open</li>
+                                <li>✅ Banner already shows when user opens app after PSP cancellation</li>
+                                <li>✅ CTA "Resume Subscription" → Opens retention dialog</li>
+                                <li>✅ Banner is dismissible and re-appears on next app open</li>
                             </ul>
                         </li>
-                        <li><strong>Resume Mandate API Integration:</strong>
+                        <li><strong>Analytics Events Tracking:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Implement pausePlanPhonePe() and pausePlanPaytm() methods (currently empty placeholders)</li>
-                                <li>Add resumePlanPhonePe() and resumePlanPaytm() methods</li>
-                                <li>Handle PSP-specific mandate reactivation flow (new mandate creation)</li>
-                                <li>Backend triggers: trial_reactivated event on successful new mandate registration</li>
-                                <li>Update subscription status after successful resume</li>
+                                <li><strong>trial_activated</strong> event with property <code>is_reactivated: true</code>
+                                    <ul style="margin-left: 20px; margin-top: 5px;">
+                                        <li>Track when user registers new mandate after PSP revoked/cancelled</li>
+                                        <li>Indicates successful reactivation via new mandate creation</li>
+                                    </ul>
+                                </li>
+                                <li><strong>trial_resumed</strong> event (new event)
+                                    <ul style="margin-left: 20px; margin-top: 5px;">
+                                        <li>Track when user resumes mandate from in-app (not PSP)</li>
+                                        <li>Indicates mandate unpause action within STAGE app</li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -820,8 +825,8 @@
                         - Catches users in impulse cancellation moment
                     </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 9 days (4 days push/deep link + 5 days retention flow)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancellation_detected_count, psp_cancel_notification_open_rate, trial_reactivated_count (new mandate registrations), trial_cancellation_rate (target: 36% → 30% Android)</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 7 days (4 days push/deep link + 3 days retention flow + analytics)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancellation_detected_count, psp_cancel_notification_open_rate, trial_activated (is_reactivated: true), trial_resumed, trial_cancellation_rate (target: 36% → 30% Android)</p>
                 </div>
             </div>
 
