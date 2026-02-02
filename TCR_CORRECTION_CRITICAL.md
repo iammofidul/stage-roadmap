@@ -24,7 +24,7 @@
 
 ## 📊 Amplitude Data Source
 
-**Chart:** [Trial Cancellation Funnel](https://app.amplitude.com/analytics/STAGEAPP/chart/new/99wgbl1q)
+**Chart:** [Trial Cancellation Funnel](https://app.amplitude.com/analytics/STAGEAPP/chart/new/8zwqmk1r)
 
 **Funnel Definition:**
 - **Event A:** trial_activated (489,024 users in last 30 days)
