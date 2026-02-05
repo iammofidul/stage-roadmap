@@ -695,12 +695,12 @@
                         <div style="color: var(--text-muted);">Total Dev-Days</div>
                     </div>
                     <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-orange);">
-                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-orange);">168.5</div>
+                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-orange);">170</div>
                         <div style="color: var(--text-muted);">Required Effort</div>
                     </div>
                     <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
-                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-green);">20%</div>
-                        <div style="color: var(--text-muted);">Buffer (41.5 days)</div>
+                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-green);">19%</div>
+                        <div style="color: var(--text-muted);">Buffer (40 days)</div>
                     </div>
                 </div>
             </div>
@@ -2372,6 +2372,160 @@
                     <p style="margin-top: 20px;"><strong>⏱️ Total Effort:</strong> 1 day</p>
                     <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P2 - Medium (cleanup task)</p>
                     <p style="margin-top: 5px;"><strong>💰 Impact:</strong> Reduced maintenance overhead + cleaner codebase</p>
+                </div>
+            </div>
+
+            <!-- Initiative 15: Memory Leak Audit -->
+            <div class="initiative-card" style="background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid #ff9800;">
+                <div class="initiative-header">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, #ff9800, #f57c00);">15</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Memory Leak Audit & Performance Optimization</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: #ff9800;">⚡ PERFORMANCE</span>
+                            <span class="badge badge-week">⏱️ 1.5 Days</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🚀 Reduce Crashes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-content" style="margin-top: 30px;">
+                    <h4>🚨 Problem: Potential Memory Leaks</h4>
+                    <div class="metric-box" style="border-left-color: #ff9800;">
+                        <strong>Risk:</strong> Unsubscribed streams and undisposed resources cause memory leaks<br>
+                        <strong>Impact:</strong> App slowdown, increased crashes, poor user experience<br>
+                        <strong>Common Culprits:</strong> StreamSubscriptions, VideoControllers, AnimationControllers, Timers, Database connections
+                    </div>
+
+                    <h4>🔍 Action Points (3 Phases)</h4>
+
+                    <p style="margin-top: 15px;"><strong>Phase 1: Stream Subscription Audit (0.5 days)</strong></p>
+                    <table style="width: 100%; background: var(--bg-card); border-radius: 8px; overflow: hidden; margin-top: 10px;">
+                        <thead>
+                            <tr style="background: rgba(255, 152, 0, 0.1);">
+                                <th style="padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color);">Action</th>
+                                <th style="padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color);">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><strong>Search Pattern</strong></td>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><code>StreamSubscription</code>, <code>.listen(</code>, <code>.stream</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><strong>Verify</strong></td>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);">Each subscription has <code>cancel()</code> in <code>dispose()</code> or <code>close()</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><strong>Check Cubits</strong></td>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);">All Cubit classes properly call <code>subscription?.cancel()</code> in <code>close()</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;"><strong>Check Widgets</strong></td>
+                                <td style="padding: 10px;">StatefulWidgets with streams cancel in <code>dispose()</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p style="margin-top: 15px;"><strong>Phase 2: Video/Animation Controller Audit (0.5 days)</strong></p>
+                    <table style="width: 100%; background: var(--bg-card); border-radius: 8px; overflow: hidden; margin-top: 10px;">
+                        <thead>
+                            <tr style="background: rgba(255, 152, 0, 0.1);">
+                                <th style="padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color);">Controller Type</th>
+                                <th style="padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color);">Audit Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><strong>VideoController</strong></td>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);">Verify <code>controller.dispose()</code> called in widget/cubit disposal</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><strong>AnimationController</strong></td>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);">Check <code>controller.dispose()</code> in <code>dispose()</code> method</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><strong>TextEditingController</strong></td>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);">Ensure proper disposal in form screens</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);"><strong>ScrollController</strong></td>
+                                <td style="padding: 10px; border-bottom: 1px solid var(--border-color);">Verify disposal, especially in list screens</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;"><strong>Timer/Periodic</strong></td>
+                                <td style="padding: 10px;">Find all <code>Timer.periodic</code> and verify <code>cancel()</code> called</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p style="margin-top: 15px;"><strong>Phase 3: DevTools Memory Profiling (0.5 days)</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li><strong>Profile Key Screens:</strong> Home, Player, Profile, Search (high-traffic screens)</li>
+                        <li><strong>Test Scenario:</strong> Navigate to screen → Use features → Back → Check if objects are released</li>
+                        <li><strong>Tools:</strong> Flutter DevTools Memory tab, Heap Snapshot comparison</li>
+                        <li><strong>Look For:</strong> Retained widget trees, unreleased controllers, zombie listeners</li>
+                        <li><strong>Document Findings:</strong> Create report with screenshots + memory graphs</li>
+                    </ul>
+
+                    <h4 style="margin-top: 20px;">🎯 Priority Files to Check</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-top: 10px;">
+                        <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #ff9800;">
+                            📹 <strong>Video Playback</strong><br>
+                            <code>consumption_cubit.dart</code><br>
+                            <code>video_player_screen.dart</code>
+                        </div>
+                        <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #ff9800;">
+                            🏠 <strong>Home Screen</strong><br>
+                            <code>home_cubit.dart</code><br>
+                            <code>home_screen.dart</code>
+                        </div>
+                        <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #ff9800;">
+                            🔍 <strong>Search</strong><br>
+                            <code>search_cubit.dart</code><br>
+                            <code>search_screen.dart</code>
+                        </div>
+                        <div style="background: rgba(255, 152, 0, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #ff9800;">
+                            ⬇️ <strong>Downloads</strong><br>
+                            <code>download_manager.dart</code><br>
+                            Background workers
+                        </div>
+                    </div>
+
+                    <h4 style="margin-top: 20px;">📋 Common Fixes</h4>
+                    <div style="background: rgba(255, 152, 0, 0.05); padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <strong>Cubit Pattern:</strong><br>
+                        <pre style="background: var(--bg-card); padding: 10px; border-radius: 4px; margin-top: 8px; overflow-x: auto;"><code>class MyCubit extends Cubit<MyState> {
+  StreamSubscription? _subscription;
+
+  @override
+  Future<void> close() {
+    _subscription?.cancel();
+    return super.close();
+  }
+}</code></pre>
+                    </div>
+
+                    <h4 style="margin-top: 20px;">✅ Testing & Validation</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 10px;">
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #4caf50;">
+                            ✅ Run memory profiler on key screens
+                        </div>
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #4caf50;">
+                            ✅ Compare heap snapshots before/after
+                        </div>
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #4caf50;">
+                            ✅ Test navigation leaks (back button)
+                        </div>
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid #4caf50;">
+                            ✅ Verify no retained objects
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 20px;"><strong>⏱️ Total Effort:</strong> 1.5 days (0.5d streams + 0.5d controllers + 0.5d profiling)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P1 - High (prevents production issues)</p>
+                    <p style="margin-top: 5px;"><strong>💰 Impact:</strong> Reduced app crashes, improved performance, better user experience</p>
                 </div>
             </div>
 
