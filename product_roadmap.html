@@ -2195,6 +2195,66 @@
                 </div>
             </div>
 
+            <!-- Initiative 13: Trailer Fallback Fix -->
+            <div class="initiative-card" style="background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(255, 87, 34, 0.05) 100%); border: 2px solid #f44336;">
+                <div class="initiative-header">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, #f44336, #e53935);">13</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Fix Trailer Fallback in Content Playback</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: #f44336;">🐛 BUG FIX</span>
+                            <span class="badge badge-week">⏱️ 1 Day</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🎬 Unblocks Playback</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-types">
+                    <h4>🎯 Target Users</h4>
+                    <div class="user-type-tags">
+                        <span class="user-type-tag">all_users</span>
+                    </div>
+                </div>
+
+                <div class="section-content">
+                    <h4>🚨 Problem: Playback Blocked by Invalid Trailers</h4>
+                    <div class="metric-box" style="border-left-color: #f44336;">
+                        <strong>Current Bug:</strong> When trailer URL is empty or invalid, consumption cubit logic fails to fallback to actual content playback<br>
+                        <strong>Impact:</strong> Users cannot watch main content when trailer metadata is missing/corrupted<br>
+                        <strong>Root Cause:</strong> Missing validation and fallback logic in consumption cubit
+                    </div>
+
+                    <h4>✅ Solution: Add Trailer Validation & Fallback</h4>
+                    <ul>
+                        <li><strong>Validate Trailer URL:</strong> Check for null, empty string, or invalid URL format before attempting trailer playback</li>
+                        <li><strong>Automatic Fallback:</strong> If trailer is invalid, skip trailer and proceed directly to main content playback</li>
+                        <li><strong>Error Handling:</strong> Gracefully handle trailer load failures without blocking content</li>
+                        <li><strong>Analytics Tracking:</strong> Track <code>trailer_load_failed</code> and <code>content_fallback_triggered</code> events</li>
+                    </ul>
+
+                    <h4>📁 Files to Modify</h4>
+                    <ul>
+                        <li><code>consumption_cubit.dart</code> - Add trailer validation + fallback logic</li>
+                        <li><code>consumption_state.dart</code> - Handle fallback states if needed</li>
+                        <li>Analytics helper - Add tracking events</li>
+                    </ul>
+
+                    <h4>🧪 Testing</h4>
+                    <ul>
+                        <li>Test with null trailer URL → Should play main content</li>
+                        <li>Test with empty string trailer URL → Should play main content</li>
+                        <li>Test with invalid URL format → Should play main content</li>
+                        <li>Test with valid trailer → Should play trailer then content</li>
+                        <li>Verify analytics events fire correctly</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 1 day (1 developer)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P1 - High (blocks content playback for affected users)</p>
+                    <p style="margin-top: 5px;"><strong>💰 Impact:</strong> Improved playback reliability + better user experience</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- Summary Footer -->
