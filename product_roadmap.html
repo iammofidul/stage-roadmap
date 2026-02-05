@@ -2300,27 +2300,56 @@
                             <tr>
                                 <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Android Directories</td>
                                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>4</strong></td>
-                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><code>android/app/src/har</code>, <code>har_dev</code>, <code>raj</code>, <code>raj_dev</code></td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+                                    <code>android/app/src/har/</code><br>
+                                    <code>android/app/src/har_dev/</code><br>
+                                    <code>android/app/src/raj/</code><br>
+                                    <code>android/app/src/raj_dev/</code>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">CI/CD Workflows</td>
                                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>4</strong></td>
-                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Firebase + Tramline build workflows</td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+                                    <code>.github/workflows/firebase_build_har_apk.yaml</code><br>
+                                    <code>.github/workflows/firebase_build_raj_apk.yaml</code><br>
+                                    <code>.github/workflows/tramline_build_har_aab.yaml</code><br>
+                                    <code>.github/workflows/tramline_build_raj_aab.yaml</code>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Firebase Configs</td>
                                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>4</strong></td>
-                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><code>firebase_options_*.dart</code></td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+                                    <code>lib/config/firebase_options_har.dart</code><br>
+                                    <code>lib/config/firebase_options_har_dev.dart</code><br>
+                                    <code>lib/config/firebase_options_raj.dart</code><br>
+                                    <code>lib/config/firebase_options_raj_dev.dart</code>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Launcher/Splash Configs</td>
                                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>8</strong></td>
-                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Icons + splash screen YAML files</td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+                                    <code>flutter_launcher_icons-har.yaml</code><br>
+                                    <code>flutter_launcher_icons-har_dev.yaml</code><br>
+                                    <code>flutter_launcher_icons-raj.yaml</code><br>
+                                    <code>flutter_launcher_icons-raj_dev.yaml</code><br>
+                                    <code>flutter_native_splash-har.yaml</code><br>
+                                    <code>flutter_native_splash-har_dev.yaml</code><br>
+                                    <code>flutter_native_splash-raj.yaml</code><br>
+                                    <code>flutter_native_splash-raj_dev.yaml</code>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Dev Assets</td>
                                 <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>4</strong></td>
-                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><code>dev_assets/*.png</code></td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">
+                                    <code>dev_assets/har_dev.png</code><br>
+                                    <code>dev_assets/har_prod.png</code><br>
+                                    <code>dev_assets/raj_dev.png</code><br>
+                                    <code>dev_assets/raj_prod.png</code>
+                                </td>
                             </tr>
                             <tr>
                                 <td style="padding: 12px;">Code Modifications</td>
