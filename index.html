@@ -2134,6 +2134,160 @@
                 </div>
             </div>
 
+            <!-- TECH-001: Code Refactoring -->
+            <div class="initiative-card" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">TECH-1</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Code Refactoring: Decompose Monster DTO File</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">⚙️ TECHNICAL DEBT</span>
+                            <span class="badge badge-week">⏱️ 5 Days (Parallel)</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🚀 +20% Velocity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-content">
+                    <h4>🚨 Problem: Scalability Blocker</h4>
+                    <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div><strong>File:</strong> copies_response.dart</div>
+                            <div><strong>Size:</strong> 3,455 lines</div>
+                            <div><strong>Classes:</strong> 58 classes in 1 file</div>
+                            <div><strong>Issue:</strong> God Object anti-pattern</div>
+                        </div>
+                    </div>
+
+                    <h4>📊 Impact on Team</h4>
+                    <table style="width: 100%; background: var(--bg-card); border-radius: 8px; overflow: hidden; margin-top: 15px;">
+                        <thead>
+                            <tr style="background: rgba(239, 167, 63, 0.1);">
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color);">Metric</th>
+                                <th style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">Before</th>
+                                <th style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">After</th>
+                                <th style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">Improvement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">File Size</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">3,455 lines</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">&lt;200 lines</td>
+                                <td style="padding: 12px; text-align: center; color: var(--accent-green); border-bottom: 1px solid var(--border-color);"><strong>-94%</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Build Time</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">Baseline</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">Faster</td>
+                                <td style="padding: 12px; text-align: center; color: var(--accent-green); border-bottom: 1px solid var(--border-color);"><strong>-10-15%</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Merge Conflicts</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">High</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">Minimal</td>
+                                <td style="padding: 12px; text-align: center; color: var(--accent-green); border-bottom: 1px solid var(--border-color);"><strong>-90%</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px;">Developer Velocity</td>
+                                <td style="padding: 12px; text-align: center;">Baseline</td>
+                                <td style="padding: 12px; text-align: center;">Higher</td>
+                                <td style="padding: 12px; text-align: center; color: var(--accent-green);"><strong>+20%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>✅ Solution: Split into 55 Organized Files</h4>
+                    <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; margin-top: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <strong>Before:</strong><br>
+                                <code style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px;">copies_response.dart</code>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>3,455 lines</li>
+                                    <li>58 classes</li>
+                                    <li>35 imports</li>
+                                    <li>Monolithic structure</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>After:</strong><br>
+                                <code style="background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px;">copies/ (organized folders)</code>
+                                <ul style="margin-left: 20px; margin-top: 10px;">
+                                    <li>55 focused files</li>
+                                    <li>1-3 classes per file</li>
+                                    <li>Feature-based folders</li>
+                                    <li>Clean architecture</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>📅 5-Day Implementation</h4>
+                    <div style="display: grid; gap: 12px; margin-top: 15px;">
+                        <div style="background: var(--bg-card); padding: 15px; border-left: 4px solid var(--accent-green); border-radius: 6px;">
+                            <strong>Day 1:</strong> Extract Auth, Home, Common (8 files) → ~400 lines reduced
+                        </div>
+                        <div style="background: var(--bg-card); padding: 15px; border-left: 4px solid var(--accent-blue); border-radius: 6px;">
+                            <strong>Day 2:</strong> Extract Subscription, Payment (11 files) → ~700 lines reduced
+                        </div>
+                        <div style="background: var(--bg-card); padding: 15px; border-left: 4px solid var(--accent-orange); border-radius: 6px;">
+                            <strong>Day 3:</strong> Extract TNPL, Premium, Consumption (17 files) → ~1,200 lines reduced
+                        </div>
+                        <div style="background: var(--bg-card); padding: 15px; border-left: 4px solid var(--accent-gold); border-radius: 6px;">
+                            <strong>Day 4:</strong> Extract Profile, Content, Settings (15 files) → ~800 lines reduced
+                        </div>
+                        <div style="background: var(--bg-card); padding: 15px; border-left: 4px solid var(--accent-green-bright); border-radius: 6px;">
+                            <strong>Day 5:</strong> Refactor Data class, update imports, testing, documentation
+                        </div>
+                    </div>
+
+                    <h4>🎯 Benefits (Why This Matters)</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: rgba(37, 141, 88, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(37, 141, 88, 0.3);">
+                            <strong>🚀 Parallel Development</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.9em;">Team can work on multiple features without blocking</span>
+                        </div>
+                        <div style="background: rgba(0, 168, 232, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 168, 232, 0.3);">
+                            <strong>⚡ Faster Builds</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.9em;">Only recompile changed features, not entire file</span>
+                        </div>
+                        <div style="background: rgba(239, 167, 63, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(239, 167, 63, 0.3);">
+                            <strong>🧪 Easier Testing</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.9em;">Test individual copy models in isolation</span>
+                        </div>
+                        <div style="background: rgba(0, 214, 101, 0.1); padding: 15px; border-radius: 8px; border: 1px solid rgba(0, 214, 101, 0.3);">
+                            <strong>✨ Better Quality</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.9em;">Immutable properties, type-safe parsing, const constructors</span>
+                        </div>
+                    </div>
+
+                    <h4>📊 Success Metrics</h4>
+                    <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                        <strong>Quantitative Targets (30 days post-deployment):</strong><br>
+                        ✅ File size reduced from 3,455 → &lt;200 lines (94% reduction)<br>
+                        ✅ Build time: 10-15% faster (measurable via CI/CD)<br>
+                        ✅ Merge conflicts: 90% reduction (Git metrics tracking)<br>
+                        ✅ Developer velocity: +20% (story points completed per sprint)<br>
+                        ✅ Test coverage: Isolated unit tests per feature<br>
+                        ✅ Code quality: All files follow CLAUDE.md standards
+                    </div>
+
+                    <h4>⚠️ Risk: LOW (No Backend Changes)</h4>
+                    <ul>
+                        <li>✅ <strong>Pure frontend refactoring</strong> - No API contract changes</li>
+                        <li>✅ <strong>No breaking changes</strong> - Usage code remains identical</li>
+                        <li>✅ <strong>Incremental approach</strong> - Extract 1 feature at a time, test, commit</li>
+                        <li>✅ <strong>No backend coordination</strong> - JSON parsing stays the same</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 5 days (1 developer, can run parallel to feature development)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P1 - Critical (blocks team scalability)</p>
+                    <p style="margin-top: 5px;"><strong>💰 ROI:</strong> High - 5 days investment → ongoing 20% velocity improvement</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- Summary Footer -->
