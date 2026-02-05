@@ -2255,6 +2255,103 @@
                 </div>
             </div>
 
+            <!-- Initiative 14: Remove HAR & RAJ Flavors -->
+            <div class="initiative-card" style="background: linear-gradient(135deg, rgba(156, 39, 176, 0.1) 0%, rgba(103, 58, 183, 0.05) 100%); border: 2px solid #9c27b0;">
+                <div class="initiative-header">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, #9c27b0, #7b1fa2);">14</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Remove Discontinued HAR & RAJ Flavor Configurations</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: #9c27b0;">🧹 CLEANUP</span>
+                            <span class="badge badge-week">⏱️ 1 Day</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">📦 -4 Flavors</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-content" style="margin-top: 30px;">
+                    <h4>📊 Current State</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                        <div class="metric-box" style="border-left-color: #9c27b0;">
+                            <strong>6 Flavors</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.9em;">Currently maintained</span>
+                        </div>
+                        <div class="metric-box" style="border-left-color: #4caf50;">
+                            <strong>2 Active</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.9em;">dev + prod only</span>
+                        </div>
+                        <div class="metric-box" style="border-left-color: #f44336;">
+                            <strong>4 Unused</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.9em;">har/raj discontinued</span>
+                        </div>
+                    </div>
+
+                    <h4>🗑️ Files to Delete</h4>
+                    <table style="width: 100%; background: var(--bg-card); border-radius: 8px; overflow: hidden; margin-top: 15px;">
+                        <thead>
+                            <tr style="background: rgba(156, 39, 176, 0.1);">
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color);">Category</th>
+                                <th style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);">Count</th>
+                                <th style="padding: 12px; text-align: left; border-bottom: 1px solid var(--border-color);">Files/Directories</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Android Directories</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>4</strong></td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><code>android/app/src/har</code>, <code>har_dev</code>, <code>raj</code>, <code>raj_dev</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">CI/CD Workflows</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>4</strong></td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Firebase + Tramline build workflows</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Firebase Configs</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>4</strong></td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><code>firebase_options_*.dart</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Launcher/Splash Configs</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>8</strong></td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Icons + splash screen YAML files</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);">Dev Assets</td>
+                                <td style="padding: 12px; text-align: center; border-bottom: 1px solid var(--border-color);"><strong>4</strong></td>
+                                <td style="padding: 12px; border-bottom: 1px solid var(--border-color);"><code>dev_assets/*.png</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px;">Code Modifications</td>
+                                <td style="padding: 12px; text-align: center;"><strong>3</strong></td>
+                                <td style="padding: 12px;"><code>build.gradle</code>, <code>app_flavor_enum.dart</code>, <code>shorebird.yaml</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="margin-top: 25px;">✅ Testing</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 15px;">
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid #4caf50;">
+                            ✅ Build dev successfully
+                        </div>
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid #4caf50;">
+                            ✅ Build prod successfully
+                        </div>
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid #4caf50;">
+                            ✅ CI/CD triggers correctly
+                        </div>
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 8px; border-left: 3px solid #4caf50;">
+                            ✅ No har/raj references remain
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 20px;"><strong>⏱️ Total Effort:</strong> 1 day</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P2 - Medium (cleanup task)</p>
+                    <p style="margin-top: 5px;"><strong>💰 Impact:</strong> Reduced maintenance overhead + cleaner codebase</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- Summary Footer -->
