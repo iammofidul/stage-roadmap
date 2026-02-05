@@ -695,12 +695,12 @@
                         <div style="color: var(--text-muted);">Total Dev-Days</div>
                     </div>
                     <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-orange);">
-                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-orange);">169.5</div>
+                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-orange);">168.5</div>
                         <div style="color: var(--text-muted);">Required Effort</div>
                     </div>
                     <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
-                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-green);">19%</div>
-                        <div style="color: var(--text-muted);">Buffer (40.5 days)</div>
+                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-green);">20%</div>
+                        <div style="color: var(--text-muted);">Buffer (41.5 days)</div>
                     </div>
                 </div>
             </div>
@@ -1065,7 +1065,7 @@
                     <div class="initiative-title-block">
                         <div class="initiative-title">Microdrama Engagement Boost (Comprehensive)</div>
                         <div class="initiative-meta">
-                            <span class="badge badge-week">⏱️ Week 1-3 (14 days)</span>
+                            <span class="badge badge-week">⏱️ Week 1-3 (13 days)</span>
                             <span class="badge badge-team">👥 2 Developers</span>
                             <span class="badge badge-impact">📈 +13pp Starts, 2.1x Episodes</span>
                         </div>
@@ -1099,16 +1099,25 @@
                         <strong>Already Exists:</strong> Microdrama rows (DynamicHomeRow), Continue Watching (exists), Binge Auto-Play (in progress)
                     </div>
 
-                    <h4>✅ What We'll Build (6 Tasks)</h4>
+                    <h4>✅ What We'll Build (5 Tasks)</h4>
 
-                    <p style="margin-top: 15px;"><strong>Task 1: Filter Visibility Improvements (3 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 1 (Main): In-App PiP for Microdrama Auto-Play (3 days)</strong></p>
+                    <ul>
+                        <li><strong>PiP Position:</strong> Left bottom corner of home screen</li>
+                        <li><strong>Content Logic:</strong> Show most popular microdrama OR last incomplete microdrama</li>
+                        <li><strong>Auto-Play:</strong> Start playback automatically when user lands on home (muted initially)</li>
+                        <li><strong>Tap to Expand:</strong> Tap PiP to open full-screen player</li>
+                        <li><strong>Close Button:</strong> Dismiss PiP if user not interested</li>
+                        <li><strong>Track:</strong> pip_microdrama_shown, pip_auto_play_started, pip_expanded_to_fullscreen, pip_dismissed, pip_conversion_rate</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Task 2: Filter Visibility Improvements (2 days)</strong></p>
                     <ul>
                         <li><strong>"Drama Shorts" Label Visibility:</strong> Increase label size and add microdrama icon (assets already exist)</li>
                         <li><strong>Auto-Show on First Visit:</strong> Auto-select microdrama filter for first-time visitors to increase discovery</li>
-                        <li><strong>Analytics Enhancement:</strong> Track microdrama_filter_view, microdrama_filter_clicked</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 2: Personalized Microdrama Recommendations (2 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 3: Personalized Microdrama Recommendations (2 days)</strong></p>
                     <ul>
                         <li><strong>New Row:</strong> "Microdramas You'll Love" on home screen</li>
                         <li><strong>Personalization:</strong> Based on viewing history (genre affinity, completion rate, watch time)</li>
@@ -1116,7 +1125,7 @@
                         <li><strong>Track:</strong> personalized_microdrama_shown, personalized_microdrama_clicked, personalized_conversion_rate</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 3: Push Notification for New Microdrama Releases (2 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 4: Push Notification for New Microdrama Releases (2 days)</strong></p>
                     <ul>
                         <li><strong>Weekly Push:</strong> "3 new microdramas added this week 🎬"</li>
                         <li><strong>Personalized Notification:</strong> Segment by genre preference from watch history</li>
@@ -1124,28 +1133,13 @@
                         <li><strong>Track:</strong> new_microdrama_notification_sent, new_microdrama_notification_clicked, notification_to_playback_rate</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 4: "Top 10 Microdramas This Week" Banner (1.5 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 5: "Top 10 Microdramas This Week" Banner (1.5 days)</strong></p>
                     <ul>
                         <li><strong>Hero Banner:</strong> Prominent at top of home screen</li>
                         <li><strong>Content:</strong> Most-watched microdramas with view count (social proof)</li>
                         <li><strong>UI:</strong> Horizontal carousel with thumbnails + "Trending" badge</li>
                         <li><strong>Backend:</strong> Query top 10 microdramas by view count (last 7 days)</li>
                         <li><strong>Track:</strong> top10_microdrama_banner_view, top10_microdrama_clicked, top10_conversion_rate</li>
-                    </ul>
-
-                    <p style="margin-top: 15px;"><strong>Task 5: Microdrama Watch Streak Gamification (2 days)</strong></p>
-                    <ul>
-                        <li><strong>Streak Tracking:</strong> Track consecutive days user watched microdramas</li>
-                        <li><strong>Streak Badge:</strong> Show "🔥 5-day Microdrama Streak!" in home header</li>
-                        <li><strong>Milestones:</strong> Rewards at 7 days, 30 days (badge, push notification)</li>
-                        <li><strong>Reminder Push:</strong> "Don't break your 5-day streak! 🔥"</li>
-                        <li><strong>Track:</strong> microdrama_streak_count, streak_milestone_reached, streak_broken, streak_notification_sent</li>
-                    </ul>
-
-                    <p style="margin-top: 15px;"><strong>Task 6: Analytics Dashboard Integration (0.5 days)</strong></p>
-                    <ul>
-                        <li><strong>Metrics:</strong> Track avg episodes per session, microdrama weekly active users, personalization impact</li>
-                        <li><strong>Funnel:</strong> Discovery → Start → Completion → Retention lift</li>
                     </ul>
 
                     <h4>📈 Expected Impact</h4>
@@ -1156,16 +1150,16 @@
                         <strong>Microdrama Weekly Active Users:</strong> 25% → 40% (+15pp)<br>
                         <strong>D7 Retention (Microdrama Viewers):</strong> 45% → 55% (+10pp)<br><br>
                         <strong>Why This Works:</strong><br>
+                        - In-app PiP drives immediate engagement (auto-play on home screen)<br>
                         - Personalization drives 35-40% higher engagement<br>
                         - Social proof (Top 10) creates FOMO and drives discovery<br>
                         - Push notifications bring users back weekly (habit formation)<br>
-                        - Gamification (streak) increases daily active usage by 20-30%<br>
                         - Microdrama viewers have 25% higher D7 retention vs non-viewers
                     </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 14 days (3d visibility + 2d personalization + 2d push + 2d top10/gamification + 2d experimentation + 2d integration tests + 1d events)</p>
-                    <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> Row position (top vs middle vs bottom), Personalization (on vs off), Notification timing (immediate vs 1hr delayed)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> microdrama_start_rate, episodes_per_session, microdrama_weekly_active_rate, personalization_lift, streak_retention_impact</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 13 days (3d PiP + 2d visibility + 2d personalization + 2d push + 1.5d top10 + 2d integration tests + 0.5d analytics)</p>
+                    <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> PiP content (popular vs incomplete), Row position (top vs middle vs bottom), Personalization (on vs off), Notification timing (immediate vs 1hr delayed)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> pip_conversion_rate, microdrama_start_rate, episodes_per_session, microdrama_weekly_active_rate, personalization_lift</p>
                 </div>
             </div>
 
