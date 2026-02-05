@@ -2219,22 +2219,35 @@
                         <li><strong>Automatic Fallback:</strong> If trailer is invalid, skip trailer and proceed directly to main content playback</li>
                         <li><strong>Error Handling:</strong> Gracefully handle trailer load failures without blocking content</li>
                         <li><strong>Analytics Tracking:</strong> Track <code>trailer_load_failed</code> and <code>content_fallback_triggered</code> events</li>
+                        <li><strong>Backend API Logging:</strong> Hit backend API with content details when trailer failure detected → Enables Datadog hourly alerts based on API call count</li>
                     </ul>
+
+                    <h4>📊 Backend Monitoring Setup</h4>
+                    <div style="background: rgba(244, 67, 54, 0.1); padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 3px solid #f44336;">
+                        <strong>API Endpoint:</strong> <code>POST /api/v1/content/trailer-failure</code><br>
+                        <strong>Payload:</strong> <code>{ content_id, content_type, trailer_url, error_type, timestamp, user_id }</code><br>
+                        <strong>Datadog Alert:</strong> Trigger alert if trailer failure count > threshold per hour<br>
+                        <strong>Use Case:</strong> Monitor content quality issues, identify problematic content, alert backend team
+                    </div>
 
                     <h4>📁 Files to Modify</h4>
                     <ul>
-                        <li><code>consumption_cubit.dart</code> - Add trailer validation + fallback logic</li>
+                        <li><code>consumption_cubit.dart</code> - Add trailer validation + fallback logic + backend API call</li>
                         <li><code>consumption_state.dart</code> - Handle fallback states if needed</li>
                         <li>Analytics helper - Add tracking events</li>
+                        <li><code>api_client.dart</code> - Add <code>logTrailerFailure()</code> method</li>
+                        <li>Backend team - Create <code>/api/v1/content/trailer-failure</code> endpoint</li>
                     </ul>
 
                     <h4>🧪 Testing</h4>
                     <ul>
-                        <li>Test with null trailer URL → Should play main content</li>
-                        <li>Test with empty string trailer URL → Should play main content</li>
-                        <li>Test with invalid URL format → Should play main content</li>
-                        <li>Test with valid trailer → Should play trailer then content</li>
+                        <li>Test with null trailer URL → Should play main content + log to backend</li>
+                        <li>Test with empty string trailer URL → Should play main content + log to backend</li>
+                        <li>Test with invalid URL format → Should play main content + log to backend</li>
+                        <li>Test with valid trailer → Should play trailer then content (no backend call)</li>
                         <li>Verify analytics events fire correctly</li>
+                        <li>Verify backend API receives failure logs with correct payload</li>
+                        <li>Test Datadog alert triggers when failure count exceeds threshold</li>
                     </ul>
 
                     <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 1 day (1 developer)</p>
