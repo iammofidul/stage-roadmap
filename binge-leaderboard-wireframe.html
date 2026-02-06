@@ -89,7 +89,7 @@
             border-radius: 30px;
             padding: 15px;
             margin: 0 auto;
-            max-width: 480px;
+            max-width: 540px;
             width: 100%;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
@@ -108,7 +108,7 @@
             background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
             min-height: 650px;
             border-radius: 15px;
-            padding: 20px;
+            padding: 24px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -235,11 +235,11 @@
         .leaderboard-item {
             background: #292929;
             border-radius: 12px;
-            padding: 16px;
+            padding: 14px 12px;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
             transition: all 0.3s;
             border: 2px solid transparent;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -267,34 +267,36 @@
         }
 
         .rank-position {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             color: #737373;
-            min-width: 42px;
+            min-width: 36px;
             text-align: center;
             background: rgba(255, 255, 255, 0.05);
-            padding: 8px 6px;
+            padding: 6px 4px;
             border-radius: 8px;
+            flex-shrink: 0;
         }
 
         .rank-position.top3 {
             background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: #000;
-            font-size: 22px;
+            font-size: 20px;
             box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
         }
 
         .user-avatar {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: linear-gradient(135deg, #3E3E3E 0%, #2a2a2a 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 22px;
             border: 2px solid #1A1A1A;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            flex-shrink: 0;
         }
 
         .user-info {
@@ -303,27 +305,32 @@
         }
 
         .user-name {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             color: #FFFFFF;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .user-stats {
-            font-size: 12px;
+            font-size: 11px;
             color: #BEBEBE;
             line-height: 1.4;
+            white-space: nowrap;
         }
 
         .tier-badge {
-            padding: 7px 12px;
-            border-radius: 10px;
-            font-size: 10px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 9px;
             font-weight: 800;
             white-space: nowrap;
             text-align: center;
             letter-spacing: 0.5px;
+            flex-shrink: 0;
         }
 
         .badge-legend {
@@ -724,14 +731,11 @@
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #292929;">
-                            <div>
-                                <div style="font-size: 24px; font-weight: 900; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px;">
-                                    🏆 <span style="background: linear-gradient(135deg, #ffffff 0%, #a8a8a8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Leaderboard</span>
-                                </div>
-                                <div style="font-size: 11px; color: #737373; margin-top: 4px; font-weight: 600;">ALL-TIME RANKING</div>
+                        <div style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #292929;">
+                            <div style="font-size: 24px; font-weight: 900; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3); display: flex; align-items: center; gap: 8px;">
+                                🏆 <span style="background: linear-gradient(135deg, #ffffff 0%, #a8a8a8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Leaderboard</span>
                             </div>
-                            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(36, 139, 59, 0.4); font-size: 18px;">📤</div>
+                            <div style="font-size: 11px; color: #737373; margin-top: 4px; font-weight: 600;">ALL-TIME RANKING</div>
                         </div>
 
                         <div style="text-align: center; margin-bottom: 24px; padding: 16px; background: linear-gradient(135deg, rgba(36, 139, 59, 0.15) 0%, rgba(29, 110, 47, 0.15) 100%); border-radius: 12px; border: 2px solid rgba(36, 139, 59, 0.3); box-shadow: 0 4px 12px rgba(36, 139, 59, 0.2);">
@@ -746,9 +750,8 @@
                                 <div class="user-avatar">👑</div>
                                 <div class="user-info">
                                     <div class="user-name">@dramaqueen92</div>
-                                    <div class="user-stats">145 episodes • 72h watch time</div>
+                                    <div class="user-stats">145 eps • 72h</div>
                                 </div>
-                                <div class="tier-badge badge-legend">LEGEND</div>
                             </div>
 
                             <div class="leaderboard-item">
@@ -756,9 +759,8 @@
                                 <div class="user-avatar">🎬</div>
                                 <div class="user-info">
                                     <div class="user-name">@bingewatcher</div>
-                                    <div class="user-stats">138 episodes • 69h watch time</div>
+                                    <div class="user-stats">138 eps • 69h</div>
                                 </div>
-                                <div class="tier-badge badge-legend">LEGEND</div>
                             </div>
 
                             <div class="leaderboard-item">
@@ -766,9 +768,8 @@
                                 <div class="user-avatar">⭐</div>
                                 <div class="user-info">
                                     <div class="user-name">@showaddict</div>
-                                    <div class="user-stats">129 episodes • 64h watch time</div>
+                                    <div class="user-stats">129 eps • 64h</div>
                                 </div>
-                                <div class="tier-badge badge-legend">LEGEND</div>
                             </div>
 
                             <div class="leaderboard-item">
@@ -776,9 +777,8 @@
                                 <div class="user-avatar">🎭</div>
                                 <div class="user-info">
                                     <div class="user-name">@stageuser</div>
-                                    <div class="user-stats">89 episodes • 44h watch time</div>
+                                    <div class="user-stats">89 eps • 44h</div>
                                 </div>
-                                <div class="tier-badge badge-superfan">SUPER FAN</div>
                             </div>
 
                             <div class="leaderboard-item current-user">
@@ -786,9 +786,8 @@
                                 <div class="user-avatar" style="border-color: #248b3b;">🙋</div>
                                 <div class="user-info">
                                     <div class="user-name" style="color: #248b3b;">You</div>
-                                    <div class="user-stats">23 episodes • 11h watch time</div>
+                                    <div class="user-stats">23 eps • 11h</div>
                                 </div>
-                                <div class="tier-badge" style="background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%); color: #fff; font-size: 11px; padding: 8px 14px; box-shadow: 0 3px 10px rgba(36, 139, 59, 0.6);">TOP 500</div>
                             </div>
 
                             <div class="leaderboard-item">
@@ -796,7 +795,7 @@
                                 <div class="user-avatar">👤</div>
                                 <div class="user-info">
                                     <div class="user-name">@viewer123</div>
-                                    <div class="user-stats">22 episodes • 11h watch time</div>
+                                    <div class="user-stats">22 eps • 11h</div>
                                 </div>
                             </div>
                         </div>

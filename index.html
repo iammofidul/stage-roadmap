@@ -698,7 +698,7 @@
                 #2: Resume Watching Notifications - 2.5K saved trials/month from incomplete sessions<br>
                 #3: Microdrama Discovery Promotion - Improve engagement to reduce churn<br>
                 #4: Watchlist Expansion - Increase content investment to reduce churn<br>
-                #5: Binge Leaderboard (WOW FACTOR) - Competitive gamification + Top 500 get FREE subscription cycle 🎁<br>
+                #5: Binge Leaderboard (WOW FACTOR) - Competitive gamification + One-time reward: FREE subscription for 7-day streak OR Top 500 🎁<br>
                 #6: AI Mood Curator (WOW FACTOR) - Emotional discovery, +45% content discovery rate<br>
                 #11: Community Watch Challenges (WOW FACTOR) - Viral gamification, +45% WAU, +30% consumption
             </div>
@@ -1294,62 +1294,70 @@
                     <h4>🎯 Why This is a Wow Factor (For Paid Subscribers)?</h4>
                     <ul>
                         <li><strong>Competition Drives Obsession:</strong> "I'm 2 episodes away from Top 10!" → Paid users binge more to rank higher</li>
-                        <li><strong>Viral Social Sharing:</strong> "I'm #3 on STAGE Binge Board 🔥" → Screenshot shares on Twitter/Instagram</li>
-                        <li><strong>Content Discovery:</strong> Leaderboard by genre → "Top Drama Bingers" → Users try new content to compete</li>
-                        <li><strong>Recurring Engagement:</strong> Weekly resets create Monday ritual (come back every week)</li>
-                        <li><strong>Subscriber Retention:</strong> Users stay subscribed to maintain their rank and compete weekly</li>
+                        <li><strong>Viral Social Sharing:</strong> "I'm #3 on STAGE Binge Board 🔥" → Screenshot shares on WhatsApp drive friend installs</li>
+                        <li><strong>One-Time Reward Motivation:</strong> FREE subscription extension for 7-day streak OR Top 500 rank → Drives urgency to earn before losing opportunity</li>
+                        <li><strong>All-Time Ranking:</strong> Never resets → Users build long-term status, encouraging continuous engagement vs. weekly resets</li>
+                        <li><strong>Subscriber Retention:</strong> Users stay subscribed to maintain and improve their all-time rank</li>
                         <li><strong>Community Building:</strong> Paid users feel part of exclusive STAGE community → Higher brand loyalty</li>
                     </ul>
 
                     <h4>✅ What We'll Build (5 Tasks)</h4>
 
+                    <div class="metric-box" style="background: rgba(36, 139, 59, 0.1); border-left-color: #248b3b; margin: 15px 0 20px 0;">
+                        <strong>📱 Wireframe:</strong> <a href="binge-leaderboard-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View Interactive Wireframe →</a><br>
+                        <span style="font-size: 13px; color: #BEBEBE;">See the complete leaderboard: Home entry → Full leaderboard → Social sharing → Streak rewards</span>
+                    </div>
+
                     <p style="margin-top: 15px;"><strong>Task 1: Leaderboard Backend API (3 days)</strong></p>
                     <ul>
                         <li><strong>Ranking Logic:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Calculate user rank by: Total episodes watched (last 7 days) + Total watch time (hours)</li>
-                                <li>Segment leaderboards: Overall, Drama, Comedy, Thriller, Microdrama</li>
+                                <li>Calculate user rank by: Total episodes watched (all-time) + Total watch time (hours)</li>
+                                <li>All-time leaderboard: Never resets (continuous ranking)</li>
+                                <li>Single overall leaderboard (no genre segmentation for simplicity)</li>
                                 <li>Real-time ranking updates (refresh every 30 minutes)</li>
-                                <li>Weekly reset: Monday 12 AM IST</li>
                             </ul>
                         </li>
-                        <li><strong>Leaderboard Tiers + Rewards:</strong>
+                        <li><strong>One-Time Reward System:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Top 10: "Binge Legend" badge 🏆</li>
-                                <li>Top 50: "Super Fan" badge ⭐</li>
-                                <li>Top 100: "Rising Star" badge 🌟</li>
                                 <li style="background: rgba(37, 141, 88, 0.15); padding: 10px; border-radius: 6px; border-left: 4px solid var(--accent-green); margin-top: 8px;">
-                                    <strong style="color: var(--accent-green);">🎁 Top 500: FREE next subscription cycle extension</strong><br>
-                                    <span style="color: var(--text-muted); font-size: 0.9em;">Users ranked #1-500 get automatic subscription extension for next billing cycle</span>
+                                    <strong style="color: var(--accent-green);">🎁 One-Time Reward: FREE subscription extension</strong><br>
+                                    <span style="color: var(--text-muted); font-size: 0.9em;"><strong>Option 1:</strong> Complete 7-day watch streak OR <strong>Option 2:</strong> Reach Top 500 rank</span><br>
+                                    <span style="color: var(--text-muted); font-size: 0.9em;">⚠️ Can only be claimed once - cannot earn again after redemption</span>
                                 </li>
+                                <li>Track reward eligibility and claimed status per user</li>
                                 <li>Store user's best rank achieved (personal best)</li>
                             </ul>
                         </li>
-                        <li><strong>API Endpoints:</strong> /leaderboard/weekly, /leaderboard/genre/{genreId}, /user/rank</li>
+                        <li><strong>API Endpoints:</strong> /leaderboard/alltime, /user/rank, /user/reward-status</li>
                     </ul>
 
                     <p style="margin-top: 15px;"><strong>Task 2: Leaderboard UI (3 days)</strong></p>
                     <ul>
-                        <li><strong>Home Screen Widget:</strong>
+                        <li><strong>Home Screen Entry Point:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Floating badge showing user's current rank: "You're #347 this week! 🎁"</li>
-                                <li>Show reward eligibility: "Keep Top 500 to get FREE next cycle"</li>
-                                <li>Tap to open full leaderboard</li>
-                                <li>Mini progress bar: "Watch 5 more episodes to reach #300"</li>
+                                <li>Leaderboard row on home screen showing user's rank: "Your Rank This Week: #347"</li>
+                                <li>Show reward eligibility status: "TOP 500" badge with "FREE cycle!" indicator</li>
+                                <li>"View All" link to open full leaderboard</li>
+                                <li>Episodes watched count: "23 episodes watched"</li>
+                                <li>Green gradient background for visibility</li>
                             </ul>
                         </li>
-                        <li><strong>Full Leaderboard Screen:</strong>
+                        <li><strong>Full Leaderboard Screen (Simplified Design):</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Top 10 users with avatars, usernames, episode count</li>
-                                <li>User's rank highlighted in list</li>
-                                <li>Tabs: Overall / Drama / Comedy / Thriller / Microdrama</li>
-                                <li>"Share My Rank" button → Screenshot with STAGE branding</li>
+                                <li>Clean header: Trophy icon + "Leaderboard" title + "ALL-TIME RANKING" subtitle</li>
+                                <li>Reward callout box: "ONE-TIME REWARD: FREE Subscription Extension" with two earning options</li>
+                                <li>Leaderboard list with rank badges, avatars, usernames, episode count & watch time</li>
+                                <li>Top 3 ranks: Gold gradient rank badges for visual hierarchy</li>
+                                <li>Current user highlighted: Green border, pulsing animation, green rank badge</li>
+                                <li>No tier badges (LEGEND/SUPER FAN) - cleaner, less cluttered UI</li>
+                                <li>No tabs - single overall leaderboard for simplicity</li>
                             </ul>
                         </li>
                         <li><strong>Achievement Animations:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>When user enters Top 10 → Full-screen celebration animation</li>
-                                <li>When user moves up 10+ ranks → Push notification + badge unlock</li>
+                                <li>When user enters Top 500 → Push notification + reward eligibility unlocked</li>
+                                <li>When user moves up 10+ ranks → Push notification</li>
                                 <li>When user reaches personal best → Confetti animation</li>
                             </ul>
                         </li>
@@ -1359,17 +1367,17 @@
                     <ul>
                         <li><strong>Share Feature:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Generate shareable image: "I'm #12 on STAGE Binge Leaderboard 🔥"</li>
-                                <li>Include user rank, total episodes, badge earned</li>
-                                <li>Deep link for friends to install STAGE and compete</li>
-                                <li>Share to: WhatsApp</li>
+                                <li>Generate shareable image card: "I'm #12 on STAGE Binge Leaderboard 🔥"</li>
+                                <li>Include user rank, total episodes watched, watch time</li>
+                                <li>STAGE branding with green gradient design</li>
+                                <li>Share to: WhatsApp only (focused viral channel)</li>
                             </ul>
                         </li>
                         <li><strong>Push Notifications:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>"You're 2 episodes away from Top 10! 🏆" (when close to milestone)</li>
                                 <li>"You dropped to #45. Watch now to climb back!" (when rank drops)</li>
-                                <li>"Monday Reset! Last week you were #23. Can you beat it?" (weekly reset)</li>
+                                <li>"You're eligible for FREE subscription! You're in Top 500! Claim your reward now." (reward eligibility)</li>
                                 <li>"You're now #8! Keep binging to reach Top 5!" (when rank improves)</li>
                             </ul>
                         </li>
@@ -1379,17 +1387,18 @@
                     <ul>
                         <li><strong>Track Events:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>leaderboard_viewed (tab: overall/genre)</li>
-                                <li>leaderboard_rank_achieved (rank, tier, genre)</li>
-                                <li>leaderboard_shared (platform: instagram/twitter/whatsapp)</li>
-                                <li>leaderboard_notification_clicked (type: milestone/drop/reset)</li>
-                                <li>badge_unlocked (badge_name: legend/super_fan/rising_star)</li>
+                                <li>leaderboard_viewed</li>
+                                <li>leaderboard_rank_achieved (rank, milestone: top10/top100/top500)</li>
+                                <li>leaderboard_shared (platform: whatsapp)</li>
+                                <li>leaderboard_notification_clicked (type: milestone/drop/reward_eligible)</li>
+                                <li>reward_claimed (reward_type: streak/leaderboard)</li>
                             </ul>
                         </li>
                         <li><strong>Integration:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li>Connect to existing microdrama streak gamification (Initiative #3, Task 5)</li>
                                 <li>Cross-promote: "You have a 5-day streak AND you're #20 on Leaderboard!"</li>
+                                <li>Track one-time reward eligibility and claimed status</li>
                             </ul>
                         </li>
                     </ul>
