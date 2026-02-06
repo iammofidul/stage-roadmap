@@ -572,13 +572,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>PSP/App Pause Retention Flow</h1>
-        <p class="subtitle">Notification → FOMO Journey → Content Blocked → Resume/Reactivate</p>
+        <h1>PSP/App Pause & Subscription Expired Retention Flow</h1>
+        <p class="subtitle">Two Variants: Trial Paused | Subscription Expired → FOMO Journey → Content Blocked → Resume/Reactivate</p>
 
         <div class="screens-grid">
-            <!-- Screen 1: Lock Screen Notification -->
+            <!-- Screen 1A: Lock Screen Notification - Trial Paused -->
             <div class="screen-card">
-                <div class="screen-title">1. Notification - Trial Paused/Revoked</div>
+                <div class="screen-title">1A. Notification - Trial Paused/Revoked</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -596,6 +596,34 @@
                                 <div class="notif-time">now</div>
                             </div>
                             <div class="notif-title">Trial Paused</div>
+                            <div class="notif-body">You can not watch any STAGE content</div>
+                        </div>
+
+                        <div class="flow-indicator">⬇️ User taps notification</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 1B: Lock Screen Notification - Subscription Expired -->
+            <div class="screen-card">
+                <div class="screen-title">1B. Notification - Subscription Expired</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="lock-screen-time">
+                            <div class="time-large">10:30</div>
+                            <div class="date-text">Friday, February 6</div>
+                        </div>
+
+                        <div class="notification-card">
+                            <div class="notif-header">
+                                <div class="notif-icon">⚠️</div>
+                                <div>
+                                    <div class="notif-app-name">STAGE</div>
+                                </div>
+                                <div class="notif-time">now</div>
+                            </div>
+                            <div class="notif-title">Subscription Expired</div>
                             <div class="notif-body">You can not watch any STAGE content</div>
                         </div>
 
@@ -845,6 +873,93 @@
                 </div>
             </div>
 
+            <!-- Screen 3C: Content Blocked - Subscription Expired (App) -->
+            <div class="screen-card">
+                <div class="screen-title">3C. Content Blocked - Subscription Expired (App)</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="close-btn">✕</div>
+                        </div>
+
+                        <div class="blocked-overlay">
+                            <div class="blocked-icon">⏸️</div>
+                            <div class="blocked-title">Subscription Expired</div>
+                            <div class="blocked-subtitle">Resume to watch Bideshi Bahu finale and other popular shows</div>
+
+                            <div class="status-badge badge-app">
+                                <span>⚠️</span>
+                                <span>Expired</span>
+                            </div>
+                        </div>
+
+                        <div class="cta-button" style="margin-bottom: 16px;">▶️ Resume</div>
+
+                        <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're Missing:</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
+                                • Bideshi Bahu finale (tomorrow)<br>
+                                • Meera premiere (20 episodes)<br>
+                                • Hasir Raja trending episodes<br>
+                                • 100+ other shows
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
+                            Reactivate your subscription to continue watching
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 3D: Content Blocked - Subscription Expired (PSP) -->
+            <div class="screen-card">
+                <div class="screen-title">3D. Content Blocked - Subscription Expired (PSP)</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="close-btn">✕</div>
+                        </div>
+
+                        <div class="blocked-overlay">
+                            <div class="blocked-icon">🔒</div>
+                            <div class="blocked-title">Subscription Expired</div>
+                            <div class="blocked-subtitle">Reactivate to watch Bideshi Bahu and more</div>
+
+                            <div class="status-badge badge-psp">
+                                <span>⛔</span>
+                                <span>Expired</span>
+                            </div>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 14px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);">
+                            <div style="font-size: 14px; margin-bottom: 12px;">Setup payment mandate to reactivate your subscription</div>
+                            <div style="background: #fff; color: #ef4444; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; font-size: 15px; cursor: pointer;">
+                                🔄 Reactivate Subscription
+                            </div>
+                        </div>
+
+                        <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're Missing:</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
+                                • Bideshi Bahu finale (tomorrow)<br>
+                                • Meera premiere (20 episodes)<br>
+                                • Hasir Raja trending episodes<br>
+                                • 100+ other shows
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
+                            Setup mandate via PhonePe/Paytm to reactivate
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -862,7 +977,7 @@
         // Notification click simulation
         document.querySelectorAll('.notification-card').forEach(notif => {
             notif.addEventListener('click', function() {
-                alert('📱 Notification clicked!\n\n✅ Title: "Trial Paused" / "Trial Revoked"\n✅ Body: "You can not watch any STAGE content"\n✅ Opens FOMO journey: Popular unwatched + Upcoming shows\n✅ Deep link: stage://pause-retention/fomo-journey');
+                alert('📱 Notification clicked!\n\n✅ Variants: "Trial Paused" / "Trial Revoked" / "Subscription Expired"\n✅ Body: "You can not watch any STAGE content"\n✅ Opens FOMO journey: Popular unwatched + Upcoming shows\n✅ Deep link: stage://pause-retention/fomo-journey');
             });
         });
 
@@ -882,11 +997,12 @@
             }
         });
 
-        // Reactivate Trial button click simulation
+        // Reactivate Trial/Subscription button click simulation
         document.querySelectorAll('div').forEach(div => {
-            if (div.textContent.trim() === '🔄 Reactivate Trial') {
+            if (div.textContent.trim() === '🔄 Reactivate Trial' || div.textContent.trim() === '🔄 Reactivate Subscription') {
                 div.addEventListener('click', function() {
-                    alert('🔄 Reactivate Trial clicked!\n\n✅ Simple & clear CTA\n✅ Deeplink: stage://resume/har/hin/payment?planId=X\n✅ Redirects to PhonePe app for mandate setup\n✅ Return URL brings user back to STAGE');
+                    const buttonText = div.textContent.trim();
+                    alert(`${buttonText} clicked!\n\n✅ Simple & clear CTA\n✅ Deeplink: stage://resume/har/hin/payment?planId=X\n✅ Redirects to PhonePe app for mandate setup\n✅ Return URL brings user back to STAGE`);
                 });
             }
         });
