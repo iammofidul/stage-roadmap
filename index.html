@@ -642,6 +642,66 @@
             background: var(--accent-green);
         }
 
+        /* Expandable Initiative Styles */
+        .initiative-header {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .initiative-header:hover {
+            opacity: 0.9;
+        }
+
+        .expand-toggle {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .expand-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .expand-toggle::before {
+            content: '▼';
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .initiative-card.collapsed .expand-toggle::before {
+            transform: rotate(-90deg);
+        }
+
+        .initiative-card .metric-tags {
+            margin-top: 16px;
+            margin-left: 76px;
+        }
+
+        .initiative-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+            opacity: 1;
+            margin-top: 12px;
+        }
+
+        .initiative-card.collapsed .initiative-content {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container { padding: 24px 16px; }
@@ -839,8 +899,8 @@
             </div>
 
             <!-- Initiative 1: Trial Cancellation Reduction -->
-            <div class="initiative-card critical">
-                <div class="initiative-header">
+            <div class="initiative-card critical collapsed">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number">1</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">PSP Cancellation Prevention (App-Side)</div>
@@ -851,6 +911,7 @@
                             <span class="badge badge-impact">📈 18K Saves/Month</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
                 <div class="metric-tags">
@@ -858,6 +919,8 @@
                     <span class="metric-tag growth">📊 D₁(Retention) ↑</span>
                     <span class="metric-tag growth">🔄 Re Activation ↑</span>
                 </div>
+
+                <div class="initiative-content">
                 <div style="margin: 12px 0; padding: 12px; background: rgba(37, 141, 88, 0.1); border-left: 3px solid var(--accent-green); border-radius: 6px; font-size: 0.9em; line-height: 1.5;">
                     <strong>Why these metrics?</strong> Intercepts PSP cancellations with push notifications and FOMO content to prevent Day 0 churn and reactivate users who cancelled outside the app.
                 </div>
@@ -1079,11 +1142,12 @@
                     <p style="margin-top: 5px;"><strong>🧪 Future Experiments:</strong> WhatsApp vs Push effectiveness, FOMO content order (popular-first vs upcoming-first), Notification timing (immediate vs 5min vs 10min delay), CTA copy variants (fear vs benefit)</p>
                     <p style="margin-top: 5px;"><strong>📊 Reference Code:</strong> motivator_popup.dart, resume_subscription_banner.dart, trial_mandate_resume_psp.dart, restart_subscription_popup.dart</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 2: Resume Watching Notifications -->
-            <div class="initiative-card critical">
-                <div class="initiative-header">
+            <div class="initiative-card critical collapsed">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number">2</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Resume Watching Notifications (Rich Notification)</div>
@@ -1094,6 +1158,7 @@
                             <span class="badge badge-impact">📈 2.5K Saves/Month</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
                 <div class="metric-tags">
@@ -1101,6 +1166,8 @@
                     <span class="metric-tag retention">📊 Month 0 Watchers ↑</span>
                     <span class="metric-tag growth">💡 AHA Moment ↑</span>
                 </div>
+
+                <div class="initiative-content">
                 <div style="margin: 12px 0; padding: 12px; background: rgba(37, 141, 88, 0.1); border-left: 3px solid var(--accent-green); border-radius: 6px; font-size: 0.9em; line-height: 1.5;">
                     <strong>Why these metrics?</strong> Reminds users to finish incomplete sessions via rich notifications, bringing them back next day and increasing early consumption to drive consecutive viewing days.
                 </div>
@@ -1252,11 +1319,12 @@
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> resume_notification_sent, resume_notification_clicked (target: 40%), playback_resumed_from_notification (target: 25%), incomplete_session_cancellation_rate (reduce by 10%)</p>
                     <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> Notification timing (5min vs 10min vs 30min), Copy variants (Continue vs Finish)</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 3: Micro Drama -->
-            <div class="initiative-card critical">
-                <div class="initiative-header">
+            <div class="initiative-card critical collapsed">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number">3</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Microdrama Engagement Boost (Comprehensive)</div>
@@ -1266,6 +1334,7 @@
                             <span class="badge badge-impact">📈 +13pp Starts, 2.1x Episodes</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
                 <div class="metric-tags">
@@ -1273,6 +1342,8 @@
                     <span class="metric-tag growth">💡 AHA Moment ↑</span>
                     <span class="metric-tag growth">📊 D₁(Retention) ↑</span>
                 </div>
+
+                <div class="initiative-content">
                 <div style="margin: 12px 0; padding: 12px; background: rgba(37, 141, 88, 0.1); border-left: 3px solid var(--accent-green); border-radius: 6px; font-size: 0.9em; line-height: 1.5;">
                     <strong>Why these metrics?</strong> Short 4-minute episodes enable multiple watches per day, driving early consumption and faster value realization through the AHA moment (4 consecutive viewing days).
                 </div>
@@ -1366,11 +1437,12 @@
                     <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> PiP content (popular vs incomplete), PiP timing (immediate vs delayed), Row position (top vs middle vs bottom), Personalization (on vs off), Notification timing (immediate vs 1hr delayed)</p>
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> pip_conversion_rate, microdrama_start_rate, episodes_per_session, microdrama_weekly_active_rate, personalization_lift</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 4: Watchlist -->
-            <div class="initiative-card critical">
-                <div class="initiative-header">
+            <div class="initiative-card critical collapsed">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number">4</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Watchlist Expansion (My List + Notifications)</div>
@@ -1380,6 +1452,7 @@
                             <span class="badge badge-impact">📈 3.8x Lift</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
                 <div class="metric-tags">
@@ -1388,6 +1461,8 @@
                     <span class="metric-tag retention">🔁 Renewal Rate ↑</span>
                     <span class="metric-tag retention">📊 Month 0 Watchers ↑</span>
                 </div>
+
+                <div class="initiative-content">
                 <div style="margin: 12px 0; padding: 12px; background: rgba(37, 141, 88, 0.1); border-left: 3px solid var(--accent-green); border-radius: 6px; font-size: 0.9em; line-height: 1.5;">
                     <strong>Why these metrics?</strong> Users who save content for later create return behavior through notifications, driving consecutive viewing days (8-day habit) and sustaining engagement beyond Week 4.
                 </div>
@@ -1442,11 +1517,12 @@
 
                     <p style="margin-top: 10px;"><strong>⏱️ Effort:</strong> 10 days</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 5: Binge Leaderboard -->
-            <div class="initiative-card critical">
-                <div class="initiative-header">
+            <div class="initiative-card critical collapsed">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number">5</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Binge Leaderboard - Competitive Gamification</div>
@@ -1457,6 +1533,7 @@
                             <span class="badge badge-impact">📈 +60% Consumption, 10K Social Shares</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
                 <div class="metric-tags">
@@ -1465,6 +1542,8 @@
                     <span class="metric-tag retention">📊 Month 0 Watchers ↑</span>
                     <span class="metric-tag retention">🔁 Renewal Rate ↑</span>
                 </div>
+
+                <div class="initiative-content">
                 <div style="margin: 12px 0; padding: 12px; background: rgba(37, 141, 88, 0.1); border-left: 3px solid var(--accent-green); border-radius: 6px; font-size: 0.9em; line-height: 1.5;">
                     <strong>Why these metrics?</strong> Competitive gamification with 7-day streaks and Top 500 rewards creates daily viewing habits, sustains engagement beyond Week 4, and increases renewal intent.
                 </div>
@@ -1674,11 +1753,12 @@
                     <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> Reset frequency (weekly vs bi-weekly vs monthly), Entry point visibility (home vs profile vs dedicated tab)</p>
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> leaderboard_engagement_rate, social_share_count, episodes_per_session_lift (subscribers), subscriber_churn_reduction, subscriber_ltv_increase, viral_coefficient</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 6: AI Mood Curator -->
-            <div class="initiative-card critical">
-                <div class="initiative-header">
+            <div class="initiative-card critical collapsed">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number">6</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">AI Mood Curator - Emotional Content Discovery</div>
@@ -1689,6 +1769,7 @@
                             <span class="badge badge-impact">📈 +45% Discovery, +18pp Microdrama</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
                 <div class="metric-tags">
@@ -1697,6 +1778,8 @@
                     <span class="metric-tag growth">💡 AHA Moment ↑</span>
                     <span class="metric-tag growth">📊 D₁(Retention) ↑</span>
                 </div>
+
+                <div class="initiative-content">
                 <div style="margin: 12px 0; padding: 12px; background: rgba(37, 141, 88, 0.1); border-left: 3px solid var(--accent-green); border-radius: 6px; font-size: 0.9em; line-height: 1.5;">
                     <strong>Why these metrics?</strong> Mood-based personalization solves "what to watch" problem, increasing content discovery, reactivating dormant users via mood-based notifications, and driving faster value realization.
                 </div>
@@ -1884,6 +1967,7 @@
                     <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> Mood selector frequency (every launch vs daily vs weekly), Algorithm type (explicit mood-based vs AI-inferred mood)</p>
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> mood_to_playback_rate, microdrama_start_rate_lift, content_completion_rate_lift, d7_retention_impact, social_share_count</p>
                 </div>
+                </div>
             </div>
 
         </div>
@@ -1904,8 +1988,8 @@
             </p>
 
             <!-- Initiative 9: Resume Trial -->
-            <div class="initiative-card retention">
-                <div class="initiative-header">
+            <div class="initiative-card retention collapsed">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number orange">9</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Resume Trial Incentives (Optimization)</div>
@@ -1915,6 +1999,7 @@
                             <span class="badge badge-impact">📈 +15-20% Resume Rate</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
                 <div class="metric-tags">
@@ -1922,6 +2007,8 @@
                     <span class="metric-tag retention">🔁 Renewal Rate ↑</span>
                     <span class="metric-tag retention">📈 Month 1 Watcher ↑</span>
                 </div>
+
+                <div class="initiative-content">
                 <div style="margin: 12px 0; padding: 12px; background: rgba(37, 141, 88, 0.1); border-left: 3px solid var(--accent-green); border-radius: 6px; font-size: 0.9em; line-height: 1.5;">
                     <strong>Why these metrics?</strong> Targeted incentives for trial_over and subscription_over users win back churned users before renewal window closes, re-engaging them after Month 1.
                 </div>
@@ -1996,6 +2083,7 @@
                     <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 3 days (2 days messaging variants + 1 day conversion tracking)</p>
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> trial_resumed_rate (flag revert), trial_reactivated_rate (PSP new mandate), conversion_by_message_variant</p>
                 </div>
+                </div>
             </div>
 
         </div>
@@ -2016,8 +2104,8 @@
             </p>
 
             <!-- Initiative 11: Community Watch Challenges -->
-            <div class="initiative-card critical">
-                <div class="initiative-header">
+            <div class="initiative-card critical collapsed">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number">11</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Community Watch Challenges - Viral Gamification</div>
@@ -2028,6 +2116,7 @@
                             <span class="badge badge-impact">📈 +45% WAU, +30% Consumption</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
                 <div class="metric-tags">
@@ -2036,6 +2125,8 @@
                     <span class="metric-tag retention">📊 Month 0 Watchers ↑</span>
                     <span class="metric-tag growth">📈 Trial Rate (TRT) ↑</span>
                 </div>
+
+                <div class="initiative-content">
                 <div style="margin: 12px 0; padding: 12px; background: rgba(37, 141, 88, 0.1); border-left: 3px solid var(--accent-green); border-radius: 6px; font-size: 0.9em; line-height: 1.5;">
                     <strong>Why these metrics?</strong> Group challenges create social accountability for daily watching, sustaining engagement beyond Week 4, while viral sharing brings new trial users through social proof.
                 </div>
@@ -2238,11 +2329,12 @@
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> challenge_viewed, challenge_contribution_tracked, challenge_completed (success rate), challenge_shared, WAU lift, content consumption lift, D7 retention lift</p>
                     <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> Goal difficulty (easy vs medium vs hard), Reward type (content vs trial extension vs mixed), Challenge duration (7-day vs 3-day)</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 12: Code Refactoring -->
-            <div class="initiative-card" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
-                <div class="initiative-header">
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">12</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Code Refactoring: Decompose Monster DTO File</div>
@@ -2253,8 +2345,10 @@
                             <span class="badge badge-impact">🚀 +20% Velocity</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
+                <div class="initiative-content">
                 <div class="section-content" style="margin-top: 50px;">
                     <h4>🚨 Problem: Scalability Blocker</h4>
                     <div class="metric-box" style="border-left-color: var(--accent-orange);">
@@ -2386,11 +2480,12 @@
                     <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P1 - Critical (blocks team scalability)</p>
                     <p style="margin-top: 5px;"><strong>💰 ROI:</strong> High - 1.5 days investment → ongoing 20% velocity improvement</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 13: Trailer Fallback Fix -->
-            <div class="initiative-card" style="background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(255, 87, 34, 0.05) 100%); border: 2px solid #f44336;">
-                <div class="initiative-header">
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(255, 87, 34, 0.05) 100%); border: 2px solid #f44336;">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number" style="background: linear-gradient(135deg, #f44336, #e53935);">13</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Fix Trailer Fallback in Content Playback</div>
@@ -2401,8 +2496,10 @@
                             <span class="badge badge-impact">🎬 Unblocks Playback</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
+                <div class="initiative-content">
                 <div class="user-types">
                     <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
@@ -2459,11 +2556,12 @@
                     <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P1 - High (blocks content playback for affected users)</p>
                     <p style="margin-top: 5px;"><strong>💰 Impact:</strong> Improved playback reliability + better user experience</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 14: Remove HAR & RAJ Flavors -->
-            <div class="initiative-card" style="background: linear-gradient(135deg, rgba(156, 39, 176, 0.1) 0%, rgba(103, 58, 183, 0.05) 100%); border: 2px solid #9c27b0;">
-                <div class="initiative-header">
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(156, 39, 176, 0.1) 0%, rgba(103, 58, 183, 0.05) 100%); border: 2px solid #9c27b0;">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number" style="background: linear-gradient(135deg, #9c27b0, #7b1fa2);">14</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Remove Discontinued HAR & RAJ Flavor Configurations</div>
@@ -2474,8 +2572,10 @@
                             <span class="badge badge-impact">📦 -4 Flavors</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
+                <div class="initiative-content">
                 <div class="section-content" style="margin-top: 30px;">
                     <h4>📊 Current State</h4>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
@@ -2585,11 +2685,12 @@
                     <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P2 - Medium (cleanup task)</p>
                     <p style="margin-top: 5px;"><strong>💰 Impact:</strong> Reduced maintenance overhead + cleaner codebase</p>
                 </div>
+                </div>
             </div>
 
             <!-- Initiative 15: Memory Leak Audit -->
-            <div class="initiative-card" style="background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid #ff9800;">
-                <div class="initiative-header">
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid #ff9800;">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
                     <div class="initiative-number" style="background: linear-gradient(135deg, #ff9800, #f57c00);">15</div>
                     <div class="initiative-title-block">
                         <div class="initiative-title">Memory Leak Audit & Performance Optimization</div>
@@ -2600,8 +2701,10 @@
                             <span class="badge badge-impact">🚀 Reduce Crashes</span>
                         </div>
                     </div>
+                    <div class="expand-toggle"></div>
                 </div>
 
+                <div class="initiative-content">
                 <div class="section-content" style="margin-top: 30px;">
                     <h4>🚨 Problem: Potential Memory Leaks</h4>
                     <div class="metric-box" style="border-left-color: #ff9800;">
@@ -2739,6 +2842,7 @@
                     <p style="margin-top: 5px;"><strong>🎯 Priority:</strong> P1 - High (prevents production issues)</p>
                     <p style="margin-top: 5px;"><strong>💰 Impact:</strong> Reduced app crashes, improved performance, better user experience</p>
                 </div>
+                </div>
             </div>
 
         </div>
@@ -2801,5 +2905,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleInitiative(header) {
+            const card = header.closest('.initiative-card');
+            card.classList.toggle('collapsed');
+        }
+    </script>
 </body>
 </html>
