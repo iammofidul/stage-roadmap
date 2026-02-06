@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Watch Challenges - Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #248B3B;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #BEBEBE;
+            font-size: 1.1em;
+            margin-bottom: 50px;
+        }
+
+        .group {
+            margin-bottom: 80px;
+        }
+
+        .group-title {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #EFA73F;
+            border-bottom: 3px solid #EFA73F;
+            padding-bottom: 10px;
+        }
+
+        .screens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(650px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .screen {
+            background: #171717;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .screen-title {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #248B3B;
+            font-weight: 700;
+        }
+
+        .phone {
+            width: 650px;
+            height: 1200px;
+            margin: 0 auto;
+            background: #121212;
+            border-radius: 30px;
+            border: 8px solid #3f3f3f;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .status-bar {
+            background: #000;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #FFF;
+        }
+
+        .content {
+            padding: 20px;
+            height: calc(100% - 50px);
+            overflow-y: auto;
+        }
+
+        .challenge-banner {
+            background: linear-gradient(135deg, #248B3B, #1f7a32);
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            border: 2px solid rgba(36, 139, 59, 0.3);
+        }
+
+        .challenge-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #FFF;
+        }
+
+        .challenge-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .progress-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            height: 32px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #00e676, #00d665);
+            height: 100%;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        .countdown {
+            background: rgba(239, 167, 63, 0.2);
+            color: #EFA73F;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .your-contribution {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .cta-button {
+            background: #FFF;
+            color: #248B3B;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .reward-preview {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+
+        .reward-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #00e676;
+        }
+
+        .reward-list {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .leaderboard {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .leaderboard-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #248B3B;
+        }
+
+        .leaderboard-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rank {
+            font-size: 16px;
+            font-weight: 700;
+            color: #EFA73F;
+            min-width: 30px;
+        }
+
+        .rank.gold { color: #FFD700; }
+        .rank.silver { color: #C0C0C0; }
+        .rank.bronze { color: #CD7F32; }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .username {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .contribution {
+            font-size: 12px;
+            color: #BEBEBE;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .success-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #00e676;
+        }
+
+        .success-subtitle {
+            font-size: 16px;
+            color: #BEBEBE;
+            margin-bottom: 30px;
+        }
+
+        .success-stats {
+            background: rgba(0, 230, 118, 0.1);
+            border: 2px solid #00e676;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .stat-label {
+            color: #BEBEBE;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: #00e676;
+        }
+
+        .share-button {
+            background: linear-gradient(135deg, #00e676, #00d665);
+            color: #000;
+            padding: 14px 40px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+
+        .claim-button {
+            background: linear-gradient(135deg, #248B3B, #1f7a32);
+            color: #FFF;
+            padding: 14px 40px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .notes {
+            background: #171717;
+            border-left: 4px solid #248B3B;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .notes-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #248B3B;
+        }
+
+        .notes ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .notes li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .notes li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #248B3B;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 Community Watch Challenges - Wireframe</h1>
+        <p class="subtitle">Viral gamification with collective goals and social rewards</p>
+
+        <!-- Screen 1: Challenge Home Banner -->
+        <div class="group">
+            <h2 class="group-title">Screen 1: Challenge Home Banner</h2>
+            <div class="screens">
+                <div class="screen">
+                    <h3 class="screen-title">Challenge Banner on Home Screen</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+                        <div class="content">
+                            <div class="challenge-banner">
+                                <div class="challenge-title">🌍 Community Challenge</div>
+                                <div class="challenge-subtitle">Let's reach 10 Million watch hours together!</div>
+
+                                <div class="countdown">⏰ 2 days 5 hours remaining</div>
+
+                                <div class="progress-text">
+                                    <span><strong>8.5M hours</strong></span>
+                                    <span>10M hours</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-bar" style="width: 85%;">85%</div>
+                                </div>
+
+                                <div class="your-contribution">
+                                    <strong>Your contribution:</strong> 2.5 hours<br>
+                                    <span style="color: #BEBEBE; font-size: 12px;">You're ranked #234 globally 🔥</span>
+                                </div>
+
+                                <button class="cta-button">🎬 Start Watching</button>
+
+                                <div class="reward-preview">
+                                    <div class="reward-title">🎁 Everyone gets if we succeed:</div>
+                                    <div class="reward-list">
+                                        • Exclusive episode unlock<br>
+                                        • 1 week FREE trial extension<br>
+                                        • Behind-the-scenes content<br>
+                                        • Early access to new show
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="text-align: center; margin-top: 20px;">
+                                <h3 style="font-size: 16px; margin-bottom: 12px;">📺 Regular Content Feed Below</h3>
+                                <div style="background: rgba(255,255,255,0.05); height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #666;">
+                                    [Home Feed Content Cards]
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 2: Challenge Details Screen -->
+        <div class="group">
+            <h2 class="group-title">Screen 2: Challenge Details Screen</h2>
+            <div class="screens">
+                <div class="screen">
+                    <h3 class="screen-title">Full Challenge Details with Leaderboard</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+                        <div class="content">
+                            <div style="text-align: center; margin-bottom: 24px;">
+                                <div style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">🌍 Community Challenge</div>
+                                <div style="color: #BEBEBE;">Watch 10M hours together this week!</div>
+                            </div>
+
+                            <div class="challenge-banner" style="margin-bottom: 24px;">
+                                <div class="countdown" style="margin-bottom: 16px;">⏰ 2 days 5 hours remaining</div>
+
+                                <div class="progress-text">
+                                    <span><strong>8.5M / 10M hours</strong></span>
+                                    <span style="color: #00e676; font-weight: 700;">85%</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-bar" style="width: 85%;">We're almost there!</div>
+                                </div>
+
+                                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; margin-top: 12px; font-size: 13px;">
+                                    <strong>📊 Your Stats:</strong><br>
+                                    • Watch time: 2.5 hours<br>
+                                    • Global rank: #234<br>
+                                    • Episodes watched: 15
+                                </div>
+                            </div>
+
+                            <div class="leaderboard">
+                                <div class="leaderboard-title">🏆 Top Contributors</div>
+
+                                <div class="leaderboard-item">
+                                    <div class="rank gold">#1</div>
+                                    <div class="user-info">
+                                        <div class="username">Rajesh K.</div>
+                                        <div class="contribution">12.5 hours watched</div>
+                                    </div>
+                                    <div class="badge">🏆 Champion</div>
+                                </div>
+
+                                <div class="leaderboard-item">
+                                    <div class="rank silver">#2</div>
+                                    <div class="user-info">
+                                        <div class="username">Priya M.</div>
+                                        <div class="contribution">11.2 hours watched</div>
+                                    </div>
+                                </div>
+
+                                <div class="leaderboard-item">
+                                    <div class="rank bronze">#3</div>
+                                    <div class="user-info">
+                                        <div class="username">Amit S.</div>
+                                        <div class="contribution">10.8 hours watched</div>
+                                    </div>
+                                </div>
+
+                                <div class="leaderboard-item">
+                                    <div class="rank">#4</div>
+                                    <div class="user-info">
+                                        <div class="username">Sneha R.</div>
+                                        <div class="contribution">9.5 hours watched</div>
+                                    </div>
+                                </div>
+
+                                <div class="leaderboard-item">
+                                    <div class="rank">#5</div>
+                                    <div class="user-info">
+                                        <div class="username">Arjun P.</div>
+                                        <div class="contribution">8.9 hours watched</div>
+                                    </div>
+                                </div>
+
+                                <div style="text-align: center; margin-top: 16px; color: #BEBEBE; font-size: 13px;">
+                                    • • •
+                                </div>
+
+                                <div class="leaderboard-item" style="border: 2px solid #248B3B;">
+                                    <div class="rank">#234</div>
+                                    <div class="user-info">
+                                        <div class="username">You</div>
+                                        <div class="contribution">2.5 hours watched</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="cta-button" style="margin-bottom: 16px;">🎬 Watch More to Climb Ranks</button>
+                            <button class="share-button" style="width: 100%;">📤 Share with Friends</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 3: Challenge Success Screen -->
+        <div class="group">
+            <h2 class="group-title">Screen 3: Challenge Success Screen</h2>
+            <div class="screens">
+                <div class="screen">
+                    <h3 class="screen-title">Goal Achieved - Collective Celebration</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+                        <div class="content">
+                            <div class="success-screen">
+                                <div class="success-icon">🎉</div>
+                                <div class="success-title">WE DID IT!</div>
+                                <div class="success-subtitle">The STAGE community crushed this week's challenge!</div>
+
+                                <div class="success-stats">
+                                    <div class="stat-row">
+                                        <span class="stat-label">Goal:</span>
+                                        <span class="stat-value">10M hours</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">Achieved:</span>
+                                        <span class="stat-value">10.3M hours (103%)</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">Total Contributors:</span>
+                                        <span class="stat-value">127,543 users</span>
+                                    </div>
+                                    <div class="stat-row">
+                                        <span class="stat-label">Your Contribution:</span>
+                                        <span class="stat-value">2.5 hours (#234)</span>
+                                    </div>
+                                </div>
+
+                                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin-bottom: 30px; width: 100%;">
+                                    <div style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #00e676;">🎁 Your Rewards Unlocked:</div>
+                                    <div style="text-align: left; font-size: 14px; line-height: 1.8;">
+                                        ✓ Exclusive episode: "Dark Beginnings - E01"<br>
+                                        ✓ 1 week FREE trial extension<br>
+                                        ✓ Behind-the-scenes blooper reel<br>
+                                        ✓ Early access to "Shadow Empire" (Feb 15)
+                                    </div>
+                                </div>
+
+                                <button class="share-button">📤 Share Your Victory</button>
+                                <button class="claim-button">🎁 Claim Rewards</button>
+
+                                <div style="margin-top: 20px; font-size: 13px; color: #BEBEBE;">
+                                    Next challenge starts in 2 days!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 4: Share Screen -->
+        <div class="group">
+            <h2 class="group-title">Screen 4: Social Share Screen</h2>
+            <div class="screens">
+                <div class="screen">
+                    <h3 class="screen-title">Viral Share Card Generation</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+                        <div class="content">
+                            <div style="text-align: center; margin-bottom: 24px;">
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">📤 Share Your Progress</div>
+                                <div style="color: #BEBEBE; font-size: 14px;">Help us reach the goal together!</div>
+                            </div>
+
+                            <div style="background: linear-gradient(135deg, #248B3B, #1f7a32); padding: 40px 24px; border-radius: 16px; text-align: center; margin-bottom: 24px; border: 3px solid rgba(0, 230, 118, 0.3);">
+                                <div style="font-size: 16px; margin-bottom: 16px; opacity: 0.9;">🌍 STAGE Community Challenge</div>
+                                <div style="font-size: 32px; font-weight: 800; margin-bottom: 8px;">I'm #234!</div>
+                                <div style="font-size: 18px; margin-bottom: 24px;">2.5 hours contributed 🔥</div>
+
+                                <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px;">
+                                    <div style="font-size: 14px; margin-bottom: 8px; opacity: 0.9;">Community Progress</div>
+                                    <div style="font-size: 28px; font-weight: 800; color: #00e676;">85%</div>
+                                    <div style="font-size: 13px; opacity: 0.8;">8.5M / 10M hours</div>
+                                </div>
+
+                                <div style="font-size: 14px; font-weight: 600;">Help us reach 10M hours!</div>
+                                <div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">Join @ STAGE App</div>
+                            </div>
+
+                            <button class="share-button" style="width: 100%; margin-bottom: 12px;">📱 Share on WhatsApp</button>
+                            <button style="background: linear-gradient(135deg, #E1306C, #C13584); color: #FFF; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 16px; border: none; width: 100%; margin-bottom: 12px;">📷 Share on Instagram Story</button>
+                            <button style="background: rgba(255,255,255,0.1); color: #FFF; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 16px; border: none; width: 100%;">📋 Copy Link</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Notes -->
+        <div class="notes">
+            <div class="notes-title">📝 Implementation Notes</div>
+            <ul>
+                <li><strong>Challenge Types:</strong> Watch Hours, Episode Count, Genre Focus, Content Launch targets</li>
+                <li><strong>Real-time Progress:</strong> Updates every 5 minutes (aggregate user watch time)</li>
+                <li><strong>Leaderboard:</strong> Top 100 contributors displayed, personal rank always visible</li>
+                <li><strong>Badges:</strong> Top 10 get "Community Champion" badge for the week</li>
+                <li><strong>Rewards Distribution:</strong> Automatic unlock if goal reached (content unlock, trial extension, exclusive episodes)</li>
+                <li><strong>Challenge Duration:</strong> Weekly cycle (7 days), resets every Monday</li>
+                <li><strong>A/B Testing:</strong> Goal difficulty (easy 90% / medium 70% / hard 50%), reward types, duration variants</li>
+                <li><strong>Social Sharing:</strong> Generate shareable image card with rank and progress</li>
+                <li><strong>Analytics Events:</strong> challenge_viewed, challenge_contribution_tracked, challenge_completed, challenge_shared, challenge_reward_claimed</li>
+                <li><strong>Push Notifications:</strong>
+                    <ul style="margin-left: 20px; margin-top: 8px;">
+                        <li>"We're at 85%! Watch now to help reach the goal 🔥"</li>
+                        <li>"Only 6 hours left! Community needs your help to reach 10M hours"</li>
+                        <li>"🎉 WE DID IT! Claim your rewards now"</li>
+                    </ul>
+                </li>
+                <li><strong>Viral Mechanics:</strong> Users recruit friends via share, showing personal contribution creates social proof</li>
+                <li><strong>Variable Rewards:</strong> Uncertainty of success creates excitement (like raid boss in games)</li>
+                <li><strong>Weekly Reset:</strong> Fresh challenge every week maintains novelty and re-engagement</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
