@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1600px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -37,42 +37,9 @@
             font-size: 16px;
         }
 
-        .feature-description {
-            background: #292929;
-            border-left: 4px solid #248b3b;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 30px 0;
-        }
-
-        .feature-description h3 {
-            color: #248b3b;
-            margin-bottom: 12px;
-            font-size: 20px;
-        }
-
-        .feature-description ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .feature-description li {
-            padding: 8px 0;
-            padding-left: 24px;
-            position: relative;
-            color: #BEBEBE;
-        }
-
-        .feature-description li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #248b3b;
-        }
-
         .screens-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
             margin-bottom: 40px;
         }
@@ -90,16 +57,51 @@
             border-color: #248b3b;
         }
 
+        .task-label {
+            background: #248b3b;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .new-label {
+            background: #EFA73F;
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            display: inline-block;
+            margin-left: 8px;
+        }
+
+        .existing-label {
+            background: #737373;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 8px;
+        }
+
         .screen-title {
             color: #248b3b;
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 8px;
+            text-align: center;
         }
 
         .screen-subtitle {
-            color: #737373;
+            color: #BEBEBE;
             font-size: 13px;
+            text-align: center;
             margin-bottom: 15px;
         }
 
@@ -109,7 +111,7 @@
             border-radius: 30px;
             padding: 15px;
             margin: 0 auto;
-            max-width: 360px;
+            max-width: 300px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
@@ -125,21 +127,19 @@
 
         .phone-screen {
             background: #1A1A1A;
-            min-height: 600px;
+            min-height: 500px;
             border-radius: 15px;
-            padding: 0;
+            padding: 20px;
             position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* App Header */
         .app-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 16px;
-            background: #1A1A1A;
-            border-bottom: 1px solid #3E3E3E;
+            margin-bottom: 20px;
         }
 
         .logo {
@@ -161,35 +161,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
             cursor: pointer;
+            font-size: 16px;
         }
 
-        /* Scrollable Content */
         .scrollable-content {
-            height: 520px;
+            flex: 1;
             overflow-y: auto;
-            padding: 16px;
+            margin-bottom: 15px;
         }
 
-        .scrollable-content::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .scrollable-content::-webkit-scrollbar-track {
-            background: #292929;
-        }
-
-        .scrollable-content::-webkit-scrollbar-thumb {
-            background: #3E3E3E;
-            border-radius: 2px;
-        }
-
-        /* Section Title */
         .section-title {
             font-size: 16px;
             font-weight: 600;
-            margin: 20px 0 12px;
+            margin: 15px 0 10px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -200,124 +185,100 @@
             color: #fff;
             padding: 2px 8px;
             border-radius: 12px;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 12px;
+            font-weight: 600;
         }
 
-        /* Content Row */
         .content-row {
             display: flex;
             gap: 12px;
             overflow-x: auto;
-            padding: 4px 0;
-            margin-bottom: 16px;
-        }
-
-        .content-row::-webkit-scrollbar {
-            height: 4px;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
         }
 
         .content-card {
-            min-width: 130px;
-            flex-shrink: 0;
-            position: relative;
+            min-width: 140px;
+            background: #292929;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .content-card:hover {
+            transform: scale(1.05);
         }
 
         .content-card-large {
-            min-width: 200px;
+            min-width: 160px;
         }
 
         .content-thumbnail {
             height: 180px;
             background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
-            border-radius: 8px;
-            margin-bottom: 8px;
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
+            position: relative;
         }
 
         .add-to-list-btn {
             position: absolute;
             top: 8px;
             right: 8px;
-            width: 32px;
-            height: 32px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid #248b3b;
-            color: #248b3b;
-        }
-
-        .add-to-list-btn:hover {
-            background: #248b3b;
-            color: #fff;
-            transform: scale(1.1);
-        }
-
-        .add-to-list-btn.added {
-            background: #248b3b;
-            color: #fff;
-            border-color: #248b3b;
-        }
-
-        .play-overlay {
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            background: rgba(36, 139, 59, 0.9);
+            width: 28px;
+            height: 28px;
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .content-badge {
-            position: absolute;
-            top: 8px;
-            left: 8px;
+        .add-to-list-btn:hover {
             background: #248b3b;
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 600;
+            transform: scale(1.1);
+        }
+
+        .add-to-list-btn.added {
+            background: #248b3b;
+        }
+
+        .play-overlay {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(36, 139, 59, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
         }
 
         .content-title {
+            padding: 8px;
             font-size: 13px;
             font-weight: 600;
-            margin-bottom: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .content-meta {
+            padding: 0 8px 8px;
             font-size: 11px;
             color: #737373;
         }
 
-        /* Bottom Navigation */
         .bottom-nav {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
             display: flex;
             justify-content: space-around;
             padding: 12px 0;
-            background: #1A1A1A;
             border-top: 1px solid #3E3E3E;
+            margin-top: auto;
         }
 
         .nav-item {
@@ -325,10 +286,10 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
-            font-size: 10px;
+            font-size: 11px;
             color: #737373;
-            cursor: pointer;
             position: relative;
+            cursor: pointer;
         }
 
         .nav-item.active {
@@ -342,44 +303,47 @@
         .nav-badge {
             position: absolute;
             top: -4px;
-            right: -8px;
-            background: #EF4444;
-            color: #fff;
-            width: 18px;
-            height: 18px;
+            right: -4px;
+            background: #EFA73F;
+            color: #000;
+            font-size: 9px;
+            font-weight: 700;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
-            font-weight: 700;
         }
 
-        /* Notification */
         .notification-card {
             background: #292929;
             border-radius: 12px;
             padding: 16px;
-            margin-bottom: 16px;
             border: 2px solid #3E3E3E;
+            transition: border-color 0.2s;
+        }
+
+        .notification-card:hover {
+            border-color: #248b3b;
         }
 
         .notif-header {
             display: flex;
-            align-items: center;
             gap: 12px;
+            align-items: flex-start;
             margin-bottom: 12px;
         }
 
         .notif-icon {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             background: #248b3b;
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
             flex-shrink: 0;
         }
 
@@ -396,7 +360,7 @@
         .notif-title {
             font-size: 15px;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .notif-body {
@@ -406,7 +370,7 @@
 
         .notif-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             margin-top: 12px;
         }
 
@@ -418,8 +382,8 @@
             font-weight: 600;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s;
             border: none;
+            transition: all 0.2s;
         }
 
         .notif-btn-primary {
@@ -436,78 +400,82 @@
             color: #BEBEBE;
         }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
+        .notif-btn-secondary:hover {
+            background: #4E4E4E;
         }
 
-        .empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            opacity: 0.5;
+        .feature-description {
+            background: #292929;
+            border-left: 4px solid #248b3b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
         }
 
-        .empty-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
+        .feature-description h3 {
+            color: #248b3b;
+            margin-bottom: 12px;
+        }
+
+        .feature-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-description li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
             color: #BEBEBE;
         }
 
-        .empty-text {
-            font-size: 13px;
-            color: #737373;
-            margin-bottom: 20px;
-        }
-
-        .empty-btn {
-            background: #248b3b;
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-
-        .empty-btn:hover {
-            background: #1d6e2f;
-        }
-
-        .task-label {
-            display: inline-block;
-            background: rgba(36, 139, 59, 0.2);
+        .feature-description li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
             color: #248b3b;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 12px;
+        }
+
+        .existing-features {
+            background: rgba(115, 115, 115, 0.2);
+            border-left-color: #737373;
+        }
+
+        .existing-features h3 {
+            color: #BEBEBE;
+        }
+
+        .existing-features li:before {
+            color: #737373;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Watchlist Expansion (My List + Notifications)</h1>
-        <p class="subtitle">Wireframe & User Flows</p>
+        <p class="subtitle">NEW Features - Wireframe & User Flows</p>
 
         <div class="feature-description">
-            <h3>Feature Overview</h3>
+            <h3>What's NEW in This Initiative</h3>
             <ul>
-                <li><strong>Goal:</strong> Increase watchlist adds from 2.91% → 8% (+5pp, +3,400 adds/month)</li>
-                <li><strong>Timeline:</strong> Week 4-6 (10 days) | L Effort</li>
-                <li><strong>Team:</strong> 2 Developers</li>
-                <li><strong>Impact:</strong> 3.8x lift in watchlist conversion, +20pp watchlist → playback rate</li>
+                <li><strong>Feature 1:</strong> My List Row on Home Screen <span class="new-label">NEW</span></li>
+                <li><strong>Feature 4:</strong> 48h Reminder Notifications <span class="new-label">NEW</span></li>
+                <li><strong>Feature 5:</strong> Weekly Digest Notifications <span class="new-label">NEW</span></li>
+            </ul>
+        </div>
+
+        <div class="feature-description existing-features">
+            <h3>Already Existing Features (No Development Needed)</h3>
+            <ul>
+                <li><strong>Feature 2:</strong> Quick Add Button - Already exists in search results, carousels, similar content <span class="existing-label">EXISTS</span></li>
+                <li><strong>Feature 3:</strong> Dedicated My List Screen - Fully functional with edit, delete, undo features <span class="existing-label">EXISTS</span></li>
             </ul>
         </div>
 
         <div class="screens-grid">
             <!-- Screen 1: Home with My List Row -->
             <div class="screen-card">
-                <div class="task-label">Feature 1: My List Row on Home</div>
+                <div class="task-label">Feature 1: My List Row on Home <span class="new-label">NEW</span></div>
                 <div class="screen-title">Home with "My List" Row</div>
                 <div class="screen-subtitle">Dedicated row at top showing all watchlisted content</div>
                 <div class="phone-frame">
@@ -622,166 +590,24 @@
                         <li>Each card shows ✓ icon indicating it's in My List</li>
                         <li>Badge counter "5" shows number of items</li>
                         <li>User taps card → Opens content player</li>
+                        <li>Taps My List nav icon → Opens full My List screen (already exists)</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Screen 2: Content Card with Add Button -->
+            <!-- Screen 2: 48h Reminder Notification -->
             <div class="screen-card">
-                <div class="task-label">Feature 2: Quick Add Button Everywhere</div>
-                <div class="screen-title">Content Cards with "+My List"</div>
-                <div class="screen-subtitle">Add button on all content cards, not just exit popup</div>
-                <div style="padding: 40px 20px; background: #292929; border-radius: 8px; margin-top: 15px;">
-                    <div class="content-card" style="margin: 0 auto;">
-                        <div class="content-thumbnail" style="height: 240px;">
-                            🎬
-                            <div class="add-to-list-btn">➕</div>
-                            <div class="play-overlay">▶️</div>
-                        </div>
-                        <div class="content-title">Bideshi Bahu</div>
-                        <div class="content-meta">Season 1 • Drama Series</div>
-                    </div>
-                    <div style="text-align: center; margin-top: 20px; color: #EFA73F; font-size: 13px; font-weight: 600;">
-                        ⬆️ Tap ➕ to add to My List
-                    </div>
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #3E3E3E;">
-                        <div class="content-card" style="margin: 0 auto;">
-                            <div class="content-thumbnail" style="height: 240px;">
-                                🎬
-                                <div class="add-to-list-btn added">✓</div>
-                                <div class="play-overlay">▶️</div>
-                            </div>
-                            <div class="content-title">Bideshi Bahu</div>
-                            <div class="content-meta">Season 1 • Drama Series</div>
-                        </div>
-                        <div style="text-align: center; margin-top: 20px; color: #248b3b; font-size: 13px; font-weight: 600;">
-                            ✓ Added to My List
-                        </div>
-                    </div>
-                </div>
-                <div class="feature-description" style="margin: 15px 0;">
-                    <h3 style="font-size: 14px;">User Flow</h3>
-                    <ul style="font-size: 12px;">
-                        <li>User browses content on home/search/details</li>
-                        <li>Sees ➕ button on every content card (top-right)</li>
-                        <li>Taps ➕ → Content added to My List</li>
-                        <li>Button changes to ✓ with green background</li>
-                        <li>Toast message: "Added to My List"</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Screen 3: My List Screen -->
-            <div class="screen-card">
-                <div class="task-label">Feature 3: Dedicated My List Screen</div>
-                <div class="screen-title">My List Screen</div>
-                <div class="screen-subtitle">Full screen showing all watchlisted content with badge counter in nav</div>
-                <div class="phone-frame">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <!-- App Header -->
-                        <div class="app-header">
-                            <div class="logo" style="color: #fff;">My List</div>
-                            <div class="header-icons">
-                                <div class="icon-btn">🔍</div>
-                            </div>
-                        </div>
-
-                        <!-- Scrollable Content -->
-                        <div class="scrollable-content">
-                            <div style="padding: 0 4px;">
-                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
-                                    <div class="content-card" style="min-width: auto;">
-                                        <div class="content-thumbnail">
-                                            🎬
-                                            <div class="add-to-list-btn added">✓</div>
-                                        </div>
-                                        <div class="content-title">Bideshi Bahu</div>
-                                        <div class="content-meta">Season 1</div>
-                                    </div>
-                                    <div class="content-card" style="min-width: auto;">
-                                        <div class="content-thumbnail">
-                                            🌟
-                                            <div class="add-to-list-btn added">✓</div>
-                                        </div>
-                                        <div class="content-title">City Dreams</div>
-                                        <div class="content-meta">Season 2</div>
-                                    </div>
-                                    <div class="content-card" style="min-width: auto;">
-                                        <div class="content-thumbnail">
-                                            💔
-                                            <div class="add-to-list-btn added">✓</div>
-                                        </div>
-                                        <div class="content-title">Husband on Sale</div>
-                                        <div class="content-meta">Episode 6</div>
-                                    </div>
-                                    <div class="content-card" style="min-width: auto;">
-                                        <div class="content-thumbnail">
-                                            🎭
-                                            <div class="add-to-list-btn added">✓</div>
-                                        </div>
-                                        <div class="content-title">Drama Series</div>
-                                        <div class="content-meta">Season 3</div>
-                                    </div>
-                                    <div class="content-card" style="min-width: auto;">
-                                        <div class="content-thumbnail">
-                                            ⚡
-                                            <div class="add-to-list-btn added">✓</div>
-                                        </div>
-                                        <div class="content-title">Action Movie</div>
-                                        <div class="content-meta">2024</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Bottom Navigation -->
-                        <div class="bottom-nav">
-                            <div class="nav-item">
-                                <div class="nav-icon">🏠</div>
-                                <span>Home</span>
-                            </div>
-                            <div class="nav-item">
-                                <div class="nav-icon">🎬</div>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="nav-item active">
-                                <div class="nav-icon">➕</div>
-                                <div class="nav-badge">5</div>
-                                <span>My List</span>
-                            </div>
-                            <div class="nav-item">
-                                <div class="nav-icon">⚙️</div>
-                                <span>Settings</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="feature-description" style="margin: 15px 0;">
-                    <h3 style="font-size: 14px;">User Flow</h3>
-                    <ul style="font-size: 12px;">
-                        <li>User taps "My List" in bottom navigation</li>
-                        <li>Badge shows "5" items in list</li>
-                        <li>Screen shows all watchlisted content in grid</li>
-                        <li>User taps ✓ to remove from list</li>
-                        <li>User taps card → Opens content player</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Screen 4: Reminder Notification -->
-            <div class="screen-card">
-                <div class="task-label">Feature 4: Watchlist Reminder (48h)</div>
-                <div class="screen-title">Reminder Notification</div>
-                <div class="screen-subtitle">Sent 48 hours after adding content if not watched</div>
+                <div class="task-label">Feature 4: 48h Reminder Notification <span class="new-label">NEW</span></div>
+                <div class="screen-title">Reminder for Unwatched Content</div>
+                <div class="screen-subtitle">If content added but not watched in 48h</div>
                 <div style="margin-top: 15px;">
                     <div class="notification-card">
                         <div class="notif-header">
-                            <div class="notif-icon">🔖</div>
+                            <div class="notif-icon">📺</div>
                             <div class="notif-content">
                                 <div class="notif-app">STAGE</div>
                                 <div class="notif-title">Don't forget: Bideshi Bahu is waiting</div>
-                                <div class="notif-body">You added this to your list 2 days ago</div>
+                                <div class="notif-body">You added this to My List 2 days ago. Start watching now!</div>
                             </div>
                         </div>
                         <div class="notif-actions">
@@ -796,25 +622,26 @@
                         <li>User adds content to My List</li>
                         <li>48 hours pass without watching</li>
                         <li>System sends reminder notification</li>
-                        <li>User taps "Watch Now" → Deep links to player</li>
+                        <li>User taps "Watch Now" → Opens player with content</li>
                         <li>User taps "Remove" → Removes from My List</li>
+                        <li>Notification dismissed if user watches before 48h</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Screen 5: Weekly Digest Notification -->
+            <!-- Screen 3: Weekly Digest Notification -->
             <div class="screen-card">
-                <div class="task-label">Feature 5: Weekly Digest</div>
+                <div class="task-label">Feature 5: Weekly Digest <span class="new-label">NEW</span></div>
                 <div class="screen-title">Weekly Watchlist Digest</div>
-                <div class="screen-subtitle">Summary of new episodes added to watchlisted shows</div>
+                <div class="screen-subtitle">Summary of new content available in My List shows</div>
                 <div style="margin-top: 15px;">
                     <div class="notification-card">
                         <div class="notif-header">
                             <div class="notif-icon">📺</div>
                             <div class="notif-content">
                                 <div class="notif-app">STAGE</div>
-                                <div class="notif-title">Your Watchlist: 3 new episodes added</div>
-                                <div class="notif-body">Bideshi Bahu (Ep 8), City Dreams (Ep 5), Drama Series (Ep 12)</div>
+                                <div class="notif-title">Your My List: 3 shows have new content</div>
+                                <div class="notif-body">Bideshi Bahu, City Dreams, and Drama Series are ready to watch!</div>
                             </div>
                         </div>
                         <div class="notif-actions">
@@ -826,11 +653,11 @@
                 <div class="feature-description" style="margin: 15px 0;">
                     <h3 style="font-size: 14px;">User Flow</h3>
                     <ul style="font-size: 12px;">
-                        <li>User has content in My List (shows/series)</li>
-                        <li>New episodes released for those shows</li>
+                        <li>User has content in My List (shows/series/movies)</li>
+                        <li>New content becomes available for those shows</li>
                         <li>Weekly (every Monday) digest notification sent</li>
-                        <li>Shows summary: "3 new episodes added"</li>
-                        <li>Lists shows and episode numbers</li>
+                        <li>Shows summary: "3 shows have new content"</li>
+                        <li>Lists show names without episode numbers (some shows release all at once)</li>
                         <li>User taps "View My List" → Opens My List screen</li>
                     </ul>
                 </div>
@@ -838,27 +665,26 @@
         </div>
 
         <div class="feature-description">
-            <h3>User Flow Summary</h3>
+            <h3>Development Focus: What Needs to be Built</h3>
             <ul>
-                <li><strong>Adding to List:</strong> User browses content → Taps ➕ on any card → Added to My List (✓ shown)</li>
-                <li><strong>Viewing List:</strong> User taps "My List" in navigation → Sees all watchlisted content with badge counter</li>
-                <li><strong>Home Visibility:</strong> "My List" row appears at top of home with all watchlisted items</li>
-                <li><strong>48h Reminder:</strong> Content added but not watched → User receives "Don't forget" notification → Taps "Watch Now"</li>
-                <li><strong>Weekly Digest:</strong> New episodes added to watchlisted shows → User receives weekly summary → Taps "View My List"</li>
+                <li><strong>My List Row Widget:</strong> New home screen component showing watchlisted content (Feature 1)</li>
+                <li><strong>48h Reminder System:</strong> Background service tracking unwatched content and sending notifications (Feature 4)</li>
+                <li><strong>Weekly Digest System:</strong> Cron job checking for new content and sending weekly summaries (Feature 5)</li>
+                <li><strong>Notification Deep Links:</strong> Direct navigation from notifications to player/My List screen</li>
+                <li><strong>Analytics Events:</strong> Track notification impressions, taps, dismissals</li>
             </ul>
         </div>
 
         <div class="feature-description">
             <h3>Technical Requirements</h3>
             <ul>
-                <li>Quick add button component on all content cards (home, search, details, player exit)</li>
                 <li>My List row widget on home screen (always visible if list has items)</li>
-                <li>Dedicated My List screen accessible from bottom navigation</li>
-                <li>Badge counter component showing list count (updates in real-time)</li>
-                <li>Background service for 48h reminder notifications (local scheduling)</li>
-                <li>Weekly digest notification (server-side cron job, Monday 9 AM)</li>
-                <li>Deep linking for "Watch Now" actions</li>
-                <li>Analytics: watchlist_add, watchlist_remove, watchlist_reminder_sent, watchlist_reminder_clicked, weekly_digest_sent, weekly_digest_clicked</li>
+                <li>Background notification scheduler for 48h reminders</li>
+                <li>Weekly cron job for digest generation (Mondays)</li>
+                <li>Push notification setup (Firebase Cloud Messaging)</li>
+                <li>Deep linking configuration for notification actions</li>
+                <li>Local storage for tracking notification state</li>
+                <li>Analytics tracking for notification engagement</li>
             </ul>
         </div>
 
@@ -867,46 +693,38 @@
             <ul>
                 <li><strong>Watchlist Adds:</strong> 2.91% → 8% (+5pp, +3,400 adds/month)</li>
                 <li><strong>Watchlist → Playback:</strong> 40% → 60% (+20pp from notifications)</li>
-                <li><strong>Engagement Lift:</strong> Exit intent popup gives 3.8x lift (10.61% vs 2.91%)</li>
-                <li><strong>D7 Retention:</strong> Users with watchlists have 20% higher retention</li>
+                <li><strong>Goal:</strong> Increase content investment and reduce churn by keeping users engaged with their watchlist</li>
             </ul>
         </div>
     </div>
 
     <script>
-        // Interactive effects
-        document.querySelectorAll('.add-to-list-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (this.classList.contains('added')) {
-                    this.classList.remove('added');
-                    this.textContent = '➕';
-                    alert('Removed from My List');
-                } else {
-                    this.classList.add('added');
-                    this.textContent = '✓';
-                    alert('Added to My List');
-                }
+        // Add interactive hover effects
+        document.querySelectorAll('.notification-card, .notif-btn, .content-card, .icon-btn').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 100);
             });
         });
 
+        // Simulate button actions
         document.querySelectorAll('.notif-btn-primary').forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                if (btn.textContent.includes('Watch Now')) {
-                    alert('Deep linking to content player...');
-                } else if (btn.textContent.includes('View My List')) {
+                if (btn.textContent.includes('Watch')) {
+                    alert('Deep linking to video player...');
+                } else if (btn.textContent.includes('View')) {
                     alert('Opening My List screen...');
                 }
             });
         });
 
-        document.querySelectorAll('.content-card, .nav-item').forEach(el => {
-            el.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 100);
+        document.querySelectorAll('.notif-btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Notification dismissed.');
             });
         });
     </script>
