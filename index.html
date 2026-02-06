@@ -2024,42 +2024,53 @@
 
                     <h4>📊 Current State</h4>
                     <ul>
-                        <li><strong>2 Touchpoints Available:</strong> Home banner + Settings screen banner</li>
-                        <li><strong>Missing Touchpoints:</strong> Floating banner, bottom sheet, popup (need to be implemented)</li>
-                        <li><strong>Existing A/B Test:</strong> Text vs Image layout only</li>
+                        <li><strong>✅ 2 Touchpoints Available for subscription_over Users:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><code>resume_subscription_banner.dart</code> - Home banner in dynamic_home_screen</li>
+                                <li><code>restart_subscription_popup.dart</code> - Settings popup (success confirmation)</li>
+                            </ul>
+                        </li>
+                        <li><strong>❌ 3 Touchpoints NOT for subscription_over (only for trial_mandate_paused/revoked):</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><code>floating_banner.dart</code> - Only checks trial mandate status (needs subscription_over support)</li>
+                                <li><code>title_page_bottom_sheet.dart</code> - Only triggered for trial mandate paused (needs subscription_over version)</li>
+                                <li><code>resume_trial_popup.dart</code> - Only for trial users (needs subscription_over version)</li>
+                            </ul>
+                        </li>
                         <li><strong>API:</strong> resumePlan() - reverts backend pause flag for subscription_over users</li>
-                        <li><strong>Gap:</strong> No conversion tracking, no messaging variants tested, missing key touchpoints</li>
+                        <li><strong>Gap:</strong> Missing 3 touchpoints for subscription_over, no A/B testing for message variants, no conversion tracking</li>
                     </ul>
 
                     <div class="metric-box" style="background: rgba(36, 139, 59, 0.1); border-left-color: #248b3b; margin: 15px 0 20px 0;">
                         <strong>📱 Wireframe:</strong> <a href="resume-subscription-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View Interactive Wireframe →</a><br>
-                        <span style="font-size: 13px; color: #BEBEBE;">5 Touchpoints: Home Banner, Settings Banner, Floating Banner, Bottom Sheet, Popup - Full resume subscription flow with 4 message variants</span>
+                        <span style="font-size: 13px; color: #BEBEBE;">✅ 2/5 Touchpoints Exist | Need: 3 New Touchpoints + A/B Test 4 Message Variants Across All 5</span>
                     </div>
 
                     <h4>✅ What We'll Build (3 Tasks)</h4>
 
-                    <p style="margin-top: 15px;"><strong>Task 1: Implement Missing Touchpoints (1.5 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 1: Build 3 Missing Touchpoints for subscription_over Users (1.5 days)</strong></p>
                     <ul>
-                        <li><strong>Implement 3 Missing Touchpoints:</strong>
+                        <li><strong>Create subscription_over Versions of Existing Trial Components:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>Floating Banner:</strong> Persistent bottom floating CTA on home screen for subscription_over users</li>
-                                <li><strong>Bottom Sheet:</strong> Slide-up modal with resume subscription details and benefits</li>
-                                <li><strong>Popup:</strong> Full-screen overlay with personalized content hook (last watched show)</li>
+                                <li><strong>Floating Banner:</strong> Modify <code>floating_banner.dart</code> to add subscription_over check (SubscriptionStatusUtil.isSubscriptionOver())</li>
+                                <li><strong>Bottom Sheet:</strong> Modify <code>title_page_bottom_sheet.dart</code> to support subscription_over users</li>
+                                <li><strong>Popup:</strong> Add subscription_over logic to <code>resume_trial_popup.dart</code></li>
                             </ul>
                         </li>
-                        <li><strong>Update Existing Touchpoints:</strong>
+                        <li><strong>User Detection Logic:</strong> Add checks for subscription_over users alongside existing trial checks</li>
+                        <li><strong>Visibility Rules:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>Home Banner:</strong> Update styling and add A/B test variants</li>
-                                <li><strong>Settings Banner:</strong> Update styling and add A/B test variants</li>
+                                <li>Floating Banner: Show on video player for subscription_over users</li>
+                                <li>Bottom Sheet: Show when subscription_over user tries to watch content</li>
+                                <li>Popup: Show on download/watch attempts for subscription_over users</li>
                             </ul>
                         </li>
-                        <li><strong>Deep Link:</strong> stage://resume-subscription for all touchpoints</li>
-                        <li><strong>User Detection:</strong> Show touchpoints only for subscription_over users</li>
+                        <li><strong>Deep Link:</strong> Use existing stage://resume/har/hin/payment pattern</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 2: A/B Test Messaging Variants - Subscription (1 day)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 2: A/B Test 4 Message Variants Across All 5 Touchpoints (1 day)</strong></p>
                     <ul>
-                        <li><strong>Test 4 Message Variants for Subscription Users (subscription_over):</strong>
+                        <li><strong>Test 4 Message Variants for subscription_over Users:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li><strong>Variant A:</strong> "Resume subscription to continue unlimited streaming" (benefit reminder)</li>
                                 <li><strong>Variant B:</strong> "Continue watching [Last Show]" (personalized content hook)</li>
@@ -2067,21 +2078,32 @@
                                 <li><strong>Variant D:</strong> "Don't lose your subscription access" (loss aversion)</li>
                             </ul>
                         </li>
-                        <li><strong>Implementation:</strong> Add resume_subscription_message_variant to Remote Config for all 5 touchpoints</li>
-                        <li><strong>Touchpoint-Specific Copy:</strong> Adapt message variants for each touchpoint type (banner, sheet, popup)</li>
-                        <li><strong>Note:</strong> No pricing changes (just copy testing for subscription users)</li>
+                        <li><strong>Update All 5 Touchpoint Files:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><code>resume_subscription_banner.dart</code> - Add Remote Config variant logic</li>
+                                <li><code>restart_subscription_popup.dart</code> - Add variant messaging</li>
+                                <li><code>floating_banner.dart</code> - Add variant messaging</li>
+                                <li><code>title_page_bottom_sheet.dart</code> - Add variant messaging</li>
+                                <li><code>resume_trial_popup.dart</code> - Add variant messaging</li>
+                            </ul>
+                        </li>
+                        <li><strong>Implementation:</strong> Add resume_subscription_message_variant to Remote Config</li>
+                        <li><strong>Touchpoint-Specific Copy:</strong> Adapt message variants for each touchpoint UI (banner/sheet/popup format)</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 3: Conversion Tracking - Subscription (0.5 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 3: Enhanced Conversion Tracking by Touchpoint (0.5 days)</strong></p>
                     <ul>
-                        <li><strong>Subscription Events:</strong>
+                        <li><strong>Add Comprehensive Analytics to All 5 Touchpoints:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Widget Viewed:</strong> Track message_variant + touchpoint_type for each view</li>
+                                <li><strong>Widget Clicked:</strong> Track conversion intent by variant + touchpoint</li>
                                 <li><strong>subscription_resumed:</strong> Flag revert (no payment, internal backend flag only)</li>
                                 <li><strong>subscription_reactivated:</strong> New mandate registration (actual payment via PSP)</li>
                             </ul>
                         </li>
-                        <li><strong>Full Funnel:</strong> Widget View (touchpoint_type: home_banner/settings_banner/floating_banner/bottom_sheet/popup) → Click → API Call → subscription_resumed/subscription_reactivated</li>
-                        <li><strong>Metrics:</strong> Conversion rate by message variant, touchpoint type, days since expiry, pause source (PSP vs In-app)</li>
+                        <li><strong>Full Funnel:</strong> Widget View → Click → API Call → subscription_resumed/subscription_reactivated</li>
+                        <li><strong>Metrics by:</strong> message_variant, touchpoint_type, days_since_expiry, pause_source</li>
+                        <li><strong>Goal:</strong> Identify best-performing message variant per touchpoint for optimization</li>
                     </ul>
 
                     <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green); margin-top: 15px;">
@@ -2108,7 +2130,7 @@
                         🔗 View Subscription Retention
                     </a>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 3 days (1.5 days missing touchpoints + 1 day messaging variants + 0.5 days conversion tracking)</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 3 days (1.5 days build touchpoints + 1 day A/B test variants + 0.5 days conversion tracking)</p>
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> subscription_resumed_rate, subscription_reactivated_rate, conversion_by_message_variant, conversion_by_touchpoint_type</p>
                 </div>
                 </div>
