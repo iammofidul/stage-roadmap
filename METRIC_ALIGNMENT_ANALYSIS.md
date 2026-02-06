@@ -79,7 +79,7 @@
 
 ### Initiative #5: Binge Leaderboard - Competitive Gamification
 **Aligns With:**
-- ✅ **Habit Moment % ↑** - 7-day streak = consecutive watching habit (PRIMARY)
+- ✅ **Habit Moment % ↑** - 8-day streak = consecutive watching habit (PRIMARY)
 - ✅ **Week 4 Watchers/% ↑** - Leaderboard keeps users engaged beyond Week 4
 - ✅ **Month 0 Watchers/% ↑** - Gamification drives consumption
 - ✅ **Renewal Rate ↑** - Top 500 reward = free subscription = retention
