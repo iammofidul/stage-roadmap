@@ -568,17 +568,42 @@
             margin: 16px 0;
             font-weight: 600;
         }
+
+        .flow-divider {
+            margin: 60px 0 40px;
+            padding: 24px;
+            background: linear-gradient(135deg, #1A1A1A 0%, #171717 100%);
+            border-left: 4px solid #248b3b;
+            border-radius: 8px;
+        }
+
+        .flow-divider h2 {
+            color: #248b3b;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .flow-divider p {
+            color: #BEBEBE;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>PSP/App Pause & Subscription Expired Retention Flow</h1>
-        <p class="subtitle">Two Variants: Trial Paused | Subscription Expired → FOMO Journey → Content Blocked → Resume/Reactivate</p>
+        <h1>Retention Flows: Trial Paused vs Subscription Expired</h1>
+        <p class="subtitle">Two Separate Groups - Each with Complete Flow: Notification → FOMO Journey → Content Blocked → CTA</p>
+
+        <!-- GROUP 1: TRIAL PAUSED/REVOKED FLOW -->
+        <div class="flow-divider">
+            <h2>🔵 Group 1: Trial Paused/Revoked Flow</h2>
+            <p>Notification → FOMO Journey → Content Blocked → Resume/Reactivate Trial</p>
+        </div>
 
         <div class="screens-grid">
-            <!-- Screen 1A: Lock Screen Notification - Trial Paused -->
+            <!-- Screen 1: Lock Screen Notification - Trial Paused -->
             <div class="screen-card">
-                <div class="screen-title">1A. Notification - Trial Paused/Revoked</div>
+                <div class="screen-title">1. Notification - Trial Paused/Revoked</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -604,9 +629,259 @@
                 </div>
             </div>
 
-            <!-- Screen 1B: Lock Screen Notification - Subscription Expired -->
+            <!-- Screen 2: FOMO Journey - Popular + Upcoming -->
             <div class="screen-card">
-                <div class="screen-title">1B. Notification - Subscription Expired</div>
+                <div class="screen-title">2. FOMO Journey - Popular + Upcoming</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="close-btn">✕</div>
+                        </div>
+
+                        <div class="section-title">Popular Shows You Haven't Watched</div>
+
+                        <div class="horizontal-scroll">
+                            <div class="upcoming-card">
+                                <div class="trending-badge">🔥 TRENDING #1</div>
+                                <div class="card-thumbnail">
+                                    🎭
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Bideshi Bahu</div>
+                                    <div class="card-meta">40 Episodes • Drama</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">👥</span>
+                                        <span>2.1M watching</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="upcoming-card">
+                                <div class="trending-badge">⭐ POPULAR</div>
+                                <div class="card-thumbnail">
+                                    😄
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Hasir Raja</div>
+                                    <div class="card-meta">S02 • Comedy</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">⭐</span>
+                                        <span>Most popular</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="upcoming-card">
+                                <div class="trending-badge">📺 POPULAR</div>
+                                <div class="card-thumbnail">
+                                    💕
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Meera</div>
+                                    <div class="card-meta">20 Episodes • Romance</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">👥</span>
+                                        <span>1.8M watching</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="upcoming-card">
+                                <div class="trending-badge">🎬 POPULAR</div>
+                                <div class="card-thumbnail">
+                                    👑
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Rani Rashmoni</div>
+                                    <div class="card-meta">Historical Drama</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">👥</span>
+                                        <span>1.5M watching</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="countdown-badge" style="margin-top: 20px;">⏰ Coming Soon</div>
+
+                        <div class="section-title" style="margin-top: 12px;">Upcoming Shows & Movies</div>
+
+                        <div class="horizontal-scroll">
+                            <div class="upcoming-card">
+                                <div class="upcoming-badge">🔥 TOMORROW 8PM</div>
+                                <div class="card-thumbnail">
+                                    🎭
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Bideshi Bahu - Finale</div>
+                                    <div class="card-meta">Episode 40 • Feb 7</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">👥</span>
+                                        <span>2.8M expected</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="upcoming-card">
+                                <div class="upcoming-badge">📅 NEW SERIES</div>
+                                <div class="card-thumbnail">
+                                    💕
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Meera</div>
+                                    <div class="card-meta">20 Episodes • Romance</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">⭐</span>
+                                        <span>Most anticipated</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="upcoming-card">
+                                <div class="upcoming-badge">🎬 NEW MOVIE</div>
+                                <div class="card-thumbnail">
+                                    🎥
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Golpo Holeo Shotti</div>
+                                    <div class="card-meta">Movie • Feb 8</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">🔥</span>
+                                        <span>Highly awaited</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="upcoming-card">
+                                <div class="upcoming-badge">📺 COMING SOON</div>
+                                <div class="card-thumbnail">
+                                    😄
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Hasir Raja S03</div>
+                                    <div class="card-meta">Comedy • Feb 10</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">⭐</span>
+                                        <span>New season</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flow-indicator" style="margin-top: 20px;">⬇️ User tries to play</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 3: Content Blocked - App Paused -->
+            <div class="screen-card">
+                <div class="screen-title">3. Content Blocked - App Paused</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="close-btn">✕</div>
+                        </div>
+
+                        <div class="blocked-overlay">
+                            <div class="blocked-icon">⏸️</div>
+                            <div class="blocked-title">Trial Paused</div>
+                            <div class="blocked-subtitle">Resume to watch Bideshi Bahu finale and other popular shows</div>
+
+                            <div class="status-badge badge-app">
+                                <span>⚠️</span>
+                                <span>Paused from App</span>
+                            </div>
+                        </div>
+
+                        <div class="cta-button" style="margin-bottom: 16px;">▶️ Resume</div>
+
+                        <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're Missing:</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
+                                • Bideshi Bahu finale (tomorrow)<br>
+                                • Meera premiere (20 episodes)<br>
+                                • Hasir Raja trending episodes<br>
+                                • 100+ other shows
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
+                            Expires on Feb 11 • 5 days left
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 4: Content Blocked - PSP Revoked -->
+            <div class="screen-card">
+                <div class="screen-title">4. Content Blocked - PSP Revoked</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="close-btn">✕</div>
+                        </div>
+
+                        <div class="blocked-overlay">
+                            <div class="blocked-icon">🔒</div>
+                            <div class="blocked-title">Mandate Cancelled</div>
+                            <div class="blocked-subtitle">Payment mandate cancelled from PhonePe. Reactivate to watch Bideshi Bahu and more</div>
+
+                            <div class="status-badge badge-psp">
+                                <span>⛔</span>
+                                <span>Revoked from PSP</span>
+                            </div>
+                        </div>
+
+                        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 14px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);">
+                            <div style="font-size: 14px; margin-bottom: 12px;">Setup payment mandate via PhonePe/Paytm to continue watching</div>
+                            <div style="background: #fff; color: #ef4444; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; font-size: 15px; cursor: pointer;">
+                                🔄 Reactivate Trial
+                            </div>
+                        </div>
+
+                        <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're Missing:</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
+                                • Bideshi Bahu finale (tomorrow)<br>
+                                • Meera premiere (20 episodes)<br>
+                                • Hasir Raja trending episodes<br>
+                                • 100+ other shows
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
+                            Your trial will continue with 5 days remaining
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- GROUP 2: SUBSCRIPTION EXPIRED FLOW -->
+        <div class="flow-divider">
+            <h2>🟠 Group 2: Subscription Expired Flow</h2>
+            <p>Notification → FOMO Journey → Content Blocked → Resume/Reactivate Subscription</p>
+        </div>
+
+        <div class="screens-grid">
+            <!-- Screen 1: Lock Screen Notification - Subscription Expired -->
+            <div class="screen-card">
+                <div class="screen-title">1. Notification - Subscription Expired</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -786,96 +1061,9 @@
                 </div>
             </div>
 
-            <!-- Screen 3: Content Blocked - App Paused -->
+            <!-- Screen 3: Content Blocked - Subscription Expired (App) -->
             <div class="screen-card">
-                <div class="screen-title">3A. Content Blocked - App Paused</div>
-                <div class="phone-frame">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <div class="app-header">
-                            <div class="logo">STAGE</div>
-                            <div class="close-btn">✕</div>
-                        </div>
-
-                        <div class="blocked-overlay">
-                            <div class="blocked-icon">⏸️</div>
-                            <div class="blocked-title">Trial Paused</div>
-                            <div class="blocked-subtitle">Resume to watch Bideshi Bahu finale and other popular shows</div>
-
-                            <div class="status-badge badge-app">
-                                <span>⚠️</span>
-                                <span>Paused from App</span>
-                            </div>
-                        </div>
-
-                        <div class="cta-button" style="margin-bottom: 16px;">▶️ Resume</div>
-
-                        <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
-                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're Missing:</div>
-                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
-                                • Bideshi Bahu finale (tomorrow)<br>
-                                • Meera premiere (20 episodes)<br>
-                                • Hasir Raja trending episodes<br>
-                                • 100+ other shows
-                            </div>
-                        </div>
-
-                        <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
-                            Expires on Feb 11 • 5 days left
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Screen 4: Content Blocked - PSP Revoked -->
-            <div class="screen-card">
-                <div class="screen-title">3B. Content Blocked - PSP Revoked</div>
-                <div class="phone-frame">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <div class="app-header">
-                            <div class="logo">STAGE</div>
-                            <div class="close-btn">✕</div>
-                        </div>
-
-                        <div class="blocked-overlay">
-                            <div class="blocked-icon">🔒</div>
-                            <div class="blocked-title">Mandate Cancelled</div>
-                            <div class="blocked-subtitle">Payment mandate cancelled from PhonePe. Reactivate to watch Bideshi Bahu and more</div>
-
-                            <div class="status-badge badge-psp">
-                                <span>⛔</span>
-                                <span>Revoked from PSP</span>
-                            </div>
-                        </div>
-
-                        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 14px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);">
-                            <div style="font-size: 14px; margin-bottom: 12px;">Setup payment mandate via PhonePe/Paytm to continue watching</div>
-                            <div style="background: #fff; color: #ef4444; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; font-size: 15px; cursor: pointer;">
-                                🔄 Reactivate Trial
-                            </div>
-                        </div>
-
-                        <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
-                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're Missing:</div>
-                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
-                                • Bideshi Bahu finale (tomorrow)<br>
-                                • Meera premiere (20 episodes)<br>
-                                • Hasir Raja trending episodes<br>
-                                • 100+ other shows
-                            </div>
-                        </div>
-
-                        <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
-                            Your trial will continue with 5 days remaining
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Screen 3C: Content Blocked - Subscription Expired (App) -->
-            <div class="screen-card">
-                <div class="screen-title">3C. Content Blocked - Subscription Expired (App)</div>
+                <div class="screen-title">3. Content Blocked - Subscription Expired (App)</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -914,9 +1102,9 @@
                 </div>
             </div>
 
-            <!-- Screen 3D: Content Blocked - Subscription Expired (PSP) -->
+            <!-- Screen 4: Content Blocked - Subscription Expired (PSP) -->
             <div class="screen-card">
-                <div class="screen-title">3D. Content Blocked - Subscription Expired (PSP)</div>
+                <div class="screen-title">4. Content Blocked - Subscription Expired (PSP)</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
