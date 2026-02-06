@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Watch Challenges - Wireframe</title>
+    <title>Show/Movie Community Challenge - Wireframe</title>
     <style>
         * {
             margin: 0;
@@ -99,7 +99,84 @@
             overflow-y: auto;
         }
 
-        .challenge-banner {
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #434343, #282828);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .content-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #FFF;
+        }
+
+        .content-meta {
+            font-size: 13px;
+            color: #BEBEBE;
+            margin-bottom: 16px;
+        }
+
+        .challenge-badge {
+            background: linear-gradient(135deg, #248B3B, #1f7a32);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid rgba(36, 139, 59, 0.4);
+            cursor: pointer;
+        }
+
+        .challenge-badge-icon {
+            font-size: 24px;
+        }
+
+        .challenge-badge-text {
+            flex: 1;
+        }
+
+        .challenge-badge-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .challenge-badge-progress {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .watch-button {
+            background: #FFF;
+            color: #000;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #BEBEBE;
+            line-height: 1.6;
+        }
+
+        .challenge-header {
             background: linear-gradient(135deg, #248B3B, #1f7a32);
             padding: 24px;
             border-radius: 16px;
@@ -164,27 +241,13 @@
             padding: 12px;
             border-radius: 8px;
             font-size: 13px;
-            margin-bottom: 16px;
-        }
-
-        .cta-button {
-            background: #FFF;
-            color: #248B3B;
-            padding: 14px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 16px;
-            text-align: center;
-            cursor: pointer;
-            border: none;
-            width: 100%;
         }
 
         .reward-preview {
             background: rgba(255, 255, 255, 0.05);
             padding: 16px;
             border-radius: 12px;
-            margin-top: 16px;
+            margin-top: 20px;
         }
 
         .reward-title {
@@ -194,17 +257,29 @@
             color: #00e676;
         }
 
-        .reward-list {
+        .reward-description {
             font-size: 13px;
             opacity: 0.9;
             line-height: 1.6;
+        }
+
+        .bts-thumbnail {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(135deg, #434343, #282828);
+            border-radius: 8px;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
         }
 
         .leaderboard {
             background: #1a1a1a;
             border-radius: 12px;
             padding: 16px;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .leaderboard-title {
@@ -249,380 +324,311 @@
             color: #BEBEBE;
         }
 
-        .badge {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            color: #000;
-        }
-
-        .success-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .success-banner {
+            background: linear-gradient(135deg, #00e676, #00d665);
+            padding: 32px 24px;
+            border-radius: 16px;
             text-align: center;
-            padding: 40px 20px;
+            margin-bottom: 24px;
         }
 
         .success-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
+            font-size: 64px;
+            margin-bottom: 16px;
         }
 
         .success-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
-            margin-bottom: 12px;
-            color: #00e676;
+            color: #000;
+            margin-bottom: 8px;
         }
 
         .success-subtitle {
-            font-size: 16px;
-            color: #BEBEBE;
-            margin-bottom: 30px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.7);
         }
 
-        .success-stats {
-            background: rgba(0, 230, 118, 0.1);
-            border: 2px solid #00e676;
+        .bts-card {
+            background: #1a1a1a;
             border-radius: 12px;
             padding: 20px;
-            margin-bottom: 30px;
-            width: 100%;
+            margin-bottom: 20px;
         }
 
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-
-        .stat-label {
-            color: #BEBEBE;
-        }
-
-        .stat-value {
+        .bts-title {
+            font-size: 18px;
             font-weight: 700;
-            color: #00e676;
-        }
-
-        .share-button {
-            background: linear-gradient(135deg, #00e676, #00d665);
-            color: #000;
-            padding: 14px 40px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
             margin-bottom: 12px;
-        }
-
-        .claim-button {
-            background: linear-gradient(135deg, #248B3B, #1f7a32);
             color: #FFF;
-            padding: 14px 40px;
+        }
+
+        .bts-video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #434343, #282828);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .bts-meta {
+            font-size: 13px;
+            color: #BEBEBE;
+            margin-bottom: 12px;
+        }
+
+        .play-button {
+            background: #00e676;
+            color: #000;
+            padding: 14px;
             border-radius: 10px;
             font-weight: 700;
             font-size: 16px;
-            border: none;
-            cursor: pointer;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .notes {
-            background: #171717;
-            border-left: 4px solid #248B3B;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 30px;
+        .implementation-notes {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 50px;
         }
 
         .notes-title {
-            font-size: 1.2em;
+            font-size: 1.5em;
+            color: #EFA73F;
+            margin-bottom: 20px;
             font-weight: 700;
-            margin-bottom: 12px;
+        }
+
+        .note-section {
+            margin-bottom: 20px;
+        }
+
+        .note-section h3 {
             color: #248B3B;
-        }
-
-        .notes ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .notes li {
+            font-size: 1.1em;
             margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
         }
 
-        .notes li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #248B3B;
+        .note-section p, .note-section ul {
+            color: #BEBEBE;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .note-section ul {
+            margin-left: 20px;
+        }
+
+        .note-section li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #00e676;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🌍 Community Watch Challenges - Wireframe</h1>
-        <p class="subtitle">Viral gamification with collective goals and social rewards</p>
+        <h1>🏆 Show/Movie Community Challenge Wireframe</h1>
+        <p class="subtitle">Subscription-Active Users Only | Entry Point: Content Title Screen | Reward: Behind-the-Scenes Content</p>
 
-        <!-- Screen 1: Challenge Home Banner -->
         <div class="group">
-            <h2 class="group-title">Screen 1: Challenge Home Banner</h2>
+            <h2 class="group-title">📱 Screen Flow (3 Screens)</h2>
+
             <div class="screens">
+                <!-- Screen 1: Content Title Screen with Challenge Badge -->
                 <div class="screen">
-                    <h3 class="screen-title">Challenge Banner on Home Screen</h3>
+                    <h3 class="screen-title">Screen 1: Content Title Screen (Entry Point)</h3>
+                    <p style="margin-bottom: 20px; color: #BEBEBE;">File: <code>episode_details.dart</code> | User: subscription_active only</p>
+
                     <div class="phone">
                         <div class="status-bar">
                             <span>9:41</span>
-                            <span>📶 🔋</span>
+                            <span>● ● ● ●</span>
                         </div>
                         <div class="content">
-                            <div class="challenge-banner">
-                                <div class="challenge-title">🌍 Community Challenge</div>
-                                <div class="challenge-subtitle">Let's reach 10 Million watch hours together!</div>
-
-                                <div class="countdown">⏰ 2 days 5 hours remaining</div>
-
-                                <div class="progress-text">
-                                    <span><strong>8.5M hours</strong></span>
-                                    <span>10M hours</span>
-                                </div>
-                                <div class="progress-container">
-                                    <div class="progress-bar" style="width: 85%;">85%</div>
-                                </div>
-
-                                <div class="your-contribution">
-                                    <strong>Your contribution:</strong> 2.5 hours<br>
-                                    <span style="color: #BEBEBE; font-size: 12px;">You're ranked #234 globally 🔥</span>
-                                </div>
-
-                                <button class="cta-button">🎬 Start Watching</button>
-
-                                <div class="reward-preview">
-                                    <div class="reward-title">🎁 Everyone gets if we succeed:</div>
-                                    <div class="reward-list">
-                                        • Exclusive episode unlock<br>
-                                        • 1 week FREE trial extension<br>
-                                        • Behind-the-scenes content<br>
-                                        • Early access to new show
-                                    </div>
-                                </div>
+                            <div class="video-placeholder">
+                                ▶️
                             </div>
 
-                            <div style="text-align: center; margin-top: 20px;">
-                                <h3 style="font-size: 16px; margin-bottom: 12px;">📺 Regular Content Feed Below</h3>
-                                <div style="background: rgba(255,255,255,0.05); height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #666;">
-                                    [Home Feed Content Cards]
+                            <div class="content-title">Broken But Beautiful</div>
+                            <div class="content-meta">2024 • Drama • Romance • Season 3</div>
+
+                            <!-- Challenge Badge Entry Point -->
+                            <div class="challenge-badge">
+                                <div class="challenge-badge-icon">🏆</div>
+                                <div class="challenge-badge-text">
+                                    <div class="challenge-badge-title">Community Challenge Active</div>
+                                    <div class="challenge-badge-progress">850K / 1M views • 85% complete • 3 days left</div>
                                 </div>
+                                <div style="font-size: 20px;">›</div>
+                            </div>
+
+                            <div class="watch-button">
+                                <span>▶</span>
+                                <span>Start Watching</span>
+                            </div>
+
+                            <div class="description">
+                                Veer and Sameera's love story continues in this emotional drama about heartbreak, healing, and second chances. When past wounds resurface, they must decide if love is worth fighting for...
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Screen 2: Challenge Details Screen -->
-        <div class="group">
-            <h2 class="group-title">Screen 2: Challenge Details Screen</h2>
-            <div class="screens">
+                <!-- Screen 2: Challenge Details + Leaderboard -->
                 <div class="screen">
-                    <h3 class="screen-title">Full Challenge Details with Leaderboard</h3>
+                    <h3 class="screen-title">Screen 2: Challenge Details + Leaderboard</h3>
+                    <p style="margin-bottom: 20px; color: #BEBEBE;">Opened when user clicks challenge badge</p>
+
                     <div class="phone">
                         <div class="status-bar">
                             <span>9:41</span>
-                            <span>📶 🔋</span>
+                            <span>● ● ● ●</span>
                         </div>
                         <div class="content">
-                            <div style="text-align: center; margin-bottom: 24px;">
-                                <div style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">🌍 Community Challenge</div>
-                                <div style="color: #BEBEBE;">Watch 10M hours together this week!</div>
+                            <div class="challenge-header">
+                                <div class="challenge-title">🏆 Broken But Beautiful Challenge</div>
+                                <div class="challenge-subtitle">Help us reach 1M views to unlock exclusive behind-the-scenes content!</div>
+
+                                <div class="progress-container">
+                                    <div class="progress-bar" style="width: 85%;">85%</div>
+                                </div>
+                                <div class="progress-text">
+                                    <span>850K views</span>
+                                    <span>1M target</span>
+                                </div>
+
+                                <div class="countdown">⏰ 3 days remaining</div>
+
+                                <div class="your-contribution">
+                                    <strong>Your contribution:</strong> 5 episodes watched<br>
+                                    <span>You're ranked #234 globally 🔥</span>
+                                </div>
                             </div>
 
-                            <div class="challenge-banner" style="margin-bottom: 24px;">
-                                <div class="countdown" style="margin-bottom: 16px;">⏰ 2 days 5 hours remaining</div>
-
-                                <div class="progress-text">
-                                    <span><strong>8.5M / 10M hours</strong></span>
-                                    <span style="color: #00e676; font-weight: 700;">85%</span>
+                            <div class="reward-preview">
+                                <div class="reward-title">🎁 Unlock Behind-the-Scenes Content</div>
+                                <div class="reward-description">
+                                    When we reach 1M views, ALL subscription_active users unlock:
                                 </div>
-                                <div class="progress-container">
-                                    <div class="progress-bar" style="width: 85%;">We're almost there!</div>
-                                </div>
-
-                                <div style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; margin-top: 12px; font-size: 13px;">
-                                    <strong>📊 Your Stats:</strong><br>
-                                    • Watch time: 2.5 hours<br>
-                                    • Global rank: #234<br>
-                                    • Episodes watched: 15
+                                <div class="bts-thumbnail">🎬</div>
+                                <div style="margin-top: 12px; font-size: 14px; font-weight: 600;">
+                                    "Making of Broken But Beautiful"<br>
+                                    <span style="font-size: 12px; color: #BEBEBE;">15 min • Cast interviews, bloopers, deleted scenes</span>
                                 </div>
                             </div>
 
                             <div class="leaderboard">
-                                <div class="leaderboard-title">🏆 Top Contributors</div>
+                                <div class="leaderboard-title">👑 Top Contributors</div>
 
                                 <div class="leaderboard-item">
                                     <div class="rank gold">#1</div>
                                     <div class="user-info">
-                                        <div class="username">Rajesh K.</div>
-                                        <div class="contribution">12.5 hours watched</div>
+                                        <div class="username">Priya M.</div>
+                                        <div class="contribution">32 episodes watched</div>
                                     </div>
-                                    <div class="badge">🏆 Champion</div>
                                 </div>
 
                                 <div class="leaderboard-item">
                                     <div class="rank silver">#2</div>
                                     <div class="user-info">
-                                        <div class="username">Priya M.</div>
-                                        <div class="contribution">11.2 hours watched</div>
+                                        <div class="username">Rahul S.</div>
+                                        <div class="contribution">28 episodes watched</div>
                                     </div>
                                 </div>
 
                                 <div class="leaderboard-item">
                                     <div class="rank bronze">#3</div>
                                     <div class="user-info">
-                                        <div class="username">Amit S.</div>
-                                        <div class="contribution">10.8 hours watched</div>
+                                        <div class="username">Neha K.</div>
+                                        <div class="contribution">24 episodes watched</div>
                                     </div>
                                 </div>
 
                                 <div class="leaderboard-item">
                                     <div class="rank">#4</div>
                                     <div class="user-info">
-                                        <div class="username">Sneha R.</div>
-                                        <div class="contribution">9.5 hours watched</div>
+                                        <div class="username">Amit P.</div>
+                                        <div class="contribution">21 episodes watched</div>
                                     </div>
-                                </div>
-
-                                <div class="leaderboard-item">
-                                    <div class="rank">#5</div>
-                                    <div class="user-info">
-                                        <div class="username">Arjun P.</div>
-                                        <div class="contribution">8.9 hours watched</div>
-                                    </div>
-                                </div>
-
-                                <div style="text-align: center; margin-top: 16px; color: #BEBEBE; font-size: 13px;">
-                                    • • •
                                 </div>
 
                                 <div class="leaderboard-item" style="border: 2px solid #248B3B;">
                                     <div class="rank">#234</div>
                                     <div class="user-info">
                                         <div class="username">You</div>
-                                        <div class="contribution">2.5 hours watched</div>
+                                        <div class="contribution">5 episodes watched</div>
                                     </div>
                                 </div>
                             </div>
-
-                            <button class="cta-button" style="margin-bottom: 16px;">🎬 Watch More to Climb Ranks</button>
-                            <button class="share-button" style="width: 100%;">📤 Share with Friends</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Screen 3: Challenge Success Screen -->
-        <div class="group">
-            <h2 class="group-title">Screen 3: Challenge Success Screen</h2>
-            <div class="screens">
+                <!-- Screen 3: Behind-the-Scenes Unlock Success -->
                 <div class="screen">
-                    <h3 class="screen-title">Goal Achieved - Collective Celebration</h3>
+                    <h3 class="screen-title">Screen 3: Behind-the-Scenes Content Unlocked</h3>
+                    <p style="margin-bottom: 20px; color: #BEBEBE;">Shown when challenge goal is reached</p>
+
                     <div class="phone">
                         <div class="status-bar">
                             <span>9:41</span>
-                            <span>📶 🔋</span>
+                            <span>● ● ● ●</span>
                         </div>
                         <div class="content">
-                            <div class="success-screen">
+                            <div class="success-banner">
                                 <div class="success-icon">🎉</div>
-                                <div class="success-title">WE DID IT!</div>
-                                <div class="success-subtitle">The STAGE community crushed this week's challenge!</div>
-
-                                <div class="success-stats">
-                                    <div class="stat-row">
-                                        <span class="stat-label">Goal:</span>
-                                        <span class="stat-value">10M hours</span>
-                                    </div>
-                                    <div class="stat-row">
-                                        <span class="stat-label">Achieved:</span>
-                                        <span class="stat-value">10.3M hours (103%)</span>
-                                    </div>
-                                    <div class="stat-row">
-                                        <span class="stat-label">Total Contributors:</span>
-                                        <span class="stat-value">127,543 users</span>
-                                    </div>
-                                    <div class="stat-row">
-                                        <span class="stat-label">Your Contribution:</span>
-                                        <span class="stat-value">2.5 hours (#234)</span>
-                                    </div>
-                                </div>
-
-                                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin-bottom: 30px; width: 100%;">
-                                    <div style="font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #00e676;">🎁 Your Rewards Unlocked:</div>
-                                    <div style="text-align: left; font-size: 14px; line-height: 1.8;">
-                                        ✓ Exclusive episode: "Dark Beginnings - E01"<br>
-                                        ✓ 1 week FREE trial extension<br>
-                                        ✓ Behind-the-scenes blooper reel<br>
-                                        ✓ Early access to "Shadow Empire" (Feb 15)
-                                    </div>
-                                </div>
-
-                                <button class="share-button">📤 Share Your Victory</button>
-                                <button class="claim-button">🎁 Claim Rewards</button>
-
-                                <div style="margin-top: 20px; font-size: 13px; color: #BEBEBE;">
-                                    Next challenge starts in 2 days!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Screen 4: Share Screen -->
-        <div class="group">
-            <h2 class="group-title">Screen 4: Social Share Screen</h2>
-            <div class="screens">
-                <div class="screen">
-                    <h3 class="screen-title">Viral Share Card Generation</h3>
-                    <div class="phone">
-                        <div class="status-bar">
-                            <span>9:41</span>
-                            <span>📶 🔋</span>
-                        </div>
-                        <div class="content">
-                            <div style="text-align: center; margin-bottom: 24px;">
-                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">📤 Share Your Progress</div>
-                                <div style="color: #BEBEBE; font-size: 14px;">Help us reach the goal together!</div>
+                                <div class="success-title">Challenge Complete!</div>
+                                <div class="success-subtitle">1.02M views reached • Goal unlocked</div>
                             </div>
 
-                            <div style="background: linear-gradient(135deg, #248B3B, #1f7a32); padding: 40px 24px; border-radius: 16px; text-align: center; margin-bottom: 24px; border: 3px solid rgba(0, 230, 118, 0.3);">
-                                <div style="font-size: 16px; margin-bottom: 16px; opacity: 0.9;">🌍 STAGE Community Challenge</div>
-                                <div style="font-size: 32px; font-weight: 800; margin-bottom: 8px;">I'm #234!</div>
-                                <div style="font-size: 18px; margin-bottom: 24px;">2.5 hours contributed 🔥</div>
+                            <div class="bts-card">
+                                <div class="bts-title">🎬 Behind-the-Scenes Unlocked</div>
 
-                                <div style="background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; margin-bottom: 20px;">
-                                    <div style="font-size: 14px; margin-bottom: 8px; opacity: 0.9;">Community Progress</div>
-                                    <div style="font-size: 28px; font-weight: 800; color: #00e676;">85%</div>
-                                    <div style="font-size: 13px; opacity: 0.8;">8.5M / 10M hours</div>
+                                <div class="bts-video-thumbnail">▶️</div>
+
+                                <div style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">
+                                    Making of Broken But Beautiful
                                 </div>
 
-                                <div style="font-size: 14px; font-weight: 600;">Help us reach 10M hours!</div>
-                                <div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">Join @ STAGE App</div>
+                                <div class="bts-meta">
+                                    15 min • Cast interviews, bloopers & deleted scenes<br>
+                                    Unlocked by the STAGE community 🏆
+                                </div>
+
+                                <div class="play-button">
+                                    <span>▶</span>
+                                    <span>Watch Behind-the-Scenes</span>
+                                </div>
                             </div>
 
-                            <button class="share-button" style="width: 100%; margin-bottom: 12px;">📱 Share on WhatsApp</button>
-                            <button style="background: linear-gradient(135deg, #E1306C, #C13584); color: #FFF; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 16px; border: none; width: 100%; margin-bottom: 12px;">📷 Share on Instagram Story</button>
-                            <button style="background: rgba(255,255,255,0.1); color: #FFF; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 16px; border: none; width: 100%;">📋 Copy Link</button>
+                            <div style="background: rgba(36, 139, 59, 0.1); padding: 16px; border-radius: 12px; border-left: 3px solid #248B3B;">
+                                <strong style="color: #248B3B;">Thank you for participating!</strong><br>
+                                <span style="font-size: 13px; color: #BEBEBE;">
+                                    Your contribution helped the community reach 1.02M views. This exclusive BTS content is now permanently available in the show's episode list.
+                                </span>
+                            </div>
+
+                            <div style="margin-top: 20px; text-align: center; font-size: 13px; color: #BEBEBE;">
+                                Your final ranking: <strong style="color: #FFF;">#234 globally</strong><br>
+                                Total contribution: <strong style="color: #FFF;">5 episodes watched</strong>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -630,29 +636,81 @@
         </div>
 
         <!-- Implementation Notes -->
-        <div class="notes">
-            <div class="notes-title">📝 Implementation Notes</div>
-            <ul>
-                <li><strong>Challenge Types:</strong> Watch Hours, Episode Count, Genre Focus, Content Launch targets</li>
-                <li><strong>Real-time Progress:</strong> Updates every 5 minutes (aggregate user watch time)</li>
-                <li><strong>Leaderboard:</strong> Top 100 contributors displayed, personal rank always visible</li>
-                <li><strong>Badges:</strong> Top 10 get "Community Champion" badge for the week</li>
-                <li><strong>Rewards Distribution:</strong> Automatic unlock if goal reached (content unlock, trial extension, exclusive episodes)</li>
-                <li><strong>Challenge Duration:</strong> Weekly cycle (7 days), resets every Monday</li>
-                <li><strong>A/B Testing:</strong> Goal difficulty (easy 90% / medium 70% / hard 50%), reward types, duration variants</li>
-                <li><strong>Social Sharing:</strong> Generate shareable image card with rank and progress</li>
-                <li><strong>Analytics Events:</strong> challenge_viewed, challenge_contribution_tracked, challenge_completed, challenge_shared, challenge_reward_claimed</li>
-                <li><strong>Push Notifications:</strong>
-                    <ul style="margin-left: 20px; margin-top: 8px;">
-                        <li>"We're at 85%! Watch now to help reach the goal 🔥"</li>
-                        <li>"Only 6 hours left! Community needs your help to reach 10M hours"</li>
-                        <li>"🎉 WE DID IT! Claim your rewards now"</li>
-                    </ul>
-                </li>
-                <li><strong>Viral Mechanics:</strong> Users recruit friends via share, showing personal contribution creates social proof</li>
-                <li><strong>Variable Rewards:</strong> Uncertainty of success creates excitement (like raid boss in games)</li>
-                <li><strong>Weekly Reset:</strong> Fresh challenge every week maintains novelty and re-engagement</li>
-            </ul>
+        <div class="implementation-notes">
+            <h2 class="notes-title">📝 Implementation Notes</h2>
+
+            <div class="note-section">
+                <h3>1. Entry Point: Content Title Screen (episode_details.dart)</h3>
+                <ul>
+                    <li><strong>Location:</strong> Small challenge badge below content title, above "Start Watching" button</li>
+                    <li><strong>Visibility Check:</strong> Use <code>SubscriptionStatusUtil.isSubscriptionActive()</code> - Only show to subscription_active users</li>
+                    <li><strong>Badge Content:</strong> Show progress (850K / 1M views), completion percentage (85%), and time remaining (3 days)</li>
+                    <li><strong>Click Action:</strong> Opens full challenge details as a bottom sheet or new screen</li>
+                    <li><strong>Animation:</strong> Subtle pulse effect on badge to draw attention without being intrusive</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>2. Challenge Configuration (Admin-Side)</h3>
+                <ul>
+                    <li><strong>Challenge Type:</strong> Show/Movie-specific (link challenge to specific content slug)</li>
+                    <li><strong>Goal Setting:</strong> Admin sets view target (e.g., 1M views) and duration (e.g., 7 days)</li>
+                    <li><strong>BTS Content Link:</strong> Admin uploads/links behind-the-scenes video that unlocks upon completion</li>
+                    <li><strong>Progress Tracking:</strong> Real-time view count aggregation for the specific show/movie</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>3. Behind-the-Scenes Reward System</h3>
+                <ul>
+                    <li><strong>Unlock Trigger:</strong> When view count >= target, automatically unlock BTS content</li>
+                    <li><strong>BTS Content Types:</strong> Blooper reels, cast interviews, making-of documentaries, deleted scenes</li>
+                    <li><strong>Access:</strong> BTS content appears as a new episode in the show's episode list</li>
+                    <li><strong>Notification:</strong> Push notification to all subscription_active users: "Challenge Complete! Unlock BTS content now 🎉"</li>
+                    <li><strong>Permanence:</strong> Once unlocked, BTS content remains accessible to all subscription_active users</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>4. Leaderboard Implementation</h3>
+                <ul>
+                    <li><strong>Ranking Logic:</strong> Rank users by number of episodes watched for that specific show/movie</li>
+                    <li><strong>Display:</strong> Show top 50 contributors with gold/silver/bronze badges for top 3</li>
+                    <li><strong>User Position:</strong> Highlight user's own ranking (e.g., #234) with green border</li>
+                    <li><strong>Real-time Updates:</strong> Refresh leaderboard every 5 minutes or on pull-to-refresh</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>5. Analytics Events</h3>
+                <ul>
+                    <li><code>show_challenge_badge_viewed</code> - Badge displayed on episode_details.dart</li>
+                    <li><code>show_challenge_clicked</code> - User clicks badge to view details</li>
+                    <li><code>show_challenge_contribution_tracked</code> - Episode view added to challenge goal</li>
+                    <li><code>show_challenge_leaderboard_viewed</code> - User views leaderboard</li>
+                    <li><code>show_challenge_completed</code> - Challenge goal reached</li>
+                    <li><code>bts_content_unlocked</code> - BTS content becomes available</li>
+                    <li><code>bts_content_played</code> - User plays BTS content</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>6. User Restriction (Subscription-Active Only)</h3>
+                <ul>
+                    <li><strong>Check Method:</strong> <code>SubscriptionStatusUtil.isSubscriptionActive()</code></li>
+                    <li><strong>Badge Visibility:</strong> Only show challenge badge if user is subscription_active</li>
+                    <li><strong>Contribution Tracking:</strong> Only count views from subscription_active users toward goal</li>
+                    <li><strong>BTS Access:</strong> Only subscription_active users can access unlocked BTS content</li>
+                    <li><strong>Upgrade Prompt:</strong> Trial users see "Subscribe to join challenges" CTA instead of badge</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>7. Example Challenges</h3>
+                <p><strong>Challenge 1:</strong> "Broken But Beautiful" - Reach 1M views → Unlock 15-min cast interview & bloopers</p>
+                <p><strong>Challenge 2:</strong> "Dark Nights" - Reach 500K views → Unlock 20-min "Making of Dark Nights" documentary</p>
+                <p><strong>Challenge 3:</strong> "Crime Patrol S2" - Reach 2M views → Unlock deleted scenes & alternate endings (10 min)</p>
+            </div>
         </div>
     </div>
 </body>
