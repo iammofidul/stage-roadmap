@@ -124,6 +124,83 @@
             justify-content: center;
             cursor: pointer;
             font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: #3E3E3E;
+            transform: scale(1.05);
+        }
+
+        .icon-btn.mood-btn {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            box-shadow: 0 2px 8px rgba(36, 139, 59, 0.4);
+            position: relative;
+        }
+
+        .icon-btn.mood-btn::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
+            background: #EFA73F;
+            border-radius: 50%;
+            border: 2px solid #0f0f0f;
+        }
+
+        .compact-mood-row {
+            background: #292929;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .compact-mood-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .compact-mood-emoji {
+            font-size: 32px;
+        }
+
+        .compact-mood-text {
+            flex: 1;
+        }
+
+        .compact-mood-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .compact-mood-subtitle {
+            font-size: 11px;
+            color: #737373;
+        }
+
+        .explore-btn {
+            background: #248b3b;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .explore-btn:hover {
+            background: #1d6e2f;
+            transform: translateX(2px);
         }
 
         .mood-card {
@@ -146,14 +223,14 @@
         .mood-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 12px;
         }
 
         .mood-option {
             background: #292929;
             border: 2px solid #3E3E3E;
             border-radius: 12px;
-            padding: 16px 12px;
+            padding: 14px 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
@@ -572,52 +649,35 @@
                 <li><strong>Impact:</strong> +45% Content Discovery, +18pp Microdrama Start Rate</li>
                 <li><strong>Core Innovation:</strong> Beyond genre → Emotional state matching = 2x higher start rate</li>
                 <li><strong>6 Moods:</strong> Happy 😊 | Sad 😢 | Stressed 😰 | Bored 😐 | Romantic 💕 | Excited 🔥</li>
+                <li><strong>Entry Points:</strong> Mood icon (🎭) in header with badge notification + Compact row on home with "Explore" CTA</li>
             </ul>
         </div>
 
         <div class="screens-grid">
-            <!-- Screen 1: Home with Mood Entry Point -->
+            <!-- Screen 1: Home with Compact Entry Point -->
             <div class="screen-card">
-                <div class="screen-title">1. Home Screen - Mood Entry Point</div>
+                <div class="screen-title">1. Home Screen - Compact Entry Point</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
                         <div class="app-header">
                             <div class="logo">STAGE</div>
                             <div class="header-icons">
+                                <div class="icon-btn mood-btn">🎭</div>
                                 <div class="icon-btn">🔍</div>
                                 <div class="icon-btn">👤</div>
                             </div>
                         </div>
 
-                        <div class="mood-card">
-                            <div class="mood-question">How are you feeling right now? 🎭</div>
-                            <div class="mood-grid">
-                                <div class="mood-option">
-                                    <div class="mood-emoji">😊</div>
-                                    <div class="mood-label">Happy</div>
-                                </div>
-                                <div class="mood-option">
-                                    <div class="mood-emoji">😢</div>
-                                    <div class="mood-label">Sad</div>
-                                </div>
-                                <div class="mood-option active">
-                                    <div class="mood-emoji">😰</div>
-                                    <div class="mood-label">Stressed</div>
-                                </div>
-                                <div class="mood-option">
-                                    <div class="mood-emoji">😐</div>
-                                    <div class="mood-label">Bored</div>
-                                </div>
-                                <div class="mood-option">
-                                    <div class="mood-emoji">💕</div>
-                                    <div class="mood-label">Romantic</div>
-                                </div>
-                                <div class="mood-option">
-                                    <div class="mood-emoji">🔥</div>
-                                    <div class="mood-label">Excited</div>
+                        <div class="compact-mood-row">
+                            <div class="compact-mood-left">
+                                <div class="compact-mood-emoji">🎭</div>
+                                <div class="compact-mood-text">
+                                    <div class="compact-mood-title">AI Mood Curator</div>
+                                    <div class="compact-mood-subtitle">Find perfect shows for how you feel</div>
                                 </div>
                             </div>
+                            <div class="explore-btn">Explore →</div>
                         </div>
 
                         <div class="content-row">
@@ -630,6 +690,20 @@
                                 <div class="content-info">
                                     <div class="content-title">Bideshi Bahu</div>
                                     <div class="content-meta">Episode 7 • 15 min left</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-row">
+                            <div class="row-header">
+                                <div class="row-title">Trending Now</div>
+                                <div class="view-all">View All</div>
+                            </div>
+                            <div class="content-card">
+                                <div class="content-thumbnail">🔥</div>
+                                <div class="content-info">
+                                    <div class="content-title">Love & Drama</div>
+                                    <div class="content-meta">Drama • 16 episodes</div>
                                 </div>
                             </div>
                         </div>
@@ -656,9 +730,65 @@
                 </div>
             </div>
 
-            <!-- Screen 2: Mood-Based Recommendations -->
+            <!-- Screen 2: Full Mood Selector -->
             <div class="screen-card">
-                <div class="screen-title">2. AI-Curated Recommendations</div>
+                <div class="screen-title">2. Full Mood Selector Modal</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <div style="font-size: 22px; font-weight: 700; margin-bottom: 8px;">How are you feeling? 🎭</div>
+                            <div style="font-size: 13px; color: #BEBEBE;">We'll curate perfect shows for your mood</div>
+                        </div>
+
+                        <div class="mood-grid">
+                            <div class="mood-option">
+                                <div class="mood-emoji">😊</div>
+                                <div class="mood-label">Happy</div>
+                            </div>
+                            <div class="mood-option">
+                                <div class="mood-emoji">😢</div>
+                                <div class="mood-label">Sad</div>
+                            </div>
+                            <div class="mood-option active">
+                                <div class="mood-emoji">😰</div>
+                                <div class="mood-label">Stressed</div>
+                            </div>
+                            <div class="mood-option">
+                                <div class="mood-emoji">😐</div>
+                                <div class="mood-label">Bored</div>
+                            </div>
+                            <div class="mood-option">
+                                <div class="mood-emoji">💕</div>
+                                <div class="mood-label">Romantic</div>
+                            </div>
+                            <div class="mood-option">
+                                <div class="mood-emoji">🔥</div>
+                                <div class="mood-label">Excited</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 24px; padding: 16px; background: rgba(36, 139, 59, 0.15); border-radius: 12px; border: 2px solid rgba(36, 139, 59, 0.3);">
+                            <div style="font-size: 13px; color: #BEBEBE; text-align: center; line-height: 1.6;">
+                                💡 <strong style="color: #248b3b;">AI learns from you:</strong><br>
+                                Your mood + viewing history = perfect match
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; text-align: center;">
+                            <div style="display: inline-block; background: #292929; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                                <span style="font-size: 12px; color: #BEBEBE;">Skip for now</span>
+                            </div>
+                        </div>
+
+                        <div class="flow-indicator">⬇️ Select mood to see recommendations</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 3: Mood-Based Recommendations -->
+            <div class="screen-card">
+                <div class="screen-title">3. AI-Curated Recommendations</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -709,9 +839,9 @@
                 </div>
             </div>
 
-            <!-- Screen 3: Push Notification -->
+            <!-- Screen 4: Push Notification -->
             <div class="screen-card">
-                <div class="screen-title">3. Mood-Based Push Notification</div>
+                <div class="screen-title">4. Mood-Based Push Notification</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen" style="padding-top: 60px;">
@@ -753,9 +883,9 @@
                 </div>
             </div>
 
-            <!-- Screen 4: Viral Share Card -->
+            <!-- Screen 5: Viral Share Card -->
             <div class="screen-card">
-                <div class="screen-title">4. Social Sharing - Viral Moment</div>
+                <div class="screen-title">5. Social Sharing - Viral Moment</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -802,9 +932,9 @@
                 </div>
             </div>
 
-            <!-- Screen 5: All Moods View -->
+            <!-- Screen 6: All Moods View -->
             <div class="screen-card">
-                <div class="screen-title">5. All Moods - Quick Switcher</div>
+                <div class="screen-title">6. All Moods - Quick Switcher</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -880,11 +1010,12 @@
         <div class="feature-description">
             <h3>User Flow Summary</h3>
             <ul>
-                <li><strong>Step 1:</strong> User opens app → Sees prominent mood selector on home screen</li>
-                <li><strong>Step 2:</strong> Selects current mood (Happy/Sad/Stressed/Bored/Romantic/Excited)</li>
-                <li><strong>Step 3:</strong> AI generates personalized recommendations based on mood + viewing history</li>
-                <li><strong>Step 4:</strong> User sees hero card with "AI TOP PICK" and explanation: "Why this helps"</li>
-                <li><strong>Step 5:</strong> One-tap "Watch Now" → Instant playback</li>
+                <li><strong>Step 1:</strong> User opens app → Sees mood icon (🎭) in header near search + compact mood row</li>
+                <li><strong>Step 2:</strong> Taps mood icon or "Explore" button → Opens full mood selector modal</li>
+                <li><strong>Step 3:</strong> Selects current mood (Happy/Sad/Stressed/Bored/Romantic/Excited)</li>
+                <li><strong>Step 4:</strong> AI generates personalized recommendations based on mood + viewing history</li>
+                <li><strong>Step 5:</strong> User sees hero card with "AI TOP PICK" and explanation: "Why this helps"</li>
+                <li><strong>Step 6:</strong> One-tap "Watch Now" → Instant playback</li>
                 <li><strong>Alternative Flow:</strong> Push notification at 6 PM → "Feeling stressed? 5 shows to help" → Deep link to mood page</li>
                 <li><strong>Viral Moment:</strong> Share "STAGE AI knows me!" with recommendations screenshot</li>
             </ul>
