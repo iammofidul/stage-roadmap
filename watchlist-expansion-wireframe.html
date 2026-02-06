@@ -640,8 +640,8 @@
                             <div class="notif-icon">📺</div>
                             <div class="notif-content">
                                 <div class="notif-app">STAGE</div>
-                                <div class="notif-title">Your My List: 3 shows have new content</div>
-                                <div class="notif-body">Bideshi Bahu, City Dreams, and Drama Series are ready to watch!</div>
+                                <div class="notif-title">Your My List: You have 3 shows/movies/microdrama don't forget to watch</div>
+                                <div class="notif-body">Bideshi Bahu, City Dreams, and Husband on Sale are waiting for you!</div>
                             </div>
                         </div>
                         <div class="notif-actions">
@@ -653,48 +653,15 @@
                 <div class="feature-description" style="margin: 15px 0;">
                     <h3 style="font-size: 14px;">User Flow</h3>
                     <ul style="font-size: 12px;">
-                        <li>User has content in My List (shows/series/movies)</li>
-                        <li>New content becomes available for those shows</li>
+                        <li>User has content in My List (shows/series/movies/microdramas)</li>
+                        <li>New content becomes available for those items</li>
                         <li>Weekly (every Monday) digest notification sent</li>
-                        <li>Shows summary: "3 shows have new content"</li>
-                        <li>Lists show names without episode numbers (some shows release all at once)</li>
+                        <li>Shows summary: "You have 3 shows/movies/microdrama don't forget to watch"</li>
+                        <li>Lists content names to remind users</li>
                         <li>User taps "View My List" → Opens My List screen</li>
                     </ul>
                 </div>
             </div>
-        </div>
-
-        <div class="feature-description">
-            <h3>Development Focus: What Needs to be Built</h3>
-            <ul>
-                <li><strong>My List Row Widget:</strong> New home screen component showing watchlisted content (Feature 1)</li>
-                <li><strong>48h Reminder System:</strong> Background service tracking unwatched content and sending notifications (Feature 4)</li>
-                <li><strong>Weekly Digest System:</strong> Cron job checking for new content and sending weekly summaries (Feature 5)</li>
-                <li><strong>Notification Deep Links:</strong> Direct navigation from notifications to player/My List screen</li>
-                <li><strong>Analytics Events:</strong> Track notification impressions, taps, dismissals</li>
-            </ul>
-        </div>
-
-        <div class="feature-description">
-            <h3>Technical Requirements</h3>
-            <ul>
-                <li>My List row widget on home screen (always visible if list has items)</li>
-                <li>Background notification scheduler for 48h reminders</li>
-                <li>Weekly cron job for digest generation (Mondays)</li>
-                <li>Push notification setup (Firebase Cloud Messaging)</li>
-                <li>Deep linking configuration for notification actions</li>
-                <li>Local storage for tracking notification state</li>
-                <li>Analytics tracking for notification engagement</li>
-            </ul>
-        </div>
-
-        <div class="feature-description">
-            <h3>Expected Impact</h3>
-            <ul>
-                <li><strong>Watchlist Adds:</strong> 2.91% → 8% (+5pp, +3,400 adds/month)</li>
-                <li><strong>Watchlist → Playback:</strong> 40% → 60% (+20pp from notifications)</li>
-                <li><strong>Goal:</strong> Increase content investment and reduce churn by keeping users engaged with their watchlist</li>
-            </ul>
         </div>
     </div>
 
