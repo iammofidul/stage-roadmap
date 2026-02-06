@@ -231,16 +231,45 @@
             background: #171717;
             border-radius: 14px;
             overflow: hidden;
-            margin-bottom: 16px;
             border: 1px solid #3f3f3f;
             position: relative;
             cursor: pointer;
             transition: all 0.3s;
+            flex-shrink: 0;
+            width: 220px;
         }
 
         .upcoming-card:hover {
             border-color: #248b3b;
             transform: translateY(-2px);
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+            scrollbar-width: thin;
+            scrollbar-color: #3E3E3E #1A1A1A;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background: #1A1A1A;
+            border-radius: 4px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background: #3E3E3E;
+            border-radius: 4px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-thumb:hover {
+            background: #4E4E4E;
         }
 
         .upcoming-badge {
@@ -268,12 +297,12 @@
         }
 
         .card-thumbnail {
-            height: 160px;
+            height: 140px;
             background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 56px;
+            font-size: 48px;
             position: relative;
         }
 
@@ -290,19 +319,20 @@
         }
 
         .card-info {
-            padding: 16px;
+            padding: 12px;
         }
 
         .card-title {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            line-height: 1.3;
         }
 
         .card-meta {
-            font-size: 12px;
+            font-size: 11px;
             color: #737373;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .social-proof {
@@ -672,41 +702,70 @@
                         <div class="fomo-heading">Popular Shows<br>You Haven't Watched</div>
                         <div class="fomo-subheading">Everyone's watching these. Don't miss out!</div>
 
-                        <div class="upcoming-card">
-                            <div class="trending-badge">🔥 TRENDING #1</div>
-                            <div class="card-thumbnail">
-                                🎭
-                                <div class="play-overlay">▶️</div>
-                            </div>
-                            <div class="card-info">
-                                <div class="card-title">Bideshi Bahu</div>
-                                <div class="card-meta">40 Episodes • Drama</div>
-                                <div class="social-proof">
-                                    <span class="social-icon">👥</span>
-                                    <span>2.1M watching now</span>
+                        <div class="horizontal-scroll">
+                            <div class="upcoming-card">
+                                <div class="trending-badge">🔥 TRENDING #1</div>
+                                <div class="card-thumbnail">
+                                    🎭
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Bideshi Bahu</div>
+                                    <div class="card-meta">40 Episodes • Drama</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">👥</span>
+                                        <span>2.1M watching</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="upcoming-card">
-                            <div class="trending-badge">⭐ POPULAR</div>
-                            <div class="card-thumbnail">
-                                😄
-                                <div class="play-overlay">▶️</div>
-                            </div>
-                            <div class="card-info">
-                                <div class="card-title">Hasir Raja</div>
-                                <div class="card-meta">S02 • Comedy</div>
-                                <div class="social-proof">
-                                    <span class="social-icon">💬</span>
-                                    <span>45K comments today</span>
+                            <div class="upcoming-card">
+                                <div class="trending-badge">⭐ POPULAR</div>
+                                <div class="card-thumbnail">
+                                    😄
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Hasir Raja</div>
+                                    <div class="card-meta">S02 • Comedy</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">⭐</span>
+                                        <span>Most popular</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="bottom-cta-container">
-                            <div class="cta-button">👀 See More Shows</div>
-                            <div class="cta-subtitle">Scroll to see what you're missing</div>
+                            <div class="upcoming-card">
+                                <div class="trending-badge">📺 POPULAR</div>
+                                <div class="card-thumbnail">
+                                    💕
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Meera</div>
+                                    <div class="card-meta">20 Episodes • Romance</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">👥</span>
+                                        <span>1.8M watching</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="upcoming-card">
+                                <div class="trending-badge">🎬 POPULAR</div>
+                                <div class="card-thumbnail">
+                                    👑
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Rani Rashmoni</div>
+                                    <div class="card-meta">Historical Drama</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">👥</span>
+                                        <span>1.5M watching</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -728,34 +787,68 @@
                         <div class="fomo-heading">Upcoming Shows<br>& Movies</div>
                         <div class="fomo-subheading">New episodes and movies releasing soon</div>
 
-                        <div class="upcoming-card">
-                            <div class="upcoming-badge">🔥 TOMORROW 8PM</div>
-                            <div class="card-thumbnail">
-                                🎭
-                                <div class="play-overlay">▶️</div>
-                            </div>
-                            <div class="card-info">
-                                <div class="card-title">Bideshi Bahu - Season Finale</div>
-                                <div class="card-meta">Episode 40 • Feb 7, 8:00 PM</div>
-                                <div class="social-proof">
-                                    <span class="social-icon">👥</span>
-                                    <span>2.8M viewers expected</span>
+                        <div class="horizontal-scroll">
+                            <div class="upcoming-card">
+                                <div class="upcoming-badge">🔥 TOMORROW 8PM</div>
+                                <div class="card-thumbnail">
+                                    🎭
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Bideshi Bahu - Finale</div>
+                                    <div class="card-meta">Episode 40 • Feb 7</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">👥</span>
+                                        <span>2.8M expected</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="upcoming-card">
-                            <div class="upcoming-badge">📅 NEW SERIES</div>
-                            <div class="card-thumbnail">
-                                💕
-                                <div class="play-overlay">▶️</div>
+                            <div class="upcoming-card">
+                                <div class="upcoming-badge">📅 NEW SERIES</div>
+                                <div class="card-thumbnail">
+                                    💕
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Meera</div>
+                                    <div class="card-meta">20 Episodes • Romance</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">⭐</span>
+                                        <span>Most anticipated</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-info">
-                                <div class="card-title">Meera</div>
-                                <div class="card-meta">20 Episodes • Romance Drama</div>
-                                <div class="social-proof">
-                                    <span class="social-icon">⭐</span>
-                                    <span>Most anticipated show</span>
+
+                            <div class="upcoming-card">
+                                <div class="upcoming-badge">🎬 NEW MOVIE</div>
+                                <div class="card-thumbnail">
+                                    🎥
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Golpo Holeo Shotti</div>
+                                    <div class="card-meta">Movie • Feb 8</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">🔥</span>
+                                        <span>Highly awaited</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="upcoming-card">
+                                <div class="upcoming-badge">📺 COMING SOON</div>
+                                <div class="card-thumbnail">
+                                    😄
+                                    <div class="play-overlay">▶️</div>
+                                </div>
+                                <div class="card-info">
+                                    <div class="card-title">Hasir Raja S03</div>
+                                    <div class="card-meta">Comedy • Feb 10</div>
+                                    <div class="social-proof">
+                                        <span class="social-icon">⭐</span>
+                                        <span>New season</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -765,6 +858,7 @@
                         <div class="info-box">
                             <div class="info-box-title">🎯 Simple FOMO Strategy</div>
                             <div class="info-box-text">
+                                <strong>Horizontal Lists:</strong> Easy to browse, more content visible<br>
                                 <strong>Popular Unwatched:</strong> Shows they haven't seen yet<br>
                                 <strong>Upcoming:</strong> New episodes/movies releasing soon<br>
                                 <strong>Action:</strong> User taps any show → Content blocked screen
@@ -787,8 +881,8 @@
 
                         <div class="blocked-overlay">
                             <div class="blocked-icon">⏸️</div>
-                            <div class="blocked-title">Subscription Paused</div>
-                            <div class="blocked-subtitle">Resume your trial to watch Bideshi Bahu Season Finale tomorrow!</div>
+                            <div class="blocked-title">Trial Paused</div>
+                            <div class="blocked-subtitle">Resume to watch Bideshi Bahu finale and other popular shows</div>
 
                             <div class="status-badge badge-app">
                                 <span>⚠️</span>
@@ -839,7 +933,7 @@
                         <div class="blocked-overlay">
                             <div class="blocked-icon">🔒</div>
                             <div class="blocked-title">Mandate Cancelled</div>
-                            <div class="blocked-subtitle">Your payment mandate was cancelled from PhonePe. Register again to watch!</div>
+                            <div class="blocked-subtitle">Payment mandate cancelled from PhonePe. Reactivate to watch Bideshi Bahu and more</div>
 
                             <div class="status-badge badge-psp">
                                 <span>⛔</span>
