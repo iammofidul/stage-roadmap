@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binge Leaderboard - Competitive Gamification</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #FFFFFF;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #248b3b;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #BEBEBE;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen-card {
+            background: #1A1A1A;
+            border: 2px solid #3E3E3E;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .screen-card:hover {
+            transform: translateY(-5px);
+            border-color: #248b3b;
+        }
+
+        .task-label {
+            background: #248b3b;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .screen-title {
+            color: #248b3b;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .screen-subtitle {
+            color: #BEBEBE;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .phone-frame {
+            background: #000;
+            border: 8px solid #292929;
+            border-radius: 30px;
+            padding: 15px;
+            margin: 0 auto;
+            max-width: 300px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .phone-notch {
+            background: #000;
+            height: 25px;
+            width: 150px;
+            margin: -15px auto 10px;
+            border-radius: 0 0 15px 15px;
+            border: 2px solid #292929;
+            border-top: none;
+        }
+
+        .phone-screen {
+            background: #1A1A1A;
+            min-height: 500px;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #248b3b;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            background: #292929;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .rank-widget {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(36, 139, 59, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .rank-widget:hover {
+            transform: scale(1.02);
+        }
+
+        .rank-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .rank-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .rank-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .rank-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+        }
+
+        .rank-progress {
+            background: rgba(0, 0, 0, 0.3);
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .rank-progress-fill {
+            background: #EFA73F;
+            height: 100%;
+            width: 70%;
+            border-radius: 3px;
+        }
+
+        .tabs-container {
+            display: flex;
+            gap: 8px;
+            padding: 8px;
+            background: #292929;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #BEBEBE;
+        }
+
+        .tab.active {
+            background: #248b3b;
+            color: #fff;
+        }
+
+        .leaderboard-list {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+
+        .leaderboard-item {
+            background: #292929;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.2s;
+        }
+
+        .leaderboard-item:hover {
+            background: #3E3E3E;
+        }
+
+        .leaderboard-item.current-user {
+            background: linear-gradient(135deg, rgba(36, 139, 59, 0.3) 0%, rgba(29, 110, 47, 0.3) 100%);
+            border: 2px solid #248b3b;
+        }
+
+        .rank-position {
+            font-size: 20px;
+            font-weight: 900;
+            color: #EFA73F;
+            min-width: 30px;
+        }
+
+        .rank-position.top3 {
+            color: #FFD700;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .user-stats {
+            font-size: 11px;
+            color: #737373;
+        }
+
+        .tier-badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge-legend {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+        }
+
+        .badge-superfan {
+            background: linear-gradient(135deg, #00d4ff 0%, #0088cc 100%);
+            color: #fff;
+        }
+
+        .badge-rising {
+            background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+            color: #fff;
+        }
+
+        .share-card {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-rank {
+            font-size: 48px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .share-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .share-stats {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .share-stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .share-branding {
+            font-size: 24px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 16px;
+        }
+
+        .notification-card {
+            background: #292929;
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid #3E3E3E;
+            transition: border-color 0.2s;
+            margin-bottom: 12px;
+        }
+
+        .notification-card:hover {
+            border-color: #248b3b;
+        }
+
+        .notif-header {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .notif-icon {
+            width: 40px;
+            height: 40px;
+            background: #248b3b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .notif-content {
+            flex: 1;
+        }
+
+        .notif-app {
+            font-size: 11px;
+            color: #737373;
+            margin-bottom: 4px;
+        }
+
+        .notif-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .notif-body {
+            font-size: 13px;
+            color: #BEBEBE;
+        }
+
+        .streak-widget {
+            background: linear-gradient(135deg, #EFA73F 0%, #d68a2e 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .streak-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .streak-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .streak-count {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .streak-progress-bar {
+            background: rgba(0, 0, 0, 0.3);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .streak-progress-fill {
+            background: #fff;
+            height: 100%;
+            width: 57%;
+        }
+
+        .streak-text {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .reward-card {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            border: 3px solid #EFA73F;
+        }
+
+        .reward-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .reward-title {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .reward-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid #3E3E3E;
+            margin-top: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #737373;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #248b3b;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .feature-description {
+            background: #292929;
+            border-left: 4px solid #248b3b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .feature-description h3 {
+            color: #248b3b;
+            margin-bottom: 12px;
+        }
+
+        .feature-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-description li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #BEBEBE;
+        }
+
+        .feature-description li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #248b3b;
+        }
+
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Binge Leaderboard - Competitive Gamification</h1>
+        <p class="subtitle">Wireframe & User Flows</p>
+
+        <div class="feature-description">
+            <h3>Feature Overview</h3>
+            <ul>
+                <li><strong>Target Users:</strong> Paid subscribers only (subscription_active)</li>
+                <li><strong>Timeline:</strong> Week 3-4 (13 days) | XL Effort | 1 Developer</li>
+                <li><strong>Impact:</strong> +60% Consumption, 10K Social Shares/Month</li>
+                <li><strong>🎁 Reward:</strong> Top 500 users get FREE next subscription cycle extension</li>
+            </ul>
+        </div>
+
+        <div class="screens-grid">
+            <!-- Screen 1: Home with Leaderboard Row -->
+            <div class="screen-card">
+                <div class="task-label">Task 2: Home Screen Entry Point</div>
+                <div class="screen-title">Home with Leaderboard Row</div>
+                <div class="screen-subtitle">Dedicated row showing leaderboard preview and your rank</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="header-icons">
+                                <div class="icon-btn">🔍</div>
+                            </div>
+                        </div>
+
+                        <div class="scrollable-content">
+                            <!-- Continue Watching -->
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 10px;">Continue Watching</div>
+                            <div style="background: #292929; border-radius: 12px; padding: 12px; margin-bottom: 20px;">
+                                <div style="display: flex; gap: 12px;">
+                                    <div style="width: 80px; height: 60px; background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🎬</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 14px; font-weight: 600;">Bideshi Bahu</div>
+                                        <div style="font-size: 11px; color: #737373; margin-bottom: 6px;">Episode 7 • 35% watched</div>
+                                        <div style="background: #3E3E3E; height: 4px; border-radius: 2px; overflow: hidden;">
+                                            <div style="background: #248b3b; height: 100%; width: 35%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Leaderboard Row -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div style="font-size: 16px; font-weight: 600;">🏆 Binge Leaderboard</div>
+                                <div style="font-size: 12px; color: #248b3b; font-weight: 600;">View All →</div>
+                            </div>
+
+                            <!-- Your Rank Card -->
+                            <div style="background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%); border-radius: 12px; padding: 14px; margin-bottom: 12px; cursor: pointer;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <div>
+                                        <div style="font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 2px;">Your Rank</div>
+                                        <div style="font-size: 24px; font-weight: 900; color: #fff;">#347</div>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;">🎁 Top 500</div>
+                                </div>
+                                <div style="font-size: 11px; color: rgba(255,255,255,0.9);">23 episodes • Keep Top 500 for FREE subscription!</div>
+                            </div>
+
+                            <!-- Top 3 Preview -->
+                            <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                                <div style="flex: 1; background: #292929; border-radius: 8px; padding: 10px; text-align: center;">
+                                    <div style="font-size: 20px; margin-bottom: 4px;">🥇</div>
+                                    <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">@dramaqueen</div>
+                                    <div style="font-size: 10px; color: #737373;">145 eps</div>
+                                </div>
+                                <div style="flex: 1; background: #292929; border-radius: 8px; padding: 10px; text-align: center;">
+                                    <div style="font-size: 20px; margin-bottom: 4px;">🥈</div>
+                                    <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">@bingewatcher</div>
+                                    <div style="font-size: 10px; color: #737373;">138 eps</div>
+                                </div>
+                                <div style="flex: 1; background: #292929; border-radius: 8px; padding: 10px; text-align: center;">
+                                    <div style="font-size: 20px; margin-bottom: 4px;">🥉</div>
+                                    <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">@showaddict</div>
+                                    <div style="font-size: 10px; color: #737373;">129 eps</div>
+                                </div>
+                            </div>
+
+                            <!-- Watch Streak Widget -->
+                            <div style="background: linear-gradient(135deg, #EFA73F 0%, #d68a2e 100%); border-radius: 12px; padding: 14px; margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <div style="font-size: 14px; font-weight: 700; color: #fff;">🔥 Watch Streak</div>
+                                    <div style="font-size: 20px; font-weight: 900; color: #fff;">4/7</div>
+                                </div>
+                                <div style="background: rgba(0,0,0,0.3); height: 6px; border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+                                    <div style="background: #fff; height: 100%; width: 57%;"></div>
+                                </div>
+                                <div style="font-size: 11px; color: rgba(255,255,255,0.9);">3 more days to unlock FREE subscription!</div>
+                            </div>
+
+                            <!-- Trending Now -->
+                            <div style="font-size: 16px; font-weight: 600; margin-bottom: 10px;">🔥 Trending Now</div>
+                            <div style="display: flex; gap: 10px; overflow-x: auto;">
+                                <div style="min-width: 130px; background: #292929; border-radius: 8px; overflow: hidden;">
+                                    <div style="height: 100px; background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%); display: flex; align-items: center; justify-content: center; font-size: 32px;">🎭</div>
+                                    <div style="padding: 8px;">
+                                        <div style="font-size: 12px; font-weight: 600;">Drama Series</div>
+                                        <div style="font-size: 10px; color: #737373;">Season 1</div>
+                                    </div>
+                                </div>
+                                <div style="min-width: 130px; background: #292929; border-radius: 8px; overflow: hidden;">
+                                    <div style="height: 100px; background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%); display: flex; align-items: center; justify-content: center; font-size: 32px;">🎪</div>
+                                    <div style="padding: 8px;">
+                                        <div style="font-size: 12px; font-weight: 600;">Action Movie</div>
+                                        <div style="font-size: 10px; color: #737373;">2024</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <div class="nav-icon">🏠</div>
+                                <span>Home</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">🏆</div>
+                                <span>Leaderboard</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">➕</div>
+                                <span>My List</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">⚙️</div>
+                                <span>Settings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>User lands on home → Sees normal content (Continue Watching, etc.)</li>
+                        <li>Leaderboard row shows "🏆 Binge Leaderboard" section</li>
+                        <li>Your rank card displays "#347" with "🎁 Top 500" badge</li>
+                        <li>Top 3 users preview (🥇🥈🥉) shown below</li>
+                        <li>Watch streak widget shows "4/7" progress</li>
+                        <li>User taps "View All" or rank card → Opens full leaderboard</li>
+                        <li>Leaderboard also accessible via bottom nav 🏆 icon</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 2: Full Leaderboard (Overall) -->
+            <div class="screen-card">
+                <div class="task-label">Task 2: Full Leaderboard UI</div>
+                <div class="screen-title">Leaderboard - Overall</div>
+                <div class="screen-subtitle">Weekly ranking with tabs for genres</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div style="font-size: 18px; font-weight: 700;">🏆 Binge Leaderboard</div>
+                            <div class="icon-btn">📤</div>
+                        </div>
+
+                        <div class="tabs-container">
+                            <div class="tab active">Overall</div>
+                            <div class="tab">Drama</div>
+                            <div class="tab">Comedy</div>
+                            <div class="tab">Thriller</div>
+                            <div class="tab">Microdrama</div>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: #BEBEBE;">
+                            Resets every Monday • Top 500 get FREE subscription 🎁
+                        </div>
+
+                        <div class="leaderboard-list">
+                            <div class="leaderboard-item">
+                                <div class="rank-position top3">#1</div>
+                                <div class="user-avatar">👑</div>
+                                <div class="user-info">
+                                    <div class="user-name">@dramaqueen92</div>
+                                    <div class="user-stats">145 episodes • 72h watch time</div>
+                                </div>
+                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
+                            </div>
+
+                            <div class="leaderboard-item">
+                                <div class="rank-position top3">#2</div>
+                                <div class="user-avatar">🎬</div>
+                                <div class="user-info">
+                                    <div class="user-name">@bingewatcher</div>
+                                    <div class="user-stats">138 episodes • 69h watch time</div>
+                                </div>
+                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
+                            </div>
+
+                            <div class="leaderboard-item">
+                                <div class="rank-position top3">#3</div>
+                                <div class="user-avatar">⭐</div>
+                                <div class="user-info">
+                                    <div class="user-name">@showaddict</div>
+                                    <div class="user-stats">129 episodes • 64h watch time</div>
+                                </div>
+                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
+                            </div>
+
+                            <div class="leaderboard-item">
+                                <div class="rank-position">#12</div>
+                                <div class="user-avatar">🎭</div>
+                                <div class="user-info">
+                                    <div class="user-name">@stageuser</div>
+                                    <div class="user-stats">89 episodes • 44h watch time</div>
+                                </div>
+                                <div class="tier-badge badge-superfan">⭐ SUPER FAN</div>
+                            </div>
+
+                            <div class="leaderboard-item current-user">
+                                <div class="rank-position">#347</div>
+                                <div class="user-avatar">🙋</div>
+                                <div class="user-info">
+                                    <div class="user-name">You</div>
+                                    <div class="user-stats">23 episodes • 11h watch time</div>
+                                </div>
+                                <div class="tier-badge" style="background: #248b3b; color: #fff;">TOP 500</div>
+                            </div>
+
+                            <div class="leaderboard-item">
+                                <div class="rank-position">#348</div>
+                                <div class="user-avatar">👤</div>
+                                <div class="user-info">
+                                    <div class="user-name">@viewer123</div>
+                                    <div class="user-stats">22 episodes • 11h watch time</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <span>Home</span>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">🏆</div>
+                                <span>Leaderboard</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">➕</div>
+                                <span>My List</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">⚙️</div>
+                                <span>Settings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>User taps Leaderboard nav icon → Opens full leaderboard</li>
+                        <li>Tabs for Overall, Drama, Comedy, Thriller, Microdrama</li>
+                        <li>Top 10 users shown with badges (Legend, Super Fan, Rising Star)</li>
+                        <li>Current user (#347) highlighted in green with "TOP 500" badge</li>
+                        <li>Shows episodes watched and total watch time</li>
+                        <li>Taps share icon → Opens social sharing card</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 3: Social Share Card -->
+            <div class="screen-card">
+                <div class="task-label">Task 3: Social Sharing</div>
+                <div class="screen-title">Share Your Rank</div>
+                <div class="screen-subtitle">Shareable card for Instagram, Twitter, WhatsApp</div>
+                <div style="max-width: 300px; margin: 15px auto;">
+                    <div class="share-card">
+                        <div class="share-rank">#347</div>
+                        <div class="share-title">I'm on STAGE Binge Leaderboard! 🔥</div>
+
+                        <div class="share-stats">
+                            <div class="share-stat-row">
+                                <span>Episodes Watched:</span>
+                                <strong>23</strong>
+                            </div>
+                            <div class="share-stat-row">
+                                <span>Watch Time:</span>
+                                <strong>11 hours</strong>
+                            </div>
+                            <div class="share-stat-row">
+                                <span>Tier:</span>
+                                <strong>🎁 Top 500</strong>
+                            </div>
+                        </div>
+
+                        <div class="share-branding">STAGE</div>
+                        <div style="font-size: 11px; color: rgba(255, 255, 255, 0.7);">Download & compete with me!</div>
+                    </div>
+
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button style="flex: 1; padding: 12px; background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer;">Instagram</button>
+                        <button style="flex: 1; padding: 12px; background: #1DA1F2; border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer;">Twitter</button>
+                        <button style="flex: 1; padding: 12px; background: #25D366; border: none; border-radius: 8px; color: #fff; font-weight: 600; cursor: pointer;">WhatsApp</button>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>User taps "Share My Rank" button on leaderboard</li>
+                        <li>Generate shareable card with rank, stats, and badge</li>
+                        <li>Include deep link for friends to install STAGE</li>
+                        <li>User selects platform: Instagram Stories, Twitter, WhatsApp</li>
+                        <li>Share drives viral growth and organic installs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 4: Push Notifications -->
+            <div class="screen-card">
+                <div class="task-label">Task 3: Push Notifications</div>
+                <div class="screen-title">Engagement Notifications</div>
+                <div class="screen-subtitle">Milestone, rank drop, reset, and improvement alerts</div>
+                <div style="margin-top: 15px;">
+                    <div class="notification-card">
+                        <div class="notif-header">
+                            <div class="notif-icon">🏆</div>
+                            <div class="notif-content">
+                                <div class="notif-app">STAGE</div>
+                                <div class="notif-title">You're 2 episodes away from Top 10!</div>
+                                <div class="notif-body">Keep binging to unlock Legend badge 🏆</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification-card">
+                        <div class="notif-header">
+                            <div class="notif-icon">⚠️</div>
+                            <div class="notif-content">
+                                <div class="notif-app">STAGE</div>
+                                <div class="notif-title">You dropped to #45</div>
+                                <div class="notif-body">Watch now to climb back! Others are catching up.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification-card">
+                        <div class="notif-header">
+                            <div class="notif-icon">🔄</div>
+                            <div class="notif-content">
+                                <div class="notif-app">STAGE</div>
+                                <div class="notif-title">Monday Reset! Last week you were #23</div>
+                                <div class="notif-body">Can you beat your record this week?</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notification-card">
+                        <div class="notif-header">
+                            <div class="notif-icon">🚀</div>
+                            <div class="notif-content">
+                                <div class="notif-app">STAGE</div>
+                                <div class="notif-title">You're now #8! Keep binging!</div>
+                                <div class="notif-body">You're so close to Top 5. Don't stop now! 🔥</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">Notification Types</h3>
+                    <ul style="font-size: 12px;">
+                        <li><strong>Milestone:</strong> "2 episodes away from Top 10" - drives urgency</li>
+                        <li><strong>Rank Drop:</strong> "You dropped to #45" - FOMO to watch more</li>
+                        <li><strong>Weekly Reset:</strong> "Last week you were #23" - Monday ritual</li>
+                        <li><strong>Rank Improvement:</strong> "You're now #8!" - positive reinforcement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 5: 7-Day Streak Completion -->
+            <div class="screen-card">
+                <div class="task-label">Task 5: 7-Day Streak Reward</div>
+                <div class="screen-title">FREE Subscription Extension</div>
+                <div class="screen-subtitle">Reward for 7 consecutive days of watching</div>
+                <div style="max-width: 300px; margin: 15px auto;">
+                    <div class="reward-card">
+                        <div class="reward-icon">🎁</div>
+                        <div class="reward-title">Congratulations!</div>
+                        <div class="reward-text">You completed a 7-day watch streak!</div>
+                        <div style="background: rgba(0, 0, 0, 0.2); border-radius: 8px; padding: 16px; margin: 16px 0;">
+                            <div style="font-size: 28px; font-weight: 900; margin-bottom: 8px;">+1 MONTH FREE</div>
+                            <div style="font-size: 13px; color: rgba(255, 255, 255, 0.9);">Added to your next billing cycle</div>
+                        </div>
+                        <div class="reward-text" style="font-size: 12px; margin-top: 12px;">
+                            Next renewal: March 15, 2026<br>
+                            <strong>+ 1 month FREE (7-day streak)</strong>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 16px; background: #292929; border-radius: 8px;">
+                        <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">How it works:</div>
+                        <div style="font-size: 12px; color: #BEBEBE; line-height: 1.6;">
+                            • Watch ANY episode or movie for 7 consecutive days<br>
+                            • Automatically extends your subscription<br>
+                            • Start a new streak to earn again<br>
+                            • Grace period: 12 AM - 11:59 PM IST
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>User watches content for 7 consecutive days</li>
+                        <li>Day 7 completed → Full-screen celebration animation</li>
+                        <li>Reward: +1 month FREE added to next billing cycle</li>
+                        <li>Shown in subscription settings with extension details</li>
+                        <li>User must start new 7-day streak to earn again</li>
+                        <li>Reminder notifications: "Don't lose your 5-day streak!"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 6: Genre-Specific Leaderboard -->
+            <div class="screen-card">
+                <div class="task-label">Task 2: Genre Leaderboards</div>
+                <div class="screen-title">Leaderboard - Drama</div>
+                <div class="screen-subtitle">Genre-specific ranking to drive content discovery</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div style="font-size: 18px; font-weight: 700;">🏆 Binge Leaderboard</div>
+                            <div class="icon-btn">📤</div>
+                        </div>
+
+                        <div class="tabs-container">
+                            <div class="tab">Overall</div>
+                            <div class="tab active">Drama</div>
+                            <div class="tab">Comedy</div>
+                            <div class="tab">Thriller</div>
+                            <div class="tab">Microdrama</div>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: #BEBEBE;">
+                            Top Drama Bingers This Week 🎭
+                        </div>
+
+                        <div class="leaderboard-list">
+                            <div class="leaderboard-item">
+                                <div class="rank-position top3">#1</div>
+                                <div class="user-avatar">👑</div>
+                                <div class="user-info">
+                                    <div class="user-name">@dramaqueen92</div>
+                                    <div class="user-stats">87 drama episodes • 43h watch time</div>
+                                </div>
+                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
+                            </div>
+
+                            <div class="leaderboard-item">
+                                <div class="rank-position top3">#2</div>
+                                <div class="user-avatar">🎭</div>
+                                <div class="user-info">
+                                    <div class="user-name">@dramalover</div>
+                                    <div class="user-stats">79 drama episodes • 39h watch time</div>
+                                </div>
+                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
+                            </div>
+
+                            <div class="leaderboard-item current-user">
+                                <div class="rank-position">#156</div>
+                                <div class="user-avatar">🙋</div>
+                                <div class="user-info">
+                                    <div class="user-name">You</div>
+                                    <div class="user-stats">18 drama episodes • 9h watch time</div>
+                                </div>
+                                <div class="tier-badge badge-rising">🌟 RISING STAR</div>
+                            </div>
+
+                            <div class="leaderboard-item">
+                                <div class="rank-position">#157</div>
+                                <div class="user-avatar">👤</div>
+                                <div class="user-info">
+                                    <div class="user-name">@viewer456</div>
+                                    <div class="user-stats">17 drama episodes • 8h watch time</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-nav">
+                            <div class="nav-item">
+                                <div class="nav-icon">🏠</div>
+                                <span>Home</span>
+                            </div>
+                            <div class="nav-item active">
+                                <div class="nav-icon">🏆</div>
+                                <span>Leaderboard</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">➕</div>
+                                <span>My List</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">⚙️</div>
+                                <span>Settings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>User taps "Drama" tab → Shows Drama-only leaderboard</li>
+                        <li>Ranking based on drama episodes watched + watch time</li>
+                        <li>Current user (#156) ranked as "Rising Star" in Drama</li>
+                        <li>Drives content discovery: Users try new dramas to compete</li>
+                        <li>Users can compete in multiple genre leaderboards</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive hover effects
+        document.querySelectorAll('.notification-card, .rank-widget, .streak-widget, .leaderboard-item, .share-card').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.target.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // Simulate tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
