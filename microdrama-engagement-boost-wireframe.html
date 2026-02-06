@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microdrama Engagement Boost - Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #FFFFFF;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #248b3b;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #BEBEBE;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .feature-description {
+            background: #292929;
+            border-left: 4px solid #248b3b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .feature-description h3 {
+            color: #248b3b;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .feature-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-description li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #BEBEBE;
+        }
+
+        .feature-description li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #248b3b;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen-card {
+            background: #1A1A1A;
+            border: 2px solid #3E3E3E;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .screen-card:hover {
+            transform: translateY(-5px);
+            border-color: #248b3b;
+        }
+
+        .screen-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .screen-title {
+            color: #248b3b;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .screen-subtitle {
+            color: #737373;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .phone-frame {
+            background: #000;
+            border: 8px solid #292929;
+            border-radius: 30px;
+            padding: 15px;
+            margin: 0 auto;
+            max-width: 340px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .phone-notch {
+            background: #000;
+            height: 25px;
+            width: 150px;
+            margin: -15px auto 10px;
+            border-radius: 0 0 15px 15px;
+            border: 2px solid #292929;
+            border-top: none;
+        }
+
+        .phone-screen {
+            background: #1A1A1A;
+            min-height: 600px;
+            border-radius: 15px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* App Header */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 16px;
+            background: #1A1A1A;
+            border-bottom: 1px solid #3E3E3E;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #248b3b;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            background: #292929;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Content Filter */
+        .content-filter {
+            padding: 12px 16px;
+            background: #1A1A1A;
+            border-bottom: 1px solid #3E3E3E;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #292929;
+            border-radius: 20px;
+            margin-right: 8px;
+            font-size: 13px;
+            color: #BEBEBE;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-chip.active {
+            background: #248b3b;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .filter-chip.highlight {
+            background: #EFA73F;
+            color: #1A1A1A;
+            font-weight: 600;
+            font-size: 14px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Scrollable Content */
+        .scrollable-content {
+            height: 520px;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-track {
+            background: #292929;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: #3E3E3E;
+            border-radius: 2px;
+        }
+
+        /* Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: "🔥";
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 48px;
+            opacity: 0.2;
+        }
+
+        .banner-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .banner-subtitle {
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 12px;
+        }
+
+        .banner-carousel {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 4px 0;
+        }
+
+        .banner-carousel::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .banner-item {
+            min-width: 100px;
+            height: 140px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #2a2a2a 100%);
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .trending-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #EFA73F;
+            color: #1A1A1A;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .view-count {
+            position: absolute;
+            bottom: 6px;
+            left: 6px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 20px 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .new-badge {
+            background: #EFA73F;
+            color: #1A1A1A;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* Content Row */
+        .content-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 4px 0;
+            margin-bottom: 16px;
+        }
+
+        .content-row::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .content-card {
+            min-width: 130px;
+            flex-shrink: 0;
+        }
+
+        .content-card-large {
+            min-width: 200px;
+        }
+
+        .content-thumbnail {
+            height: 180px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .content-thumbnail-small {
+            height: 140px;
+        }
+
+        .play-overlay {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: rgba(36, 139, 59, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .content-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #248b3b;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .duration-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .content-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .content-meta {
+            font-size: 11px;
+            color: #737373;
+        }
+
+        /* PiP Player */
+        .pip-player {
+            position: absolute;
+            bottom: 80px;
+            left: 16px;
+            width: 140px;
+            height: 200px;
+            background: #000;
+            border-radius: 12px;
+            border: 2px solid #248b3b;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            z-index: 100;
+            animation: pip-entrance 0.3s ease-out;
+        }
+
+        @keyframes pip-entrance {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .pip-content {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .pip-video {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            position: relative;
+        }
+
+        .pip-playing-indicator {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 6px;
+            height: 6px;
+            background: #248b3b;
+            border-radius: 50%;
+            animation: playing-pulse 1.5s infinite;
+        }
+
+        @keyframes playing-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .pip-close {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 24px;
+            height: 24px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .pip-info {
+            padding: 8px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .pip-title {
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .pip-subtitle {
+            font-size: 9px;
+            color: #737373;
+        }
+
+        .pip-tap-hint {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8px;
+            color: #248b3b;
+            background: rgba(36, 139, 59, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            background: #1A1A1A;
+            border-top: 1px solid #3E3E3E;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            color: #737373;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #248b3b;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        /* Notification */
+        .notification-card {
+            background: #292929;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 2px solid #3E3E3E;
+        }
+
+        .notif-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .notif-icon {
+            width: 48px;
+            height: 48px;
+            background: #248b3b;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .notif-content {
+            flex: 1;
+        }
+
+        .notif-app {
+            font-size: 11px;
+            color: #737373;
+            margin-bottom: 4px;
+        }
+
+        .notif-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .notif-body {
+            font-size: 13px;
+            color: #BEBEBE;
+        }
+
+        .notif-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .notif-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .notif-btn-primary {
+            background: #248b3b;
+            color: #fff;
+        }
+
+        .notif-btn-primary:hover {
+            background: #1d6e2f;
+        }
+
+        .notif-btn-secondary {
+            background: #3E3E3E;
+            color: #BEBEBE;
+        }
+
+        .task-label {
+            display: inline-block;
+            background: rgba(36, 139, 59, 0.2);
+            color: #248b3b;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: #292929;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 3px solid #248b3b;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #737373;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #248b3b;
+        }
+
+        .metric-change {
+            font-size: 12px;
+            color: #EFA73F;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Microdrama Engagement Boost</h1>
+        <p class="subtitle">Wireframe & User Flows</p>
+
+        <div class="screens-grid">
+            <!-- Screen 1: Home Screen with All Features -->
+            <div class="screen-card full-width">
+                <div class="screen-title">Home Screen with PiP Auto-Playing</div>
+                <div class="screen-subtitle">No filter applied - PiP player shows "Husband on Sale - Episode 6" in bottom-left corner</div>
+                <div class="phone-frame" style="max-width: 100%; width: 360px;">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <!-- App Header -->
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="header-icons">
+                                <div class="icon-btn">🔍</div>
+                            </div>
+                        </div>
+
+                        <!-- Content Filter -->
+                        <div class="content-filter">
+                            <div class="filter-chip">Shows</div>
+                            <div class="filter-chip">Movies</div>
+                            <div class="filter-chip">Microdrama</div>
+                        </div>
+
+                        <!-- Scrollable Content -->
+                        <div class="scrollable-content">
+                            <!-- Continue Watching -->
+                            <div class="section-title">Continue Watching</div>
+                            <div class="content-row">
+                                <div class="content-card content-card-large">
+                                    <div class="content-thumbnail">
+                                        🎬
+                                        <div class="duration-badge">12 min left</div>
+                                    </div>
+                                    <div class="content-title">Bideshi Bahu</div>
+                                    <div class="content-meta">Episode 7 • 65% watched</div>
+                                </div>
+                                <div class="content-card content-card-large">
+                                    <div class="content-thumbnail">
+                                        🌟
+                                        <div class="duration-badge">8 min left</div>
+                                    </div>
+                                    <div class="content-title">City Dreams</div>
+                                    <div class="content-meta">Episode 3 • 45% watched</div>
+                                </div>
+                            </div>
+
+<!-- Continue Watching -->
+                            <div class="section-title">Continue Watching</div>
+                            <div class="content-row">
+                                <div class="content-card content-card-large">
+                                    <div class="content-thumbnail">
+                                        🎬
+                                        <div class="duration-badge">12 min left</div>
+                                    </div>
+                                    <div class="content-title">Bideshi Bahu</div>
+                                    <div class="content-meta">Episode 7 • 65% watched</div>
+                                </div>
+                                <div class="content-card content-card-large">
+                                    <div class="content-thumbnail">
+                                        🌟
+                                        <div class="duration-badge">8 min left</div>
+                                    </div>
+                                    <div class="content-title">City Dreams</div>
+                                    <div class="content-meta">Episode 3 • 45% watched</div>
+                                </div>
+                            </div>
+
+                            <!-- Trending Content -->
+                            <div class="section-title">🔥 Trending Now</div>
+                            <div class="content-row">
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        🎪
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Popular Show</div>
+                                    <div class="content-meta">Season 1</div>
+                                </div>
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        🌆
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Trending Movie</div>
+                                    <div class="content-meta">Action</div>
+                                </div>
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        ⚡
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Drama Series</div>
+                                    <div class="content-meta">Season 2</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PiP Player (Task 1) -->
+                        <div class="pip-player">
+                            <div class="pip-content">
+                                <div class="pip-close">✕</div>
+                                <div class="pip-video">
+                                    🎬
+                                    <div class="pip-playing-indicator"></div>
+                                </div>
+                                <div class="pip-info">
+                                    <div class="pip-title">Husband on Sale</div>
+                                    <div class="pip-subtitle">Episode 6 • Auto-playing</div>
+                                </div>
+                                <div class="pip-tap-hint">Tap to expand</div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <div class="nav-icon">🏠</div>
+                                <span>Home</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">🎬</div>
+                                <span>Coming Soon</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">➕</div>
+                                <span>My List</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">⚙️</div>
+                                <span>Settings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 2: Task 1 - PiP Detail -->
+            <div class="screen-card">
+                <div class="task-label">Task 1: In-App PiP Auto-Play</div>
+                <div class="screen-title">PiP Player - Left Bottom Corner</div>
+                <div class="screen-subtitle">Auto-plays "Husband on Sale - Episode 6" when user lands on home</div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>User opens app → Lands on home screen</li>
+                        <li>PiP appears in left bottom corner</li>
+                        <li>Video auto-plays (muted) with green playing indicator</li>
+                        <li>User taps PiP → Expands to full-screen player</li>
+                        <li>User taps ✕ button → PiP dismisses</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 3: Task 2 - Personalized Recommendations -->
+            <div class="screen-card">
+                <div class="task-label">Task 2: Personalized Recommendations</div>
+                <div class="screen-title">Microdramas You'll Love</div>
+                <div class="screen-subtitle">Shows personalized "Husband on Sale" episodes based on viewing history</div>
+                <div style="padding: 20px; background: #292929; border-radius: 8px; margin-top: 15px;">
+                    <div class="section-title" style="margin: 0 0 12px 0;">
+                        ✨ Microdramas You'll Love
+                        <span class="new-badge">NEW</span>
+                    </div>
+                    <div class="content-row">
+                        <div class="content-card">
+                            <div class="content-thumbnail content-thumbnail-small">
+                                💔
+                                <div class="content-badge">For You</div>
+                                <div class="duration-badge">5 min</div>
+                            </div>
+                            <div class="content-title">Husband on Sale</div>
+                            <div class="content-meta">Episode 6</div>
+                        </div>
+                        <div class="content-card">
+                            <div class="content-thumbnail content-thumbnail-small">
+                                🎭
+                                <div class="content-badge">For You</div>
+                                <div class="duration-badge">6 min</div>
+                            </div>
+                            <div class="content-title">Husband on Sale</div>
+                            <div class="content-meta">Episode 6</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>User scrolls down home screen</li>
+                        <li>Sees "✨ Microdramas You'll Love" row with NEW badge</li>
+                        <li>Content cards show "For You" badges</li>
+                        <li>User taps card → Opens microdrama player</li>
+                        <li>Personalized based on viewing history & preferences</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 4: Task 3 - Push Notification -->
+            <div class="screen-card">
+                <div class="task-label">Task 3: Push Notifications</div>
+                <div class="screen-title">New Microdrama Launch Notification</div>
+                <div class="screen-subtitle">Weekly push for new microdrama series launches</div>
+                <div style="margin-top: 15px;">
+                    <div class="notification-card">
+                        <div class="notif-header">
+                            <div class="notif-icon">📺</div>
+                            <div class="notif-content">
+                                <div class="notif-app">STAGE</div>
+                                <div class="notif-title">New Microdrama: Husband on Sale! 🎬</div>
+                                <div class="notif-body">Watch all episodes now - Drama series</div>
+                            </div>
+                        </div>
+                        <div class="notif-actions">
+                            <button class="notif-btn notif-btn-secondary">Later</button>
+                            <button class="notif-btn notif-btn-primary">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>New microdrama launches → User receives push notification</li>
+                        <li>User sees notification on lock screen or notification center</li>
+                        <li>User taps "Watch Now" → Deep links to new microdrama series</li>
+                        <li>User taps "Later" → Notification dismissed, can access from home</li>
+                        <li>Sent weekly when new microdrama series are launched</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Screen 5: Task 4 - Top 10 Banner -->
+            <div class="screen-card">
+                <div class="task-label">Task 4: Top 10 Microdramas Banner (Filter-Based)</div>
+                <div class="screen-title">Home with Microdrama Filter Applied</div>
+                <div class="screen-subtitle">Complete home screen showing Top 10 banner when Microdrama filter is active</div>
+                <div class="phone-frame" style="max-width: 100%; width: 360px; margin-top: 15px;">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <!-- App Header -->
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="header-icons">
+                                <div class="icon-btn">🔍</div>
+                            </div>
+                        </div>
+
+                        <!-- Content Filter - Microdrama Active -->
+                        <div class="content-filter">
+                            <div class="filter-chip">Shows</div>
+                            <div class="filter-chip">Movies</div>
+                            <div class="filter-chip active">Microdrama</div>
+                        </div>
+
+                        <!-- Scrollable Content -->
+                        <div class="scrollable-content">
+                            <!-- Top 10 Banner (Only appears when filter is active) -->
+                            <div class="hero-banner">
+                                <div class="banner-title">🔥 Top 10 Microdramas This Week</div>
+                                <div class="banner-subtitle">Most-watched by STAGE users</div>
+                                <div class="banner-carousel">
+                                    <div class="banner-item">
+                                        🎭
+                                        <div class="trending-badge">TRENDING</div>
+                                        <div class="view-count">2.3M views</div>
+                                    </div>
+                                    <div class="banner-item">
+                                        💔
+                                        <div class="trending-badge">TRENDING</div>
+                                        <div class="view-count">1.8M views</div>
+                                    </div>
+                                    <div class="banner-item">
+                                        🎪
+                                        <div class="view-count">1.5M views</div>
+                                    </div>
+                                    <div class="banner-item">
+                                        🌟
+                                        <div class="view-count">1.2M views</div>
+                                    </div>
+                                    <div class="banner-item">
+                                        💍
+                                        <div class="view-count">980K views</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Personalized Row -->
+                            <div class="section-title">
+                                ✨ Microdramas You'll Love
+                                <span class="new-badge">NEW</span>
+                            </div>
+                            <div class="content-row">
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        💔
+                                        <div class="content-badge">For You</div>
+                                        <div class="duration-badge">2 min</div>
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Husband on Sale</div>
+                                    <div class="content-meta">Episode 6 • Drama</div>
+                                </div>
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        🎭
+                                        <div class="content-badge">For You</div>
+                                        <div class="duration-badge">2 min</div>
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Husband on Sale</div>
+                                    <div class="content-meta">Episode 6 • Drama</div>
+                                </div>
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        💍
+                                        <div class="content-badge">For You</div>
+                                        <div class="duration-badge">2 min</div>
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Husband on Sale</div>
+                                    <div class="content-meta">Episode 6 • Drama</div>
+                                </div>
+                            </div>
+
+                            <!-- Trending Microdramas -->
+                            <div class="section-title">🔥 Trending Microdramas</div>
+                            <div class="content-row">
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        🎪
+                                        <div class="duration-badge">2 min</div>
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Husband on Sale</div>
+                                    <div class="content-meta">Episode 6 • Drama</div>
+                                </div>
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        🌆
+                                        <div class="duration-badge">2 min</div>
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Husband on Sale</div>
+                                    <div class="content-meta">Episode 6 • Drama</div>
+                                </div>
+                                <div class="content-card">
+                                    <div class="content-thumbnail content-thumbnail-small">
+                                        ⚡
+                                        <div class="duration-badge">2 min</div>
+                                        <div class="play-overlay">▶️</div>
+                                    </div>
+                                    <div class="content-title">Husband on Sale</div>
+                                    <div class="content-meta">Episode 6 • Drama</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Navigation -->
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <div class="nav-icon">🏠</div>
+                                <span>Home</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">🎬</div>
+                                <span>Coming Soon</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">➕</div>
+                                <span>My List</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">⚙️</div>
+                                <span>Settings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-description" style="margin: 15px 0;">
+                    <h3 style="font-size: 14px;">User Flow</h3>
+                    <ul style="font-size: 12px;">
+                        <li>User lands on home → Taps "Microdrama" filter</li>
+                        <li>Filter becomes active/highlighted (green)</li>
+                        <li>Top 10 banner appears at top (only when filter is active)</li>
+                        <li>Banner shows "🔥 Top 10 Microdramas This Week" with carousel</li>
+                        <li>Personalized "Microdramas You'll Love" row appears below</li>
+                        <li>Trending Microdramas section shows more content</li>
+                        <li>User swipes carousel or taps content → Opens microdrama player</li>
+                        <li>View counts create social proof (2.3M views, 1.8M views)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-description">
+            <h3>User Flow Overview</h3>
+            <ul>
+                <li><strong>Step 1:</strong> User opens app and lands on home screen</li>
+                <li><strong>Step 2:</strong> User taps "Microdrama" filter → Filter becomes active/highlighted</li>
+                <li><strong>Step 3:</strong> PiP player appears in left bottom corner, auto-plays "Husband on Sale - Episode 6" (muted)</li>
+                <li><strong>Step 4:</strong> "🔥 Top 10 Microdramas This Week" banner appears at top (only visible when filter is active)</li>
+                <li><strong>Step 5:</strong> User scrolls and discovers "✨ Microdramas You'll Love" personalized row</li>
+                <li><strong>Step 6:</strong> User taps PiP player → Expands to full-screen microdrama player and starts watching</li>
+                <li><strong>Step 7:</strong> When new microdrama launches, user receives push notification → Taps "Watch Now" to view</li>
+                <li><strong>Alternative Flow:</strong> User dismisses PiP → Can access "Husband on Sale" from Top 10 banner or personalized row</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive effects
+        document.querySelectorAll('.content-card, .banner-item, .filter-chip, .notif-btn, .pip-player').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // Simulate PiP expansion
+        document.querySelector('.pip-player')?.addEventListener('click', function() {
+            alert('In the actual app, this would expand to full-screen microdrama player with episode list.');
+        });
+
+        // Simulate filter selection
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                document.querySelectorAll('.filter-chip').forEach(c => {
+                    c.classList.remove('active', 'highlight');
+                });
+                this.classList.add('active');
+                alert(`Filter changed to: ${this.textContent.trim()}`);
+            });
+        });
+
+        // Simulate notification action
+        document.querySelectorAll('.notif-btn-primary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Deep linking to new microdrama collection page...');
+            });
+        });
+    </script>
+</body>
+</html>

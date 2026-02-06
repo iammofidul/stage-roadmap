@@ -1092,7 +1092,7 @@
                     <div class="initiative-title-block">
                         <div class="initiative-title">Microdrama Engagement Boost (Comprehensive)</div>
                         <div class="initiative-meta">
-                            <span class="badge badge-week">⏱️ <strong style="background: rgba(239, 68, 68, 0.3); padding: 2px 6px; border-radius: 4px; color: #ef4444;">XL</strong> / Week 1-3 (13 days)</span>
+                            <span class="badge badge-week">⏱️ <strong style="background: rgba(249, 115, 22, 0.3); padding: 2px 6px; border-radius: 4px; color: #f97316;">L</strong> / Week 1-3 (11 days)</span>
                             <span class="badge badge-team">👥 2 Developers</span>
                             <span class="badge badge-impact">📈 +13pp Starts, 2.1x Episodes</span>
                         </div>
@@ -1126,11 +1126,16 @@
                         <strong>Already Exists:</strong> Microdrama rows (DynamicHomeRow), Continue Watching (exists), Binge Auto-Play (in progress)
                     </div>
 
-                    <h4>✅ What We'll Build (5 Tasks)</h4>
+                    <h4>✅ What We'll Build (4 Tasks)</h4>
 
-                    <p style="margin-top: 15px;"><strong>Task 1 (Main): In-App PiP for Microdrama Auto-Play (3 days)</strong></p>
+                    <div class="metric-box" style="background: rgba(36, 139, 59, 0.1); border-left-color: #248b3b; margin: 15px 0 20px 0;">
+                        <strong>📱 Wireframe:</strong> <a href="microdrama-engagement-boost-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View Interactive Wireframe →</a><br>
+                        <span style="font-size: 13px; color: #BEBEBE;">See PiP auto-play, filter-based Top 10 banner, personalized recommendations, and push notifications</span>
+                    </div>
+
+                    <p style="margin-top: 15px;"><strong>Task 1: In-App PiP for Microdrama Auto-Play (3 days)</strong></p>
                     <ul>
-                        <li><strong>PiP Position:</strong> Left bottom corner of home screen</li>
+                        <li><strong>PiP Position:</strong> Left bottom corner of home screen (no filter applied)</li>
                         <li><strong>Content Logic:</strong> Show most popular microdrama OR last incomplete microdrama</li>
                         <li><strong>Auto-Play:</strong> Start playback automatically when user lands on home (muted initially)</li>
                         <li><strong>Tap to Expand:</strong> Tap PiP to open full-screen player</li>
@@ -1138,31 +1143,26 @@
                         <li><strong>Track:</strong> pip_microdrama_shown, pip_auto_play_started, pip_expanded_to_fullscreen, pip_dismissed, pip_conversion_rate</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 2: Filter Visibility Improvements (2 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 2: Personalized Microdrama Recommendations (2 days)</strong></p>
                     <ul>
-                        <li><strong>"Drama Shorts" Label Visibility:</strong> Increase label size and add microdrama icon (assets already exist)</li>
-                        <li><strong>Auto-Show on First Visit:</strong> Auto-select microdrama filter for first-time visitors to increase discovery</li>
-                    </ul>
-
-                    <p style="margin-top: 15px;"><strong>Task 3: Personalized Microdrama Recommendations (2 days)</strong></p>
-                    <ul>
-                        <li><strong>New Row:</strong> "Microdramas You'll Love" on home screen</li>
+                        <li><strong>New Row:</strong> "Microdramas You'll Love" on home screen (when Microdrama filter applied)</li>
                         <li><strong>Personalization:</strong> Based on viewing history (genre affinity, completion rate, watch time)</li>
                         <li><strong>Backend:</strong> Query recommendation API with content_type=microdrama filter</li>
                         <li><strong>Track:</strong> personalized_microdrama_shown, personalized_microdrama_clicked, personalized_conversion_rate</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 4: Push Notification for New Microdrama Releases (2 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 3: Push Notification for New Microdrama Launches (2 days)</strong></p>
                     <ul>
-                        <li><strong>Weekly Push:</strong> "3 new microdramas added this week 🎬"</li>
+                        <li><strong>Weekly Push:</strong> "New Microdrama: [Series Name] 🎬 - Watch all episodes now"</li>
                         <li><strong>Personalized Notification:</strong> Segment by genre preference from watch history</li>
-                        <li><strong>Deep Link:</strong> Opens microdrama collection page with new releases</li>
+                        <li><strong>Deep Link:</strong> Opens specific new microdrama series page to start watching</li>
                         <li><strong>Track:</strong> new_microdrama_notification_sent, new_microdrama_notification_clicked, notification_to_playback_rate</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 5: "Top 10 Microdramas This Week" Banner (1.5 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 4: "Top 10 Microdramas This Week" Banner - Filter-Based Widget (Already Exists)</strong></p>
                     <ul>
-                        <li><strong>Hero Banner:</strong> Prominent at top of home screen</li>
+                        <li><strong>Existing Widget:</strong> Already implemented - appears when Microdrama filter is applied</li>
+                        <li><strong>Hero Banner:</strong> Prominent at top of home screen (only when Microdrama filter active)</li>
                         <li><strong>Content:</strong> Most-watched microdramas with view count (social proof)</li>
                         <li><strong>UI:</strong> Horizontal carousel with thumbnails + "Trending" badge</li>
                         <li><strong>Backend:</strong> Query top 10 microdramas by view count (last 7 days)</li>
@@ -1184,8 +1184,8 @@
                         - Microdrama viewers have 25% higher D7 retention vs non-viewers
                     </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 13 days (3d PiP + 2d visibility + 2d personalization + 2d push + 1.5d top10 + 2d integration tests + 0.5d analytics)</p>
-                    <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> PiP content (popular vs incomplete), Row position (top vs middle vs bottom), Personalization (on vs off), Notification timing (immediate vs 1hr delayed)</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 11 days (3d PiP + 2d personalization + 2d push + 0.5d top10 integration + 2d integration tests + 0.5d analytics + 1d buffer)</p>
+                    <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> PiP content (popular vs incomplete), PiP timing (immediate vs delayed), Row position (top vs middle vs bottom), Personalization (on vs off), Notification timing (immediate vs 1hr delayed)</p>
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> pip_conversion_rate, microdrama_start_rate, episodes_per_session, microdrama_weekly_active_rate, personalization_lift</p>
                 </div>
             </div>
