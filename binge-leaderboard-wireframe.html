@@ -233,13 +233,14 @@
 
         .leaderboard-item {
             background: #292929;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 8px;
+            border-radius: 10px;
+            padding: 14px 12px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
 
         .leaderboard-item:hover {
@@ -252,14 +253,16 @@
         }
 
         .rank-position {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
-            color: #EFA73F;
-            min-width: 30px;
+            color: #BEBEBE;
+            min-width: 35px;
+            text-align: left;
         }
 
         .rank-position.top3 {
             color: #FFD700;
+            font-size: 20px;
         }
 
         .user-avatar {
@@ -280,35 +283,40 @@
         .user-name {
             font-size: 14px;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
+            color: #FFFFFF;
         }
 
         .user-stats {
-            font-size: 11px;
-            color: #737373;
+            font-size: 12px;
+            color: #BEBEBE;
         }
 
         .tier-badge {
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 10px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 11px;
             font-weight: 700;
             white-space: nowrap;
+            text-align: center;
         }
 
         .badge-legend {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            background: #FFD700;
             color: #000;
+            box-shadow: 0 2px 6px rgba(255, 215, 0, 0.4);
         }
 
         .badge-superfan {
-            background: linear-gradient(135deg, #00d4ff 0%, #0088cc 100%);
+            background: #248b3b;
             color: #fff;
+            box-shadow: 0 2px 6px rgba(36, 139, 59, 0.4);
         }
 
         .badge-rising {
-            background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
-            color: #fff;
+            background: #EFA73F;
+            color: #000;
+            box-shadow: 0 2px 6px rgba(239, 167, 63, 0.4);
         }
 
         .share-card {
@@ -699,7 +707,7 @@
                                     <div class="user-name">@dramaqueen92</div>
                                     <div class="user-stats">145 episodes • 72h watch time</div>
                                 </div>
-                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
+                                <div class="tier-badge badge-legend">LEGEND</div>
                             </div>
 
                             <div class="leaderboard-item">
@@ -709,7 +717,7 @@
                                     <div class="user-name">@bingewatcher</div>
                                     <div class="user-stats">138 episodes • 69h watch time</div>
                                 </div>
-                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
+                                <div class="tier-badge badge-legend">LEGEND</div>
                             </div>
 
                             <div class="leaderboard-item">
@@ -719,7 +727,7 @@
                                     <div class="user-name">@showaddict</div>
                                     <div class="user-stats">129 episodes • 64h watch time</div>
                                 </div>
-                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
+                                <div class="tier-badge badge-legend">LEGEND</div>
                             </div>
 
                             <div class="leaderboard-item">
@@ -729,7 +737,7 @@
                                     <div class="user-name">@stageuser</div>
                                     <div class="user-stats">89 episodes • 44h watch time</div>
                                 </div>
-                                <div class="tier-badge badge-superfan">⭐ SUPER FAN</div>
+                                <div class="tier-badge badge-superfan">SUPER FAN</div>
                             </div>
 
                             <div class="leaderboard-item current-user">
