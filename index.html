@@ -246,6 +246,55 @@
             line-height: 1.8;
         }
 
+        /* Metric Tags */
+        .metric-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .metric-tag {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75em;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid;
+            transition: all 0.2s;
+        }
+
+        .metric-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .metric-tag.retention {
+            background: rgba(37, 141, 88, 0.15);
+            border-color: rgba(37, 141, 88, 0.4);
+            color: #2ea66b;
+        }
+
+        .metric-tag.growth {
+            background: rgba(239, 167, 63, 0.15);
+            border-color: rgba(239, 167, 63, 0.4);
+            color: #EFA73F;
+        }
+
+        .metric-tag.primary {
+            background: rgba(37, 141, 88, 0.3);
+            border-color: var(--accent-green);
+            border-width: 2px;
+            font-weight: 700;
+        }
+
+        .metric-tag.primary.growth {
+            background: rgba(239, 167, 63, 0.3);
+            border-color: var(--accent-orange);
+        }
+
         /* Initiative Card */
         .initiative-card {
             background: var(--bg-card);
@@ -692,6 +741,68 @@
                 <strong>Mission:</strong> Reduce trial cancellation (especially PSP-initiated) and maximize content consumption. Every percentage point saved = Direct revenue impact.
             </p>
 
+            <!-- Key Metrics Section -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
+                <!-- Retention Metrics -->
+                <div style="background: linear-gradient(135deg, rgba(37, 141, 88, 0.1) 0%, rgba(37, 141, 88, 0.05) 100%); border: 2px solid rgba(37, 141, 88, 0.3); border-radius: 16px; padding: 24px;">
+                    <h3 style="color: var(--accent-green); font-size: 1.5em; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.3em;">🔄</span>
+                        <span>RETENTION Metrics</span>
+                    </h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="padding: 10px 14px; background: rgba(37, 141, 88, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-green);">
+                            📊 Month 0 Watchers/% ↑
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(37, 141, 88, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-green);">
+                            ⚡ Habit Moment % ↑ <span style="color: #BEBEBE; font-weight: 400;">(8 days consecutive)</span>
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(37, 141, 88, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-green);">
+                            📅 Week 4 Watchers/% ↑
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(37, 141, 88, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-green);">
+                            🔁 Renewal Rate ↑
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(37, 141, 88, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-green);">
+                            📈 Month 1 Watcher/% ↑
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(37, 141, 88, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-green);">
+                            😴 Dormants Watcher/% ↑
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(37, 141, 88, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-green);">
+                            🔄 Re Acquisition/% ↑
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Growth Metrics -->
+                <div style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(239, 167, 63, 0.05) 100%); border: 2px solid rgba(239, 167, 63, 0.3); border-radius: 16px; padding: 24px;">
+                    <h3 style="color: var(--accent-orange); font-size: 1.5em; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.3em;">🚀</span>
+                        <span>GROWTH Metrics</span>
+                    </h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="padding: 10px 14px; background: rgba(239, 167, 63, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-orange);">
+                            📈 Trial Rate (TRT) ↑
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(239, 167, 63, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-orange);">
+                            ⚠️ D₀(TCR) ↓ <span style="color: #BEBEBE; font-weight: 400;">(Day 0 Trial Cancellation)</span>
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(239, 167, 63, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-orange);">
+                            📊 D₁(Retention) ↑ <span style="color: #BEBEBE; font-weight: 400;">(Day 1 Return)</span>
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(239, 167, 63, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-orange);">
+                            💡 AHA Moment ↑ <span style="color: #BEBEBE; font-weight: 400;">(4 days consecutive)</span>
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(239, 167, 63, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-orange);">
+                            💳 Subscription/Rate ↑
+                        </div>
+                        <div style="padding: 10px 14px; background: rgba(239, 167, 63, 0.1); border-radius: 8px; font-size: 0.9em; font-weight: 600; border-left: 3px solid var(--accent-orange);">
+                            🔄 Re Activation/% ↑
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green); margin-bottom: 32px;">
                 <strong>🎯 P0 Focus (6 Initiatives) - TCR Reduction + Viral Growth:</strong><br>
                 #1: PSP Cancellation Prevention (App-Side) - 18K saved trials/month from 120K PSP cancellations (Notification → FOMO Journey → Content Blocked → Resume/Reactivate)<br>
@@ -740,6 +851,12 @@
                             <span class="badge badge-impact">📈 18K Saves/Month</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="metric-tags">
+                    <span class="metric-tag growth primary">⚠️ D₀(TCR) ↓</span>
+                    <span class="metric-tag growth">📊 D₁(Retention) ↑</span>
+                    <span class="metric-tag growth">🔄 Re Activation ↑</span>
                 </div>
 
                 <div class="user-types">
@@ -976,6 +1093,12 @@
                     </div>
                 </div>
 
+                <div class="metric-tags">
+                    <span class="metric-tag growth primary">📊 D₁(Retention) ↑</span>
+                    <span class="metric-tag retention">📊 Month 0 Watchers ↑</span>
+                    <span class="metric-tag growth">💡 AHA Moment ↑</span>
+                </div>
+
                 <div class="user-types">
                     <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
@@ -1139,6 +1262,12 @@
                     </div>
                 </div>
 
+                <div class="metric-tags">
+                    <span class="metric-tag retention primary">📊 Month 0 Watchers ↑</span>
+                    <span class="metric-tag growth">💡 AHA Moment ↑</span>
+                    <span class="metric-tag growth">📊 D₁(Retention) ↑</span>
+                </div>
+
                 <div class="user-types">
                     <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
@@ -1244,6 +1373,13 @@
                     </div>
                 </div>
 
+                <div class="metric-tags">
+                    <span class="metric-tag retention primary">⚡ Habit Moment % ↑</span>
+                    <span class="metric-tag retention">📅 Week 4 Watchers ↑</span>
+                    <span class="metric-tag retention">🔁 Renewal Rate ↑</span>
+                    <span class="metric-tag retention">📊 Month 0 Watchers ↑</span>
+                </div>
+
                 <div class="user-types">
                     <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
@@ -1309,6 +1445,13 @@
                             <span class="badge badge-impact">📈 +60% Consumption, 10K Social Shares</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="metric-tags">
+                    <span class="metric-tag retention primary">⚡ Habit Moment % ↑</span>
+                    <span class="metric-tag retention">📅 Week 4 Watchers ↑</span>
+                    <span class="metric-tag retention">📊 Month 0 Watchers ↑</span>
+                    <span class="metric-tag retention">🔁 Renewal Rate ↑</span>
                 </div>
 
                 <div class="user-types">
@@ -1533,6 +1676,13 @@
                     </div>
                 </div>
 
+                <div class="metric-tags">
+                    <span class="metric-tag retention primary">📊 Month 0 Watchers ↑</span>
+                    <span class="metric-tag retention">😴 Dormants Watcher ↑</span>
+                    <span class="metric-tag growth">💡 AHA Moment ↑</span>
+                    <span class="metric-tag growth">📊 D₁(Retention) ↑</span>
+                </div>
+
                 <div class="user-types">
                     <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
@@ -1749,6 +1899,12 @@
                     </div>
                 </div>
 
+                <div class="metric-tags">
+                    <span class="metric-tag growth primary">🔄 Re Activation ↑</span>
+                    <span class="metric-tag retention">🔁 Renewal Rate ↑</span>
+                    <span class="metric-tag retention">📈 Month 1 Watcher ↑</span>
+                </div>
+
                 <div class="user-types">
                     <h4>🎯 Target Users</h4>
                     <div class="user-type-tags">
@@ -1851,6 +2007,13 @@
                             <span class="badge badge-impact">📈 +45% WAU, +30% Consumption</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="metric-tags">
+                    <span class="metric-tag retention primary">⚡ Habit Moment % ↑</span>
+                    <span class="metric-tag retention">📅 Week 4 Watchers ↑</span>
+                    <span class="metric-tag retention">📊 Month 0 Watchers ↑</span>
+                    <span class="metric-tag growth">📈 Trial Rate (TRT) ↑</span>
                 </div>
 
                 <div class="user-types">
@@ -2068,6 +2231,10 @@
                     </div>
                 </div>
 
+                <div class="metric-tags">
+                    <span class="metric-tag" style="background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.4); color: #ef4444;">❌ NO METRIC ALIGNMENT</span>
+                </div>
+
                 <div class="section-content" style="margin-top: 50px;">
                     <h4>🚨 Problem: Scalability Blocker</h4>
                     <div class="metric-box" style="border-left-color: var(--accent-orange);">
@@ -2214,6 +2381,11 @@
                             <span class="badge badge-impact">🎬 Unblocks Playback</span>
                         </div>
                     </div>
+                </div>
+
+                <div class="metric-tags">
+                    <span class="metric-tag" style="background: rgba(239, 167, 63, 0.15); border-color: rgba(239, 167, 63, 0.4); color: #EFA73F;">⚠️ WEAK ALIGNMENT</span>
+                    <span class="metric-tag growth" style="opacity: 0.6;">📊 D₁(Retention) ↑ (Indirect)</span>
                 </div>
 
                 <div class="user-types">
