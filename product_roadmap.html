@@ -797,21 +797,63 @@
                         <span style="font-size: 13px; color: #BEBEBE;">Two retention flows: Trial Paused/Revoked (4 screens) & Subscription Expired (3 screens) - Notification → FOMO Journey → Content Blocked → CTA</span>
                     </div>
 
-                    <p style="margin-top: 15px;"><strong>Phase 1: Notification System (3 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 1: Multi-Channel Notification System (3 days)</strong></p>
                     <ul>
-                        <li><strong>Day 1-2: Notification Implementation</strong>
+                        <li><strong>Day 1-2: Push Notification + WhatsApp Implementation</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>Trial Paused/Revoked Notification:</strong> Title: "Trial Paused", Body: "You can not watch any STAGE content"</li>
-                                <li><strong>Subscription Expired Notification:</strong> Title: "Subscription Expired", Body: "You can not watch any STAGE content"</li>
+                                <li><strong>Push Notification - Trial Paused/Revoked:</strong> Title: "Trial Paused", Body: "You can not watch any STAGE content"</li>
+                                <li><strong>Push Notification - Subscription Expired:</strong> Title: "Subscription Expired", Body: "You can not watch any STAGE content"</li>
                                 <li><strong>Trigger Logic:</strong> Backend webhook detects pause/revoke/expire → Send notification within 5 minutes</li>
                                 <li><strong>Deep Link:</strong> stage://retention-flow?type=trial_paused|trial_revoked|subscription_expired&source=app|psp</li>
                             </ul>
                         </li>
-                        <li><strong>Day 3: Notification Analytics</strong>
+                        <li><strong>WhatsApp Message Copy:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><code>retention_notification_sent</code> - Track notification delivery (type, source)</li>
-                                <li><code>retention_notification_clicked</code> - Track notification taps</li>
-                                <li><code>retention_deep_link_opened</code> - Track deep link success</li>
+                                <li><strong>Trial Paused (App-Side):</strong><br>
+                                    <div style="background: #25D366; color: white; padding: 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; line-height: 1.6;">
+                                        👋 Hey! Your STAGE trial is paused<br><br>
+                                        You're missing out on:<br>
+                                        🔥 Bideshi Bahu finale (tomorrow)<br>
+                                        ⭐ Meera - New 20-episode series<br>
+                                        😄 Hasir Raja trending episodes<br>
+                                        📺 100+ other shows<br><br>
+                                        ▶️ <strong>Resume your trial now</strong> → [Deep Link]<br><br>
+                                        Still X days left in your trial!
+                                    </div>
+                                </li>
+                                <li><strong>Trial Revoked (PSP-Side):</strong><br>
+                                    <div style="background: #25D366; color: white; padding: 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; line-height: 1.6;">
+                                        ⚠️ Your STAGE trial was cancelled from PhonePe/Paytm<br><br>
+                                        Don't miss:<br>
+                                        🔥 Bideshi Bahu finale drops tomorrow<br>
+                                        📺 2.1M people are watching right now<br>
+                                        ⏰ New shows premiering this week<br><br>
+                                        🔄 <strong>Reactivate your trial</strong> → [Deep Link]<br><br>
+                                        Quick 1-tap setup via PhonePe/Paytm. X days of trial remaining!
+                                    </div>
+                                </li>
+                                <li><strong>Subscription Expired:</strong><br>
+                                    <div style="background: #25D366; color: white; padding: 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; line-height: 1.6;">
+                                        🎬 Your STAGE subscription expired!<br><br>
+                                        You're missing:<br>
+                                        🔥 Bideshi Bahu - Most-watched show (2.1M viewers)<br>
+                                        💕 Meera - Romantic drama everyone's talking about<br>
+                                        😄 Hasir Raja S03 - Comedy hit returning soon<br><br>
+                                        🔄 <strong>Reactivate subscription</strong> → [Deep Link]<br><br>
+                                        Instant access to all content. Setup mandate now!
+                                    </div>
+                                </li>
+                                <li><strong>Timing Strategy:</strong> Send WhatsApp 30 minutes after push notification (if push not opened)</li>
+                                <li><strong>Deep Links:</strong> Same deep link structure as push notifications</li>
+                            </ul>
+                        </li>
+                        <li><strong>Day 3: Multi-Channel Analytics</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><code>retention_notification_sent</code> - Track delivery (type, source, channel: push/whatsapp)</li>
+                                <li><code>retention_notification_clicked</code> - Track taps (channel: push/whatsapp)</li>
+                                <li><code>retention_deep_link_opened</code> - Track deep link success (channel)</li>
+                                <li><code>whatsapp_message_delivered</code> - Track WhatsApp delivery success</li>
+                                <li><code>whatsapp_message_read</code> - Track WhatsApp read receipts</li>
                             </ul>
                         </li>
                     </ul>
@@ -882,20 +924,22 @@
 
                     <p style="margin-top: 15px;"><strong>Phase 4: Integration Testing (2 days)</strong></p>
                     <ul>
-                        <li><strong>Day 1: Flow Testing - Trial Paused/Revoked</strong>
+                        <li><strong>Day 1: Flow Testing - Trial Paused/Revoked (Push + WhatsApp)</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Test Flow 1: App pause → Notification → FOMO → Content blocked → Resume → Success</li>
-                                <li>Test Flow 2: PSP revoke → Notification → FOMO → Content blocked → Reactivate → PhonePe deeplink</li>
+                                <li>Test Flow 1: App pause → Push notification → FOMO → Content blocked → Resume → Success</li>
+                                <li>Test Flow 2: PSP revoke → Push notification → FOMO → Content blocked → Reactivate → PhonePe deeplink</li>
+                                <li>Test WhatsApp fallback: Push not opened → WhatsApp sent after 30 min → Deep link works</li>
                                 <li>Verify notification variants (Trial Paused vs Trial Revoked)</li>
                                 <li>Test different PSP sources (PhonePe vs Paytm)</li>
                             </ul>
                         </li>
                         <li><strong>Day 2: Flow Testing - Subscription Expired & Edge Cases</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Test Flow 3: Subscription expired → Notification → FOMO → Content blocked → Reactivate → PSP deeplink</li>
+                                <li>Test Flow 3: Subscription expired → Push/WhatsApp → FOMO → Content blocked → Reactivate → PSP deeplink</li>
+                                <li>Test WhatsApp delivery: Message sent → Delivered confirmation → Read receipt → Link clicked</li>
                                 <li>Test notification delivery failures (no internet, permissions off)</li>
                                 <li>Test deep link errors (app not installed, malformed URLs)</li>
-                                <li>Verify all analytics events fire correctly for all 3 flows</li>
+                                <li>Verify all analytics events fire correctly for all 3 flows (push + WhatsApp)</li>
                                 <li>Regression test existing in-app cancellation flow</li>
                             </ul>
                         </li>
@@ -904,7 +948,8 @@
                     <h4>📈 Expected Impact</h4>
                     <div class="metric-box">
                         <strong>Conservative Estimate:</strong><br>
-                        <strong>PSP Cancellation Save Rate: 15-20%</strong> (industry benchmark for push notification + retention dialog)<br><br>
+                        <strong>PSP Cancellation Save Rate: 15-20%</strong> (industry benchmark for push notification + retention dialog)<br>
+                        <strong>Multi-Channel Boost:</strong> WhatsApp fallback can increase reach by 20-30% (users with push disabled/ignored)<br><br>
                         <strong>Math (Based on Actual 36.28% TCR - Android Only):</strong><br>
                         - <strong>Total cancellations: ~116K/month</strong> (319K trial activations × 36.28% TCR)<br>
                         - <strong>PSP cancellations: ~81K/month</strong> (70% of total, bypass STAGE app)<br>
@@ -926,9 +971,10 @@
                         - Catches users in impulse cancellation moment
                     </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 12 days (3 days notification + 3 days FOMO journey + 4 days blocked screens + 2 days integration tests)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> retention_notification_clicked, retention_fomo_shown, retention_blocked_shown, retention_resume_clicked, retention_reactivate_clicked, trial_resumed, trial_activated (is_reactivated: true), trial_cancellation_rate (target: 36% → 30% Android)</p>
-                    <p style="margin-top: 5px;"><strong>🧪 Future Experiments:</strong> FOMO content order (popular-first vs upcoming-first), Notification timing (immediate vs 5min vs 10min delay), CTA copy variants</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 12 days (3 days multi-channel notification (push+WhatsApp) + 3 days FOMO journey + 4 days blocked screens + 2 days integration tests)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> retention_notification_clicked (channel: push/whatsapp), whatsapp_message_delivered, whatsapp_message_read, retention_fomo_shown, retention_blocked_shown, retention_resume_clicked, retention_reactivate_clicked, trial_resumed, trial_activated (is_reactivated: true), trial_cancellation_rate (target: 36% → 30% Android)</p>
+                    <p style="margin-top: 5px;"><strong>📱 WhatsApp Strategy:</strong> Send WhatsApp 30 min after push if not opened. Includes FOMO content (Bideshi Bahu finale, 2.1M watching) + urgency (X days left) + direct CTA with deep link</p>
+                    <p style="margin-top: 5px;"><strong>🧪 Future Experiments:</strong> WhatsApp vs Push effectiveness, FOMO content order (popular-first vs upcoming-first), Notification timing (immediate vs 5min vs 10min delay), CTA copy variants (fear vs benefit)</p>
                     <p style="margin-top: 5px;"><strong>📊 Reference Code:</strong> motivator_popup.dart, resume_subscription_banner.dart, trial_mandate_resume_psp.dart, restart_subscription_popup.dart</p>
                 </div>
             </div>
