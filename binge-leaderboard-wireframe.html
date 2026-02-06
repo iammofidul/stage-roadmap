@@ -594,33 +594,17 @@
                             </div>
 
                             <!-- Your Rank Card -->
-                            <div style="background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%); border-radius: 12px; padding: 14px; margin-bottom: 12px; cursor: pointer;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <div style="background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%); border-radius: 12px; padding: 16px; margin-bottom: 20px; cursor: pointer;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
                                     <div>
-                                        <div style="font-size: 11px; color: rgba(255,255,255,0.8); margin-bottom: 2px;">Your Rank</div>
-                                        <div style="font-size: 24px; font-weight: 900; color: #fff;">#347</div>
+                                        <div style="font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 4px;">Your Rank This Week</div>
+                                        <div style="font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 4px;">#347</div>
+                                        <div style="font-size: 12px; color: rgba(255,255,255,0.9);">23 episodes watched</div>
                                     </div>
-                                    <div style="background: rgba(255,255,255,0.2); padding: 6px 10px; border-radius: 8px; font-size: 11px; font-weight: 600;">🎁 Top 500</div>
-                                </div>
-                                <div style="font-size: 11px; color: rgba(255,255,255,0.9);">23 episodes • Keep Top 500 for FREE subscription!</div>
-                            </div>
-
-                            <!-- Top 3 Preview -->
-                            <div style="display: flex; gap: 8px; margin-bottom: 20px;">
-                                <div style="flex: 1; background: #292929; border-radius: 8px; padding: 10px; text-align: center;">
-                                    <div style="font-size: 20px; margin-bottom: 4px;">🥇</div>
-                                    <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">@dramaqueen</div>
-                                    <div style="font-size: 10px; color: #737373;">145 eps</div>
-                                </div>
-                                <div style="flex: 1; background: #292929; border-radius: 8px; padding: 10px; text-align: center;">
-                                    <div style="font-size: 20px; margin-bottom: 4px;">🥈</div>
-                                    <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">@bingewatcher</div>
-                                    <div style="font-size: 10px; color: #737373;">138 eps</div>
-                                </div>
-                                <div style="flex: 1; background: #292929; border-radius: 8px; padding: 10px; text-align: center;">
-                                    <div style="font-size: 20px; margin-bottom: 4px;">🥉</div>
-                                    <div style="font-size: 11px; font-weight: 600; margin-bottom: 2px;">@showaddict</div>
-                                    <div style="font-size: 10px; color: #737373;">129 eps</div>
+                                    <div>
+                                        <div style="background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; text-align: center;">🎁 Top 500</div>
+                                        <div style="font-size: 10px; color: rgba(255,255,255,0.7); margin-top: 4px; text-align: center;">FREE cycle!</div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -681,20 +665,19 @@
                     <ul style="font-size: 12px;">
                         <li>User lands on home → Sees normal content (Continue Watching, etc.)</li>
                         <li>Leaderboard row shows "🏆 Binge Leaderboard" section</li>
-                        <li>Your rank card displays "#347" with "🎁 Top 500" badge</li>
-                        <li>Top 3 users preview (🥇🥈🥉) shown below</li>
-                        <li>Watch streak widget shows "4/7" progress</li>
+                        <li>Simplified rank card: "#347" with "🎁 Top 500 - FREE cycle!" badge</li>
+                        <li>Watch streak widget shows "🔥 4/7" progress</li>
                         <li>User taps "View All" or rank card → Opens full leaderboard</li>
                         <li>Entry points: Leaderboard row on home screen only</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Screen 2: Full Leaderboard (Overall) -->
+            <!-- Screen 2: Full Leaderboard -->
             <div class="screen-card">
                 <div class="task-label">Task 2: Full Leaderboard UI</div>
-                <div class="screen-title">Leaderboard - Overall</div>
-                <div class="screen-subtitle">Weekly ranking with tabs for genres</div>
+                <div class="screen-title">Binge Leaderboard</div>
+                <div class="screen-subtitle">Weekly ranking - resets every Monday</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -703,16 +686,9 @@
                             <div class="icon-btn">📤</div>
                         </div>
 
-                        <div class="tabs-container">
-                            <div class="tab active">Overall</div>
-                            <div class="tab">Drama</div>
-                            <div class="tab">Comedy</div>
-                            <div class="tab">Thriller</div>
-                            <div class="tab">Microdrama</div>
-                        </div>
-
-                        <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: #BEBEBE;">
-                            Resets every Monday • Top 500 get FREE subscription 🎁
+                        <div style="text-align: center; margin-bottom: 20px; padding: 12px; background: rgba(36, 139, 59, 0.1); border-radius: 8px;">
+                            <div style="font-size: 13px; color: #BEBEBE; margin-bottom: 4px;">Resets every Monday</div>
+                            <div style="font-size: 14px; font-weight: 600; color: #248b3b;">Top 500 get FREE subscription cycle 🎁</div>
                         </div>
 
                         <div class="leaderboard-list">
@@ -800,11 +776,12 @@
                     <h3 style="font-size: 14px;">User Flow</h3>
                     <ul style="font-size: 12px;">
                         <li>User taps "View All" or rank card on home → Opens full leaderboard</li>
-                        <li>Tabs for Overall, Drama, Comedy, Thriller, Microdrama</li>
-                        <li>Top 10 users shown with badges (Legend, Super Fan, Rising Star)</li>
-                        <li>Current user (#347) highlighted in green with "TOP 500" badge</li>
-                        <li>Shows episodes watched and total watch time</li>
+                        <li>Shows overall ranking (all content types combined)</li>
+                        <li>Top users shown with tier badges (Legend, Super Fan, Rising Star)</li>
+                        <li>Current user (#347) highlighted with "TOP 500" badge</li>
+                        <li>Displays episodes watched and total watch time per user</li>
                         <li>Taps share icon → Opens social sharing card</li>
+                        <li>Weekly reset every Monday creates recurring engagement</li>
                     </ul>
                 </div>
             </div>
@@ -960,103 +937,6 @@
                 </div>
             </div>
 
-            <!-- Screen 6: Genre-Specific Leaderboard -->
-            <div class="screen-card">
-                <div class="task-label">Task 2: Genre Leaderboards</div>
-                <div class="screen-title">Leaderboard - Drama</div>
-                <div class="screen-subtitle">Genre-specific ranking to drive content discovery</div>
-                <div class="phone-frame">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <div class="app-header">
-                            <div style="font-size: 18px; font-weight: 700;">🏆 Binge Leaderboard</div>
-                            <div class="icon-btn">📤</div>
-                        </div>
-
-                        <div class="tabs-container">
-                            <div class="tab">Overall</div>
-                            <div class="tab active">Drama</div>
-                            <div class="tab">Comedy</div>
-                            <div class="tab">Thriller</div>
-                            <div class="tab">Microdrama</div>
-                        </div>
-
-                        <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: #BEBEBE;">
-                            Top Drama Bingers This Week 🎭
-                        </div>
-
-                        <div class="leaderboard-list">
-                            <div class="leaderboard-item">
-                                <div class="rank-position top3">#1</div>
-                                <div class="user-avatar">👑</div>
-                                <div class="user-info">
-                                    <div class="user-name">@dramaqueen92</div>
-                                    <div class="user-stats">87 drama episodes • 43h watch time</div>
-                                </div>
-                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
-                            </div>
-
-                            <div class="leaderboard-item">
-                                <div class="rank-position top3">#2</div>
-                                <div class="user-avatar">🎭</div>
-                                <div class="user-info">
-                                    <div class="user-name">@dramalover</div>
-                                    <div class="user-stats">79 drama episodes • 39h watch time</div>
-                                </div>
-                                <div class="tier-badge badge-legend">🏆 LEGEND</div>
-                            </div>
-
-                            <div class="leaderboard-item current-user">
-                                <div class="rank-position">#156</div>
-                                <div class="user-avatar">🙋</div>
-                                <div class="user-info">
-                                    <div class="user-name">You</div>
-                                    <div class="user-stats">18 drama episodes • 9h watch time</div>
-                                </div>
-                                <div class="tier-badge badge-rising">🌟 RISING STAR</div>
-                            </div>
-
-                            <div class="leaderboard-item">
-                                <div class="rank-position">#157</div>
-                                <div class="user-avatar">👤</div>
-                                <div class="user-info">
-                                    <div class="user-name">@viewer456</div>
-                                    <div class="user-stats">17 drama episodes • 8h watch time</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bottom-nav">
-                            <div class="nav-item">
-                                <div class="nav-icon">🏠</div>
-                                <span>Home</span>
-                            </div>
-                            <div class="nav-item">
-                                <div class="nav-icon">🎬</div>
-                                <span>Coming Soon</span>
-                            </div>
-                            <div class="nav-item">
-                                <div class="nav-icon">➕</div>
-                                <span>My List</span>
-                            </div>
-                            <div class="nav-item">
-                                <div class="nav-icon">⚙️</div>
-                                <span>Settings</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="feature-description" style="margin: 15px 0;">
-                    <h3 style="font-size: 14px;">User Flow</h3>
-                    <ul style="font-size: 12px;">
-                        <li>User taps "Drama" tab → Shows Drama-only leaderboard</li>
-                        <li>Ranking based on drama episodes watched + watch time</li>
-                        <li>Current user (#156) ranked as "Rising Star" in Drama</li>
-                        <li>Drives content discovery: Users try new dramas to compete</li>
-                        <li>Users can compete in multiple genre leaderboards</li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -1068,14 +948,6 @@
                 setTimeout(() => {
                     e.target.style.transform = 'scale(1)';
                 }, 100);
-            });
-        });
-
-        // Simulate tab switching
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
             });
         });
     </script>
