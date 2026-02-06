@@ -717,12 +717,12 @@
                         <div style="color: var(--text-muted);">Total Dev-Days</div>
                     </div>
                     <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-orange);">
-                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-orange);">174</div>
+                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-orange);">176</div>
                         <div style="color: var(--text-muted);">Required Effort</div>
                     </div>
                     <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
-                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-green);">17%</div>
-                        <div style="color: var(--text-muted);">Buffer (36 days)</div>
+                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-green);">16%</div>
+                        <div style="color: var(--text-muted);">Buffer (34 days)</div>
                     </div>
                 </div>
             </div>
@@ -735,7 +735,7 @@
                         <div class="initiative-title">PSP Cancellation Prevention (App-Side)</div>
                         <div class="initiative-meta">
                             <span class="badge badge-new">🆕 HIGHEST PRIORITY</span>
-                            <span class="badge badge-week">⏱️ <strong style="background: rgba(249, 115, 22, 0.3); padding: 2px 6px; border-radius: 4px; color: #f97316;">L</strong> / Week 1-2 (12 days)
+                            <span class="badge badge-week">⏱️ <strong style="background: rgba(249, 115, 22, 0.3); padding: 2px 6px; border-radius: 4px; color: #f97316;">L</strong> / Week 1-3 (14 days)
                             <span class="badge badge-team">👥 2 Developers</span>
                             <span class="badge badge-impact">📈 18K Saves/Month</span>
                         </div>
@@ -794,7 +794,7 @@
 
                     <div class="metric-box" style="background: rgba(36, 139, 59, 0.1); border-left-color: #248b3b; margin: 15px 0 20px 0;">
                         <strong>📱 Wireframe:</strong> <a href="psp-cancellation-prevention-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View Interactive Wireframe →</a><br>
-                        <span style="font-size: 13px; color: #BEBEBE;">Two retention flows: Trial Paused/Revoked (4 screens) & Subscription Expired (3 screens) - Notification → FOMO Journey → Content Blocked → CTA</span>
+                        <span style="font-size: 13px; color: #BEBEBE;">Two retention flows + WhatsApp Message Copy: Trial Paused/Revoked (4 screens) & Subscription Expired (3 screens) + 3 WhatsApp templates - Notification → FOMO Journey → Content Blocked → CTA</span>
                     </div>
 
                     <p style="margin-top: 15px;"><strong>Phase 1: Multi-Channel Notification System (3 days)</strong></p>
@@ -858,7 +858,28 @@
                         </li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Phase 2: FOMO Journey Screen (3 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 2: WhatsApp Integration (2 days)</strong></p>
+                    <ul>
+                        <li><strong>Day 1: WhatsApp Message Templates + Backend Integration</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Template Creation:</strong> 3 WhatsApp message templates (Trial Paused, Trial Revoked, Subscription Expired)</li>
+                                <li>Format messages with emojis, FOMO content (Bideshi Bahu, Meera, Hasir Raja), social proof (2.1M watching)</li>
+                                <li>Add deep link CTAs: "Resume your trial now" / "Reactivate your trial" / "Reactivate subscription"</li>
+                                <li><strong>Backend API Integration:</strong> Connect to WhatsApp Business API for message delivery</li>
+                                <li>Configure fallback logic: If push not opened after 30 min → Send WhatsApp</li>
+                            </ul>
+                        </li>
+                        <li><strong>Day 2: Testing + Analytics</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Test WhatsApp message delivery, read receipts, deep link clicks</li>
+                                <li>Test fallback timing (30 min delay after push)</li>
+                                <li>Implement analytics: whatsapp_message_delivered, whatsapp_message_read, whatsapp_link_clicked</li>
+                                <li>Test different phone number formats, international numbers, opt-out handling</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Phase 3: FOMO Journey Screen (3 days)</strong></p>
                     <ul>
                         <li><strong>Day 1: Popular Content Section</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
@@ -885,7 +906,7 @@
                         </li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Phase 3: Content Blocked Screens (4 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 4: Content Blocked Screens (4 days)</strong></p>
                     <ul>
                         <li><strong>Day 1: Trial Paused (App) Screen</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
@@ -922,7 +943,7 @@
                         </li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Phase 4: Integration Testing (2 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Phase 5: Integration Testing (2 days)</strong></p>
                     <ul>
                         <li><strong>Day 1: Flow Testing - Trial Paused/Revoked (Push + WhatsApp)</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
@@ -971,7 +992,7 @@
                         - Catches users in impulse cancellation moment
                     </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 12 days (3 days multi-channel notification (push+WhatsApp) + 3 days FOMO journey + 4 days blocked screens + 2 days integration tests)</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 14 days (3 days push notification + 2 days WhatsApp integration + 3 days FOMO journey + 4 days blocked screens + 2 days integration tests)</p>
                     <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> retention_notification_clicked (channel: push/whatsapp), whatsapp_message_delivered, whatsapp_message_read, retention_fomo_shown, retention_blocked_shown, retention_resume_clicked, retention_reactivate_clicked, trial_resumed, trial_activated (is_reactivated: true), trial_cancellation_rate (target: 36% → 30% Android)</p>
                     <p style="margin-top: 5px;"><strong>📱 WhatsApp Strategy:</strong> Send WhatsApp 30 min after push if not opened. Includes FOMO content (Bideshi Bahu finale, 2.1M watching) + urgency (X days left) + direct CTA with deep link</p>
                     <p style="margin-top: 5px;"><strong>🧪 Future Experiments:</strong> WhatsApp vs Push effectiveness, FOMO content order (popular-first vs upcoming-first), Notification timing (immediate vs 5min vs 10min delay), CTA copy variants (fear vs benefit)</p>
