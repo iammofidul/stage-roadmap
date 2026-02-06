@@ -604,16 +604,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>PSP/App Pause Retention Flow - FOMO Journey</h1>
-        <p class="subtitle">Notification → FOMO Journey → Content Blocked → Resume/Register CTA</p>
+        <h1>PSP/App Pause Retention Flow - Simple FOMO Journey</h1>
+        <p class="subtitle">Trial Paused/Revoked → Popular Unwatched + Upcoming Shows → Simple Resume/Reactivate CTA</p>
 
         <div class="feature-description">
-            <h3>🎯 Feature Overview</h3>
+            <h3>🎯 Feature Overview - Simple & Direct</h3>
             <ul>
                 <li><strong>Trigger:</strong> User pauses subscription (from app or PSP) → Notification sent immediately</li>
-                <li><strong>Strategy:</strong> FOMO journey showcasing upcoming releases + trending shows before showing CTA</li>
-                <li><strong>Two Paths:</strong> App pause = Resume banner (low friction) | PSP revoked = Register mandate banner (high friction)</li>
-                <li><strong>Entry Point:</strong> Lock screen notification → Opens FOMO journey → Content blocked with appropriate CTA</li>
+                <li><strong>Notification:</strong> Simple & direct - "Trial Paused" / "Trial Revoked" + "You can not watch any STAGE content"</li>
+                <li><strong>FOMO Journey:</strong> Show popular unwatched content + upcoming shows/movies (Bideshi Bahu as main example)</li>
+                <li><strong>Two Simple CTAs:</strong> App pause = "Resume" button | PSP revoked = "Reactivate Trial" button</li>
+                <li><strong>Entry Point:</strong> Lock screen notification → Opens FOMO journey → User tries to play → Content blocked → Simple CTA</li>
                 <li><strong>Design Pattern:</strong> Based on existing codebase (motivator_popup.dart, resume_subscription_banner.dart)</li>
                 <li><strong>Colors:</strong> Dark theme (0xFF121212) + Green CTA (0xFF248B3B) matching codebase standards</li>
             </ul>
@@ -622,7 +623,7 @@
         <div class="screens-grid">
             <!-- Screen 1: Lock Screen Notification -->
             <div class="screen-card">
-                <div class="screen-title">1. Lock Screen Notification (Immediate)</div>
+                <div class="screen-title">1. Notification - Trial Paused/Revoked</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -633,33 +634,33 @@
 
                         <div class="notification-card">
                             <div class="notif-header">
-                                <div class="notif-icon">🎬</div>
+                                <div class="notif-icon">⚠️</div>
                                 <div>
                                     <div class="notif-app-name">STAGE</div>
                                 </div>
                                 <div class="notif-time">now</div>
                             </div>
-                            <div class="notif-title">😱 Don't Miss Tomorrow's Big Releases!</div>
-                            <div class="notif-body">Bideshi Bahu Season Finale + 3 new shows dropping tomorrow. See what's coming!</div>
+                            <div class="notif-title">Trial Paused</div>
+                            <div class="notif-body">You can not watch any STAGE content</div>
                         </div>
 
                         <div class="flow-indicator">⬇️ User taps notification</div>
 
                         <div class="info-box">
-                            <div class="info-box-title">🔔 Sent Immediately After Pause</div>
+                            <div class="info-box-title">🔔 Simple & Direct Messaging</div>
                             <div class="info-box-text">
                                 <strong>Trigger:</strong> paymentRepository.pausePlan() API success<br>
-                                <strong>Copy:</strong> Focuses on upcoming releases (tomorrow) creating immediate urgency<br>
-                                <strong>CTA:</strong> "See what's coming" (curious, not pushy)
+                                <strong>Copy:</strong> Clear status + consequence (can't watch)<br>
+                                <strong>Action:</strong> Opens FOMO journey showing what they're missing
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Screen 2: FOMO Journey - Upcoming Shows -->
+            <!-- Screen 2: FOMO Journey - Popular Unwatched -->
             <div class="screen-card">
-                <div class="screen-title">2. FOMO Journey - Upcoming Releases</div>
+                <div class="screen-title">2. FOMO Journey - Popular Unwatched</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -668,20 +669,74 @@
                             <div class="close-btn">✕</div>
                         </div>
 
-                        <div class="countdown-badge">⏰ Releasing in 24 Hours</div>
-
-                        <div class="fomo-heading">😱 Tomorrow's<br>Must-Watch Releases</div>
-                        <div class="fomo-subheading">Don't be the only one missing these premieres. Everyone will be watching!</div>
+                        <div class="fomo-heading">Popular Shows<br>You Haven't Watched</div>
+                        <div class="fomo-subheading">Everyone's watching these. Don't miss out!</div>
 
                         <div class="upcoming-card">
-                            <div class="upcoming-badge">🔥 FINALE TOMORROW 8PM</div>
+                            <div class="trending-badge">🔥 TRENDING #1</div>
+                            <div class="card-thumbnail">
+                                🎭
+                                <div class="play-overlay">▶️</div>
+                            </div>
+                            <div class="card-info">
+                                <div class="card-title">Bideshi Bahu</div>
+                                <div class="card-meta">40 Episodes • Drama</div>
+                                <div class="social-proof">
+                                    <span class="social-icon">👥</span>
+                                    <span>2.1M watching now</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="upcoming-card">
+                            <div class="trending-badge">⭐ POPULAR</div>
+                            <div class="card-thumbnail">
+                                😄
+                                <div class="play-overlay">▶️</div>
+                            </div>
+                            <div class="card-info">
+                                <div class="card-title">Hasir Raja</div>
+                                <div class="card-meta">S02 • Comedy</div>
+                                <div class="social-proof">
+                                    <span class="social-icon">💬</span>
+                                    <span>45K comments today</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-cta-container">
+                            <div class="cta-button">👀 See More Shows</div>
+                            <div class="cta-subtitle">Scroll to see what you're missing</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 3: FOMO Journey - Upcoming Shows -->
+            <div class="screen-card">
+                <div class="screen-title">3. FOMO Journey - Upcoming Shows</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="close-btn">✕</div>
+                        </div>
+
+                        <div class="countdown-badge">⏰ Coming Tomorrow</div>
+
+                        <div class="fomo-heading">Upcoming Shows<br>& Movies</div>
+                        <div class="fomo-subheading">New episodes and movies releasing soon</div>
+
+                        <div class="upcoming-card">
+                            <div class="upcoming-badge">🔥 TOMORROW 8PM</div>
                             <div class="card-thumbnail">
                                 🎭
                                 <div class="play-overlay">▶️</div>
                             </div>
                             <div class="card-info">
                                 <div class="card-title">Bideshi Bahu - Season Finale</div>
-                                <div class="card-meta">Episode 40 • Drama • Feb 7, 8:00 PM</div>
+                                <div class="card-meta">Episode 40 • Feb 7, 8:00 PM</div>
                                 <div class="social-proof">
                                     <span class="social-icon">👥</span>
                                     <span>2.8M viewers expected</span>
@@ -690,82 +745,28 @@
                         </div>
 
                         <div class="upcoming-card">
-                            <div class="upcoming-badge">📅 NEW SERIES FEB 7</div>
+                            <div class="upcoming-badge">📅 NEW SERIES</div>
                             <div class="card-thumbnail">
                                 💕
                                 <div class="play-overlay">▶️</div>
                             </div>
                             <div class="card-info">
-                                <div class="card-title">Meera - Series Premiere</div>
+                                <div class="card-title">Meera</div>
                                 <div class="card-meta">20 Episodes • Romance Drama</div>
                                 <div class="social-proof">
                                     <span class="social-icon">⭐</span>
-                                    <span>Most anticipated show of the month</span>
+                                    <span>Most anticipated show</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bottom-cta-container">
-                            <div class="cta-button">👀 See More Upcoming Shows</div>
-                            <div class="cta-subtitle">Scroll to see what you're missing</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Screen 3: FOMO Journey - Trending Now -->
-            <div class="screen-card">
-                <div class="screen-title">3. FOMO Journey - Trending Content</div>
-                <div class="phone-frame">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <div class="app-header">
-                            <div class="logo">STAGE</div>
-                            <div class="close-btn">✕</div>
-                        </div>
-
-                        <div class="fomo-heading">🔥 Trending Right Now</div>
-                        <div class="fomo-subheading">While you're away, millions are watching these shows. Join the conversation!</div>
-
-                        <div class="upcoming-card">
-                            <div class="trending-badge">🚨 2.1M WATCHING</div>
-                            <div class="card-thumbnail">
-                                😄
-                                <div class="play-overlay">▶️</div>
-                            </div>
-                            <div class="card-info">
-                                <div class="card-title">Hasir Raja</div>
-                                <div class="card-meta">S02 E15 • Comedy • Trending #1</div>
-                                <div class="social-proof">
-                                    <span class="social-icon">💬</span>
-                                    <span>45K comments today</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="upcoming-card">
-                            <div class="trending-badge">📈 VIRAL</div>
-                            <div class="card-thumbnail">
-                                👑
-                                <div class="play-overlay">▶️</div>
-                            </div>
-                            <div class="card-info">
-                                <div class="card-title">Rani Rashmoni</div>
-                                <div class="card-meta">New Episodes • Historical Drama</div>
-                                <div class="social-proof">
-                                    <span class="social-icon">🔥</span>
-                                    <span>Everyone's talking about Episode 42</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flow-indicator">⬇️ User scrolls & tries to play</div>
+                        <div class="flow-indicator">⬇️ User tries to play</div>
 
                         <div class="info-box">
-                            <div class="info-box-title">🎯 FOMO Strategy</div>
+                            <div class="info-box-title">🎯 Simple FOMO Strategy</div>
                             <div class="info-box-text">
-                                <strong>Pattern:</strong> Similar to motivator_popup.dart with carousel<br>
-                                <strong>Social Proof:</strong> Real viewer counts, comments, trending badges<br>
+                                <strong>Popular Unwatched:</strong> Shows they haven't seen yet<br>
+                                <strong>Upcoming:</strong> New episodes/movies releasing soon<br>
                                 <strong>Action:</strong> User taps any show → Content blocked screen
                             </div>
                         </div>
@@ -795,28 +796,26 @@
                             </div>
                         </div>
 
-                        <div class="resume-banner">
-                            <div class="banner-icon">▶️</div>
-                            <div class="banner-content">
-                                <div class="banner-title">Resume Membership</div>
-                                <div class="banner-subtitle">Your subscription expires on Feb 11 • 5 days left</div>
-                            </div>
-                            <div class="banner-arrow">→</div>
-                        </div>
+                        <div class="cta-button" style="margin-bottom: 16px;">▶️ Resume</div>
 
                         <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
-                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're About to Miss:</div>
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're Missing:</div>
                             <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
-                                ✓ Bideshi Bahu finale (tomorrow)<br>
-                                ✓ Meera premiere (20 episodes)<br>
-                                ✓ Hasir Raja trending episodes<br>
-                                ✓ 100+ other shows
+                                • Bideshi Bahu finale (tomorrow)<br>
+                                • Meera premiere (20 episodes)<br>
+                                • Hasir Raja trending episodes<br>
+                                • 100+ other shows
                             </div>
+                        </div>
+
+                        <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
+                            Expires on Feb 11 • 5 days left
                         </div>
 
                         <div class="info-box">
-                            <div class="info-box-title">✅ Pattern: resume_subscription_banner.dart</div>
+                            <div class="info-box-title">✅ Simple Resume Button</div>
                             <div class="info-box-text">
+                                <strong>Button:</strong> "Resume" (simple, direct)<br>
                                 <strong>API:</strong> paymentRepository.resumePlan()<br>
                                 <strong>Success:</strong> Shows restart_subscription_popup.dart<br>
                                 <strong>Analytics:</strong> resume_trial_widget_clicked
@@ -848,28 +847,34 @@
                             </div>
                         </div>
 
-                        <div class="psp-banner">
-                            <div class="psp-banner-title">🔄 Re-Register Mandate</div>
-                            <div class="psp-banner-text">Setup payment mandate again via PhonePe/Paytm. Your trial continues with 5 days remaining!</div>
-                            <div class="psp-banner-btn">Setup Mandate via PhonePe →</div>
-                        </div>
-
-                        <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
-                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">⚡ Quick Setup (2 mins):</div>
-                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
-                                1️⃣ Tap button above<br>
-                                2️⃣ Redirect to PhonePe app<br>
-                                3️⃣ Authorize mandate<br>
-                                4️⃣ Return to STAGE & watch!
+                        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 14px; padding: 20px; margin-bottom: 20px; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);">
+                            <div style="font-size: 14px; margin-bottom: 12px;">Setup payment mandate via PhonePe/Paytm to continue watching</div>
+                            <div style="background: #fff; color: #ef4444; padding: 14px; border-radius: 10px; text-align: center; font-weight: 700; font-size: 15px; cursor: pointer;">
+                                🔄 Reactivate Trial
                             </div>
                         </div>
 
+                        <div style="padding: 16px; background: #171717; border-radius: 12px; border: 1px solid #3f3f3f; margin-bottom: 16px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">📺 You're Missing:</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
+                                • Bideshi Bahu finale (tomorrow)<br>
+                                • Meera premiere (20 episodes)<br>
+                                • Hasir Raja trending episodes<br>
+                                • 100+ other shows
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
+                            Your trial will continue with 5 days remaining
+                        </div>
+
                         <div class="info-box">
-                            <div class="info-box-title">🔗 Pattern: trial_mandate_resume_psp.dart</div>
+                            <div class="info-box-title">🔄 Reactivate Trial Button</div>
                             <div class="info-box-text">
+                                <strong>Button:</strong> "Reactivate Trial" (clear action)<br>
                                 <strong>Deeplink:</strong> stage://resume/har/hin/payment?planId=X<br>
                                 <strong>Check:</strong> isUserEligibleForNewTrialMandateSetup<br>
-                                <strong>Flow:</strong> Redirect to PSP → Return → Resume
+                                <strong>Flow:</strong> Redirect to PhonePe → Authorize → Return to STAGE
                             </div>
                         </div>
                     </div>
@@ -932,15 +937,15 @@
         </div>
 
         <div class="feature-description">
-            <h3>📱 Complete User Flow</h3>
+            <h3>📱 Complete User Flow - Simplified</h3>
             <ul>
                 <li><strong>Step 1:</strong> User pauses subscription (app or PSP) → API: paymentRepository.pausePlan()</li>
-                <li><strong>Step 2:</strong> Notification sent immediately: "😱 Don't Miss Tomorrow's Big Releases!"</li>
-                <li><strong>Step 3:</strong> User taps notification → Opens FOMO journey screen (2-3 screens of upcoming + trending shows)</li>
-                <li><strong>Step 4:</strong> User tries to play any show → Content blocked screen shown</li>
-                <li><strong>Step 5A (App Pause):</strong> Resume banner shown → Tap → resumePlan() API → Success popup</li>
-                <li><strong>Step 5B (PSP Revoke):</strong> Register mandate banner → Deeplink to PhonePe → Return → Success</li>
-                <li><strong>Step 6:</strong> Success screen with continue watching recommendations</li>
+                <li><strong>Step 2:</strong> Notification sent: "Trial Paused" / "Trial Revoked" + "You can not watch any STAGE content"</li>
+                <li><strong>Step 3:</strong> User taps notification → Opens FOMO journey (Popular unwatched + Upcoming shows)</li>
+                <li><strong>Step 4:</strong> User tries to play Bideshi Bahu or any show → Content blocked screen shown</li>
+                <li><strong>Step 5A (App Pause):</strong> Simple "Resume" button → Tap → resumePlan() API → Success popup</li>
+                <li><strong>Step 5B (PSP Revoke):</strong> "Reactivate Trial" button → Deeplink to PhonePe → Authorize → Return to STAGE → Success</li>
+                <li><strong>Step 6:</strong> Success screen (Hindi copy) with continue watching recommendations</li>
             </ul>
         </div>
 
@@ -983,14 +988,15 @@
         </div>
 
         <div class="feature-description">
-            <h3>🎯 Why This UX Works Better</h3>
+            <h3>🎯 Why This Simple UX Works</h3>
             <ul>
-                <li><strong>FOMO Before CTA:</strong> Shows what user is missing BEFORE asking to resume (prime → convert pattern)</li>
-                <li><strong>Upcoming + Trending:</strong> Creates dual urgency (don't miss tomorrow + everyone watching now)</li>
-                <li><strong>Social Proof:</strong> Real viewer counts, comments, trending badges increase FOMO</li>
-                <li><strong>Natural Flow:</strong> User tries to play → blocked → CTA feels necessary vs pushy banner</li>
-                <li><strong>Matches Codebase:</strong> Uses existing motivator_popup pattern, resume banner, success popup</li>
-                <li><strong>Low Cognitive Load:</strong> Visual cards with emojis, not text-heavy explanations</li>
+                <li><strong>Clear Notification:</strong> Direct message - "Trial Paused" + "You can not watch any STAGE content" (no ambiguity)</li>
+                <li><strong>FOMO Before CTA:</strong> Shows popular unwatched + upcoming content BEFORE asking to resume</li>
+                <li><strong>Simple Buttons:</strong> "Resume" (app) / "Reactivate Trial" (PSP) - clear action verbs, no confusion</li>
+                <li><strong>Natural Flow:</strong> User tries to play Bideshi Bahu → blocked → CTA feels necessary (not pushy)</li>
+                <li><strong>Focused Content:</strong> Popular unwatched (what they haven't seen) + Upcoming (what they'll miss)</li>
+                <li><strong>Matches Codebase:</strong> Uses existing motivator_popup pattern, resume API flows, success popup</li>
+                <li><strong>Low Cognitive Load:</strong> Visual cards with social proof, simple CTAs, no overwhelming choices</li>
             </ul>
         </div>
     </div>
@@ -1009,7 +1015,7 @@
         // Notification click simulation
         document.querySelectorAll('.notification-card').forEach(notif => {
             notif.addEventListener('click', function() {
-                alert('📱 Notification clicked!\n\n✅ Opens FOMO journey showing upcoming shows\n✅ Deep link: stage://pause-retention/fomo-journey');
+                alert('📱 Notification clicked!\n\n✅ Title: "Trial Paused" / "Trial Revoked"\n✅ Body: "You can not watch any STAGE content"\n✅ Opens FOMO journey: Popular unwatched + Upcoming shows\n✅ Deep link: stage://pause-retention/fomo-journey');
             });
         });
 
@@ -1020,18 +1026,22 @@
             });
         });
 
-        // Resume banner click simulation
-        document.querySelectorAll('.resume-banner').forEach(banner => {
-            banner.addEventListener('click', function() {
-                alert('▶️ Resume Membership clicked!\n\n✅ API: paymentRepository.resumePlan()\n✅ Success → Shows restart_subscription_popup.dart\n✅ Analytics: resume_trial_widget_clicked');
-            });
+        // Resume button click simulation
+        document.querySelectorAll('.cta-button').forEach(btn => {
+            if (btn.textContent.includes('Resume') && !btn.textContent.includes('VIP')) {
+                btn.addEventListener('click', function() {
+                    alert('▶️ Resume button clicked!\n\n✅ Simple & direct CTA\n✅ API: paymentRepository.resumePlan()\n✅ Success → Shows restart_subscription_popup.dart\n✅ Analytics: resume_trial_widget_clicked');
+                });
+            }
         });
 
-        // PSP banner click simulation
-        document.querySelectorAll('.psp-banner-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                alert('🔄 Setup Mandate clicked!\n\n✅ Deeplink: stage://resume/har/hin/payment?planId=X\n✅ Redirects to PhonePe app for mandate setup\n✅ Return URL brings user back to STAGE');
-            });
+        // Reactivate Trial button click simulation
+        document.querySelectorAll('div').forEach(div => {
+            if (div.textContent.trim() === '🔄 Reactivate Trial') {
+                div.addEventListener('click', function() {
+                    alert('🔄 Reactivate Trial clicked!\n\n✅ Simple & clear CTA\n✅ Deeplink: stage://resume/har/hin/payment?planId=X\n✅ Redirects to PhonePe app for mandate setup\n✅ Return URL brings user back to STAGE');
+                });
+            }
         });
 
         // CTA button click simulation
