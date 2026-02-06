@@ -793,8 +793,8 @@
                     <h4>✅ What We'll Build (App-Side Implementation)</h4>
 
                     <div class="metric-box" style="background: rgba(36, 139, 59, 0.1); border-left-color: #248b3b; margin: 15px 0 20px 0;">
-                        <strong>📱 Wireframe:</strong> <a href="psp-cancellation-prevention-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View Interactive Wireframe →</a><br>
-                        <span style="font-size: 13px; color: #BEBEBE;">Two retention flows + WhatsApp Message Copy: Trial Paused/Revoked (4 screens) & Subscription Expired (3 screens) + 3 WhatsApp templates - Notification → FOMO Journey → Content Blocked → CTA</span>
+                        <strong>📱 Wireframe:</strong> <a href="psp-cancellation-prevention-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View Interactive Wireframe + WhatsApp Message Copy →</a><br>
+                        <span style="font-size: 13px; color: #BEBEBE;">Two retention flows (7 screens) + 💬 WhatsApp Message Templates (3 templates with full copy): Trial Paused/Revoked (4 screens) & Subscription Expired (3 screens) - Notification → FOMO Journey → Content Blocked → CTA</span>
                     </div>
 
                     <p style="margin-top: 15px;"><strong>Phase 1: Multi-Channel Notification System (3 days)</strong></p>
@@ -805,46 +805,6 @@
                                 <li><strong>Push Notification - Subscription Expired:</strong> Title: "Subscription Expired", Body: "You can not watch any STAGE content"</li>
                                 <li><strong>Trigger Logic:</strong> Backend webhook detects pause/revoke/expire → Send notification within 5 minutes</li>
                                 <li><strong>Deep Link:</strong> stage://retention-flow?type=trial_paused|trial_revoked|subscription_expired&source=app|psp</li>
-                            </ul>
-                        </li>
-                        <li><strong>WhatsApp Message Copy:</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>Trial Paused (App-Side):</strong><br>
-                                    <div style="background: #25D366; color: white; padding: 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; line-height: 1.6;">
-                                        👋 Hey! Your STAGE trial is paused<br><br>
-                                        You're missing out on:<br>
-                                        🔥 Bideshi Bahu finale (tomorrow)<br>
-                                        ⭐ Meera - New 20-episode series<br>
-                                        😄 Hasir Raja trending episodes<br>
-                                        📺 100+ other shows<br><br>
-                                        ▶️ <strong>Resume your trial now</strong> → [Deep Link]<br><br>
-                                        Still X days left in your trial!
-                                    </div>
-                                </li>
-                                <li><strong>Trial Revoked (PSP-Side):</strong><br>
-                                    <div style="background: #25D366; color: white; padding: 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; line-height: 1.6;">
-                                        ⚠️ Your STAGE trial was cancelled from PhonePe/Paytm<br><br>
-                                        Don't miss:<br>
-                                        🔥 Bideshi Bahu finale drops tomorrow<br>
-                                        📺 2.1M people are watching right now<br>
-                                        ⏰ New shows premiering this week<br><br>
-                                        🔄 <strong>Reactivate your trial</strong> → [Deep Link]<br><br>
-                                        Quick 1-tap setup via PhonePe/Paytm. X days of trial remaining!
-                                    </div>
-                                </li>
-                                <li><strong>Subscription Expired:</strong><br>
-                                    <div style="background: #25D366; color: white; padding: 12px; border-radius: 8px; margin: 8px 0; font-size: 13px; line-height: 1.6;">
-                                        🎬 Your STAGE subscription expired!<br><br>
-                                        You're missing:<br>
-                                        🔥 Bideshi Bahu - Most-watched show (2.1M viewers)<br>
-                                        💕 Meera - Romantic drama everyone's talking about<br>
-                                        😄 Hasir Raja S03 - Comedy hit returning soon<br><br>
-                                        🔄 <strong>Reactivate subscription</strong> → [Deep Link]<br><br>
-                                        Instant access to all content. Setup mandate now!
-                                    </div>
-                                </li>
-                                <li><strong>Timing Strategy:</strong> Send WhatsApp 30 minutes after push notification (if push not opened)</li>
-                                <li><strong>Deep Links:</strong> Same deep link structure as push notifications</li>
                             </ul>
                         </li>
                         <li><strong>Day 3: Multi-Channel Analytics</strong>
@@ -863,6 +823,7 @@
                         <li><strong>Day 1: WhatsApp Message Templates + Backend Integration</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li><strong>Template Creation:</strong> 3 WhatsApp message templates (Trial Paused, Trial Revoked, Subscription Expired)</li>
+                                <li><strong>📱 See Full Message Copy:</strong> <a href="psp-cancellation-prevention-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View WhatsApp Message Templates in Wireframe →</a></li>
                                 <li>Format messages with emojis, FOMO content (Bideshi Bahu, Meera, Hasir Raja), social proof (2.1M watching)</li>
                                 <li>Add deep link CTAs: "Resume your trial now" / "Reactivate your trial" / "Reactivate subscription"</li>
                                 <li><strong>Backend API Integration:</strong> Connect to WhatsApp Business API for message delivery</li>
