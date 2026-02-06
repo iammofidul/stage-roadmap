@@ -7,7 +7,7 @@
 
 ---
 
-## 📂 **USE THIS FILE**: product_roadmap.html
+## 📂 **USE THIS FILE**: index.html (https://iammofidul.github.io/stage-roadmap/)
 
 This is the **priority-based roadmap** with:
 - ✅ **P0 (Critical): Trial Retention & Consumption** - Weeks 1-5 (Highest priority)
@@ -291,7 +291,8 @@ Focus: Scale what works and win back lapsed users
 
 | File | Status | Description |
 |------|--------|-------------|
-| **product_roadmap.html** | ✅ **USE THIS** | Priority-based roadmap (P0/P1/P2) with 3 new consumption tasks |
+| **index.html** | ✅ **USE THIS** | Priority-based roadmap (P0/P1/P2) - Live at https://iammofidul.github.io/stage-roadmap/ |
+| **psp-cancellation-prevention-wireframe.html** | ✅ Active | PSP Cancellation Prevention wireframe with WhatsApp templates |
 | README.md | ✅ Current | This file - quick reference |
 | SUBSCRIPTION_STATUS_CORRECTION.md | ℹ️ Reference | Subscription status mapping |
 | CHANGES_SUMMARY.md | ℹ️ Reference | History of initial corrections |
