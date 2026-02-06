@@ -2024,65 +2024,88 @@
 
                 <div class="section-content">
                     <div class="feature-exists">
-                        <strong>Resume Trial Feature Exists:</strong> Flag-based mandate resume (no pricing change possible - internal backend flag only)
+                        <strong>Resume Trial/Subscription Feature Exists:</strong> Flag-based mandate resume for both trial_over and subscription_over users (no pricing change possible - internal backend flag only)
                     </div>
 
                     <h4>📊 Current State</h4>
                     <ul>
                         <li><strong>5 Touchpoints:</strong> Floating banner, bottom sheet, home banners, popup</li>
                         <li><strong>Existing A/B Test:</strong> Text vs Image layout only</li>
-                        <li><strong>API:</strong> resumePlan() - reverts backend pause flag</li>
-                        <li><strong>Gap:</strong> No conversion tracking, no messaging variants tested</li>
+                        <li><strong>API:</strong> resumePlan() - reverts backend pause flag for trial_over and subscription_over</li>
+                        <li><strong>Gap:</strong> No conversion tracking, no messaging variants tested, no differentiation between trial/subscription users</li>
                     </ul>
 
                     <h4>✅ What We'll Build (2 Tasks)</h4>
 
-                    <p style="margin-top: 15px;"><strong>Task 1: A/B Test Messaging Variants (2 days)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 1: A/B Test Messaging Variants - Trial & Subscription (2 days)</strong></p>
                     <ul>
-                        <li><strong>Test 4 Message Variants:</strong>
+                        <li><strong>Test 4 Message Variants for Trial Users (trial_over):</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>Variant A:</strong> "Resume to continue unlimited streaming" (benefit reminder)</li>
+                                <li><strong>Variant A:</strong> "Resume trial to continue unlimited streaming" (benefit reminder)</li>
                                 <li><strong>Variant B:</strong> "Continue watching [Last Show]" (personalized content hook)</li>
                                 <li><strong>Variant C:</strong> "Trial expires in 3 days!" (urgency/FOMO)</li>
-                                <li><strong>Variant D:</strong> "Don't lose access" (loss aversion)</li>
+                                <li><strong>Variant D:</strong> "Don't lose your trial access" (loss aversion)</li>
                             </ul>
                         </li>
-                        <li><strong>Implementation:</strong> Add resume_trial_message_variant to Remote Config</li>
-                        <li><strong>Note:</strong> No pricing changes (just copy testing)</li>
+                        <li><strong>Test 4 Message Variants for Subscription Users (subscription_over):</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Variant A:</strong> "Resume subscription to continue unlimited streaming" (benefit reminder)</li>
+                                <li><strong>Variant B:</strong> "Continue watching [Last Show]" (personalized content hook)</li>
+                                <li><strong>Variant C:</strong> "Subscription expired - Reactivate now!" (urgency/FOMO)</li>
+                                <li><strong>Variant D:</strong> "Don't lose your subscription access" (loss aversion)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Implementation:</strong> Add resume_message_variant to Remote Config with user_type detection (trial_over vs subscription_over)</li>
+                        <li><strong>Note:</strong> No pricing changes (just copy testing for both user types)</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 2: Conversion Tracking (1 day)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 2: Conversion Tracking - Trial & Subscription (1 day)</strong></p>
                     <ul>
-                        <li><strong>App Event:</strong> trial_resumed (tracks flag revert API success - internal flag only)</li>
-                        <li><strong>Backend Event:</strong> trial_reactivated (tracked when PSP new mandate registered - actual payment)</li>
-                        <li><strong>Full Funnel:</strong> Widget View → Click → API Call → trial_resumed/trial_reactivated</li>
-                        <li><strong>Metrics:</strong> Conversion rate by message variant, days since pause, pause source (PSP vs In-app)</li>
+                        <li><strong>Trial Events:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>trial_resumed:</strong> Flag revert (no payment, internal backend flag only)</li>
+                                <li><strong>trial_reactivated:</strong> New mandate registration (actual payment via PSP)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Subscription Events:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>subscription_resumed:</strong> Flag revert (no payment, internal backend flag only)</li>
+                                <li><strong>subscription_reactivated:</strong> New mandate registration (actual payment via PSP)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Full Funnel:</strong> Widget View → Click → API Call → resumed/reactivated (with user_type: trial_over/subscription_over)</li>
+                        <li><strong>Metrics:</strong> Conversion rate by message variant, user type (trial/subscription), days since pause, pause source (PSP vs In-app)</li>
                     </ul>
 
                     <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green); margin-top: 15px;">
                         <strong>📌 Event Naming Convention:</strong><br>
-                        <strong>trial_resumed:</strong> Flag revert (no payment, internal backend flag only)<br>
-                        <strong>trial_reactivated:</strong> New mandate registration (actual payment via PSP)<br><br>
-                        Use case: trial_resumed for in-app pauses, trial_reactivated for PSP cancellations
+                        <strong>Trial Events:</strong><br>
+                        • trial_resumed: Flag revert (no payment, internal backend flag only)<br>
+                        • trial_reactivated: New mandate registration (actual payment via PSP)<br><br>
+                        <strong>Subscription Events:</strong><br>
+                        • subscription_resumed: Flag revert (no payment, internal backend flag only)<br>
+                        • subscription_reactivated: New mandate registration (actual payment via PSP)<br><br>
+                        Use case: resumed events for in-app pauses, reactivated events for PSP cancellations
                     </div>
 
                     <h4>📈 Expected Impact</h4>
                     <div class="metric-box">
-                        <strong>Resume Flag Revert Rate: +15-20%</strong> (from messaging optimization)<br><br>
-                        <strong>Before:</strong> Single generic message, no conversion tracking<br>
-                        <strong>After:</strong> 4 tested variants, full funnel tracking<br><br>
+                        <strong>Resume Rate: +15-20%</strong> (from messaging optimization for both trial & subscription users)<br><br>
+                        <strong>Before:</strong> Single generic message for all users, no conversion tracking<br>
+                        <strong>After:</strong> 8 tested variants (4 for trial + 4 for subscription), full funnel tracking, user-type segmentation<br><br>
                         <strong>Why This Works:</strong><br>
-                        - Right message for right user segment<br>
+                        - Right message for right user type (trial vs subscription)<br>
+                        - User-type specific copy optimization<br>
                         - Data-driven optimization via conversion tracking<br>
-                        - Identify best-performing variant to scale
+                        - Identify best-performing variant per user segment to scale
                     </div>
 
                     <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/0fdjwdly/edit/fvk09nv2" target="_blank" class="amplitude-link">
-                        🔗 View Trial Retention
+                        🔗 View Trial & Subscription Retention
                     </a>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 3 days (2 days messaging variants + 1 day conversion tracking)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> trial_resumed_rate (flag revert), trial_reactivated_rate (PSP new mandate), conversion_by_message_variant</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 3 days (2 days messaging variants for trial & subscription + 1 day conversion tracking)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> trial_resumed_rate, trial_reactivated_rate, subscription_resumed_rate, subscription_reactivated_rate, conversion_by_message_variant, conversion_by_user_type</p>
                 </div>
                 </div>
             </div>
