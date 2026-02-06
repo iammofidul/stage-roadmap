@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSP Cancellation Prevention - App-Side Flow</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #FFFFFF;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #248b3b;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #BEBEBE;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen-card {
+            background: #1A1A1A;
+            border: 2px solid #3E3E3E;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .screen-card:hover {
+            transform: translateY(-5px);
+            border-color: #248b3b;
+        }
+
+        .screen-title {
+            color: #248b3b;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .phone-frame {
+            background: #000;
+            border: 8px solid #292929;
+            border-radius: 30px;
+            padding: 15px;
+            margin: 0 auto;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .phone-notch {
+            background: #000;
+            height: 25px;
+            width: 150px;
+            margin: -15px auto 10px;
+            border-radius: 0 0 15px 15px;
+            border: 2px solid #292929;
+            border-top: none;
+        }
+
+        .phone-screen {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+            min-height: 650px;
+            border-radius: 15px;
+            padding: 24px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .external-app-screen {
+            background: #f5f5f5;
+            color: #000;
+        }
+
+        .psp-header {
+            background: #5f259f;
+            padding: 16px;
+            margin: -24px -24px 20px -24px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+
+        .psp-logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .cancel-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .cancel-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .cancel-details {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .cancel-btn {
+            background: #ef4444;
+            color: #fff;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .notification-preview {
+            background: rgba(41, 41, 41, 0.95);
+            border-radius: 12px;
+            padding: 14px;
+            margin: 20px 0;
+            border: 1px solid #3E3E3E;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .notif-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .notif-icon {
+            width: 40px;
+            height: 40px;
+            background: #248b3b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .notif-app {
+            font-size: 12px;
+            color: #BEBEBE;
+            font-weight: 600;
+        }
+
+        .notif-time {
+            font-size: 11px;
+            color: #737373;
+            margin-left: auto;
+        }
+
+        .notif-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .notif-body {
+            font-size: 13px;
+            color: #BEBEBE;
+            line-height: 1.5;
+        }
+
+        .retention-dialog {
+            background: #1A1A1A;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            border: 2px solid #248b3b;
+            box-shadow: 0 8px 20px rgba(36, 139, 59, 0.4);
+        }
+
+        .dialog-icon {
+            text-align: center;
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .dialog-title {
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .dialog-subtitle {
+            font-size: 14px;
+            color: #BEBEBE;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .stats-row {
+            background: rgba(36, 139, 59, 0.15);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 900;
+            color: #248b3b;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #BEBEBE;
+        }
+
+        .content-preview {
+            background: #292929;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .content-preview-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #248b3b;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .content-thumbnail {
+            width: 60px;
+            height: 40px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .content-name {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dialog-buttons {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        .dialog-btn-primary {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            color: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(36, 139, 59, 0.4);
+            transition: all 0.3s;
+        }
+
+        .dialog-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(36, 139, 59, 0.6);
+        }
+
+        .dialog-btn-secondary {
+            background: transparent;
+            color: #737373;
+            padding: 14px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+        }
+
+        .banner-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .banner-icon {
+            font-size: 32px;
+        }
+
+        .banner-text {
+            flex: 1;
+        }
+
+        .banner-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .banner-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .banner-btn {
+            background: #fff;
+            color: #ef4444;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .success-state {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .success-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #248b3b;
+        }
+
+        .success-subtitle {
+            font-size: 14px;
+            color: #BEBEBE;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 700;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .flow-indicator {
+            text-align: center;
+            color: #EFA73F;
+            font-size: 14px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            background: #292929;
+            border-left: 4px solid #248b3b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .feature-description h3 {
+            color: #248b3b;
+            margin-bottom: 12px;
+        }
+
+        .feature-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-description li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #BEBEBE;
+        }
+
+        .feature-description li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #248b3b;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #248b3b;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            background: #292929;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .content-card {
+            background: #292929;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .content-card-thumbnail {
+            height: 120px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .content-info {
+            padding: 12px;
+        }
+
+        .content-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .content-meta {
+            font-size: 11px;
+            color: #737373;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PSP Cancellation Prevention - App-Side Flow</h1>
+        <p class="subtitle">Catch & Save Users Who Cancel via PhonePe/Paytm</p>
+
+        <div class="feature-description">
+            <h3>Feature Overview</h3>
+            <ul>
+                <li><strong>Problem:</strong> ~70% of trial cancellations happen via PhonePe/Paytm apps (bypassing STAGE retention flows)</li>
+                <li><strong>Timeline:</strong> Week 1-2 (10 days) | L Effort | 2 Developers</li>
+                <li><strong>Target Users:</strong> Trial active users who cancel mandate in PSP apps</li>
+                <li><strong>Impact:</strong> 18K saved trials/month (15% save rate on 81K PSP cancellations)</li>
+                <li><strong>Solution:</strong> Push notification → Deep link → Retention dialog → Resume subscription</li>
+            </ul>
+        </div>
+
+        <div class="screens-grid">
+            <!-- Screen 1: User Cancels in PhonePe -->
+            <div class="screen-card">
+                <div class="screen-title">1. User Cancels via PhonePe/Paytm</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen external-app-screen">
+                        <div class="psp-header">
+                            <div class="psp-logo">PhonePe</div>
+                        </div>
+
+                        <div style="padding: 0 8px;">
+                            <div style="font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #000;">AutoPay Mandates</div>
+
+                            <div class="cancel-card">
+                                <div class="cancel-title">STAGE Entertainment</div>
+                                <div class="cancel-details">
+                                    <strong>Amount:</strong> ₹499/month<br>
+                                    <strong>Status:</strong> <span style="color: #22c55e; font-weight: 600;">Active</span><br>
+                                    <strong>Next Payment:</strong> 5 days remaining<br>
+                                    <strong>Trial Period:</strong> 7 days
+                                </div>
+                                <div class="cancel-btn">⛔ Cancel Mandate</div>
+                            </div>
+
+                            <div style="margin-top: 24px; padding: 16px; background: #fef3c7; border-radius: 8px; text-align: center;">
+                                <div style="font-size: 13px; color: #92400e; font-weight: 600;">
+                                    ⚠️ This action happens outside STAGE app<br>
+                                    <span style="font-size: 11px; font-weight: normal;">STAGE retention dialogs never shown</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flow-indicator" style="color: #ef4444;">⬇️ User taps Cancel Mandate</div>
+
+                        <div style="margin-top: 20px; padding: 16px; background: #fff; border-radius: 12px; border: 2px solid #22c55e;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 48px; margin-bottom: 12px;">✅</div>
+                                <div style="font-size: 14px; font-weight: 700; color: #000; margin-bottom: 6px;">Mandate Cancelled</div>
+                                <div style="font-size: 12px; color: #666;">No future payments will be deducted</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 2: Backend Detects + Sends Push -->
+            <div class="screen-card">
+                <div class="screen-title">2. Push Notification Sent (Within 5 min)</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div style="text-align: center; margin-bottom: 20px; padding-top: 40px;">
+                            <div style="font-size: 14px; color: #737373; margin-bottom: 8px;">2:35 PM</div>
+                            <div style="font-size: 11px; color: #BEBEBE;">Backend webhook detected PSP cancellation</div>
+                        </div>
+
+                        <div class="notification-preview">
+                            <div class="notif-header">
+                                <div class="notif-icon">🎬</div>
+                                <div>
+                                    <div class="notif-app">STAGE</div>
+                                </div>
+                                <div class="notif-time">now</div>
+                            </div>
+                            <div class="notif-title">Wait! Before you go... 😢</div>
+                            <div class="notif-body">Your trial has 5 days left. You've watched Bideshi Bahu and 3 more shows. Here's what you're missing!</div>
+                        </div>
+
+                        <div class="flow-indicator">⬇️ User taps notification</div>
+
+                        <div style="background: #292929; border-radius: 12px; padding: 16px; margin-top: 20px;">
+                            <div style="font-size: 13px; font-weight: 600; color: #248b3b; margin-bottom: 12px;">🔗 Deep Link Flow</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.6;">
+                                <strong>Route:</strong> stage://psp-cancellation-save<br>
+                                <strong>Parameters:</strong><br>
+                                • source: phonePe<br>
+                                • trial_days_remaining: 5<br>
+                                • shows_watched: 4<br><br>
+                                <strong>Action:</strong> Opens app → Shows retention dialog
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 14px; background: rgba(36, 139, 59, 0.15); border-radius: 8px; border-left: 3px solid #248b3b;">
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.6;">
+                                <strong style="color: #248b3b;">📊 Industry Benchmark:</strong><br>
+                                • Push open rate: 40-50% (immediate after cancellation)<br>
+                                • Timing: Sent within 5 minutes for urgency
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 3: Retention Dialog Opens -->
+            <div class="screen-card">
+                <div class="screen-title">3. PSP Retention Dialog (Deep Link)</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="retention-dialog">
+                            <div class="dialog-icon">😢</div>
+                            <div class="dialog-title">We'll Miss You!</div>
+                            <div class="dialog-subtitle">You have 5 days left in your trial. Don't lose access to all these shows!</div>
+
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <div class="stat-value">4</div>
+                                    <div class="stat-label">Shows Watched</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-value">5</div>
+                                    <div class="stat-label">Days Remaining</div>
+                                </div>
+                            </div>
+
+                            <div class="content-preview">
+                                <div class="content-preview-title">📺 Continue watching these:</div>
+                                <div class="content-item">
+                                    <div class="content-thumbnail">🎭</div>
+                                    <div>
+                                        <div class="content-name">Bideshi Bahu</div>
+                                        <div style="font-size: 11px; color: #737373;">Episode 8 waiting</div>
+                                    </div>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-thumbnail">😄</div>
+                                    <div>
+                                        <div class="content-name">Hasir Raja</div>
+                                        <div style="font-size: 11px; color: #737373;">New episodes added</div>
+                                    </div>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-thumbnail">💕</div>
+                                    <div>
+                                        <div class="content-name">Meera</div>
+                                        <div style="font-size: 11px; color: #737373;">20 episodes to binge</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dialog-buttons">
+                                <div class="dialog-btn-primary">✅ Resume My Subscription</div>
+                                <div class="dialog-btn-secondary">No thanks, keep it cancelled</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 16px; padding: 12px; background: rgba(36, 139, 59, 0.15); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 11px; color: #BEBEBE;">
+                                💡 <strong style="color: #248b3b;">Low-friction resume:</strong> 1-tap vs high-friction re-subscribe
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 4: In-App Banner (Alternative Entry) -->
+            <div class="screen-card">
+                <div class="screen-title">4. In-App Banner (Already Exists)</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="header-icons">
+                                <div class="icon-btn">🔍</div>
+                                <div class="icon-btn">👤</div>
+                            </div>
+                        </div>
+
+                        <div class="banner">
+                            <div class="banner-content">
+                                <div class="banner-icon">⚠️</div>
+                                <div class="banner-text">
+                                    <div class="banner-title">Trial Cancelled</div>
+                                    <div class="banner-subtitle">5 days left • Resume anytime</div>
+                                </div>
+                                <div class="banner-btn">Resume</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Continue Watching</div>
+                            <div class="content-card">
+                                <div class="content-card-thumbnail">🎭</div>
+                                <div class="content-info">
+                                    <div class="content-title">Bideshi Bahu</div>
+                                    <div class="content-meta">Episode 7 • 15 min left</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-size: 16px; font-weight: 700; margin-bottom: 12px;">Trending Now</div>
+                            <div class="content-card">
+                                <div class="content-card-thumbnail">🔥</div>
+                                <div class="content-info">
+                                    <div class="content-title">Meera</div>
+                                    <div class="content-meta">Drama • 20 episodes</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flow-indicator">⬆️ Banner already implemented</div>
+
+                        <div style="padding: 14px; background: rgba(36, 139, 59, 0.15); border-radius: 8px; border-left: 3px solid #248b3b;">
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.6;">
+                                ✅ <strong style="color: #248b3b;">Feature exists:</strong> Banner shows when user opens app after PSP cancellation. Tapping "Resume" opens retention dialog.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 5: Success State -->
+            <div class="screen-card">
+                <div class="screen-title">5. Success - Subscription Resumed</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="success-state">
+                            <div class="success-icon">🎉</div>
+                            <div class="success-title">Welcome Back!</div>
+                            <div class="success-subtitle">Your subscription has been resumed.<br>You still have 5 days in your trial.<br>No charges until trial ends.</div>
+                            <div class="continue-btn">▶️ Continue Watching</div>
+                        </div>
+
+                        <div style="margin-top: 30px; background: #292929; border-radius: 12px; padding: 20px;">
+                            <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px; text-align: center;">🎬 Pick up where you left off</div>
+                            <div class="content-card">
+                                <div class="content-card-thumbnail">🎭</div>
+                                <div class="content-info">
+                                    <div class="content-title">Bideshi Bahu</div>
+                                    <div class="content-meta">Episode 7 • 15 min left</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 14px; background: rgba(36, 139, 59, 0.15); border-radius: 8px; border-left: 3px solid #248b3b;">
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.6;">
+                                <strong style="color: #248b3b;">📊 Analytics Fired:</strong><br>
+                                • trial_activated (is_reactivated: true)<br>
+                                • psp_retention_dialog_resume_clicked<br>
+                                • New mandate created via PSP API
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 6: A/B Test Variants -->
+            <div class="screen-card">
+                <div class="screen-title">6. A/B Test Variants</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div style="margin-bottom: 24px;">
+                            <div style="font-size: 18px; font-weight: 700; margin-bottom: 16px; text-align: center;">🧪 Experimentation Setup</div>
+                        </div>
+
+                        <div style="background: #292929; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                            <div style="font-size: 14px; font-weight: 600; color: #248b3b; margin-bottom: 12px;">⏱️ Notification Timing</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
+                                <strong>Variant A:</strong> Immediate (0 min)<br>
+                                <strong>Variant B:</strong> 5 min delay (control)<br>
+                                <strong>Variant C:</strong> 10 min delay<br><br>
+                                <strong>Hypothesis:</strong> Immediate notification has higher open rate but lower conversion. 5-10 min delay catches users after impulse decision.
+                            </div>
+                        </div>
+
+                        <div style="background: #292929; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                            <div style="font-size: 14px; font-weight: 600; color: #248b3b; margin-bottom: 12px;">💬 Dialog Copy</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
+                                <strong>Variant A - Fear-based:</strong><br>
+                                "You'll lose access to all these shows!"<br><br>
+                                <strong>Variant B - Benefit-based (control):</strong><br>
+                                "Continue enjoying these shows you love!"<br><br>
+                                <strong>Hypothesis:</strong> Benefit-based copy has higher conversion (positive framing).
+                            </div>
+                        </div>
+
+                        <div style="background: #292929; border-radius: 12px; padding: 16px;">
+                            <div style="font-size: 14px; font-weight: 600; color: #248b3b; margin-bottom: 12px;">📊 Success Metrics</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.8;">
+                                • <strong>Primary:</strong> trial_activated (is_reactivated: true)<br>
+                                • <strong>Secondary:</strong> notification_open_rate, dialog_shown, resume_clicked<br>
+                                • <strong>Target:</strong> 15-20% PSP save rate<br>
+                                • <strong>Impact:</strong> 18K saved trials/month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-description">
+            <h3>Complete User Flow</h3>
+            <ul>
+                <li><strong>Step 1:</strong> User cancels mandate in PhonePe/Paytm app (bypassing STAGE)</li>
+                <li><strong>Step 2:</strong> Backend webhook detects PSP cancellation event within seconds</li>
+                <li><strong>Step 3:</strong> Push notification sent within 5 minutes: "Wait! Before you go... Your trial has 5 days left"</li>
+                <li><strong>Step 4:</strong> User taps notification → Deep link opens app (stage://psp-cancellation-save)</li>
+                <li><strong>Step 5:</strong> PSP retention dialog shows with personalized content and stats</li>
+                <li><strong>Step 6:</strong> User taps "Resume Subscription" → New mandate created via PSP API</li>
+                <li><strong>Step 7:</strong> Success screen confirms resumption + directs to Continue Watching</li>
+                <li><strong>Alternative:</strong> In-app banner shows when user opens app after PSP cancellation (already exists)</li>
+            </ul>
+        </div>
+
+        <div class="feature-description">
+            <h3>Technical Implementation</h3>
+            <ul>
+                <li><strong>Phase 1:</strong> Push Notification + Deep Link (4 days) - PSP cancellation detection, notification within 5 min, deep link routing</li>
+                <li><strong>Phase 2:</strong> PSP Retention Dialog (2 days) - Reuse existing PauseTrialPrideDialog, personalized content, resume API integration</li>
+                <li><strong>Phase 3:</strong> A/B Testing Setup (2 days) - Timing variants (0/5/10 min), copy variants (fear vs benefit)</li>
+                <li><strong>Phase 4:</strong> Integration Testing (2 days) - End-to-end flow, edge cases, regression testing</li>
+            </ul>
+        </div>
+
+        <div class="feature-description">
+            <h3>Expected Impact</h3>
+            <ul>
+                <li><strong>PSP Cancellations:</strong> 81K/month (70% of 116K total cancellations)</li>
+                <li><strong>Save Rate Target:</strong> 15-20% (industry benchmark for push + retention dialog)</li>
+                <li><strong>Saved Trials/Month:</strong> 12K-16K (conservative: 15% = 12,150)</li>
+                <li><strong>Revenue Impact:</strong> ₹5.4 Lakhs MRR (1,080 additional paid subscribers × ₹499 ARPU)</li>
+                <li><strong>Annual Impact:</strong> ₹64.8 Lakhs ARR from saved trials</li>
+                <li><strong>Why It Works:</strong> 40-50% push open rate, personalized reminder, low-friction 1-tap resume, catches impulse cancellation</li>
+            </ul>
+        </div>
+
+        <div class="feature-description">
+            <h3>Key Analytics Events</h3>
+            <ul>
+                <li><strong>psp_cancel_notification_sent</strong> - Notification dispatched after PSP cancellation detection</li>
+                <li><strong>psp_cancel_notification_clicked</strong> - User taps notification</li>
+                <li><strong>psp_cancel_deep_link_opened</strong> - Deep link successfully routes to app</li>
+                <li><strong>psp_retention_dialog_shown</strong> - Retention dialog displayed</li>
+                <li><strong>psp_retention_dialog_resume_clicked</strong> - User clicks resume button</li>
+                <li><strong>trial_activated (is_reactivated: true)</strong> - New mandate created, subscription resumed</li>
+                <li><strong>psp_retention_dialog_keep_cancelled_clicked</strong> - User confirms cancellation</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Interactive button effects
+        document.querySelectorAll('.cancel-btn, .dialog-btn-primary, .banner-btn, .continue-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // Dialog primary button click
+        document.querySelectorAll('.dialog-btn-primary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Calling PSP API to create new mandate...\n\nEvent fired: trial_activated (is_reactivated: true)');
+            });
+        });
+
+        // Notification click simulation
+        document.querySelectorAll('.notification-preview').forEach(notif => {
+            notif.addEventListener('click', function() {
+                alert('Deep link opening app:\nstage://psp-cancellation-save?source=phonePe&trial_days_remaining=5');
+            });
+        });
+    </script>
+</body>
+</html>
