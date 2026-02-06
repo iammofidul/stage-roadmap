@@ -1984,10 +1984,6 @@
                 <span class="priority-timeline">Weeks 1-8</span>
             </div>
 
-            <p class="priority-description">
-                <strong>Mission:</strong> Fix analytics gaps and understand retention patterns. Enable data-driven decision making.
-            </p>
-
             <!-- Initiative 9: Resume Trial -->
             <div class="initiative-card retention collapsed">
                 <div class="initiative-header" onclick="toggleInitiative(this)">
@@ -2028,15 +2024,40 @@
 
                     <h4>📊 Current State</h4>
                     <ul>
-                        <li><strong>5 Touchpoints:</strong> Floating banner, bottom sheet, home banners, popup</li>
+                        <li><strong>2 Touchpoints Available:</strong> Home banner + Settings screen banner</li>
+                        <li><strong>Missing Touchpoints:</strong> Floating banner, bottom sheet, popup (need to be implemented)</li>
                         <li><strong>Existing A/B Test:</strong> Text vs Image layout only</li>
                         <li><strong>API:</strong> resumePlan() - reverts backend pause flag for subscription_over users</li>
-                        <li><strong>Gap:</strong> No conversion tracking, no messaging variants tested for subscription users</li>
+                        <li><strong>Gap:</strong> No conversion tracking, no messaging variants tested, missing key touchpoints</li>
                     </ul>
 
-                    <h4>✅ What We'll Build (2 Tasks)</h4>
+                    <div class="metric-box" style="background: rgba(36, 139, 59, 0.1); border-left-color: #248b3b; margin: 15px 0 20px 0;">
+                        <strong>📱 Wireframe:</strong> <a href="resume-subscription-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View Interactive Wireframe →</a><br>
+                        <span style="font-size: 13px; color: #BEBEBE;">5 Touchpoints: Home Banner, Settings Banner, Floating Banner, Bottom Sheet, Popup - Full resume subscription flow with 4 message variants</span>
+                    </div>
 
-                    <p style="margin-top: 15px;"><strong>Task 1: A/B Test Messaging Variants - Subscription (2 days)</strong></p>
+                    <h4>✅ What We'll Build (3 Tasks)</h4>
+
+                    <p style="margin-top: 15px;"><strong>Task 1: Implement Missing Touchpoints (1.5 days)</strong></p>
+                    <ul>
+                        <li><strong>Implement 3 Missing Touchpoints:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Floating Banner:</strong> Persistent bottom floating CTA on home screen for subscription_over users</li>
+                                <li><strong>Bottom Sheet:</strong> Slide-up modal with resume subscription details and benefits</li>
+                                <li><strong>Popup:</strong> Full-screen overlay with personalized content hook (last watched show)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Existing Touchpoints:</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Home Banner:</strong> Update styling and add A/B test variants</li>
+                                <li><strong>Settings Banner:</strong> Update styling and add A/B test variants</li>
+                            </ul>
+                        </li>
+                        <li><strong>Deep Link:</strong> stage://resume-subscription for all touchpoints</li>
+                        <li><strong>User Detection:</strong> Show touchpoints only for subscription_over users</li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Task 2: A/B Test Messaging Variants - Subscription (1 day)</strong></p>
                     <ul>
                         <li><strong>Test 4 Message Variants for Subscription Users (subscription_over):</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
@@ -2046,11 +2067,12 @@
                                 <li><strong>Variant D:</strong> "Don't lose your subscription access" (loss aversion)</li>
                             </ul>
                         </li>
-                        <li><strong>Implementation:</strong> Add resume_subscription_message_variant to Remote Config for subscription_over users</li>
+                        <li><strong>Implementation:</strong> Add resume_subscription_message_variant to Remote Config for all 5 touchpoints</li>
+                        <li><strong>Touchpoint-Specific Copy:</strong> Adapt message variants for each touchpoint type (banner, sheet, popup)</li>
                         <li><strong>Note:</strong> No pricing changes (just copy testing for subscription users)</li>
                     </ul>
 
-                    <p style="margin-top: 15px;"><strong>Task 2: Conversion Tracking - Subscription (1 day)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Task 3: Conversion Tracking - Subscription (0.5 days)</strong></p>
                     <ul>
                         <li><strong>Subscription Events:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
@@ -2058,8 +2080,8 @@
                                 <li><strong>subscription_reactivated:</strong> New mandate registration (actual payment via PSP)</li>
                             </ul>
                         </li>
-                        <li><strong>Full Funnel:</strong> Widget View → Click → API Call → subscription_resumed/subscription_reactivated</li>
-                        <li><strong>Metrics:</strong> Conversion rate by message variant, days since expiry, pause source (PSP vs In-app)</li>
+                        <li><strong>Full Funnel:</strong> Widget View (touchpoint_type: home_banner/settings_banner/floating_banner/bottom_sheet/popup) → Click → API Call → subscription_resumed/subscription_reactivated</li>
+                        <li><strong>Metrics:</strong> Conversion rate by message variant, touchpoint type, days since expiry, pause source (PSP vs In-app)</li>
                     </ul>
 
                     <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green); margin-top: 15px;">
@@ -2082,12 +2104,12 @@
                         - Identify best-performing variant to scale
                     </div>
 
-                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/0fdjwdly/edit/fvk09nv2" target="_blank" class="amplitude-link">
+                    <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/0fdjwdly/edit/qf6crs1n" target="_blank" class="amplitude-link">
                         🔗 View Subscription Retention
                     </a>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 3 days (2 days messaging variants for subscription + 1 day conversion tracking)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> subscription_resumed_rate, subscription_reactivated_rate, conversion_by_message_variant</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 3 days (1.5 days missing touchpoints + 1 day messaging variants + 0.5 days conversion tracking)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> subscription_resumed_rate, subscription_reactivated_rate, conversion_by_message_variant, conversion_by_touchpoint_type</p>
                 </div>
                 </div>
             </div>

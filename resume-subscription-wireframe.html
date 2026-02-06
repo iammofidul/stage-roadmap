@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Subscription - Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #248B3B;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #BEBEBE;
+            font-size: 1.1em;
+            margin-bottom: 50px;
+        }
+
+        .group {
+            margin-bottom: 80px;
+        }
+
+        .group-title {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            color: #EFA73F;
+            border-bottom: 3px solid #EFA73F;
+            padding-bottom: 10px;
+        }
+
+        .screens {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .screen {
+            background: #171717;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .screen-title {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #248B3B;
+            font-weight: 700;
+        }
+
+        .phone {
+            width: 600px;
+            height: 1000px;
+            margin: 0 auto;
+            background: #121212;
+            border-radius: 30px;
+            border: 8px solid #3f3f3f;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .status-bar {
+            background: #000;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 14px;
+            color: #FFF;
+        }
+
+        .content {
+            padding: 20px;
+            height: calc(100% - 50px);
+            overflow-y: auto;
+        }
+
+        .banner {
+            background: linear-gradient(135deg, #248B3B, #1f7a32);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .banner-text {
+            flex: 1;
+        }
+
+        .banner-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .banner-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .banner-btn {
+            background: #FFF;
+            color: #248B3B;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-banner {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #248B3B, #1f7a32);
+            padding: 16px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(36, 139, 59, 0.4);
+        }
+
+        .bottom-sheet {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1f1f1f;
+            border-radius: 24px 24px 0 0;
+            padding: 30px;
+            max-height: 70%;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: #3f3f3f;
+            border-radius: 2px;
+            margin: 0 auto 20px;
+        }
+
+        .sheet-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .sheet-subtitle {
+            font-size: 14px;
+            color: #BEBEBE;
+            margin-bottom: 20px;
+        }
+
+        .benefit-list {
+            margin: 20px 0;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            background: #248B3B;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+        }
+
+        .cta-button {
+            width: 100%;
+            background: #248B3B;
+            color: #FFF;
+            padding: 16px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .popup-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .popup-content {
+            background: #1f1f1f;
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .popup-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .popup-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .popup-text {
+            font-size: 14px;
+            color: #BEBEBE;
+            margin-bottom: 20px;
+        }
+
+        .show-card {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .show-thumbnail {
+            width: 80px;
+            height: 80px;
+            background: #3f3f3f;
+            border-radius: 8px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #888;
+        }
+
+        .show-info {
+            flex: 1;
+        }
+
+        .show-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .show-subtitle {
+            font-size: 12px;
+            color: #BEBEBE;
+        }
+
+        .settings-item {
+            background: #1f1f1f;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .settings-label {
+            font-size: 14px;
+            color: #BEBEBE;
+            margin-bottom: 4px;
+        }
+
+        .settings-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .variant-box {
+            background: #2a2a2a;
+            border: 2px solid #3f3f3f;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .variant-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #EFA73F;
+            margin-bottom: 10px;
+        }
+
+        .variant-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .note {
+            background: rgba(239, 167, 63, 0.1);
+            border-left: 4px solid #EFA73F;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Resume Subscription - Wireframe</h1>
+        <p class="subtitle">5 Touchpoints for subscription_over users with 4 A/B test message variants</p>
+
+        <!-- Group 1: Banners -->
+        <div class="group">
+            <h2 class="group-title">📍 Group 1: Banner Touchpoints (2 screens)</h2>
+
+            <div class="screens">
+                <!-- Screen 1: Home Banner -->
+                <div class="screen">
+                    <h3 class="screen-title">1A. Home Banner - Variant A (Benefit Reminder)</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+                        <div class="content">
+                            <div class="banner">
+                                <div class="banner-text">
+                                    <div class="banner-title">Resume subscription to continue unlimited streaming</div>
+                                    <div class="banner-subtitle">Get back to your favorite shows</div>
+                                </div>
+                                <button class="banner-btn">Resume</button>
+                            </div>
+
+                            <div style="margin-top: 30px; padding: 20px; background: #1f1f1f; border-radius: 12px;">
+                                <div style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Continue Watching</div>
+                                <div class="show-card">
+                                    <div class="show-thumbnail">📺</div>
+                                    <div class="show-info">
+                                        <div class="show-title">Bideshi Bahu</div>
+                                        <div class="show-subtitle">S1 E15 • Drama</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="variant-box">
+                        <div class="variant-title">Message Variants for Home Banner:</div>
+                        <div class="variant-text">
+                            <strong>Variant A:</strong> "Resume subscription to continue unlimited streaming"<br>
+                            <strong>Variant B:</strong> "Continue watching [Last Show]"<br>
+                            <strong>Variant C:</strong> "Subscription expired - Reactivate now!"<br>
+                            <strong>Variant D:</strong> "Don't lose your subscription access"
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 2: Settings Banner -->
+                <div class="screen">
+                    <h3 class="screen-title">1B. Settings Banner - Variant C (Urgency/FOMO)</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+                        <div class="content">
+                            <div style="font-size: 24px; font-weight: 700; margin-bottom: 20px;">Settings</div>
+
+                            <div class="banner">
+                                <div class="banner-text">
+                                    <div class="banner-title">⚠️ Subscription expired - Reactivate now!</div>
+                                    <div class="banner-subtitle">Resume your access immediately</div>
+                                </div>
+                                <button class="banner-btn">Reactivate</button>
+                            </div>
+
+                            <div class="settings-item">
+                                <div class="settings-label">Account Status</div>
+                                <div class="settings-value" style="color: #f44336;">Subscription Expired</div>
+                            </div>
+
+                            <div class="settings-item">
+                                <div class="settings-label">Last Active</div>
+                                <div class="settings-value">3 days ago</div>
+                            </div>
+
+                            <div class="settings-item">
+                                <div class="settings-label">Subscription Type</div>
+                                <div class="settings-value">Premium Monthly</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="variant-box">
+                        <div class="variant-title">Message Variants for Settings Banner:</div>
+                        <div class="variant-text">
+                            <strong>Variant A:</strong> "Resume subscription to continue unlimited streaming"<br>
+                            <strong>Variant B:</strong> "Continue watching [Last Show]"<br>
+                            <strong>Variant C:</strong> "Subscription expired - Reactivate now!"<br>
+                            <strong>Variant D:</strong> "Don't lose your subscription access"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group 2: Floating & Sheets -->
+        <div class="group">
+            <h2 class="group-title">📍 Group 2: Floating Banner & Bottom Sheet (2 screens)</h2>
+
+            <div class="screens">
+                <!-- Screen 3: Floating Banner -->
+                <div class="screen">
+                    <h3 class="screen-title">2A. Floating Banner - Variant B (Personalized Hook)</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+                        <div class="content">
+                            <div style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Trending Now</div>
+
+                            <div class="show-card">
+                                <div class="show-thumbnail">📺</div>
+                                <div class="show-info">
+                                    <div class="show-title">Meera</div>
+                                    <div class="show-subtitle">New Series • Drama</div>
+                                </div>
+                            </div>
+
+                            <div class="show-card">
+                                <div class="show-thumbnail">📺</div>
+                                <div class="show-info">
+                                    <div class="show-title">Crime Patrol</div>
+                                    <div class="show-subtitle">S2 E20 • Thriller</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="floating-banner">
+                            <div style="flex: 1;">
+                                <div style="font-size: 14px; font-weight: 700; margin-bottom: 2px;">Continue watching Bideshi Bahu</div>
+                                <div style="font-size: 12px; opacity: 0.9;">Resume your subscription</div>
+                            </div>
+                            <button style="background: #FFF; color: #248B3B; padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 13px; border: none;">Resume</button>
+                        </div>
+                    </div>
+
+                    <div class="variant-box">
+                        <div class="variant-title">Message Variants for Floating Banner:</div>
+                        <div class="variant-text">
+                            <strong>Variant A:</strong> "Resume subscription to continue unlimited streaming"<br>
+                            <strong>Variant B:</strong> "Continue watching [Last Show]" ← Personalized<br>
+                            <strong>Variant C:</strong> "Subscription expired - Reactivate now!"<br>
+                            <strong>Variant D:</strong> "Don't lose your subscription access"
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screen 4: Bottom Sheet -->
+                <div class="screen">
+                    <h3 class="screen-title">2B. Bottom Sheet - Variant D (Loss Aversion)</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+                        <div class="content">
+                            <div style="font-size: 20px; font-weight: 700; margin-bottom: 20px;">Home</div>
+                            <div class="show-card">
+                                <div class="show-thumbnail">📺</div>
+                                <div class="show-info">
+                                    <div class="show-title">Hasir Raja</div>
+                                    <div class="show-subtitle">Comedy Show</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-sheet">
+                            <div class="sheet-handle"></div>
+                            <div class="sheet-title">⚠️ Don't lose your subscription access</div>
+                            <div class="sheet-subtitle">Resume now to keep enjoying premium content</div>
+
+                            <div class="benefit-list">
+                                <div class="benefit-item">
+                                    <div class="benefit-icon">✓</div>
+                                    <div>Unlimited streaming of all shows</div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="benefit-icon">✓</div>
+                                    <div>Ad-free viewing experience</div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="benefit-icon">✓</div>
+                                    <div>Download episodes for offline viewing</div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="benefit-icon">✓</div>
+                                    <div>Access to exclusive content</div>
+                                </div>
+                            </div>
+
+                            <button class="cta-button">Resume Subscription</button>
+                            <div style="text-align: center; margin-top: 12px; font-size: 13px; color: #BEBEBE;">
+                                No new charges until next billing cycle
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="variant-box">
+                        <div class="variant-title">Message Variants for Bottom Sheet:</div>
+                        <div class="variant-text">
+                            <strong>Variant A:</strong> "Resume subscription to continue unlimited streaming"<br>
+                            <strong>Variant B:</strong> "Continue watching [Last Show]"<br>
+                            <strong>Variant C:</strong> "Subscription expired - Reactivate now!"<br>
+                            <strong>Variant D:</strong> "Don't lose your subscription access" ← Loss Aversion
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group 3: Popup -->
+        <div class="group">
+            <h2 class="group-title">📍 Group 3: Full-Screen Popup (1 screen)</h2>
+
+            <div class="screens">
+                <!-- Screen 5: Popup -->
+                <div class="screen">
+                    <h3 class="screen-title">3. Full-Screen Popup - Variant B (Personalized Hook)</h3>
+                    <div class="phone">
+                        <div class="status-bar">
+                            <span>9:41</span>
+                            <span>📶 🔋</span>
+                        </div>
+
+                        <div class="popup-overlay">
+                            <div class="popup-content">
+                                <div class="popup-icon">📺</div>
+                                <div class="popup-title">Continue watching Bideshi Bahu</div>
+                                <div class="popup-text">You left off at Episode 15. Resume your subscription to continue the story.</div>
+
+                                <div class="show-card" style="margin: 20px 0;">
+                                    <div class="show-thumbnail">📺</div>
+                                    <div class="show-info">
+                                        <div class="show-title">Bideshi Bahu</div>
+                                        <div class="show-subtitle">S1 E15 • 42 min left</div>
+                                    </div>
+                                </div>
+
+                                <button class="cta-button">Resume Subscription</button>
+                                <button style="width: 100%; background: transparent; color: #BEBEBE; padding: 12px; border: none; font-size: 14px; margin-top: 8px; cursor: pointer;">
+                                    Maybe Later
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="variant-box">
+                        <div class="variant-title">Message Variants for Popup:</div>
+                        <div class="variant-text">
+                            <strong>Variant A:</strong> "Resume subscription to continue unlimited streaming"<br>
+                            <strong>Variant B:</strong> "Continue watching [Last Show]" ← Personalized with last watched show<br>
+                            <strong>Variant C:</strong> "Subscription expired - Reactivate now!"<br>
+                            <strong>Variant D:</strong> "Don't lose your subscription access"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Implementation Notes -->
+        <div class="group">
+            <h2 class="group-title">📝 Implementation Notes</h2>
+
+            <div class="note">
+                <strong>📌 Touchpoint Visibility Rules:</strong><br>
+                • All 5 touchpoints shown only for subscription_over users<br>
+                • Home Banner: Always visible on home screen<br>
+                • Settings Banner: Always visible in settings screen<br>
+                • Floating Banner: Shows after 5 seconds on home screen<br>
+                • Bottom Sheet: Triggered on first app open after expiry<br>
+                • Popup: Triggered when user tries to watch content
+            </div>
+
+            <div class="note">
+                <strong>🎯 A/B Test Strategy:</strong><br>
+                • 4 message variants tested across all 5 touchpoints (20 combinations total)<br>
+                • Remote Config: resume_subscription_message_variant (A/B/C/D)<br>
+                • Track conversion by: message_variant + touchpoint_type<br>
+                • Personalized variant B uses last_watched_show from user profile
+            </div>
+
+            <div class="note">
+                <strong>🔗 Deep Link:</strong><br>
+                • stage://resume-subscription<br>
+                • Opens resume subscription flow with selected variant message<br>
+                • Tracks source: home_banner/settings_banner/floating_banner/bottom_sheet/popup
+            </div>
+
+            <div class="note">
+                <strong>📊 Analytics Events:</strong><br>
+                • touchpoint_viewed (type: home_banner/settings_banner/floating_banner/bottom_sheet/popup, message_variant: A/B/C/D)<br>
+                • touchpoint_clicked (same params)<br>
+                • subscription_resumed (flag revert, no payment)<br>
+                • subscription_reactivated (new mandate via PSP)
+            </div>
+        </div>
+    </div>
+</body>
+</html>
