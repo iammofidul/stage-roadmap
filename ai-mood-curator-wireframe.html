@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mood Curator - Emotional Content Discovery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #FFFFFF;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #248b3b;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #BEBEBE;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen-card {
+            background: #1A1A1A;
+            border: 2px solid #3E3E3E;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .screen-card:hover {
+            transform: translateY(-5px);
+            border-color: #248b3b;
+        }
+
+        .screen-title {
+            color: #248b3b;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .phone-frame {
+            background: #000;
+            border: 8px solid #292929;
+            border-radius: 30px;
+            padding: 15px;
+            margin: 0 auto;
+            max-width: 540px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .phone-notch {
+            background: #000;
+            height: 25px;
+            width: 150px;
+            margin: -15px auto 10px;
+            border-radius: 0 0 15px 15px;
+            border: 2px solid #292929;
+            border-top: none;
+        }
+
+        .phone-screen {
+            background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+            min-height: 650px;
+            border-radius: 15px;
+            padding: 24px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #248b3b;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            background: #292929;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .mood-card {
+            background: linear-gradient(135deg, rgba(36, 139, 59, 0.2) 0%, rgba(29, 110, 47, 0.2) 100%);
+            border: 2px solid #248b3b;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(36, 139, 59, 0.3);
+        }
+
+        .mood-question {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .mood-option {
+            background: #292929;
+            border: 2px solid #3E3E3E;
+            border-radius: 12px;
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mood-option:hover {
+            background: #3E3E3E;
+            border-color: #248b3b;
+            transform: scale(1.05);
+        }
+
+        .mood-option.active {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            border-color: #248b3b;
+            box-shadow: 0 4px 12px rgba(36, 139, 59, 0.5);
+        }
+
+        .mood-emoji {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .mood-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #BEBEBE;
+        }
+
+        .mood-option.active .mood-label {
+            color: #fff;
+        }
+
+        .content-row {
+            margin-bottom: 24px;
+        }
+
+        .row-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .row-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .view-all {
+            font-size: 13px;
+            color: #248b3b;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .hero-card {
+            background: #292929;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 2px solid #248b3b;
+            box-shadow: 0 4px 12px rgba(36, 139, 59, 0.3);
+        }
+
+        .hero-thumbnail {
+            height: 180px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            position: relative;
+        }
+
+        .ai-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(36, 139, 59, 0.5);
+        }
+
+        .hero-info {
+            padding: 16px;
+        }
+
+        .hero-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .ai-explanation {
+            background: rgba(36, 139, 59, 0.15);
+            border-left: 3px solid #248b3b;
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .ai-explanation-text {
+            font-size: 13px;
+            color: #BEBEBE;
+            line-height: 1.5;
+        }
+
+        .watch-btn {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(36, 139, 59, 0.4);
+            transition: all 0.3s;
+        }
+
+        .watch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(36, 139, 59, 0.6);
+        }
+
+        .content-card {
+            background: #292929;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .content-thumbnail {
+            height: 120px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            position: relative;
+        }
+
+        .content-info {
+            padding: 12px;
+        }
+
+        .content-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .content-subtitle {
+            font-size: 12px;
+            color: #248b3b;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .content-meta {
+            font-size: 11px;
+            color: #737373;
+        }
+
+        .mood-selector-bar {
+            background: #292929;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .current-mood {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .current-mood-emoji {
+            font-size: 24px;
+        }
+
+        .current-mood-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .change-mood-btn {
+            background: #3E3E3E;
+            color: #BEBEBE;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .change-mood-btn:hover {
+            background: #4E4E4E;
+        }
+
+        .share-card-wrapper {
+            background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(36, 139, 59, 0.4);
+        }
+
+        .share-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .share-mood-display {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .share-mood-emoji {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .share-mood-label {
+            font-size: 14px;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .share-recommendation {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .share-rec-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .share-rec-subtitle {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .share-btn {
+            background: #fff;
+            color: #248b3b;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            display: inline-block;
+        }
+
+        .notification-preview {
+            background: rgba(41, 41, 41, 0.95);
+            border-radius: 12px;
+            padding: 14px;
+            margin: 20px 0;
+            border: 1px solid #3E3E3E;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .notif-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .notif-icon {
+            width: 36px;
+            height: 36px;
+            background: #248b3b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .notif-app {
+            font-size: 12px;
+            color: #BEBEBE;
+            font-weight: 600;
+        }
+
+        .notif-time {
+            font-size: 11px;
+            color: #737373;
+            margin-left: auto;
+        }
+
+        .notif-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .notif-body {
+            font-size: 13px;
+            color: #BEBEBE;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 16px 0 8px 0;
+            border-top: 2px solid #292929;
+            margin-top: auto;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #737373;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-item.active {
+            color: #248b3b;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .feature-description {
+            background: #292929;
+            border-left: 4px solid #248b3b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .feature-description h3 {
+            color: #248b3b;
+            margin-bottom: 12px;
+        }
+
+        .feature-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-description li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #BEBEBE;
+        }
+
+        .feature-description li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #248b3b;
+        }
+
+        .flow-indicator {
+            text-align: center;
+            color: #EFA73F;
+            font-size: 14px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Mood Curator - Emotional Content Discovery</h1>
+        <p class="subtitle">Hyper-Personalized Recommendations Based on Your Mood</p>
+
+        <div class="feature-description">
+            <h3>Feature Overview</h3>
+            <ul>
+                <li><strong>Timeline:</strong> Week 4-5 (14 days) | XL Effort | 2 Developers</li>
+                <li><strong>Target Users:</strong> Paid subscribers & trial users</li>
+                <li><strong>Impact:</strong> +45% Content Discovery, +18pp Microdrama Start Rate</li>
+                <li><strong>Core Innovation:</strong> Beyond genre → Emotional state matching = 2x higher start rate</li>
+                <li><strong>6 Moods:</strong> Happy 😊 | Sad 😢 | Stressed 😰 | Bored 😐 | Romantic 💕 | Excited 🔥</li>
+            </ul>
+        </div>
+
+        <div class="screens-grid">
+            <!-- Screen 1: Home with Mood Entry Point -->
+            <div class="screen-card">
+                <div class="screen-title">1. Home Screen - Mood Entry Point</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-header">
+                            <div class="logo">STAGE</div>
+                            <div class="header-icons">
+                                <div class="icon-btn">🔍</div>
+                                <div class="icon-btn">👤</div>
+                            </div>
+                        </div>
+
+                        <div class="mood-card">
+                            <div class="mood-question">How are you feeling right now? 🎭</div>
+                            <div class="mood-grid">
+                                <div class="mood-option">
+                                    <div class="mood-emoji">😊</div>
+                                    <div class="mood-label">Happy</div>
+                                </div>
+                                <div class="mood-option">
+                                    <div class="mood-emoji">😢</div>
+                                    <div class="mood-label">Sad</div>
+                                </div>
+                                <div class="mood-option active">
+                                    <div class="mood-emoji">😰</div>
+                                    <div class="mood-label">Stressed</div>
+                                </div>
+                                <div class="mood-option">
+                                    <div class="mood-emoji">😐</div>
+                                    <div class="mood-label">Bored</div>
+                                </div>
+                                <div class="mood-option">
+                                    <div class="mood-emoji">💕</div>
+                                    <div class="mood-label">Romantic</div>
+                                </div>
+                                <div class="mood-option">
+                                    <div class="mood-emoji">🔥</div>
+                                    <div class="mood-label">Excited</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="content-row">
+                            <div class="row-header">
+                                <div class="row-title">Continue Watching</div>
+                                <div class="view-all">View All</div>
+                            </div>
+                            <div class="content-card">
+                                <div class="content-thumbnail">🎬</div>
+                                <div class="content-info">
+                                    <div class="content-title">Bideshi Bahu</div>
+                                    <div class="content-meta">Episode 7 • 15 min left</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bottom-nav">
+                            <div class="nav-item active">
+                                <div class="nav-icon">🏠</div>
+                                <span>Home</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">🎬</div>
+                                <span>Coming Soon</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">➕</div>
+                                <span>My List</span>
+                            </div>
+                            <div class="nav-item">
+                                <div class="nav-icon">⚙️</div>
+                                <span>Settings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 2: Mood-Based Recommendations -->
+            <div class="screen-card">
+                <div class="screen-title">2. AI-Curated Recommendations</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="mood-selector-bar">
+                            <div class="current-mood">
+                                <div class="current-mood-emoji">😰</div>
+                                <div class="current-mood-text">Feeling Stressed?<br><span style="font-size: 11px; color: #BEBEBE;">Here's what helps</span></div>
+                            </div>
+                            <div class="change-mood-btn">Change Mood</div>
+                        </div>
+
+                        <div class="hero-card">
+                            <div class="hero-thumbnail">
+                                🎭
+                                <div class="ai-badge">✨ AI TOP PICK</div>
+                            </div>
+                            <div class="hero-info">
+                                <div class="hero-title">Office Comedy Shorts</div>
+                                <div class="ai-explanation">
+                                    <div class="ai-explanation-text">💡 <strong>Why this helps:</strong> Quick comedy microdramas help you unwind in just 15 minutes. Perfect stress relief!</div>
+                                </div>
+                                <div class="watch-btn">▶️ Watch Now</div>
+                            </div>
+                        </div>
+
+                        <div class="content-row">
+                            <div class="row-header">
+                                <div class="row-title">More for Your Mood</div>
+                            </div>
+                            <div class="content-card">
+                                <div class="content-thumbnail">😄</div>
+                                <div class="content-info">
+                                    <div class="content-title">Laugh Factory</div>
+                                    <div class="content-subtitle">💡 Light comedy to lift your spirits</div>
+                                    <div class="content-meta">Comedy • 12 episodes</div>
+                                </div>
+                            </div>
+                            <div class="content-card">
+                                <div class="content-thumbnail">🌸</div>
+                                <div class="content-info">
+                                    <div class="content-title">Peaceful Retreat</div>
+                                    <div class="content-subtitle">💡 Calming drama to help you relax</div>
+                                    <div class="content-meta">Drama • 8 episodes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 3: Push Notification -->
+            <div class="screen-card">
+                <div class="screen-title">3. Mood-Based Push Notification</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen" style="padding-top: 60px;">
+                        <div style="text-align: center; margin-bottom: 20px; color: #737373; font-size: 14px;">6:30 PM • After Work</div>
+
+                        <div class="notification-preview">
+                            <div class="notif-header">
+                                <div class="notif-icon">😰</div>
+                                <div>
+                                    <div class="notif-app">STAGE</div>
+                                </div>
+                                <div class="notif-time">now</div>
+                            </div>
+                            <div class="notif-title">Feeling stressed after work?</div>
+                            <div class="notif-body">We have 5 shows to help you unwind 😌 Tap to see your personalized picks!</div>
+                        </div>
+
+                        <div class="flow-indicator">⬇️ Tap notification</div>
+
+                        <div style="background: #292929; border-radius: 12px; padding: 16px; text-align: center;">
+                            <div style="font-size: 32px; margin-bottom: 12px;">✨</div>
+                            <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">Deep Link Opens App</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.5;">
+                                <strong>Route:</strong> stage://mood/stressed<br>
+                                Directly opens mood recommendations
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 16px; background: rgba(36, 139, 59, 0.15); border-radius: 8px; border-left: 3px solid #248b3b;">
+                            <div style="font-size: 13px; font-weight: 600; color: #248b3b; margin-bottom: 8px;">🎯 Notification Strategy</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.6;">
+                                • <strong>Weekdays 6 PM:</strong> "Stressed" mood trigger<br>
+                                • <strong>Weekend 10 AM:</strong> "Happy" mood content<br>
+                                • <strong>Lunch 12-2 PM:</strong> Quick "Bored" escapes<br>
+                                • <strong>Time-based personalization</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 4: Viral Share Card -->
+            <div class="screen-card">
+                <div class="screen-title">4. Social Sharing - Viral Moment</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div style="text-align: center; margin-bottom: 20px;">
+                            <div style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Share Your Mood Picks</div>
+                            <div style="font-size: 13px; color: #BEBEBE;">Show friends how STAGE knows you!</div>
+                        </div>
+
+                        <div class="share-card-wrapper">
+                            <div class="share-card-title">STAGE AI Knows Me! 😭</div>
+
+                            <div class="share-mood-display">
+                                <div class="share-mood-emoji">😰</div>
+                                <div class="share-mood-label">When I said I'm Stressed...</div>
+                            </div>
+
+                            <div class="share-recommendation">
+                                <div class="share-rec-title">📺 Office Comedy Shorts</div>
+                                <div class="share-rec-subtitle">And it was PERFECT! Quick escape in 15 min</div>
+                            </div>
+
+                            <div class="share-recommendation">
+                                <div class="share-rec-title">😄 Laugh Factory</div>
+                                <div class="share-rec-subtitle">Exactly what I needed to unwind</div>
+                            </div>
+
+                            <div style="font-size: 12px; color: rgba(255, 255, 255, 0.7); margin-top: 12px;">
+                                This app reads my mind! 🤯
+                            </div>
+
+                            <div class="share-btn">📱 Share on WhatsApp</div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 16px; background: #292929; border-radius: 8px;">
+                            <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #248b3b;">📈 Expected Viral Impact</div>
+                            <div style="font-size: 12px; color: #BEBEBE; line-height: 1.6;">
+                                • <strong>8,000+ shares/month:</strong> "This app reads my mind"<br>
+                                • <strong>Screenshot testimonials:</strong> Instagram Stories<br>
+                                • <strong>App Store reviews:</strong> "AI is a game-changer"<br>
+                                • <strong>+10% organic installs</strong> from social proof
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 5: All Moods View -->
+            <div class="screen-card">
+                <div class="screen-title">5. All Moods - Quick Switcher</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <div style="font-size: 22px; font-weight: 700; margin-bottom: 8px;">Select Your Mood 🎭</div>
+                            <div style="font-size: 13px; color: #BEBEBE;">We'll curate perfect shows for you</div>
+                        </div>
+
+                        <div style="display: grid; gap: 14px;">
+                            <div style="background: linear-gradient(135deg, #248b3b 0%, #1d6e2f 100%); border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 16px; box-shadow: 0 4px 12px rgba(36, 139, 59, 0.4);">
+                                <div style="font-size: 40px;">😰</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Stressed</div>
+                                    <div style="font-size: 12px; color: rgba(255, 255, 255, 0.8);">Comedy shorts • Light romance • Quick escape</div>
+                                </div>
+                                <div style="font-size: 14px; color: rgba(255, 255, 255, 0.9);">→</div>
+                            </div>
+
+                            <div style="background: #292929; border: 2px solid #3E3E3E; border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 16px;">
+                                <div style="font-size: 40px;">😊</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Happy</div>
+                                    <div style="font-size: 12px; color: #737373;">Comedy • Feel-good dramas • Lighthearted</div>
+                                </div>
+                                <div style="font-size: 14px; color: #737373;">→</div>
+                            </div>
+
+                            <div style="background: #292929; border: 2px solid #3E3E3E; border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 16px;">
+                                <div style="font-size: 40px;">😢</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Sad</div>
+                                    <div style="font-size: 12px; color: #737373;">Emotional dramas • Slice-of-life • Comfort</div>
+                                </div>
+                                <div style="font-size: 14px; color: #737373;">→</div>
+                            </div>
+
+                            <div style="background: #292929; border: 2px solid #3E3E3E; border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 16px;">
+                                <div style="font-size: 40px;">😐</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Bored</div>
+                                    <div style="font-size: 12px; color: #737373;">Thrillers • Action • Binge-worthy series</div>
+                                </div>
+                                <div style="font-size: 14px; color: #737373;">→</div>
+                            </div>
+
+                            <div style="background: #292929; border: 2px solid #3E3E3E; border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 16px;">
+                                <div style="font-size: 40px;">💕</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Romantic</div>
+                                    <div style="font-size: 12px; color: #737373;">Romance dramas • Love stories • Rom-coms</div>
+                                </div>
+                                <div style="font-size: 14px; color: #737373;">→</div>
+                            </div>
+
+                            <div style="background: #292929; border: 2px solid #3E3E3E; border-radius: 14px; padding: 18px; display: flex; align-items: center; gap: 16px;">
+                                <div style="font-size: 40px;">🔥</div>
+                                <div style="flex: 1;">
+                                    <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Excited</div>
+                                    <div style="font-size: 12px; color: #737373;">Action • Suspense • Popular trending</div>
+                                </div>
+                                <div style="font-size: 14px; color: #737373;">→</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 14px; background: rgba(36, 139, 59, 0.15); border-radius: 8px; text-align: center;">
+                            <div style="font-size: 12px; color: #BEBEBE;">💡 <strong style="color: #248b3b;">AI learns from you:</strong> Your preferences + current mood = perfect match</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-description">
+            <h3>User Flow Summary</h3>
+            <ul>
+                <li><strong>Step 1:</strong> User opens app → Sees prominent mood selector on home screen</li>
+                <li><strong>Step 2:</strong> Selects current mood (Happy/Sad/Stressed/Bored/Romantic/Excited)</li>
+                <li><strong>Step 3:</strong> AI generates personalized recommendations based on mood + viewing history</li>
+                <li><strong>Step 4:</strong> User sees hero card with "AI TOP PICK" and explanation: "Why this helps"</li>
+                <li><strong>Step 5:</strong> One-tap "Watch Now" → Instant playback</li>
+                <li><strong>Alternative Flow:</strong> Push notification at 6 PM → "Feeling stressed? 5 shows to help" → Deep link to mood page</li>
+                <li><strong>Viral Moment:</strong> Share "STAGE AI knows me!" with recommendations screenshot</li>
+            </ul>
+        </div>
+
+        <div class="feature-description">
+            <h3>Technical Implementation</h3>
+            <ul>
+                <li><strong>Task 1:</strong> Mood Selection UI (2 days) - Home card with 6 moods, quick switcher, saved preferences</li>
+                <li><strong>Task 2:</strong> Mood-to-Content Mapping Algorithm (3 days) - Genre/tone mapping, personalization layer, AI explanations</li>
+                <li><strong>Task 3:</strong> Recommendations UI (2.5 days) - Hero card, curated rows, mood history tracker</li>
+                <li><strong>Task 4:</strong> Push Notifications (1.5 days) - Time-based mood triggers, deep linking to mood pages</li>
+                <li><strong>Task 5:</strong> Analytics + Viral Sharing (1 day) - Track mood_to_playback_rate, social share feature</li>
+            </ul>
+        </div>
+
+        <div class="feature-description">
+            <h3>Expected Impact</h3>
+            <ul>
+                <li><strong>+45% Content Discovery:</strong> Users find content they wouldn't browse to manually</li>
+                <li><strong>+18pp Microdrama Start Rate:</strong> 22% → 40% (AI surfaces niche content based on mood)</li>
+                <li><strong>+30% Overall Start Rate:</strong> Solves "what to watch" decision paralysis</li>
+                <li><strong>+40% Completion Rate:</strong> Right mood = right content = users finish shows</li>
+                <li><strong>10x Faster Decision:</strong> 10-15 min browsing → 30 sec mood selection</li>
+                <li><strong>8,000+ Social Shares/Month:</strong> "This app reads my mind 😭" viral testimonials</li>
+                <li><strong>+10% Organic Installs:</strong> From social proof and word-of-mouth</li>
+            </ul>
+        </div>
+
+        <div class="feature-description">
+            <h3>Why This Works (Research-Backed)</h3>
+            <ul>
+                <li><strong>Spotify Case Study:</strong> Mood playlists drive 3x higher engagement vs genre playlists</li>
+                <li><strong>Netflix Study:</strong> Emotional state > genre preference for content matching success</li>
+                <li><strong>Core Problem Solved:</strong> 77% don't discover microdrama → AI surfaces it based on mood</li>
+                <li><strong>Wow Moment:</strong> "AI knows me better than my friends" → User evangelizes STAGE</li>
+                <li><strong>Hyper-Personalization:</strong> Beyond demographics → Emotional state + viewing history = 2x start rate</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Interactive mood selection
+        document.querySelectorAll('.mood-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.mood-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Watch button interaction
+        document.querySelectorAll('.watch-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Launching video player with mood-matched content...');
+            });
+        });
+
+        // Share button interaction
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Opening WhatsApp with shareable mood card: "STAGE AI knows me! 😭"');
+            });
+        });
+    </script>
+</body>
+</html>
