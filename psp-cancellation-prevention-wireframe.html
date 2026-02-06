@@ -560,28 +560,6 @@
             margin-bottom: 16px;
         }
 
-        /* Info Box */
-        .info-box {
-            background: rgba(36, 139, 59, 0.15);
-            border-radius: 10px;
-            padding: 16px;
-            border-left: 3px solid #248b3b;
-            margin-top: 20px;
-        }
-
-        .info-box-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #248b3b;
-            margin-bottom: 8px;
-        }
-
-        .info-box-text {
-            font-size: 12px;
-            color: #BEBEBE;
-            line-height: 1.6;
-        }
-
         /* Flow Indicator */
         .flow-indicator {
             text-align: center;
@@ -590,65 +568,12 @@
             margin: 16px 0;
             font-weight: 600;
         }
-
-        /* Feature Description */
-        .feature-description {
-            background: #292929;
-            border-left: 4px solid #248b3b;
-            padding: 24px;
-            border-radius: 10px;
-            margin: 40px 0;
-        }
-
-        .feature-description h3 {
-            color: #248b3b;
-            margin-bottom: 16px;
-            font-size: 20px;
-        }
-
-        .feature-description ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .feature-description li {
-            padding: 10px 0;
-            padding-left: 28px;
-            position: relative;
-            color: #BEBEBE;
-            line-height: 1.6;
-        }
-
-        .feature-description li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #248b3b;
-            font-size: 18px;
-        }
-
-        .feature-description strong {
-            color: #fff;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>PSP/App Pause Retention Flow - 4 Screens</h1>
-        <p class="subtitle">Notification → FOMO Journey (Popular + Upcoming) → Content Blocked → Resume/Reactivate</p>
-
-        <div class="feature-description">
-            <h3>🎯 Feature Overview - Streamlined 4 Screens</h3>
-            <ul>
-                <li><strong>4 Screens Total:</strong> Notification → FOMO Journey (merged) → Content Blocked (2 variants)</li>
-                <li><strong>Notification:</strong> Simple & direct - "Trial Paused" / "Trial Revoked" + "You can not watch any STAGE content"</li>
-                <li><strong>FOMO Journey:</strong> Single screen with both Popular unwatched + Upcoming shows (horizontal lists)</li>
-                <li><strong>Two Simple CTAs:</strong> App pause = "Resume" button | PSP revoked = "Reactivate Trial" button</li>
-                <li><strong>No Success Screen:</strong> Uses existing restart_subscription_popup.dart from codebase</li>
-                <li><strong>Design Pattern:</strong> Based on existing codebase (motivator_popup.dart, resume_subscription_banner.dart)</li>
-                <li><strong>Colors:</strong> Dark theme (0xFF121212) + Green CTA (0xFF248B3B) matching codebase standards</li>
-            </ul>
-        </div>
+        <h1>PSP/App Pause Retention Flow</h1>
+        <p class="subtitle">Notification → FOMO Journey → Content Blocked → Resume/Reactivate</p>
 
         <div class="screens-grid">
             <!-- Screen 1: Lock Screen Notification -->
@@ -675,15 +600,6 @@
                         </div>
 
                         <div class="flow-indicator">⬇️ User taps notification</div>
-
-                        <div class="info-box">
-                            <div class="info-box-title">🔔 Simple & Direct Messaging</div>
-                            <div class="info-box-text">
-                                <strong>Trigger:</strong> paymentRepository.pausePlan() API success<br>
-                                <strong>Copy:</strong> Clear status + consequence (can't watch)<br>
-                                <strong>Action:</strong> Opens FOMO journey showing what they're missing
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -838,15 +754,6 @@
                         </div>
 
                         <div class="flow-indicator" style="margin-top: 20px;">⬇️ User tries to play</div>
-
-                        <div class="info-box">
-                            <div class="info-box-title">🎯 Combined FOMO Screen</div>
-                            <div class="info-box-text">
-                                <strong>Single Screen:</strong> Both Popular + Upcoming in one view<br>
-                                <strong>Two Sections:</strong> Popular unwatched + Coming soon content<br>
-                                <strong>Action:</strong> User taps any show → Content blocked screen
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -887,16 +794,6 @@
 
                         <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
                             Expires on Feb 11 • 5 days left
-                        </div>
-
-                        <div class="info-box">
-                            <div class="info-box-title">✅ Simple Resume Button</div>
-                            <div class="info-box-text">
-                                <strong>Button:</strong> "Resume" (simple, direct)<br>
-                                <strong>API:</strong> paymentRepository.resumePlan()<br>
-                                <strong>Success:</strong> Shows restart_subscription_popup.dart<br>
-                                <strong>Analytics:</strong> resume_trial_widget_clicked
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -944,84 +841,10 @@
                         <div style="text-align: center; font-size: 12px; color: #737373; margin-bottom: 12px;">
                             Your trial will continue with 5 days remaining
                         </div>
-
-                        <div class="info-box">
-                            <div class="info-box-title">🔄 Reactivate Trial Button</div>
-                            <div class="info-box-text">
-                                <strong>Button:</strong> "Reactivate Trial" (clear action)<br>
-                                <strong>Deeplink:</strong> stage://resume/har/hin/payment?planId=X<br>
-                                <strong>Check:</strong> isUserEligibleForNewTrialMandateSetup<br>
-                                <strong>Flow:</strong> Redirect to PhonePe → Authorize → Return to STAGE
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
 
-        </div>
-
-        <div class="feature-description">
-            <h3>📱 Complete User Flow - 4 Screens</h3>
-            <ul>
-                <li><strong>Screen 1:</strong> Notification: "Trial Paused" / "Trial Revoked" + "You can not watch any STAGE content"</li>
-                <li><strong>Screen 2:</strong> FOMO Journey - Popular unwatched + Upcoming shows (merged into one screen)</li>
-                <li><strong>Screen 3A (App Pause):</strong> Content blocked → Simple "Resume" button → resumePlan() API → Success popup</li>
-                <li><strong>Screen 3B (PSP Revoke):</strong> Content blocked → "Reactivate Trial" button → Deeplink to PhonePe → Authorize → Resume</li>
-                <li><strong>After Resume:</strong> Shows restart_subscription_popup.dart (existing code) → Redirect to home/continue watching</li>
-            </ul>
-        </div>
-
-        <div class="feature-description">
-            <h3>🎨 Design Patterns from Codebase</h3>
-            <ul>
-                <li><strong>FOMO Journey:</strong> Based on motivator_popup.dart (700 lines) - carousel, video/image support, FOMO messaging</li>
-                <li><strong>Resume Banner:</strong> Matches resume_subscription_banner.dart - expiry date, green CTA, "Remind Later" option</li>
-                <li><strong>PSP Banner:</strong> Similar to trial_mandate_resume_psp.dart - mandate setup CTA, deeplink redirect</li>
-                <li><strong>Success Popup:</strong> Identical to restart_subscription_popup.dart - Hindi copy, success GIF, green CTA</li>
-                <li><strong>Dark Theme:</strong> Background: 0xFF121212 | Cards: 0xFF171717 | Borders: 0xFF3f3f3f</li>
-                <li><strong>Green CTA:</strong> 0xFF248B3B (matches all dialogs in codebase)</li>
-                <li><strong>Typography:</strong> Bold headings (700-900 weight), BEBEBE for secondary text, 737373 for meta</li>
-            </ul>
-        </div>
-
-        <div class="feature-description">
-            <h3>🔧 Technical Implementation</h3>
-            <ul>
-                <li><strong>Notification Trigger:</strong> After paymentRepository.pausePlan() success, send push with deeplink</li>
-                <li><strong>FOMO Screen Data:</strong> Fetch from API/remote config: upcoming shows (next 24-48h) + trending (real-time viewer counts)</li>
-                <li><strong>Content Gate:</strong> On play attempt, check subscription status → Show blocked screen if paused/revoked</li>
-                <li><strong>App Pause Flow:</strong> resumePlan() → fetchRecurringSubscriptionStatus() → Show restart_subscription_popup</li>
-                <li><strong>PSP Flow:</strong> Check isUserEligibleForNewTrialMandateSetup → Deeplink: stage://resume/har/hin/payment?planId=X</li>
-                <li><strong>Analytics:</strong> Track notification_sent, notification_clicked, fomo_journey_shown, content_blocked_shown, resume_clicked, mandate_setup_clicked, success_shown</li>
-            </ul>
-        </div>
-
-        <div class="feature-description">
-            <h3>📊 Expected Impact - Streamlined Flow</h3>
-            <ul>
-                <li><strong>Notification Open Rate:</strong> 45-50% (immediate after pause + clear messaging)</li>
-                <li><strong>FOMO Journey Engagement:</strong> 75-85% browse both sections (Popular + Upcoming in one screen)</li>
-                <li><strong>Content Blocked Conversion:</strong> Higher than direct banner (FOMO primes user for action)</li>
-                <li><strong>App Pause Recovery:</strong> 45-50% conversion (low friction resume + FOMO combination)</li>
-                <li><strong>PSP Revoke Recovery:</strong> 20-25% conversion (high friction but FOMO increases motivation)</li>
-                <li><strong>Total Recovery:</strong> 24-28K trials/month saved</li>
-                <li><strong>Revenue Impact:</strong> ₹11-13 Lakhs MRR (2,300 paid subscribers × ₹499 ARPU)</li>
-                <li><strong>Streamlined Benefit:</strong> Faster user journey (4 screens vs 6), less drop-off between screens</li>
-            </ul>
-        </div>
-
-        <div class="feature-description">
-            <h3>🎯 Why This Streamlined UX Works</h3>
-            <ul>
-                <li><strong>4 Screens Only:</strong> Faster journey, less drop-off between screens</li>
-                <li><strong>Clear Notification:</strong> Direct message - "Trial Paused" + "You can not watch any STAGE content" (no ambiguity)</li>
-                <li><strong>Merged FOMO Screen:</strong> Both Popular + Upcoming in one view (more efficient, easier to browse)</li>
-                <li><strong>Horizontal Lists:</strong> Netflix-style browsing, more content visible, familiar pattern</li>
-                <li><strong>Simple Buttons:</strong> "Resume" (app) / "Reactivate Trial" (PSP) - clear action verbs, no confusion</li>
-                <li><strong>Natural Flow:</strong> User tries to play Bideshi Bahu → blocked → CTA feels necessary (not pushy)</li>
-                <li><strong>No Redundant Success Screen:</strong> Uses existing codebase popup (restart_subscription_popup.dart)</li>
-                <li><strong>Low Cognitive Load:</strong> Visual cards with social proof, simple CTAs, no overwhelming choices</li>
-            </ul>
         </div>
     </div>
 
