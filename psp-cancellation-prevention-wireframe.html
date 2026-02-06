@@ -634,17 +634,17 @@
 </head>
 <body>
     <div class="container">
-        <h1>PSP/App Pause Retention Flow - Simple FOMO Journey</h1>
-        <p class="subtitle">Trial Paused/Revoked → Popular Unwatched + Upcoming Shows → Simple Resume/Reactivate CTA</p>
+        <h1>PSP/App Pause Retention Flow - 4 Screens</h1>
+        <p class="subtitle">Notification → FOMO Journey (Popular + Upcoming) → Content Blocked → Resume/Reactivate</p>
 
         <div class="feature-description">
-            <h3>🎯 Feature Overview - Simple & Direct</h3>
+            <h3>🎯 Feature Overview - Streamlined 4 Screens</h3>
             <ul>
-                <li><strong>Trigger:</strong> User pauses subscription (from app or PSP) → Notification sent immediately</li>
+                <li><strong>4 Screens Total:</strong> Notification → FOMO Journey (merged) → Content Blocked (2 variants)</li>
                 <li><strong>Notification:</strong> Simple & direct - "Trial Paused" / "Trial Revoked" + "You can not watch any STAGE content"</li>
-                <li><strong>FOMO Journey:</strong> Show popular unwatched content + upcoming shows/movies (Bideshi Bahu as main example)</li>
+                <li><strong>FOMO Journey:</strong> Single screen with both Popular unwatched + Upcoming shows (horizontal lists)</li>
                 <li><strong>Two Simple CTAs:</strong> App pause = "Resume" button | PSP revoked = "Reactivate Trial" button</li>
-                <li><strong>Entry Point:</strong> Lock screen notification → Opens FOMO journey → User tries to play → Content blocked → Simple CTA</li>
+                <li><strong>No Success Screen:</strong> Uses existing restart_subscription_popup.dart from codebase</li>
                 <li><strong>Design Pattern:</strong> Based on existing codebase (motivator_popup.dart, resume_subscription_banner.dart)</li>
                 <li><strong>Colors:</strong> Dark theme (0xFF121212) + Green CTA (0xFF248B3B) matching codebase standards</li>
             </ul>
@@ -688,9 +688,9 @@
                 </div>
             </div>
 
-            <!-- Screen 2: FOMO Journey - Popular Unwatched -->
+            <!-- Screen 2: FOMO Journey - Popular + Upcoming -->
             <div class="screen-card">
-                <div class="screen-title">2. FOMO Journey - Popular Unwatched</div>
+                <div class="screen-title">2. FOMO Journey - Popular + Upcoming</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -699,8 +699,7 @@
                             <div class="close-btn">✕</div>
                         </div>
 
-                        <div class="fomo-heading">Popular Shows<br>You Haven't Watched</div>
-                        <div class="fomo-subheading">Everyone's watching these. Don't miss out!</div>
+                        <div class="section-title">Popular Shows You Haven't Watched</div>
 
                         <div class="horizontal-scroll">
                             <div class="upcoming-card">
@@ -767,25 +766,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Screen 3: FOMO Journey - Upcoming Shows -->
-            <div class="screen-card">
-                <div class="screen-title">3. FOMO Journey - Upcoming Shows</div>
-                <div class="phone-frame">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <div class="app-header">
-                            <div class="logo">STAGE</div>
-                            <div class="close-btn">✕</div>
-                        </div>
+                        <div class="countdown-badge" style="margin-top: 20px;">⏰ Coming Soon</div>
 
-                        <div class="countdown-badge">⏰ Coming Tomorrow</div>
-
-                        <div class="fomo-heading">Upcoming Shows<br>& Movies</div>
-                        <div class="fomo-subheading">New episodes and movies releasing soon</div>
+                        <div class="section-title" style="margin-top: 12px;">Upcoming Shows & Movies</div>
 
                         <div class="horizontal-scroll">
                             <div class="upcoming-card">
@@ -853,14 +837,13 @@
                             </div>
                         </div>
 
-                        <div class="flow-indicator">⬇️ User tries to play</div>
+                        <div class="flow-indicator" style="margin-top: 20px;">⬇️ User tries to play</div>
 
                         <div class="info-box">
-                            <div class="info-box-title">🎯 Simple FOMO Strategy</div>
+                            <div class="info-box-title">🎯 Combined FOMO Screen</div>
                             <div class="info-box-text">
-                                <strong>Horizontal Lists:</strong> Easy to browse, more content visible<br>
-                                <strong>Popular Unwatched:</strong> Shows they haven't seen yet<br>
-                                <strong>Upcoming:</strong> New episodes/movies releasing soon<br>
+                                <strong>Single Screen:</strong> Both Popular + Upcoming in one view<br>
+                                <strong>Two Sections:</strong> Popular unwatched + Coming soon content<br>
                                 <strong>Action:</strong> User taps any show → Content blocked screen
                             </div>
                         </div>
@@ -868,9 +851,9 @@
                 </div>
             </div>
 
-            <!-- Screen 4: Content Blocked - App Paused -->
+            <!-- Screen 3: Content Blocked - App Paused -->
             <div class="screen-card">
-                <div class="screen-title">4A. Content Blocked - App Paused</div>
+                <div class="screen-title">3A. Content Blocked - App Paused</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -919,9 +902,9 @@
                 </div>
             </div>
 
-            <!-- Screen 5: Content Blocked - PSP Revoked -->
+            <!-- Screen 4: Content Blocked - PSP Revoked -->
             <div class="screen-card">
-                <div class="screen-title">4B. Content Blocked - PSP Revoked</div>
+                <div class="screen-title">3B. Content Blocked - PSP Revoked</div>
                 <div class="phone-frame">
                     <div class="phone-notch"></div>
                     <div class="phone-screen">
@@ -975,71 +958,16 @@
                 </div>
             </div>
 
-            <!-- Screen 6: Success State -->
-            <div class="screen-card">
-                <div class="screen-title">5. Success - Subscription Active</div>
-                <div class="phone-frame">
-                    <div class="phone-notch"></div>
-                    <div class="phone-screen">
-                        <div class="success-screen">
-                            <div class="success-icon">🎉</div>
-                            <div class="success-title">आपका प्लान वापस<br>शुरू कर दिया गया हैं!</div>
-                            <div class="success-subtitle">Your subscription is active again.<br>5 days left in your trial.<br>No charges until trial ends.</div>
-
-                            <div class="cta-button">▶️ VIP शोज देखना जारी रखें</div>
-                        </div>
-
-                        <div class="continue-watching-section">
-                            <div class="section-title">🎬 Watch These Now</div>
-
-                            <div class="upcoming-card" style="margin-bottom: 12px;">
-                                <div class="upcoming-badge">⏰ FINALE TOMORROW</div>
-                                <div class="card-thumbnail" style="height: 120px; font-size: 40px;">
-                                    🎭
-                                    <div class="play-overlay" style="width: 50px; height: 50px; font-size: 20px;">▶️</div>
-                                </div>
-                                <div class="card-info" style="padding: 12px;">
-                                    <div class="card-title" style="font-size: 14px;">Bideshi Bahu</div>
-                                    <div class="card-meta">Episode 39 • 42 mins</div>
-                                </div>
-                            </div>
-
-                            <div class="upcoming-card">
-                                <div class="trending-badge">🔥 TRENDING</div>
-                                <div class="card-thumbnail" style="height: 120px; font-size: 40px;">
-                                    😄
-                                    <div class="play-overlay" style="width: 50px; height: 50px; font-size: 20px;">▶️</div>
-                                </div>
-                                <div class="card-info" style="padding: 12px;">
-                                    <div class="card-title" style="font-size: 14px;">Hasir Raja</div>
-                                    <div class="card-meta">S02 E15 • 35 mins</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="info-box" style="margin-top: 16px;">
-                            <div class="info-box-title">✅ Pattern: restart_subscription_popup.dart</div>
-                            <div class="info-box-text">
-                                <strong>GIF:</strong> StageGifAssets.couponSuccess<br>
-                                <strong>Analytics:</strong> subscription_resumed_popup<br>
-                                <strong>Next:</strong> Direct to continue watching / home
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="feature-description">
-            <h3>📱 Complete User Flow - Simplified</h3>
+            <h3>📱 Complete User Flow - 4 Screens</h3>
             <ul>
-                <li><strong>Step 1:</strong> User pauses subscription (app or PSP) → API: paymentRepository.pausePlan()</li>
-                <li><strong>Step 2:</strong> Notification sent: "Trial Paused" / "Trial Revoked" + "You can not watch any STAGE content"</li>
-                <li><strong>Step 3:</strong> User taps notification → Opens FOMO journey (Popular unwatched + Upcoming shows)</li>
-                <li><strong>Step 4:</strong> User tries to play Bideshi Bahu or any show → Content blocked screen shown</li>
-                <li><strong>Step 5A (App Pause):</strong> Simple "Resume" button → Tap → resumePlan() API → Success popup</li>
-                <li><strong>Step 5B (PSP Revoke):</strong> "Reactivate Trial" button → Deeplink to PhonePe → Authorize → Return to STAGE → Success</li>
-                <li><strong>Step 6:</strong> Success screen (Hindi copy) with continue watching recommendations</li>
+                <li><strong>Screen 1:</strong> Notification: "Trial Paused" / "Trial Revoked" + "You can not watch any STAGE content"</li>
+                <li><strong>Screen 2:</strong> FOMO Journey - Popular unwatched + Upcoming shows (merged into one screen)</li>
+                <li><strong>Screen 3A (App Pause):</strong> Content blocked → Simple "Resume" button → resumePlan() API → Success popup</li>
+                <li><strong>Screen 3B (PSP Revoke):</strong> Content blocked → "Reactivate Trial" button → Deeplink to PhonePe → Authorize → Resume</li>
+                <li><strong>After Resume:</strong> Shows restart_subscription_popup.dart (existing code) → Redirect to home/continue watching</li>
             </ul>
         </div>
 
@@ -1069,27 +997,29 @@
         </div>
 
         <div class="feature-description">
-            <h3>📊 Expected Impact</h3>
+            <h3>📊 Expected Impact - Streamlined Flow</h3>
             <ul>
-                <li><strong>Notification Open Rate:</strong> 45-50% (immediate after pause + upcoming content urgency)</li>
-                <li><strong>FOMO Journey Engagement:</strong> 70-80% scroll through at least 2 screens before trying to play</li>
+                <li><strong>Notification Open Rate:</strong> 45-50% (immediate after pause + clear messaging)</li>
+                <li><strong>FOMO Journey Engagement:</strong> 75-85% browse both sections (Popular + Upcoming in one screen)</li>
                 <li><strong>Content Blocked Conversion:</strong> Higher than direct banner (FOMO primes user for action)</li>
                 <li><strong>App Pause Recovery:</strong> 45-50% conversion (low friction resume + FOMO combination)</li>
                 <li><strong>PSP Revoke Recovery:</strong> 20-25% conversion (high friction but FOMO increases motivation)</li>
-                <li><strong>Total Recovery:</strong> 24-28K trials/month (vs 21-24K without FOMO journey - 15% lift)</li>
+                <li><strong>Total Recovery:</strong> 24-28K trials/month saved</li>
                 <li><strong>Revenue Impact:</strong> ₹11-13 Lakhs MRR (2,300 paid subscribers × ₹499 ARPU)</li>
+                <li><strong>Streamlined Benefit:</strong> Faster user journey (4 screens vs 6), less drop-off between screens</li>
             </ul>
         </div>
 
         <div class="feature-description">
-            <h3>🎯 Why This Simple UX Works</h3>
+            <h3>🎯 Why This Streamlined UX Works</h3>
             <ul>
+                <li><strong>4 Screens Only:</strong> Faster journey, less drop-off between screens</li>
                 <li><strong>Clear Notification:</strong> Direct message - "Trial Paused" + "You can not watch any STAGE content" (no ambiguity)</li>
-                <li><strong>FOMO Before CTA:</strong> Shows popular unwatched + upcoming content BEFORE asking to resume</li>
+                <li><strong>Merged FOMO Screen:</strong> Both Popular + Upcoming in one view (more efficient, easier to browse)</li>
+                <li><strong>Horizontal Lists:</strong> Netflix-style browsing, more content visible, familiar pattern</li>
                 <li><strong>Simple Buttons:</strong> "Resume" (app) / "Reactivate Trial" (PSP) - clear action verbs, no confusion</li>
                 <li><strong>Natural Flow:</strong> User tries to play Bideshi Bahu → blocked → CTA feels necessary (not pushy)</li>
-                <li><strong>Focused Content:</strong> Popular unwatched (what they haven't seen) + Upcoming (what they'll miss)</li>
-                <li><strong>Matches Codebase:</strong> Uses existing motivator_popup pattern, resume API flows, success popup</li>
+                <li><strong>No Redundant Success Screen:</strong> Uses existing codebase popup (restart_subscription_popup.dart)</li>
                 <li><strong>Low Cognitive Load:</strong> Visual cards with social proof, simple CTAs, no overwhelming choices</li>
             </ul>
         </div>
