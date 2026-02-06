@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Watching Notifications - Wireframe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #FFFFFF;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #248b3b;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #BEBEBE;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen-card {
+            background: #1A1A1A;
+            border: 2px solid #3E3E3E;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .screen-card:hover {
+            transform: translateY(-5px);
+            border-color: #248b3b;
+        }
+
+        .screen-title {
+            color: #248b3b;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .phone-frame {
+            background: #000;
+            border: 8px solid #292929;
+            border-radius: 30px;
+            padding: 15px;
+            margin: 0 auto;
+            max-width: 300px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .phone-notch {
+            background: #000;
+            height: 25px;
+            width: 150px;
+            margin: -15px auto 10px;
+            border-radius: 0 0 15px 15px;
+            border: 2px solid #292929;
+            border-top: none;
+        }
+
+        .phone-screen {
+            background: #1A1A1A;
+            min-height: 500px;
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Lock Screen */
+        .lock-screen {
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .time-display {
+            font-size: 72px;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .date-display {
+            color: #BEBEBE;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .notification {
+            background: #292929;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 20px 0;
+            text-align: left;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .notification:hover {
+            background: #3E3E3E;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            background: #248b3b;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-app {
+            font-size: 12px;
+            color: #BEBEBE;
+            margin-bottom: 4px;
+        }
+
+        .notification-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .notification-body {
+            font-size: 13px;
+            color: #BEBEBE;
+        }
+
+        /* Expanded Notification */
+        .expanded-notification {
+            background: #292929;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 20px 0;
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .app-icon {
+            width: 24px;
+            height: 24px;
+            background: #248b3b;
+            border-radius: 6px;
+        }
+
+        .app-name {
+            font-size: 12px;
+            color: #BEBEBE;
+        }
+
+        .time-ago {
+            font-size: 12px;
+            color: #737373;
+        }
+
+        .media-preview {
+            background: #000;
+            border-radius: 8px;
+            height: 150px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thumbnail-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .play-overlay {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(36, 139, 59, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .progress-bar {
+            background: #3E3E3E;
+            height: 4px;
+            border-radius: 2px;
+            margin: 12px 0 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #248b3b;
+            height: 100%;
+            width: 35%;
+        }
+
+        .progress-text {
+            font-size: 11px;
+            color: #737373;
+            margin-bottom: 12px;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .action-btn-primary {
+            background: #248b3b;
+            color: #fff;
+        }
+
+        .action-btn-primary:hover {
+            background: #1d6e2f;
+        }
+
+        .action-btn-secondary {
+            background: #3E3E3E;
+            color: #BEBEBE;
+        }
+
+        .action-btn-secondary:hover {
+            background: #4E4E4E;
+        }
+
+        /* App Home Screen */
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #248b3b;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            background: #292929;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 20px 0 12px;
+        }
+
+        .content-card {
+            background: #292929;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .content-thumbnail {
+            height: 140px;
+            background: linear-gradient(135deg, #3E3E3E 0%, #1A1A1A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .resume-badge {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(36, 139, 59, 0.95);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .content-info {
+            padding: 12px;
+        }
+
+        .content-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .content-meta {
+            font-size: 12px;
+            color: #737373;
+        }
+
+        /* Video Player */
+        .video-player {
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .video-screen {
+            height: 200px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .resume-dialog {
+            background: #292929;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .resume-dialog-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .resume-dialog-text {
+            font-size: 13px;
+            color: #BEBEBE;
+            margin-bottom: 16px;
+        }
+
+        .dialog-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid #3E3E3E;
+            margin-top: 20px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #737373;
+        }
+
+        .nav-item.active {
+            color: #248b3b;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+
+        .flow-indicator {
+            text-align: center;
+            color: #EFA73F;
+            font-size: 14px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .feature-description {
+            background: #292929;
+            border-left: 4px solid #248b3b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .feature-description h3 {
+            color: #248b3b;
+            margin-bottom: 12px;
+        }
+
+        .feature-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-description li {
+            padding: 8px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #BEBEBE;
+        }
+
+        .feature-description li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #248b3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Watching Notifications</h1>
+        <p class="subtitle">Rich Notification Experience - Interactive Wireframe</p>
+
+        <div class="feature-description">
+            <h3>Feature Overview</h3>
+            <ul>
+                <li>Send rich notifications when user pauses content and leaves the app</li>
+                <li>Show thumbnail, progress bar, and episode/movie information</li>
+                <li>Provide quick actions: "Resume Now" and "Later"</li>
+                <li>Deep link directly to video player with resume capability</li>
+                <li>Track notification engagement for analytics</li>
+            </ul>
+        </div>
+
+        <div class="screens-grid">
+            <!-- Screen 1: Lock Screen Notification -->
+            <div class="screen-card">
+                <div class="screen-title">1. Lock Screen Notification</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen lock-screen">
+                        <div class="time-display">10:30</div>
+                        <div class="date-display">Friday, February 6</div>
+
+                        <div class="notification">
+                            <div class="notification-icon">📺</div>
+                            <div class="notification-content">
+                                <div class="notification-app">STAGE</div>
+                                <div class="notification-title">Continue Watching</div>
+                                <div class="notification-body">Bideshi Bahu • Episode 7 at 8:15</div>
+                            </div>
+                        </div>
+
+                        <div class="flow-indicator">⬇️ Swipe or Tap to Expand</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 2: Expanded Notification -->
+            <div class="screen-card">
+                <div class="screen-title">2. Expanded Notification</div>
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen" style="padding-top: 40px;">
+                        <div class="expanded-notification">
+                            <div class="notification-header">
+                                <div class="app-info">
+                                    <div class="app-icon"></div>
+                                    <span class="app-name">STAGE</span>
+                                </div>
+                                <span class="time-ago">5m ago</span>
+                            </div>
+
+                            <div class="notification-title" style="margin-bottom: 8px;">Continue Watching</div>
+
+                            <div class="media-preview">
+                                <div class="thumbnail-placeholder">🎬</div>
+                                <div class="play-overlay">▶️</div>
+                            </div>
+
+                            <div class="notification-title" style="font-size: 15px;">Bideshi Bahu</div>
+                            <div class="notification-body" style="margin-bottom: 8px;">Episode 7 • "Family Drama"</div>
+
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">8:15 / 16:45 remaining</div>
+
+                            <div class="notification-actions">
+                                <button class="action-btn action-btn-primary">▶️ Resume Now</button>
+                                <button class="action-btn action-btn-secondary">🔔 Later</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feature-description">
+            <h3>User Flow Summary</h3>
+            <ul>
+                <li><strong>Step 1:</strong> User pauses content and backgrounds/closes the app → System triggers notification after delay</li>
+                <li><strong>Step 2:</strong> User receives lock screen notification with basic info (title, episode, progress)</li>
+                <li><strong>Step 3:</strong> User expands notification to see full details (thumbnail, progress bar, actions)</li>
+                <li><strong>Step 4:</strong> User taps "Resume Now" → Deep link to video player and resume playback</li>
+                <li><strong>Alternative:</strong> User taps "Later" → Notification dismissed, re-sent after configured delay</li>
+            </ul>
+        </div>
+
+        <div class="feature-description">
+            <h3>Technical Requirements</h3>
+            <ul>
+                <li>Rich notification support (Android: NotificationCompat, iOS: UNNotificationContentExtension)</li>
+                <li>Background service to track playback state and trigger notifications</li>
+                <li>Deep linking configuration for "Resume Now" action</li>
+                <li>Local storage for resume position and timestamp</li>
+                <li>Analytics tracking for notification impressions, taps, and dismissals</li>
+                <li>Notification scheduling with configurable delay (e.g., 30 minutes after pause)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive hover effects
+        document.querySelectorAll('.notification, .action-btn, .content-card, .icon-btn').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.target.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    e.target.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // Simulate notification expansion
+        document.querySelectorAll('.notification').forEach(notif => {
+            notif.addEventListener('click', function() {
+                alert('In the actual app, this would expand to show the full notification with media preview and action buttons.');
+            });
+        });
+
+        // Simulate button actions
+        document.querySelectorAll('.action-btn-primary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (btn.textContent.includes('Resume')) {
+                    alert('Deep linking to video player with resume position...');
+                }
+            });
+        });
+
+        document.querySelectorAll('.action-btn-secondary').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (btn.textContent.includes('Later')) {
+                    alert('Notification dismissed. Will remind again in 30 minutes.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
