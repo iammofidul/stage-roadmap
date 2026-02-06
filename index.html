@@ -694,7 +694,7 @@
 
             <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green); margin-bottom: 32px;">
                 <strong>🎯 P0 Focus (6 Initiatives) - TCR Reduction + Viral Growth:</strong><br>
-                #1: PSP Cancellation Prevention (App-Side) - 18K saved trials/month from 120K PSP cancellations<br>
+                #1: PSP Cancellation Prevention (App-Side) - 18K saved trials/month from 120K PSP cancellations (Notification → FOMO Journey → Content Blocked → Resume/Reactivate)<br>
                 #2: Resume Watching Notifications - 2.5K saved trials/month from incomplete sessions<br>
                 #3: Microdrama Discovery Promotion - Improve engagement to reduce churn<br>
                 #4: Watchlist Expansion - Increase content investment to reduce churn<br>
@@ -717,12 +717,12 @@
                         <div style="color: var(--text-muted);">Total Dev-Days</div>
                     </div>
                     <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-orange);">
-                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-orange);">172</div>
+                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-orange);">176</div>
                         <div style="color: var(--text-muted);">Required Effort</div>
                     </div>
                     <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
-                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-green);">18%</div>
-                        <div style="color: var(--text-muted);">Buffer (38 days)</div>
+                        <div style="font-size: 2em; font-weight: bold; color: var(--accent-green);">16%</div>
+                        <div style="color: var(--text-muted);">Buffer (34 days)</div>
                     </div>
                 </div>
             </div>
@@ -735,7 +735,7 @@
                         <div class="initiative-title">PSP Cancellation Prevention (App-Side)</div>
                         <div class="initiative-meta">
                             <span class="badge badge-new">🆕 HIGHEST PRIORITY</span>
-                            <span class="badge badge-week">⏱️ <strong style="background: rgba(249, 115, 22, 0.3); padding: 2px 6px; border-radius: 4px; color: #f97316;">L</strong> / Week 1-2 (10 days)
+                            <span class="badge badge-week">⏱️ <strong style="background: rgba(249, 115, 22, 0.3); padding: 2px 6px; border-radius: 4px; color: #f97316;">L</strong> / Week 1-3 (14 days)
                             <span class="badge badge-team">👥 2 Developers</span>
                             <span class="badge badge-impact">📈 18K Saves/Month</span>
                         </div>
@@ -792,99 +792,136 @@
 
                     <h4>✅ What We'll Build (App-Side Implementation)</h4>
 
-                    <p style="margin-top: 15px;"><strong>Phase 1: Push Notification + Deep Link (4 days)</strong></p>
+                    <div class="metric-box" style="background: rgba(36, 139, 59, 0.1); border-left-color: #248b3b; margin: 15px 0 20px 0;">
+                        <strong>📱 Wireframe:</strong> <a href="psp-cancellation-prevention-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View Interactive Wireframe + WhatsApp Message Copy →</a><br>
+                        <span style="font-size: 13px; color: #BEBEBE;">Two retention flows (7 screens) + 💬 WhatsApp Message Templates (3 templates with full copy): Trial Paused/Revoked (4 screens) & Subscription Expired (3 screens) - Notification → FOMO Journey → Content Blocked → CTA</span>
+                    </div>
+
+                    <p style="margin-top: 15px;"><strong>Phase 1: Multi-Channel Notification System (3 days)</strong></p>
                     <ul>
-                        <li><strong>Day 1-2: Core Implementation</strong>
+                        <li><strong>Day 1-2: Push Notification + WhatsApp Implementation</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>PSP Cancellation Push Notification:</strong> When backend detects PSP cancellation → Send push notification within 5 minutes</li>
-                                <li>Message: "Wait! Before you go... Your trial has X days left. Here's what you're missing 🎬"</li>
-                                <li><strong>Deep Link Handler:</strong> Route stage://psp-cancellation-save with parameters (source, trial_days_remaining)</li>
-                                <li>Opens PSP retention dialog immediately</li>
+                                <li><strong>Push Notification - Trial Paused/Revoked:</strong> Title: "Trial Paused", Body: "You can not watch any STAGE content"</li>
+                                <li><strong>Push Notification - Subscription Expired:</strong> Title: "Subscription Expired", Body: "You can not watch any STAGE content"</li>
+                                <li><strong>Trigger Logic:</strong> Backend webhook detects pause/revoke/expire → Send notification within 5 minutes</li>
+                                <li><strong>Deep Link:</strong> stage://retention-flow?type=trial_paused|trial_revoked|subscription_expired&source=app|psp</li>
                             </ul>
                         </li>
-                        <li><strong>Day 3: Events Instrumentation</strong>
+                        <li><strong>Day 3: Multi-Channel Analytics</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><code>psp_cancel_notification_sent</code> - Track when notification is sent</li>
-                                <li><code>psp_cancel_notification_received</code> - Track delivery confirmation</li>
-                                <li><code>psp_cancel_notification_clicked</code> - Track notification taps</li>
-                                <li><code>psp_cancel_deep_link_opened</code> - Track deep link success</li>
+                                <li><code>retention_notification_sent</code> - Track delivery (type, source, channel: push/whatsapp)</li>
+                                <li><code>retention_notification_clicked</code> - Track taps (channel: push/whatsapp)</li>
+                                <li><code>retention_deep_link_opened</code> - Track deep link success (channel)</li>
+                                <li><code>whatsapp_message_delivered</code> - Track WhatsApp delivery success</li>
+                                <li><code>whatsapp_message_read</code> - Track WhatsApp read receipts</li>
                             </ul>
                         </li>
-                        <li><strong>Day 4: Integration Tests</strong>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Phase 2: WhatsApp Integration (2 days)</strong></p>
+                    <ul>
+                        <li><strong>Day 1: WhatsApp Message Templates + Backend Integration</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Test PSP cancellation → notification sent → notification clicked → deep link opens → dialog shown</li>
-                                <li>Test notification failures, deep link errors, dialog load failures</li>
+                                <li><strong>Template Creation:</strong> 3 WhatsApp message templates (Trial Paused, Trial Revoked, Subscription Expired)</li>
+                                <li><strong>📱 See Full Message Copy:</strong> <a href="psp-cancellation-prevention-wireframe.html" target="_blank" style="color: #248b3b; font-weight: 600; text-decoration: underline;">View WhatsApp Message Templates in Wireframe →</a></li>
+                                <li>Format messages with emojis, FOMO content (Bideshi Bahu, Meera, Hasir Raja), social proof (2.1M watching)</li>
+                                <li>Add deep link CTAs: "Resume your trial now" / "Reactivate your trial" / "Reactivate subscription"</li>
+                                <li><strong>Backend API Integration:</strong> Connect to WhatsApp Business API for message delivery</li>
+                                <li>Configure fallback logic: If push not opened after 30 min → Send WhatsApp</li>
+                            </ul>
+                        </li>
+                        <li><strong>Day 2: Testing + Analytics</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Test WhatsApp message delivery, read receipts, deep link clicks</li>
+                                <li>Test fallback timing (30 min delay after push)</li>
+                                <li>Implement analytics: whatsapp_message_delivered, whatsapp_message_read, whatsapp_link_clicked</li>
+                                <li>Test different phone number formats, international numbers, opt-out handling</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Phase 3: FOMO Journey Screen (3 days)</strong></p>
+                    <ul>
+                        <li><strong>Day 1: Popular Content Section</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Horizontal List:</strong> "Popular Shows You Haven't Watched" (Netflix-style scroll)</li>
+                                <li>Show 4+ cards with trending badges (🔥 TRENDING #1, ⭐ POPULAR)</li>
+                                <li>Display social proof: viewer counts (2.1M watching)</li>
+                                <li>Use real show names: Bideshi Bahu, Hasir Raja, Meera, Rani Rashmoni</li>
+                            </ul>
+                        </li>
+                        <li><strong>Day 2: Upcoming Content Section</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Horizontal List:</strong> "Upcoming Shows & Movies" with ⏰ Coming Soon badge</li>
+                                <li>Show premiere dates (🔥 TOMORROW 8PM, 📅 NEW SERIES)</li>
+                                <li>Display expected viewer counts (2.8M expected)</li>
+                                <li>Create urgency with countdown badges and premiere timings</li>
+                            </ul>
+                        </li>
+                        <li><strong>Day 3: Interaction & Analytics</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>User Action:</strong> When user taps any content card → Navigate to content blocked screen</li>
+                                <li><code>retention_fomo_shown</code> - Track FOMO journey view (type, source)</li>
+                                <li><code>retention_fomo_content_clicked</code> - Track content card taps</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Phase 4: Content Blocked Screens (4 days)</strong></p>
+                    <ul>
+                        <li><strong>Day 1: Trial Paused (App) Screen</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Status Badge:</strong> ⚠️ Paused from App (yellow badge)</li>
+                                <li><strong>CTA Button:</strong> "▶️ Resume" (green, low friction)</li>
+                                <li><strong>Missing Content List:</strong> Bideshi Bahu finale (tomorrow), Meera premiere, Hasir Raja, 100+ shows</li>
+                                <li><strong>Action:</strong> Resume button → Call paymentRepository.resumePlan() → Show restart_subscription_popup.dart</li>
+                            </ul>
+                        </li>
+                        <li><strong>Day 2: Trial Revoked (PSP) Screen</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Status Badge:</strong> ⛔ Revoked from PSP (red badge)</li>
+                                <li><strong>CTA Button:</strong> "🔄 Reactivate Trial" (red, high friction)</li>
+                                <li><strong>Helper Text:</strong> "Setup payment mandate via PhonePe/Paytm to continue watching"</li>
+                                <li><strong>Action:</strong> Reactivate button → Deeplink stage://resume/har/hin/payment?planId=X → Opens PhonePe/Paytm</li>
+                            </ul>
+                        </li>
+                        <li><strong>Day 3: Subscription Expired (PSP) Screen</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><strong>Status Badge:</strong> ⛔ Expired (red badge)</li>
+                                <li><strong>CTA Button:</strong> "🔄 Reactivate Subscription" (red, high friction)</li>
+                                <li><strong>Helper Text:</strong> "Setup mandate via PhonePe/Paytm to reactivate"</li>
+                                <li><strong>Note:</strong> No app-side resume for expired subscriptions (not supported in current system)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Day 4: Analytics & Integration</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li><code>retention_blocked_shown</code> - Track blocked screen views (type, source)</li>
+                                <li><code>retention_resume_clicked</code> - Track app-side resume button taps</li>
+                                <li><code>retention_reactivate_clicked</code> - Track PSP reactivation button taps</li>
+                                <li><code>trial_resumed</code> - Track successful app-side resume</li>
+                                <li><code>trial_activated</code> (is_reactivated: true) - Track PSP reactivation success</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 15px;"><strong>Phase 5: Integration Testing (2 days)</strong></p>
+                    <ul>
+                        <li><strong>Day 1: Flow Testing - Trial Paused/Revoked (Push + WhatsApp)</strong>
+                            <ul style="margin-left: 20px; margin-top: 5px;">
+                                <li>Test Flow 1: App pause → Push notification → FOMO → Content blocked → Resume → Success</li>
+                                <li>Test Flow 2: PSP revoke → Push notification → FOMO → Content blocked → Reactivate → PhonePe deeplink</li>
+                                <li>Test WhatsApp fallback: Push not opened → WhatsApp sent after 30 min → Deep link works</li>
+                                <li>Verify notification variants (Trial Paused vs Trial Revoked)</li>
                                 <li>Test different PSP sources (PhonePe vs Paytm)</li>
                             </ul>
                         </li>
-                    </ul>
-
-                    <p style="margin-top: 15px;"><strong>Phase 2: PSP Retention Dialog (2 days)</strong></p>
-                    <ul>
-                        <li><strong>Day 1: Dialog Implementation + Backend Integration</strong>
+                        <li><strong>Day 2: Flow Testing - Subscription Expired & Edge Cases</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Reuse existing PauseTrialPrideDialog with PSP-specific copy</li>
-                                <li>Show personalized content: "You've watched X shows. Here are Y more waiting"</li>
-                                <li>Two options: "Resume Subscription" (primary) vs "Keep Cancelled" (secondary)</li>
-                                <li>If resumed: Call backend API to reactivate mandate via PSP (creates new mandate)</li>
-                            </ul>
-                        </li>
-                        <li><strong>✅ In-App Banner (Already Exists):</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>✅ Banner already shows when user opens app after PSP cancellation</li>
-                                <li>✅ CTA "Resume Subscription" → Opens retention dialog</li>
-                            </ul>
-                        </li>
-                        <li><strong>Day 2: Analytics Events</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><code>psp_retention_dialog_shown</code> - Track dialog views</li>
-                                <li><code>psp_retention_dialog_resume_clicked</code> - Track resume button clicks</li>
-                                <li><code>psp_retention_dialog_keep_cancelled_clicked</code> - Track rejection</li>
-                                <li><code>trial_activated</code> with property <code>is_reactivated: true</code> - Track successful mandate reactivation</li>
-                                <li><code>trial_resumed</code> - Track in-app mandate resume (not PSP)</li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <p style="margin-top: 15px;"><strong>Phase 3: Experimentation Setup (2 days)</strong></p>
-                    <ul>
-                        <li><strong>Day 1: A/B Test Configuration</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>Notification Timing Variants:</strong></li>
-                                <li style="margin-left: 20px;">Variant A: Send immediately (0 min)</li>
-                                <li style="margin-left: 20px;">Variant B: Send after 5 min delay (control)</li>
-                                <li style="margin-left: 20px;">Variant C: Send after 10 min delay</li>
-                                <li><strong>Dialog Copy Variants:</strong></li>
-                                <li style="margin-left: 20px;">Variant A: Fear-based ("You'll lose access to X shows")</li>
-                                <li style="margin-left: 20px;">Variant B: Benefit-based ("Continue enjoying X shows") - control</li>
-                            </ul>
-                        </li>
-                        <li><strong>Day 2: Experiment Tracking + Cohort Setup</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Configure experiment cohorts in Amplitude/Firebase</li>
-                                <li>Track experiment assignment events</li>
-                                <li>Set up conversion funnels per variant</li>
-                                <li>Target metrics: notification open rate, dialog engagement, reactivation rate</li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                    <p style="margin-top: 15px;"><strong>Phase 4: Integration Testing (2 days)</strong></p>
-                    <ul>
-                        <li><strong>Day 1: End-to-End Flow Testing</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Test full flow: PSP cancellation → notification → dialog → reactivation → trial_activated event</li>
-                                <li>Test in-app resume: Banner → dialog → resume → trial_resumed event</li>
-                                <li>Verify all analytics events fire correctly</li>
-                                <li>Test experiment variant assignment</li>
-                            </ul>
-                        </li>
-                        <li><strong>Day 2: Edge Cases + Regression Testing</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Test notification delivery failures (no internet, notification permissions off)</li>
+                                <li>Test Flow 3: Subscription expired → Push/WhatsApp → FOMO → Content blocked → Reactivate → PSP deeplink</li>
+                                <li>Test WhatsApp delivery: Message sent → Delivered confirmation → Read receipt → Link clicked</li>
+                                <li>Test notification delivery failures (no internet, permissions off)</li>
                                 <li>Test deep link errors (app not installed, malformed URLs)</li>
-                                <li>Test mandate creation failures (PSP API down, invalid user state)</li>
-                                <li>Test rapid cancel/resume cycles</li>
+                                <li>Verify all analytics events fire correctly for all 3 flows (push + WhatsApp)</li>
                                 <li>Regression test existing in-app cancellation flow</li>
                             </ul>
                         </li>
@@ -893,7 +930,8 @@
                     <h4>📈 Expected Impact</h4>
                     <div class="metric-box">
                         <strong>Conservative Estimate:</strong><br>
-                        <strong>PSP Cancellation Save Rate: 15-20%</strong> (industry benchmark for push notification + retention dialog)<br><br>
+                        <strong>PSP Cancellation Save Rate: 15-20%</strong> (industry benchmark for push notification + retention dialog)<br>
+                        <strong>Multi-Channel Boost:</strong> WhatsApp fallback can increase reach by 20-30% (users with push disabled/ignored)<br><br>
                         <strong>Math (Based on Actual 36.28% TCR - Android Only):</strong><br>
                         - <strong>Total cancellations: ~116K/month</strong> (319K trial activations × 36.28% TCR)<br>
                         - <strong>PSP cancellations: ~81K/month</strong> (70% of total, bypass STAGE app)<br>
@@ -915,9 +953,11 @@
                         - Catches users in impulse cancellation moment
                     </div>
 
-                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 10 days (4 days push/deep link + 2 days retention dialog + 2 days experiments + 2 days integration tests)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> psp_cancel_notification_open_rate, psp_retention_dialog_shown, trial_activated (is_reactivated: true), trial_resumed, trial_cancellation_rate (target: 36% → 30% Android)</p>
-                    <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> Notification timing (0min vs 5min vs 10min), Dialog copy (fear-based vs benefit-based)</p>
+                    <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 14 days (3 days push notification + 2 days WhatsApp integration + 3 days FOMO journey + 4 days blocked screens + 2 days integration tests)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> retention_notification_clicked (channel: push/whatsapp), whatsapp_message_delivered, whatsapp_message_read, retention_fomo_shown, retention_blocked_shown, retention_resume_clicked, retention_reactivate_clicked, trial_resumed, trial_activated (is_reactivated: true), trial_cancellation_rate (target: 36% → 30% Android)</p>
+                    <p style="margin-top: 5px;"><strong>📱 WhatsApp Strategy:</strong> Send WhatsApp 30 min after push if not opened. Includes FOMO content (Bideshi Bahu finale, 2.1M watching) + urgency (X days left) + direct CTA with deep link</p>
+                    <p style="margin-top: 5px;"><strong>🧪 Future Experiments:</strong> WhatsApp vs Push effectiveness, FOMO content order (popular-first vs upcoming-first), Notification timing (immediate vs 5min vs 10min delay), CTA copy variants (fear vs benefit)</p>
+                    <p style="margin-top: 5px;"><strong>📊 Reference Code:</strong> motivator_popup.dart, resume_subscription_banner.dart, trial_mandate_resume_psp.dart, restart_subscription_popup.dart</p>
                 </div>
             </div>
 
