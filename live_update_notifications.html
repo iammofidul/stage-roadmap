@@ -260,6 +260,34 @@ await _liveNotificationRepository.complete(title: 'Ready', body: 'Episode 5 down
             </table>
         </section>
 
+        <!-- Analytics Events -->
+        <section>
+            <h2>Analytics Events</h2>
+            <table>
+                <thead>
+                    <tr><th>Event Name</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>device_locked_triggered</code></td>
+                        <td>When device locked from Micro Drama Player or OTT Player</td>
+                    </tr>
+                    <tr>
+                        <td><code>resume_notification_sent</code></td>
+                        <td>Track notification sent (contentId, lockDuration)</td>
+                    </tr>
+                    <tr>
+                        <td><code>resume_notification_clicked</code></td>
+                        <td>Track notification taps (timeToTap)</td>
+                    </tr>
+                    <tr>
+                        <td><code>playback_started</code></td>
+                        <td>Existing event + <code>playback_source: "resumeNotification"</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
         <!-- Resources -->
         <section>
             <h2>Resources</h2>
