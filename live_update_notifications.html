@@ -10,7 +10,6 @@
             --primary-dark: #4f46e5;
             --success: #10b981;
             --warning: #f59e0b;
-            --danger: #ef4444;
             --gray-50: #f9fafb;
             --gray-100: #f3f4f6;
             --gray-200: #e5e7eb;
@@ -18,1232 +17,271 @@
             --gray-800: #1f2937;
             --gray-900: #111827;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--gray-800);
-            background: var(--gray-50);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 3rem 2rem;
-            margin-bottom: 2rem;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-
-        .meta-info {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .roadmap-link {
-            background: rgba(255,255,255,0.2);
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            margin-top: 1.5rem;
-            display: inline-block;
-        }
-
-        .roadmap-link a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .roadmap-link a:hover {
-            text-decoration: underline;
-        }
-
-        section {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            color: var(--gray-900);
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        h3 {
-            color: var(--gray-800);
-            font-size: 1.25rem;
-            margin: 1.5rem 0 1rem;
-        }
-
-        h4 {
-            color: var(--gray-600);
-            font-size: 1rem;
-            margin: 1rem 0 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--gray-600);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-
-        th, td {
-            padding: 0.75rem 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--gray-200);
-        }
-
-        th {
-            background: var(--gray-100);
-            font-weight: 600;
-            color: var(--gray-800);
-        }
-
-        tr:hover {
-            background: var(--gray-50);
-        }
-
-        code {
-            background: var(--gray-100);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-family: 'Fira Code', 'Consolas', monospace;
-            font-size: 0.9em;
-        }
-
-        pre {
-            background: var(--gray-900);
-            color: #e5e7eb;
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-
-        pre code {
-            background: transparent;
-            padding: 0;
-            color: inherit;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .badge-android {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .badge-ios {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .badge-flutter {
-            background: #e0e7ff;
-            color: #3730a3;
-        }
-
-        .badge-new {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .platform-card {
-            border: 2px solid var(--gray-200);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: border-color 0.2s;
-        }
-
-        .platform-card:hover {
-            border-color: var(--primary);
-        }
-
-        .platform-card h3 {
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .feature-list li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: var(--gray-600);
-        }
-
-        .feature-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 0.5rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--gray-200);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 1.5rem;
-        }
-
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -1.5rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 2px solid white;
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-
-        .alert {
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
-        .alert-info {
-            background: #dbeafe;
-            border-left: 4px solid #3b82f6;
-            color: #1e40af;
-        }
-
-        .alert-warning {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            color: #92400e;
-        }
-
-        .alert-success {
-            background: #d1fae5;
-            border-left: 4px solid #10b981;
-            color: #065f46;
-        }
-
-        .comparison-table th:first-child,
-        .comparison-table td:first-child {
-            width: 30%;
-        }
-
-        .diagram {
-            background: var(--gray-100);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            margin: 1.5rem 0;
-            font-family: monospace;
-            white-space: pre;
-            overflow-x: auto;
-        }
-
-        .ref-link {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .ref-link:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--gray-600);
-            font-size: 0.9rem;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: var(--gray-800); background: var(--gray-50); }
+        .container { max-width: 1000px; margin: 0 auto; padding: 1.5rem; }
+        header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 2rem 1.5rem; margin-bottom: 1.5rem; }
+        header h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+        header p { opacity: 0.9; }
+        .meta { display: flex; gap: 1.5rem; margin-top: 0.75rem; font-size: 0.85rem; opacity: 0.8; }
+        .roadmap-link { background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 6px; margin-top: 1rem; display: inline-block; }
+        .roadmap-link a { color: white; text-decoration: none; font-weight: 600; }
+        section { background: white; border-radius: 10px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h2 { color: var(--gray-900); font-size: 1.4rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary); }
+        h3 { color: var(--gray-800); font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+        p { margin-bottom: 0.75rem; color: var(--gray-600); }
+        table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 0.9rem; }
+        th, td { padding: 0.6rem 0.75rem; text-align: left; border-bottom: 1px solid var(--gray-200); }
+        th { background: var(--gray-100); font-weight: 600; }
+        code { background: var(--gray-100); padding: 0.15rem 0.35rem; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 0.85em; }
+        pre { background: var(--gray-900); color: #e5e7eb; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 0.75rem 0; font-size: 0.8rem; }
+        pre code { background: transparent; padding: 0; color: inherit; }
+        .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .badge-android { background: #d1fae5; color: #065f46; }
+        .badge-ios { background: #dbeafe; color: #1e40af; }
+        .badge-new { background: #fef3c7; color: #92400e; }
+        .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1rem 0; }
+        .platform-card { border: 2px solid var(--gray-200); border-radius: 10px; padding: 1rem; }
+        .platform-card h3 { margin-top: 0; display: flex; align-items: center; gap: 0.5rem; }
+        .feature-list { list-style: none; padding: 0; margin: 0.5rem 0; }
+        .feature-list li { padding: 0.3rem 0 0.3rem 1.25rem; position: relative; color: var(--gray-600); font-size: 0.9rem; }
+        .feature-list li::before { content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: bold; }
+        .alert { padding: 0.75rem 1rem; border-radius: 6px; margin: 0.75rem 0; font-size: 0.9rem; }
+        .alert-success { background: #d1fae5; border-left: 3px solid #10b981; color: #065f46; }
+        .alert-info { background: #dbeafe; border-left: 3px solid #3b82f6; color: #1e40af; }
+        .alert-warning { background: #fef3c7; border-left: 3px solid #f59e0b; color: #92400e; }
+        .ref-link { color: var(--primary); text-decoration: none; }
+        .ref-link:hover { text-decoration: underline; }
+        .visual-compare { background: var(--gray-100); border-radius: 6px; padding: 1rem; font-family: monospace; font-size: 0.8rem; white-space: pre; overflow-x: auto; margin: 0.75rem 0; }
+        footer { text-align: center; padding: 1.5rem; color: var(--gray-600); font-size: 0.85rem; }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
             <h1>Live Update Notifications</h1>
-            <p>Real-time order tracking notifications for Android & iOS - Technical Specification</p>
-            <div class="meta-info">
-                <span><strong>Version:</strong> 1.0</span>
+            <p>Real-time progress tracking for Android & iOS</p>
+            <div class="meta">
+                <span><strong>Version:</strong> 1.1</span>
                 <span><strong>Date:</strong> February 2026</span>
-                <span><strong>Status:</strong> Planning</span>
             </div>
             <div class="roadmap-link">
-                <a href="https://iammofidul.github.io/stage-roadmap/" target="_blank">
-                    View Full Roadmap (Initiative 2) &rarr;
-                </a>
+                <a href="https://iammofidul.github.io/stage-roadmap/" target="_blank">View Full Roadmap (Initiative 2) &rarr;</a>
             </div>
         </div>
     </header>
 
     <div class="container">
-        <!-- Executive Summary -->
+        <!-- What is it called -->
         <section>
-            <h2>Executive Summary</h2>
-            <p>
-                Live Update Notifications enable real-time order/delivery tracking directly on the lock screen
-                and notification shade without requiring users to open the app. This feature follows the pattern
-                pioneered by quick-commerce apps like <strong>Blinkit</strong> and <strong>Zepto</strong>, now being
-                standardized through platform APIs.
-            </p>
+            <h2>Terminology - What is it called?</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Official Name</th>
+                        <th>Min Version</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-ios">iOS</span></td>
+                        <td><strong>Live Activities</strong> (with Dynamic Island)</td>
+                        <td>iOS 16.1+</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-android">Android 16+</span></td>
+                        <td><strong>Live Updates API</strong> / ProgressStyle Notifications</td>
+                        <td>Android 16+</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-android">Android &lt;16</span></td>
+                        <td><strong>Ongoing Progress Notifications</strong> + Foreground Service</td>
+                        <td>Android 8.0+</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <div class="alert alert-success">
-                <strong>Industry Reference:</strong> Blinkit has implemented Android 16's new Live Updates API
-                for order tracking, becoming one of the first apps to adopt this feature.
-                <a href="https://www.linkedin.com/posts/nakul-19_blinkit-android16-ordertracking-activity-7396907715156955136-Tt7C/" class="ref-link" target="_blank">
-                    View LinkedIn Post
-                </a>
+                <strong>Industry Reference:</strong> Blinkit implemented Android 16's Live Updates API for order tracking.
+                <a href="https://www.linkedin.com/posts/nakul-19_blinkit-android16-ordertracking-activity-7396907715156955136-Tt7C/" class="ref-link" target="_blank">View LinkedIn Post</a>
             </div>
 
+            <h3>Visual Comparison</h3>
+            <div class="visual-compare">Android 16 Live Updates:               Android &lt;16 Ongoing Notification:
+┌─────────────────────────────┐       ┌─────────────────────────────┐
+│ 🛵 Blinkit                  │       │ 🛵 Blinkit                  │
+│ ●───────●───────○───────○   │       │ On the way - 8 min away     │
+│ Packed → On the way → 8 min │       │ ████████████░░░░░░░ 65%     │
+└─────────────────────────────┘       └─────────────────────────────┘
+   Rich timeline/stages UI               Basic progress bar only</div>
+        </section>
+
+        <!-- Platform Overview -->
+        <section>
+            <h2>Platform Overview</h2>
             <div class="platform-grid">
                 <div class="platform-card">
                     <h3><span class="badge badge-ios">iOS</span> Live Activities</h3>
-                    <p>Available since iOS 16.1 with Dynamic Island support on iPhone 14 Pro+</p>
                     <ul class="feature-list">
                         <li>Lock screen live widgets</li>
-                        <li>Dynamic Island integration</li>
-                        <li>Push notification updates</li>
-                        <li>8-12 hour activity duration</li>
+                        <li>Dynamic Island (iPhone 14 Pro+)</li>
+                        <li>8-12 hour max duration</li>
+                        <li>Push or local updates</li>
                     </ul>
                 </div>
                 <div class="platform-card">
-                    <h3><span class="badge badge-android">Android</span> Live Updates <span class="badge badge-new">New</span></h3>
-                    <p>New API in Android 16 for ongoing notification updates</p>
+                    <h3><span class="badge badge-android">Android 16+</span> Live Updates</h3>
                     <ul class="feature-list">
-                        <li>Rich notification templates</li>
-                        <li>Progress tracking UI</li>
-                        <li>Foreground service integration</li>
+                        <li>Native ProgressStyle template</li>
+                        <li>Rich timeline UI</li>
                         <li>No duration limit</li>
+                        <li>System-level integration</li>
+                    </ul>
+                </div>
+                <div class="platform-card">
+                    <h3><span class="badge badge-android">Android &lt;16</span> Ongoing Notifications</h3>
+                    <ul class="feature-list">
+                        <li>Works on Android 8.0+ (~95% devices)</li>
+                        <li>Progress bar notifications</li>
+                        <li>Requires Foreground Service</li>
+                        <li>Basic UI, same functionality</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Use Cases -->
+        <!-- Implementation -->
         <section>
-            <h2>Use Cases for Stage App</h2>
+            <h2>Flutter Implementation</h2>
 
-            <h3>Primary Use Cases</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Use Case</th>
-                        <th>Description</th>
-                        <th>Update Frequency</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Download Progress</strong></td>
-                        <td>Show real-time download progress for offline content</td>
-                        <td>Every 1-2 seconds</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Live Event Countdown</strong></td>
-                        <td>Countdown timer for premiere events or live shows</td>
-                        <td>Every second (final minutes)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Watch Progress</strong></td>
-                        <td>Continue watching reminder with episode progress</td>
-                        <td>On pause/background</td>
-                    </tr>
-                    <tr>
-                        <td><strong>New Episode Alert</strong></td>
-                        <td>Live notification when new episode is released</td>
-                        <td>Event-driven</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Secondary Use Cases (Future)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Use Case</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Family Sharing Status</td>
-                        <td>Show pending invitations and acceptance status</td>
-                    </tr>
-                    <tr>
-                        <td>Subscription Expiry</td>
-                        <td>Countdown to subscription renewal/expiry</td>
-                    </tr>
-                    <tr>
-                        <td>Payment Processing</td>
-                        <td>Real-time payment status updates</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <!-- iOS Implementation -->
-        <section>
-            <h2><span class="badge badge-ios">iOS</span> Live Activities Implementation</h2>
-
-            <h3>Overview</h3>
-            <p>
-                iOS Live Activities use the <code>ActivityKit</code> framework introduced in iOS 16.1.
-                They display on the Lock Screen and Dynamic Island, providing glanceable real-time information.
-            </p>
-
-            <h3>Architecture</h3>
-            <div class="diagram">
-┌─────────────────────────────────────────────────────────────────┐
-│                        Flutter App                               │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │              live_activities Plugin                       │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │   │
-│  │  │ createActivity │  │ updateActivity │  │ endActivity    │  │   │
-│  │  └──────┬──────┘  └──────┬──────┘  └────────┬────────┘  │   │
-│  └─────────┼────────────────┼──────────────────┼───────────┘   │
-│            │                │                  │                │
-└────────────┼────────────────┼──────────────────┼────────────────┘
-             │                │                  │
-             ▼                ▼                  ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    iOS Native (Swift)                            │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                   ActivityKit Framework                   │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │               Widget Extension (SwiftUI)                  │   │
-│  │  ┌────────────────┐  ┌────────────────────────────────┐ │   │
-│  │  │ Lock Screen View │  │ Dynamic Island (Compact/Expanded) │ │   │
-│  │  └────────────────┘  └────────────────────────────────┘ │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-            </div>
-
-            <h3>Required Components</h3>
-
-            <h4>1. Flutter Plugin</h4>
+            <h3>Dependencies</h3>
             <pre><code># pubspec.yaml
 dependencies:
-  live_activities: ^2.0.0</code></pre>
+  live_activities: ^2.0.0              # iOS Live Activities
+  flutter_local_notifications: ^17.0.0  # Android notifications
+  flutter_foreground_task: ^6.0.0       # Background execution</code></pre>
 
-            <h4>2. iOS Widget Extension</h4>
-            <p>Create a new Widget Extension target in Xcode with Live Activity capability:</p>
-            <pre><code>// StageWidgetExtension/StageWidgetBundle.swift
-import WidgetKit
-import SwiftUI
-
-@main
-struct StageWidgetBundle: WidgetBundle {
-    var body: some Widget {
-        StageLiveActivity()
-    }
-}
-
-// StageWidgetExtension/StageLiveActivity.swift
-import ActivityKit
-import WidgetKit
-import SwiftUI
-
-struct StageActivityAttributes: ActivityAttributes {
-    public struct ContentState: Codable, Hashable {
-        var progress: Double
-        var statusText: String
-        var remainingTime: String
-    }
-
-    var contentTitle: String
-    var contentImageUrl: String
-}
-
-struct StageLiveActivity: Widget {
-    var body: some WidgetConfiguration {
-        ActivityConfiguration(for: StageActivityAttributes.self) { context in
-            // Lock Screen UI
-            LockScreenLiveActivityView(context: context)
-        } dynamicIsland: { context in
-            DynamicIsland {
-                // Expanded UI
-                DynamicIslandExpandedRegion(.leading) {
-                    Image(systemName: "play.circle.fill")
-                }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text(context.state.remainingTime)
-                }
-                DynamicIslandExpandedRegion(.center) {
-                    Text(context.attributes.contentTitle)
-                }
-                DynamicIslandExpandedRegion(.bottom) {
-                    ProgressView(value: context.state.progress)
-                }
-            } compactLeading: {
-                Image(systemName: "play.circle.fill")
-            } compactTrailing: {
-                Text(context.state.remainingTime)
-            } minimal: {
-                Image(systemName: "play.circle.fill")
-            }
-        }
-    }
-}</code></pre>
-
-            <h4>3. Flutter Integration</h4>
-            <pre><code>// lib/features/live_activities/data/live_activity_service.dart
-import 'package:live_activities/live_activities.dart';
-
-class LiveActivityService {
-  final _liveActivitiesPlugin = LiveActivities();
-  String? _currentActivityId;
-
-  Future&lt;void&gt; startDownloadActivity({
-    required String contentTitle,
-    required String imageUrl,
-  }) async {
-    final activityModel = LiveActivityModel(
-      contentTitle: contentTitle,
-      contentImageUrl: imageUrl,
-      progress: 0.0,
-      statusText: 'Starting download...',
-      remainingTime: 'Calculating...',
-    );
-
-    _currentActivityId = await _liveActivitiesPlugin.createActivity(
-      activityModel.toMap(),
-    );
-  }
-
-  Future&lt;void&gt; updateProgress(double progress, String remaining) async {
-    if (_currentActivityId == null) return;
-
-    await _liveActivitiesPlugin.updateActivity(
-      _currentActivityId!,
-      {
-        'progress': progress,
-        'statusText': 'Downloading...',
-        'remainingTime': remaining,
-      },
-    );
-  }
-
-  Future&lt;void&gt; endActivity() async {
-    if (_currentActivityId == null) return;
-    await _liveActivitiesPlugin.endActivity(_currentActivityId!);
-    _currentActivityId = null;
-  }
-}</code></pre>
-
-            <h3>iOS Configuration</h3>
+            <h3>iOS Setup</h3>
             <table>
-                <thead>
-                    <tr>
-                        <th>Setting</th>
-                        <th>Value</th>
-                        <th>Location</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Supports Live Activities</td>
-                        <td><code>YES</code></td>
-                        <td>Info.plist</td>
-                    </tr>
-                    <tr>
-                        <td>NSSupportsLiveActivities</td>
-                        <td><code>true</code></td>
-                        <td>Info.plist</td>
-                    </tr>
-                    <tr>
-                        <td>App Groups</td>
-                        <td><code>group.com.stage.app</code></td>
-                        <td>Signing & Capabilities</td>
-                    </tr>
-                    <tr>
-                        <td>Push Notifications</td>
-                        <td>Enabled (for push-to-start)</td>
-                        <td>Signing & Capabilities</td>
-                    </tr>
-                </tbody>
+                <tr><td><code>NSSupportsLiveActivities</code></td><td><code>true</code> in Info.plist</td></tr>
+                <tr><td>Widget Extension</td><td>Create in Xcode with SwiftUI</td></tr>
+                <tr><td>App Groups</td><td>Enable for data sharing</td></tr>
             </table>
 
-            <div class="alert alert-warning">
-                <strong>Limitations:</strong>
-                <ul style="margin: 0.5rem 0 0 1rem;">
-                    <li>Maximum 8 hours duration (12 hours with extended mode)</li>
-                    <li>Updates limited to ~4 per hour via push notifications</li>
-                    <li>Local updates more frequent but require app in memory</li>
-                    <li>Minimum iOS 16.1 required</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Android Implementation -->
-        <section>
-            <h2><span class="badge badge-android">Android</span> Live Updates Implementation</h2>
-
-            <h3>Overview</h3>
-            <p>
-                Android 16 introduces the <strong>Live Updates API</strong> for rich, updating notifications.
-                For older Android versions, we use ongoing notifications with custom layouts via Foreground Services.
-            </p>
-
-            <div class="alert alert-info">
-                <strong>Blinkit Reference:</strong> Blinkit has implemented Android 16's Live Updates API
-                for real-time order tracking, showing delivery progress directly in the notification shade.
-                This is the benchmark implementation we're following.
-            </div>
-
-            <h3>Architecture</h3>
-            <div class="diagram">
-┌─────────────────────────────────────────────────────────────────┐
-│                        Flutter App                               │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │         flutter_local_notifications Plugin               │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │   │
-│  │  │   show()     │  │  update()   │  │    cancel()     │  │   │
-│  │  └──────┬──────┘  └──────┬──────┘  └────────┬────────┘  │   │
-│  └─────────┼────────────────┼──────────────────┼───────────┘   │
-│            │                │                  │                │
-└────────────┼────────────────┼──────────────────┼────────────────┘
-             │                │                  │
-             ▼                ▼                  ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    Android Native (Kotlin)                       │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │              Foreground Service                           │   │
-│  │  ┌────────────────────────────────────────────────────┐ │   │
-│  │  │         NotificationCompat.Builder                  │ │   │
-│  │  │  ┌──────────────┐  ┌─────────────────────────────┐│ │   │
-│  │  │  │ Progress Bar  │  │ Custom RemoteViews Layout   ││ │   │
-│  │  │  └──────────────┘  └─────────────────────────────┘│ │   │
-│  │  └────────────────────────────────────────────────────┘ │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │         Android 16+ Live Updates API (Future)            │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-            </div>
-
-            <h3>Implementation</h3>
-
-            <h4>1. Flutter Plugin Setup</h4>
-            <pre><code># pubspec.yaml
-dependencies:
-  flutter_local_notifications: ^17.0.0
-  flutter_foreground_task: ^6.0.0</code></pre>
-
-            <h4>2. Notification Channel Configuration</h4>
-            <pre><code>// lib/features/live_notifications/data/android_live_notification_service.dart
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
-class AndroidLiveNotificationService {
-  static const _channelId = 'live_updates_channel';
-  static const _channelName = 'Live Updates';
-  static const _notificationId = 1001;
-
-  final FlutterLocalNotificationsPlugin _notifications =
-      FlutterLocalNotificationsPlugin();
-
-  Future&lt;void&gt; initialize() async {
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const initSettings = InitializationSettings(android: androidSettings);
-
-    await _notifications.initialize(initSettings);
-
-    // Create notification channel for live updates
-    await _notifications
-        .resolvePlatformSpecificImplementation&lt;
-            AndroidFlutterLocalNotificationsPlugin&gt;()
-        ?.createNotificationChannel(
-          const AndroidNotificationChannel(
-            _channelId,
-            _channelName,
-            description: 'Real-time progress updates',
-            importance: Importance.high,
-            playSound: false,
-            enableVibration: false,
-          ),
-        );
-  }
-
-  Future&lt;void&gt; showProgressNotification({
-    required String title,
-    required String body,
-    required int progress,
-    required int maxProgress,
-  }) async {
-    final androidDetails = AndroidNotificationDetails(
-      _channelId,
-      _channelName,
-      channelDescription: 'Real-time progress updates',
-      importance: Importance.high,
-      priority: Priority.high,
-      ongoing: true,
-      autoCancel: false,
-      showProgress: true,
-      maxProgress: maxProgress,
-      progress: progress,
-      onlyAlertOnce: true,
-      category: AndroidNotificationCategory.progress,
-    );
-
-    await _notifications.show(
-      _notificationId,
-      title,
-      body,
-      NotificationDetails(android: androidDetails),
-    );
-  }
-
-  Future&lt;void&gt; updateProgress(int progress, int maxProgress, String status) async {
-    await showProgressNotification(
-      title: 'Downloading...',
-      body: status,
-      progress: progress,
-      maxProgress: maxProgress,
-    );
-  }
-
-  Future&lt;void&gt; completeNotification(String title, String body) async {
-    final androidDetails = AndroidNotificationDetails(
-      _channelId,
-      _channelName,
-      importance: Importance.high,
-      priority: Priority.high,
-      ongoing: false,
-      autoCancel: true,
-    );
-
-    await _notifications.show(
-      _notificationId,
-      title,
-      body,
-      NotificationDetails(android: androidDetails),
-    );
-  }
-
-  Future&lt;void&gt; cancelNotification() async {
-    await _notifications.cancel(_notificationId);
-  }
-}</code></pre>
-
-            <h4>3. Foreground Service (for background updates)</h4>
-            <pre><code>// lib/features/live_notifications/data/foreground_task_service.dart
-import 'package:flutter_foreground_task/flutter_foreground_task.dart';
-
-class ForegroundTaskService {
-  Future&lt;void&gt; initForegroundTask() async {
-    FlutterForegroundTask.init(
-      androidNotificationOptions: AndroidNotificationOptions(
-        channelId: 'foreground_service',
-        channelName: 'Stage Background Service',
-        channelDescription: 'Keeps downloads running in background',
-        channelImportance: NotificationChannelImportance.LOW,
-        priority: NotificationPriority.LOW,
-        isSticky: true,
-      ),
-      iosNotificationOptions: const IOSNotificationOptions(
-        showNotification: false,
-      ),
-      foregroundTaskOptions: const ForegroundTaskOptions(
-        interval: 1000, // 1 second
-        isOnceEvent: false,
-        autoRunOnBoot: false,
-        allowWakeLock: true,
-        allowWifiLock: true,
-      ),
-    );
-  }
-
-  Future&lt;bool&gt; startForegroundTask() async {
-    return await FlutterForegroundTask.startService(
-      notificationTitle: 'Stage',
-      notificationText: 'Download in progress...',
-      callback: startCallback,
-    );
-  }
-}
-
-@pragma('vm:entry-point')
-void startCallback() {
-  FlutterForegroundTask.setTaskHandler(DownloadTaskHandler());
-}
-
-class DownloadTaskHandler extends TaskHandler {
-  @override
-  Future&lt;void&gt; onStart(DateTime timestamp, SendPort? sendPort) async {
-    // Initialize download tracking
-  }
-
-  @override
-  Future&lt;void&gt; onRepeatEvent(DateTime timestamp, SendPort? sendPort) async {
-    // Update notification with current progress
-  }
-
-  @override
-  Future&lt;void&gt; onDestroy(DateTime timestamp, SendPort? sendPort) async {
-    // Cleanup
-  }
-}</code></pre>
-
-            <h3>Android 16 Live Updates API (Future)</h3>
-            <p>
-                Android 16 introduces a dedicated Live Updates API similar to iOS Live Activities.
-                When targeting Android 16+, use:
-            </p>
-            <pre><code>// Future implementation for Android 16+
-// Uses new ProgressStyle notification template
-
-val notification = Notification.Builder(context, CHANNEL_ID)
-    .setSmallIcon(R.drawable.ic_download)
-    .setContentTitle("Downloading Episode 5")
-    .setProgress(100, 45, false)
-    .setCategory(Notification.CATEGORY_PROGRESS)
-    .setOngoing(true)
-    .setStyle(
-        Notification.ProgressStyle()
-            .setProgressText("45% - 2 min remaining")
-            .setProgressPoints(listOf(
-                ProgressPoint("Started", 0),
-                ProgressPoint("Processing", 25),
-                ProgressPoint("Downloading", 50),
-                ProgressPoint("Complete", 100)
-            ))
-    )
-    .build()</code></pre>
-
-            <h3>Android Configuration</h3>
+            <h3>Android Setup</h3>
             <table>
-                <thead>
-                    <tr>
-                        <th>Permission</th>
-                        <th>Purpose</th>
-                        <th>Required</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><code>FOREGROUND_SERVICE</code></td>
-                        <td>Run service in foreground</td>
-                        <td>Yes</td>
-                    </tr>
-                    <tr>
-                        <td><code>FOREGROUND_SERVICE_DATA_SYNC</code></td>
-                        <td>Data sync foreground service type</td>
-                        <td>Yes (Android 14+)</td>
-                    </tr>
-                    <tr>
-                        <td><code>POST_NOTIFICATIONS</code></td>
-                        <td>Show notifications</td>
-                        <td>Yes (Android 13+)</td>
-                    </tr>
-                    <tr>
-                        <td><code>WAKE_LOCK</code></td>
-                        <td>Keep CPU awake during downloads</td>
-                        <td>Optional</td>
-                    </tr>
-                </tbody>
+                <tr><td><code>FOREGROUND_SERVICE</code></td><td>Required for background updates</td></tr>
+                <tr><td><code>POST_NOTIFICATIONS</code></td><td>Required on Android 13+</td></tr>
+                <tr><td>Notification Channel</td><td>Create dedicated channel for live updates</td></tr>
             </table>
-        </section>
 
-        <!-- Unified Flutter Service -->
-        <section>
-            <h2><span class="badge badge-flutter">Flutter</span> Unified Service Layer</h2>
-
-            <h3>Cross-Platform Service</h3>
-            <pre><code>// lib/features/live_notifications/domain/repositories/live_notification_repository.dart
+            <h3>Cross-Platform Service Pattern</h3>
+            <pre><code>// Unified repository - handles platform differences internally
 abstract class LiveNotificationRepository {
-  Future&lt;void&gt; startProgressNotification({
-    required String title,
-    required String? imageUrl,
-  });
-
-  Future&lt;void&gt; updateProgress({
-    required double progress,
-    required String statusText,
-    String? remainingTime,
-  });
-
-  Future&lt;void&gt; completeNotification({
-    required String title,
-    required String body,
-  });
-
-  Future&lt;void&gt; cancelNotification();
+  Future&lt;void&gt; startProgress({required String title, String? imageUrl});
+  Future&lt;void&gt; updateProgress({required double progress, required String status});
+  Future&lt;void&gt; complete({required String title, required String body});
+  Future&lt;void&gt; cancel();
 }
 
-// lib/features/live_notifications/data/repositories/live_notification_repository_impl.dart
-import 'dart:io';
-
-@Injectable(as: LiveNotificationRepository)
-class LiveNotificationRepositoryImpl implements LiveNotificationRepository {
-  LiveNotificationRepositoryImpl(
-    this._androidService,
-    this._iosService,
-  );
-
-  final AndroidLiveNotificationService _androidService;
-  final LiveActivityService _iosService;
-
-  @override
-  Future&lt;void&gt; startProgressNotification({
-    required String title,
-    required String? imageUrl,
-  }) async {
-    if (Platform.isIOS) {
-      await _iosService.startDownloadActivity(
-        contentTitle: title,
-        imageUrl: imageUrl ?? '',
-      );
-    } else {
-      await _androidService.showProgressNotification(
-        title: title,
-        body: 'Starting...',
-        progress: 0,
-        maxProgress: 100,
-      );
-    }
-  }
-
-  @override
-  Future&lt;void&gt; updateProgress({
-    required double progress,
-    required String statusText,
-    String? remainingTime,
-  }) async {
-    if (Platform.isIOS) {
-      await _iosService.updateProgress(
-        progress,
-        remainingTime ?? '',
-      );
-    } else {
-      await _androidService.updateProgress(
-        (progress * 100).toInt(),
-        100,
-        statusText,
-      );
-    }
-  }
-
-  @override
-  Future&lt;void&gt; completeNotification({
-    required String title,
-    required String body,
-  }) async {
-    if (Platform.isIOS) {
-      await _iosService.endActivity();
-    } else {
-      await _androidService.completeNotification(title, body);
-    }
-  }
-
-  @override
-  Future&lt;void&gt; cancelNotification() async {
-    if (Platform.isIOS) {
-      await _iosService.endActivity();
-    } else {
-      await _androidService.cancelNotification();
-    }
-  }
-}</code></pre>
-
-            <h3>Cubit Integration</h3>
-            <pre><code>// lib/features/downloads/presentation/logic/download_cubit.dart
-class DownloadCubit extends Cubit&lt;DownloadState&gt; {
-  DownloadCubit(
-    this._downloadRepository,
-    this._liveNotificationRepository,
-  ) : super(const DownloadInitial());
-
-  final DownloadRepository _downloadRepository;
-  final LiveNotificationRepository _liveNotificationRepository;
-
-  Future&lt;void&gt; startDownload(ContentEntity content) async {
-    emit(DownloadInProgress(contentId: content.id, progress: 0));
-
-    await _liveNotificationRepository.startProgressNotification(
-      title: 'Downloading ${content.title}',
-      imageUrl: content.thumbnailUrl,
-    );
-
-    await _downloadRepository.downloadContent(
-      content,
-      onProgress: (progress, remaining) async {
-        emit(DownloadInProgress(
-          contentId: content.id,
-          progress: progress,
-        ));
-
-        await _liveNotificationRepository.updateProgress(
-          progress: progress,
-          statusText: '${(progress * 100).toInt()}% complete',
-          remainingTime: remaining,
-        );
-      },
-    );
-
-    await _liveNotificationRepository.completeNotification(
-      title: 'Download Complete',
-      body: '${content.title} is ready to watch',
-    );
-
-    emit(DownloadComplete(contentId: content.id));
-  }
-}</code></pre>
+// Usage in Cubit
+await _liveNotificationRepository.startProgress(title: 'Downloading Episode 5');
+await _liveNotificationRepository.updateProgress(progress: 0.45, status: '45% - 2 min left');
+await _liveNotificationRepository.complete(title: 'Ready', body: 'Episode 5 downloaded');</code></pre>
         </section>
 
-        <!-- Platform Comparison -->
+        <!-- Comparison Table -->
         <section>
             <h2>Platform Comparison</h2>
-
-            <table class="comparison-table">
+            <table>
                 <thead>
                     <tr>
                         <th>Feature</th>
-                        <th><span class="badge badge-ios">iOS</span></th>
-                        <th><span class="badge badge-android">Android</span></th>
+                        <th><span class="badge badge-ios">iOS 16.1+</span></th>
+                        <th><span class="badge badge-android">Android 16+</span></th>
+                        <th><span class="badge badge-android">Android &lt;16</span></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>API Name</td>
-                        <td>ActivityKit / Live Activities</td>
-                        <td>Live Updates API / Ongoing Notifications</td>
+                        <td>ActivityKit</td>
+                        <td>Live Updates API</td>
+                        <td>NotificationCompat</td>
                     </tr>
                     <tr>
-                        <td>Minimum Version</td>
-                        <td>iOS 16.1</td>
-                        <td>Android 8.0 (Oreo) / Android 16 for Live Updates</td>
+                        <td>Rich UI</td>
+                        <td>Yes (SwiftUI)</td>
+                        <td>Yes (ProgressStyle)</td>
+                        <td>Basic progress bar</td>
                     </tr>
                     <tr>
-                        <td>Lock Screen Support</td>
+                        <td>Lock Screen</td>
                         <td>Native widget</td>
+                        <td>Notification shade</td>
                         <td>Notification shade</td>
                     </tr>
                     <tr>
-                        <td>Dynamic Island</td>
-                        <td>Yes (iPhone 14 Pro+)</td>
-                        <td>N/A</td>
-                    </tr>
-                    <tr>
-                        <td>Max Duration</td>
-                        <td>8-12 hours</td>
+                        <td>Duration</td>
+                        <td>8-12 hours max</td>
+                        <td>Unlimited</td>
                         <td>Unlimited</td>
                     </tr>
                     <tr>
-                        <td>Update Frequency</td>
-                        <td>~4/hour (push), unlimited (local)</td>
-                        <td>Unlimited</td>
-                    </tr>
-                    <tr>
-                        <td>Custom UI</td>
-                        <td>SwiftUI Widget Extension</td>
-                        <td>RemoteViews / Notification Styles</td>
-                    </tr>
-                    <tr>
-                        <td>Background Updates</td>
+                        <td>Background</td>
                         <td>Push notifications</td>
+                        <td>Native support</td>
                         <td>Foreground Service</td>
                     </tr>
                     <tr>
                         <td>Flutter Package</td>
                         <td><code>live_activities</code></td>
-                        <td><code>flutter_local_notifications</code></td>
+                        <td colspan="2"><code>flutter_local_notifications</code></td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
-        <!-- Implementation Timeline -->
+        <!-- Use Cases -->
         <section>
-            <h2>Implementation Timeline</h2>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <h4>Phase 1: Foundation</h4>
-                    <p>Set up notification channels, foreground service, basic progress notifications</p>
-                    <ul class="feature-list">
-                        <li>Create notification service abstraction</li>
-                        <li>Implement Android ongoing notifications</li>
-                        <li>Set up iOS Widget Extension project</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <h4>Phase 2: iOS Live Activities</h4>
-                    <p>Implement iOS-specific Live Activities with Dynamic Island support</p>
-                    <ul class="feature-list">
-                        <li>Create ActivityAttributes model</li>
-                        <li>Build SwiftUI widget views</li>
-                        <li>Integrate with Flutter via live_activities plugin</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <h4>Phase 3: Feature Integration</h4>
-                    <p>Integrate with download manager and other features</p>
-                    <ul class="feature-list">
-                        <li>Connect to download progress events</li>
-                        <li>Add live event countdown support</li>
-                        <li>Implement continue watching notifications</li>
-                    </ul>
-                </div>
-                <div class="timeline-item">
-                    <h4>Phase 4: Android 16 Live Updates</h4>
-                    <p>Adopt Android 16 Live Updates API when available</p>
-                    <ul class="feature-list">
-                        <li>Implement ProgressStyle notifications</li>
-                        <li>Add rich notification templates</li>
-                        <li>Migrate from legacy ongoing notifications</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dependencies -->
-        <section>
-            <h2>Dependencies & Resources</h2>
-
-            <h3>Flutter Packages</h3>
+            <h2>Stage App Use Cases</h2>
             <table>
                 <thead>
-                    <tr>
-                        <th>Package</th>
-                        <th>Version</th>
-                        <th>Purpose</th>
-                    </tr>
+                    <tr><th>Use Case</th><th>Description</th></tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><code>live_activities</code></td>
-                        <td>^2.0.0</td>
-                        <td>iOS Live Activities integration</td>
-                    </tr>
-                    <tr>
-                        <td><code>flutter_local_notifications</code></td>
-                        <td>^17.0.0</td>
-                        <td>Android notification management</td>
-                    </tr>
-                    <tr>
-                        <td><code>flutter_foreground_task</code></td>
-                        <td>^6.0.0</td>
-                        <td>Background task execution</td>
-                    </tr>
+                    <tr><td><strong>Download Progress</strong></td><td>Real-time download progress for offline content</td></tr>
+                    <tr><td><strong>Live Event Countdown</strong></td><td>Countdown for premiere events</td></tr>
+                    <tr><td><strong>Resume Watching</strong></td><td>Continue watching reminder with progress</td></tr>
+                    <tr><td><strong>New Episode</strong></td><td>Alert when new episode releases</td></tr>
                 </tbody>
             </table>
+        </section>
 
-            <h3>Documentation Links</h3>
+        <!-- Resources -->
+        <section>
+            <h2>Resources</h2>
             <ul style="list-style: none; padding: 0;">
-                <li style="padding: 0.5rem 0;">
-                    <a href="https://developer.apple.com/documentation/activitykit" class="ref-link" target="_blank">
-                        Apple ActivityKit Documentation
-                    </a>
-                </li>
-                <li style="padding: 0.5rem 0;">
-                    <a href="https://developer.android.com/develop/ui/views/notifications" class="ref-link" target="_blank">
-                        Android Notifications Guide
-                    </a>
-                </li>
-                <li style="padding: 0.5rem 0;">
-                    <a href="https://pub.dev/packages/live_activities" class="ref-link" target="_blank">
-                        live_activities Flutter Package
-                    </a>
-                </li>
-                <li style="padding: 0.5rem 0;">
-                    <a href="https://pub.dev/packages/flutter_local_notifications" class="ref-link" target="_blank">
-                        flutter_local_notifications Package
-                    </a>
-                </li>
-                <li style="padding: 0.5rem 0;">
-                    <a href="https://www.linkedin.com/posts/nakul-19_blinkit-android16-ordertracking-activity-7396907715156955136-Tt7C/" class="ref-link" target="_blank">
-                        Blinkit Android 16 Live Updates Implementation (LinkedIn)
-                    </a>
-                </li>
+                <li style="padding: 0.4rem 0;"><a href="https://developer.apple.com/documentation/activitykit" class="ref-link" target="_blank">Apple ActivityKit Documentation</a></li>
+                <li style="padding: 0.4rem 0;"><a href="https://developer.android.com/develop/ui/views/notifications" class="ref-link" target="_blank">Android Notifications Guide</a></li>
+                <li style="padding: 0.4rem 0;"><a href="https://pub.dev/packages/live_activities" class="ref-link" target="_blank">live_activities Flutter Package</a></li>
+                <li style="padding: 0.4rem 0;"><a href="https://pub.dev/packages/flutter_local_notifications" class="ref-link" target="_blank">flutter_local_notifications Package</a></li>
+                <li style="padding: 0.4rem 0;"><a href="https://www.linkedin.com/posts/nakul-19_blinkit-android16-ordertracking-activity-7396907715156955136-Tt7C/" class="ref-link" target="_blank">Blinkit Android 16 Implementation (LinkedIn)</a></li>
             </ul>
         </section>
 
-        <!-- Roadmap Reference -->
+        <!-- Roadmap -->
         <section style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
             <h2>Roadmap Reference</h2>
-            <p>
-                This feature is part of <strong>Initiative 2</strong> in the Stage App roadmap.
-                For the complete roadmap including other initiatives and priorities, visit:
-            </p>
-            <p style="margin-top: 1.5rem;">
-                <a href="https://iammofidul.github.io/stage-roadmap/"
-                   class="ref-link"
-                   target="_blank"
-                   style="font-size: 1.25rem; font-weight: 600;">
-                    https://iammofidul.github.io/stage-roadmap/
-                </a>
-            </p>
+            <p>This feature is part of <strong>Initiative 2</strong> in the Stage App roadmap.</p>
+            <p><a href="https://iammofidul.github.io/stage-roadmap/" class="ref-link" target="_blank" style="font-size: 1.1rem; font-weight: 600;">https://iammofidul.github.io/stage-roadmap/</a></p>
         </section>
     </div>
 
     <footer>
-        <p>Stage App - Live Update Notifications Technical Specification</p>
-        <p>Last updated: February 2026</p>
+        <p>Stage App - Live Update Notifications | Last updated: February 2026</p>
     </footer>
 </body>
 </html>
