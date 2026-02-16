@@ -1230,8 +1230,7 @@
                         </li>
                         <li><strong>Day 2: Events Instrumentation</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><code>device_locked_during_playback</code> - Track lock events with contentId, watchedPercentage, timeSinceSessionStart</li>
-                                <li><code>resume_notification_eligible</code> - Track when notification criteria met</li>
+                                <li><code>device_locked_triggered</code> - When device is locked from Micro Drama Player or OTT Player (contentId, watchedPercentage, playerType)</li>
                             </ul>
                         </li>
                     </ul>
@@ -1252,8 +1251,7 @@
                             <ul style="margin-left: 20px; margin-top: 5px;">
                                 <li><code>resume_notification_sent</code> - Track notification sent with contentId, lockDuration</li>
                                 <li><code>resume_notification_clicked</code> - Track notification taps with timeToTap</li>
-                                <li><code>playback_resumed_from_notification</code> - Track successful resume with resumePosition</li>
-                                <li><code>playback_completed_after_resume</code> - Track completion after resume</li>
+                                <li><code>playback_started</code> (existing event) - Add property <code>playback_source: "resumeNotification"</code> to track successful resume with resumePosition</li>
                             </ul>
                         </li>
                     </ul>
