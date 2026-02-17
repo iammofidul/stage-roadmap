@@ -1820,14 +1820,42 @@
                 <div class="section-content">
                     <h4>📊 Current Problem</h4>
                     <div class="metric-box warning">
-                        <strong>Problem:</strong> 77% of users don't discover microdrama (only 22% start rate)<br>
+                        <strong>Current State:</strong> 64% of subscription_active users start playback on landing on home<br>
+                        <strong>Goal:</strong> Increase playback start rate using AI Mood Curator feature<br>
                         <strong>Root Cause:</strong> Generic genre rows don't match emotional state → "I don't know what to watch"<br>
-                        <strong>Impact:</strong> Low content discovery → Reduced consumption → Higher trial cancellation
+                        <strong>Impact:</strong> Low content discovery → Reduced consumption → Higher churn
                     </div>
 
                     <div class="metric-box" style="background: rgba(99, 102, 241, 0.1); border-left-color: #6366f1; margin: 15px 0 20px 0;">
-                        <strong>📈 Why Pick This Task:</strong> <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/new/xf2oyj00" target="_blank" style="color: #6366f1; font-weight: 600; text-decoration: underline;">View Playback Funnel (Home → Video) →</a><br>
-                        <span style="font-size: 13px; color: #BEBEBE;">Overall playback started from land on home to video playback - shows discovery gap opportunity</span>
+                        <strong>📈 Current Metrics:</strong><br>
+                        <a href="https://app.amplitude.com/analytics/STAGEAPP/chart/new/xlg22wb3" target="_blank" style="color: #6366f1; font-weight: 600; text-decoration: underline;">📊 Playback Start from Home (subscription_active) →</a>
+                    </div>
+
+                    <h4>🧪 Entry Point Variants (A/B Test)</h4>
+                    <div class="metric-box" style="background: rgba(245, 158, 11, 0.1); border-left-color: #f59e0b; margin: 15px 0 20px 0;">
+                        <strong>3 Entry Point Variants to Test:</strong>
+                        <table style="margin: 10px 0 0 0; font-size: 13px; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 8px; background: rgba(245, 158, 11, 0.15);">Variant</th>
+                                    <th style="padding: 8px; background: rgba(245, 158, 11, 0.15);">Entry Point</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 8px;"><strong>Variant A</strong></td>
+                                    <td style="padding: 8px;">10th Home Widget to discover this feature</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px;"><strong>Variant B</strong></td>
+                                    <td style="padding: 8px;">Open Mood Curator on land on home</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px;"><strong>Variant C</strong></td>
+                                    <td style="padding: 8px;">FAB at bottom left (move TV adoption to right center)</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <h4>🎯 Why This is a Wow Factor?</h4>
