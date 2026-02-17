@@ -1876,33 +1876,44 @@
 
                     <p style="margin-top: 15px;"><strong>Task 1: Mood Selection UI (2 days)</strong></p>
                     <ul>
-                        <li><strong>Home Screen Entry Point:</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Prominent card at top: "How are you feeling right now? 😊"</li>
-                                <li>6 Mood Options: Happy 😊 | Sad 😢 | Stressed 😰 | Bored 😐 | Romantic 💕 | Excited 🔥</li>
-                                <li>Single tap mood selection → Instant recommendations</li>
-                                <li>Save last selected mood for quick access</li>
-                            </ul>
+                        <li><strong>6 Moods (English + Hindi):</strong>
+                            <table style="margin: 10px 0; font-size: 13px; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="padding: 8px; background: rgba(99, 102, 241, 0.1);">Mood</th>
+                                        <th style="padding: 8px; background: rgba(99, 102, 241, 0.1);">Hindi</th>
+                                        <th style="padding: 8px; background: rgba(99, 102, 241, 0.1);">What to Watch</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td style="padding: 8px;">😊 <strong>Happy</strong></td><td style="padding: 8px;">खुश</td><td style="padding: 8px;">Feel-good, comedy, uplifting</td></tr>
+                                    <tr><td style="padding: 8px;">😢 <strong>Sad</strong></td><td style="padding: 8px;">उदास</td><td style="padding: 8px;">Emotional, tearjerker, cathartic</td></tr>
+                                    <tr><td style="padding: 8px;">😰 <strong>Stressed</strong></td><td style="padding: 8px;">तनाव में</td><td style="padding: 8px;">Thriller, suspense, escape</td></tr>
+                                    <tr><td style="padding: 8px;">😐 <strong>Bored</strong></td><td style="padding: 8px;">बोर</td><td style="padding: 8px;">Mind-blowing twists, engaging</td></tr>
+                                    <tr><td style="padding: 8px;">💕 <strong>Romantic</strong></td><td style="padding: 8px;">रोमांटिक</td><td style="padding: 8px;">Love, mushy, heartfelt</td></tr>
+                                    <tr><td style="padding: 8px;">🔥 <strong>Excited</strong></td><td style="padding: 8px;">उत्साहित</td><td style="padding: 8px;">Action, masala, intense</td></tr>
+                                </tbody>
+                            </table>
                         </li>
-                        <li><strong>Mood-Based Navigation Tab:</strong>
+                        <li><strong>Entry Points (A/B Test Variants):</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Add "For Your Mood" tab in home navigation</li>
-                                <li>Shows current mood: "Feeling Stressed? Here's what helps 💆"</li>
-                                <li>Change mood button: Quick switcher without leaving screen</li>
+                                <li><strong>Variant A:</strong> 10th Home Widget to discover feature</li>
+                                <li><strong>Variant B:</strong> Open Mood Curator on land on home</li>
+                                <li><strong>Variant C:</strong> FAB at bottom left (move TV adoption to right center)</li>
                             </ul>
                         </li>
                     </ul>
 
                     <p style="margin-top: 15px;"><strong>Task 2: Mood-to-Content Mapping Algorithm (3 days)</strong></p>
                     <ul>
-                        <li><strong>Mood → Genre/Tone Mapping:</strong>
+                        <li><strong>Mood → Theme Mapping (87 items → 6 moods):</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li><strong>Happy:</strong> Comedy, feel-good dramas, lighthearted microdramas</li>
-                                <li><strong>Sad:</strong> Emotional dramas, slice-of-life, comfort content</li>
-                                <li><strong>Stressed:</strong> Comedy shorts, microdramas (quick escape), light romance</li>
-                                <li><strong>Bored:</strong> Thrillers, action, binge-worthy series, mystery</li>
-                                <li><strong>Romantic:</strong> Romance dramas, romantic comedies, love stories</li>
-                                <li><strong>Excited:</strong> Action, suspense, high-energy content, popular trending</li>
+                                <li><strong>Happy (20 items):</strong> Heartwarming, Inspirational, Motivational, Feel Good, Cheerful, Lighthearted, Family Entertainment, Goofy, Hilarious, Funny, Comedy of Errors, Witty, Groovy, Energetic</li>
+                                <li><strong>Sad (13 items):</strong> Emotional, Moving, Heartbreaking, Tragic, Sensitive, Gutwrenching, Raw, Poetic, Divine</li>
+                                <li><strong>Stressed (12 items):</strong> Thrilling, Suspenseful, Scary, Nailbiting, Dark, Unsettling, Gripping, Fast-Paced</li>
+                                <li><strong>Bored (17 items):</strong> Shocking, Unexpected, Plot Twist, Bewildering, Mindbending, Awe-Inspiring, Eye-Opening, Thought-Provoking, Complex, Unconventional</li>
+                                <li><strong>Romantic (10 items):</strong> Mushy, Heartfelt, Flashy, Spiritual, Based on True Story, Realistic, Slice of Life, Relatable</li>
+                                <li><strong>Excited (15 items):</strong> Dramatic, Masaledaar, Hard-hitting, Action-Packed, Epic Battle Scenes, Violent, Gory, Intense, Strong Female Character, Social Commentary</li>
                             </ul>
                         </li>
                         <li><strong>Personalization Layer:</strong>
@@ -1911,13 +1922,6 @@
                                 <li>Combine mood mapping + personal preferences</li>
                                 <li>Weight recent watches higher (last 7 days)</li>
                                 <li>Filter out already-watched content</li>
-                            </ul>
-                        </li>
-                        <li><strong>AI Explanation Feature:</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>For each recommendation: "We picked this because..."</li>
-                                <li>Example: "Feeling Stressed? This comedy short helps you unwind in 15 minutes"</li>
-                                <li>Builds trust in AI → Higher acceptance rate</li>
                             </ul>
                         </li>
                     </ul>
@@ -1969,61 +1973,67 @@
                     <ul>
                         <li><strong>Track Events:</strong>
                             <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>mood_selected (mood_type: happy/sad/stressed/bored/romantic/excited)</li>
-                                <li>mood_recommendation_shown (mood_type, content_count, personalization_score)</li>
-                                <li>mood_recommendation_clicked (mood_type, content_id, recommendation_rank)</li>
-                                <li>mood_to_playback_rate (conversion by mood type)</li>
-                                <li>mood_content_completion_rate (did user finish recommended content?)</li>
-                            </ul>
-                        </li>
-                        <li><strong>Viral Share Feature:</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>"Share My Mood Picks" → Screenshot with AI explanation</li>
-                                <li>Example share: "STAGE AI knows me! 😭 When I said I'm stressed, it recommended [Show] and it was PERFECT"</li>
-                                <li>Track: mood_recommendation_shared (platform: instagram/twitter/whatsapp)</li>
-                            </ul>
-                        </li>
-                        <li><strong>A/B Test Variables:</strong>
-                            <ul style="margin-left: 20px; margin-top: 5px;">
-                                <li>Number of moods: 6 vs 8 vs 4 (optimal choice paradox)</li>
-                                <li>AI explanation copy: "We picked this because..." vs "Perfect for you when stressed"</li>
-                                <li>Recommendation count: 10 vs 15 vs 20 picks per mood</li>
+                                <li><code>mood_selected</code> (mood_type: happy/sad/stressed/bored/romantic/excited)</li>
+                                <li><code>mood_recommendation_shown</code> (mood_type, content_count, personalization_score)</li>
+                                <li><code>mood_recommendation_clicked</code> (mood_type, content_id, recommendation_rank)</li>
+                                <li><code>playback_started</code> (existing) - Add property <code>source: "mood_selected"</code> to track conversion by mood type</li>
+                                <li><code>consumption_ninety</code> (existing) - Add property <code>source: "mood_selected"</code> to track content completion</li>
                             </ul>
                         </li>
                     </ul>
 
                     <h4>📈 Expected Impact</h4>
                     <div class="metric-box">
-                        <strong>Discovery Breakthrough:</strong><br>
-                        <strong>Microdrama Start Rate:</strong> 22% → 40% (+18pp vs +13pp target from Initiative #3)<br>
-                        <strong>Content Discovery Rate:</strong> +45% (users find content they wouldn't browse to)<br>
-                        <strong>Decision Time:</strong> 10-15 min browsing → 30 sec mood selection (10x faster)<br><br>
-                        <strong>Consumption Boost:</strong><br>
-                        <strong>Content Start Rate (Overall):</strong> +30% (mood solves "what to watch" paralysis)<br>
-                        <strong>Content Completion Rate:</strong> +40% (right mood = right content = finish it)<br>
-                        <strong>Session Length:</strong> +25% (users watch more when content matches emotional state)<br><br>
-                        <strong>Retention Impact:</strong><br>
-                        <strong>D7 Retention:</strong> +18% (mood-based engagement creates habit)<br>
-                        <strong>Trial-to-Paid:</strong> +15% (personalization builds brand loyalty)<br>
-                        <strong>Churn Reduction:</strong> -12% (users feel understood → less likely to cancel)<br><br>
-                        <strong>Viral Growth:</strong><br>
-                        <strong>Social Shares:</strong> 8,000+/month ("This app reads my mind" testimonials)<br>
-                        <strong>App Store Reviews:</strong> "AI feature is a game-changer" → Higher ratings<br>
-                        <strong>Organic Installs:</strong> +10% from viral social proof<br><br>
+                        <strong>Playback Start Rate Target:</strong><br>
+                        <strong>Current:</strong> 64% subscription_active users start playback on home<br>
+                        <strong>Target:</strong> 75%+ playback start rate (+11pp improvement)<br><br>
+
+                        <strong>Entry Point Variant Expected Outcomes:</strong>
+                        <table style="margin: 10px 0; font-size: 13px; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 8px; background: rgba(99, 102, 241, 0.1);">Variant</th>
+                                    <th style="padding: 8px; background: rgba(99, 102, 241, 0.1);">Expected Lift</th>
+                                    <th style="padding: 8px; background: rgba(99, 102, 241, 0.1);">Hypothesis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 8px;"><strong>A: 10th Widget</strong></td>
+                                    <td style="padding: 8px;">+5-8pp</td>
+                                    <td style="padding: 8px;">Discovery-based, non-intrusive</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px;"><strong>B: Auto-open on Home</strong></td>
+                                    <td style="padding: 8px;">+10-15pp</td>
+                                    <td style="padding: 8px;">Highest engagement, may feel intrusive</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 8px;"><strong>C: FAB (bottom left)</strong></td>
+                                    <td style="padding: 8px;">+6-10pp</td>
+                                    <td style="padding: 8px;">Always accessible, user-initiated</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <strong>Secondary Metrics:</strong><br>
+                        <strong>Content Completion Rate:</strong> +40% (right mood = right content)<br>
+                        <strong>Session Length:</strong> +25% (content matches emotional state)<br>
+                        <strong>Decision Time:</strong> 10-15 min browsing → 30 sec mood selection<br><br>
+
                         <strong>Why This Works:</strong><br>
                         - Spotify "Mood Playlists" drive 3x higher engagement vs genre playlists<br>
-                        - Netflix study: Emotional state > genre preference for content match<br>
-                        - Solves core problem: 77% don't discover microdrama → AI surfaces it<br>
-                        - "AI knows me" = wow moment → User evangelizes STAGE to friends
+                        - Solves "what to watch" paralysis → faster content discovery<br>
+                        - Personalization creates habit → higher retention
                     </div>
 
                     <div class="feature-exists">
-                        <strong>Leverage Existing Infrastructure:</strong> Recommendation API, viewing history analytics, push notifications, personalization engine, social sharing framework
+                        <strong>Leverage Existing Infrastructure:</strong> Recommendation API, viewing history analytics, push notifications, personalization engine
                     </div>
 
                     <p style="margin-top: 10px;"><strong>⏱️ Total Effort:</strong> 14 days (2d mood UI + 3d algorithm + 3d recommendations UI + 2d push + 2d experimentation + 2d integration tests)</p>
-                    <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> Mood selector frequency (every launch vs daily vs weekly), Algorithm type (explicit mood-based vs AI-inferred mood)</p>
-                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> mood_to_playback_rate, microdrama_start_rate_lift, content_completion_rate_lift, d7_retention_impact, social_share_count</p>
+                    <p style="margin-top: 5px;"><strong>🧪 Experiments:</strong> 3 entry point variants (10th widget vs auto-open vs FAB)</p>
+                    <p style="margin-top: 5px;"><strong>🎯 Success Metrics:</strong> playback_start_rate, mood_to_playback_rate, content_completion_rate, session_length</p>
                 </div>
                 </div>
             </div>
