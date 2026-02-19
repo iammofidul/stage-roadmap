@@ -690,11 +690,84 @@
                     <p style="margin: 0.5rem 0;">Sunset React Native after 2 years. Technical & organizational challenges. Moved to Swift (iOS) + Kotlin (Android).</p>
                     <p style="margin-bottom: 0; font-size: 0.85rem;"><a href="https://medium.com/airbnb-engineering/sunsetting-react-native-1868ba28e30a" target="_blank" style="color: #6200EE;">Airbnb Engineering Blog →</a></p>
                 </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 1rem; border-radius: 0 8px 8px 0;">
+                    <h4 style="color: #EF4444; margin-top: 0;">Uber Lite (2018)</h4>
+                    <p>Abandoned WebView approach for native.</p>
+                    <p style="margin: 0.5rem 0;"><strong>Issues:</strong> Android fragmentation, poor performance, couldn't integrate critical features.</p>
+                    <p style="margin-bottom: 0; font-size: 0.85rem;"><a href="https://www.uber.com/blog/engineering-uber-lite/" target="_blank" style="color: #6200EE;">Uber Engineering Blog →</a></p>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 1rem; border-radius: 0 8px 8px 0;">
+                    <h4 style="color: #EF4444; margin-top: 0;">Intuit - Mint, QuickBooks (2023)</h4>
+                    <p>Left React Native for native Swift & Kotlin.</p>
+                    <p style="margin: 0.5rem 0;"><strong>Reason:</strong> Couldn't achieve the level of polish and reliability they wanted.</p>
+                    <p style="margin-bottom: 0; font-size: 0.85rem;"><a href="https://zoewave.medium.com/the-journey-away-from-react-native-adfa65448c07" target="_blank" style="color: #6200EE;">Medium →</a></p>
+                </div>
             </div>
 
             <p style="background: var(--gray-100); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
                 <strong>Lesson:</strong> WebView/HTML5/Cross-platform often fails at scale. Native SDUI gives you server control <em>without</em> sacrificing native performance.
             </p>
+
+            <h3>Companies Successfully Using SDUI (2024-2025)</h3>
+            <div style="overflow-x: auto;">
+                <table>
+                    <tr>
+                        <th>Company</th>
+                        <th>SDUI System</th>
+                        <th>Scale / Result</th>
+                        <th>Source</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Airbnb</strong></td>
+                        <td>Ghost Platform</td>
+                        <td>Unified web/iOS/Android, single GraphQL schema</td>
+                        <td><a href="https://medium.com/airbnb-engineering/a-deep-dive-into-airbnbs-server-driven-ui-system-842244c5f5" target="_blank">Engineering Blog</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Netflix</strong></td>
+                        <td>Custom SDUI</td>
+                        <td>Rapid A/B testing, personalized content across Web/TV/Mobile</td>
+                        <td><a href="https://medium.com/@aubreyhaskett/server-driven-ui-what-airbnb-netflix-and-lyft-learned-building-dynamic-mobile-experiences-20e346265305" target="_blank">Medium</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lyft</strong></td>
+                        <td>Custom SDUI</td>
+                        <td>Deploy in <strong>1-2 days</strong> vs 2 weeks, 60% less UI code</td>
+                        <td><a href="https://eng.lyft.com/the-journey-to-server-driven-ui-at-lyft-bikes-and-scooters-c19264a0378e" target="_blank">Engineering Blog</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>PhonePe</strong></td>
+                        <td>LiquidUI (2024)</td>
+                        <td><strong>130+ screens</strong>, 9 products, 40+ actions</td>
+                        <td><a href="https://tech.phonepe.com/introducing-liquidui-phonepes-server-driven-ui-framework/" target="_blank">Tech Blog</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nubank</strong></td>
+                        <td>Custom SDUI</td>
+                        <td><strong>100M+ users</strong>, rapid scaling</td>
+                        <td><a href="https://stac.dev/blogs/tech-companies-sdui" target="_blank">Stac Blog</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shopify</strong></td>
+                        <td>Dynamic layouts</td>
+                        <td>Optimized conversion rates dynamically</td>
+                        <td><a href="https://stac.dev/blogs/tech-companies-sdui" target="_blank">Stac Blog</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Slack</strong></td>
+                        <td>Gradual rollout</td>
+                        <td>Real-time feedback collection</td>
+                        <td><a href="https://stac.dev/blogs/tech-companies-sdui" target="_blank">Stac Blog</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0;">
+                <h4 style="color: #EF4444; margin-top: 0;">SDUI Failure: Spotify HubFramework (2019)</h4>
+                <p style="margin-bottom: 0;">Deprecated after launch. <strong>Reason:</strong> iOS-only, abstraction didn't provide sufficient value for their use cases.</p>
+            </div>
 
             <h4>Business Logic Example (Cannot change with SDUI)</h4>
             <p style="margin-bottom: 0.5rem;">From <code>payment_view_model.dart</code> - GST price calculation:</p>
