@@ -667,12 +667,34 @@
                 </table>
             </div>
 
-            <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 1rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0;">
-                <h4 style="color: #EF4444; margin-top: 0;">Case Study: Facebook's HTML5 Mistake (2012)</h4>
-                <p><strong>Mark Zuckerberg:</strong> <em>"Our biggest mistake was betting too much on HTML5"</em></p>
-                <p style="margin: 0.5rem 0;">Facebook built their mobile app using HTML5/WebView. Result: slow, poor UX. After rewriting as native iOS app → <strong>2x more feed stories consumed</strong>.</p>
-                <p style="margin-bottom: 0; font-size: 0.9rem;"><a href="https://techcrunch.com/2012/09/11/mark-zuckerberg-our-biggest-mistake-with-mobile-was-betting-too-much-on-html5/" target="_blank" style="color: #6200EE;">Source: TechCrunch</a></p>
+            <h3>Why Native Wins: Industry Case Studies</h3>
+
+            <div style="display: grid; gap: 1rem; margin: 1rem 0;">
+                <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 1rem; border-radius: 0 8px 8px 0;">
+                    <h4 style="color: #EF4444; margin-top: 0;">Facebook (2012)</h4>
+                    <p><strong>Zuckerberg:</strong> <em>"Our biggest mistake was betting too much on HTML5"</em></p>
+                    <p style="margin: 0.5rem 0;">Built mobile app with HTML5/WebView → slow, poor UX. After native rewrite → <strong>2x more feed stories consumed</strong>.</p>
+                    <p style="margin-bottom: 0; font-size: 0.85rem;"><a href="https://techcrunch.com/2012/09/11/mark-zuckerberg-our-biggest-mistake-with-mobile-was-betting-too-much-on-html5/" target="_blank" style="color: #6200EE;">TechCrunch →</a></p>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 1rem; border-radius: 0 8px 8px 0;">
+                    <h4 style="color: #EF4444; margin-top: 0;">LinkedIn (2013)</h4>
+                    <p><strong>Kiran Prasad (Sr. Director Mobile):</strong> <em>"HTML5 is not allowing us to do the best for our users"</em></p>
+                    <p style="margin: 0.5rem 0;">Issues: memory leaks, animation jank, poor debugging tools. Switched from 95% HTML5 to fully native.</p>
+                    <p style="margin-bottom: 0; font-size: 0.85rem;"><a href="https://venturebeat.com/2013/04/17/linkedin-mobile-web-breakup/" target="_blank" style="color: #6200EE;">VentureBeat →</a></p>
+                </div>
+
+                <div style="background: rgba(239, 68, 68, 0.1); border-left: 4px solid #EF4444; padding: 1rem; border-radius: 0 8px 8px 0;">
+                    <h4 style="color: #EF4444; margin-top: 0;">Airbnb (2018)</h4>
+                    <p><strong>Gabriel Peal (Engineer):</strong> <em>"We were unable to meet our original goals"</em></p>
+                    <p style="margin: 0.5rem 0;">Sunset React Native after 2 years. Technical & organizational challenges. Moved to Swift (iOS) + Kotlin (Android).</p>
+                    <p style="margin-bottom: 0; font-size: 0.85rem;"><a href="https://medium.com/airbnb-engineering/sunsetting-react-native-1868ba28e30a" target="_blank" style="color: #6200EE;">Airbnb Engineering Blog →</a></p>
+                </div>
             </div>
+
+            <p style="background: var(--gray-100); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                <strong>Lesson:</strong> WebView/HTML5/Cross-platform often fails at scale. Native SDUI gives you server control <em>without</em> sacrificing native performance.
+            </p>
 
             <h4>Business Logic Example (Cannot change with SDUI)</h4>
             <p style="margin-bottom: 0.5rem;">From <code>payment_view_model.dart</code> - GST price calculation:</p>
