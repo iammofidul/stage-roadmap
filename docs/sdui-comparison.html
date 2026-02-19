@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-Driven UI (SDUI) Tools for Flutter</title>
+    <style>
+        :root {
+            --primary: #6200EE;
+            --primary-light: #E8DEF8;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-600: #4B5563;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #9C27B0 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .toc {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .toc h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .toc ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .toc a {
+            color: var(--gray-600);
+            text-decoration: none;
+            padding: 0.3rem 0;
+            display: block;
+            transition: color 0.2s;
+        }
+
+        .toc a:hover {
+            color: var(--primary);
+        }
+
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        h3 {
+            color: var(--gray-800);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h4 {
+            color: var(--gray-600);
+            font-size: 1.1rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        th {
+            background: var(--gray-100);
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        tr:hover {
+            background: var(--gray-50);
+        }
+
+        .tool-card {
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            transition: border-color 0.2s;
+        }
+
+        .tool-card:hover {
+            border-color: var(--primary);
+        }
+
+        .tool-card.recommended {
+            border-color: var(--success);
+            background: linear-gradient(to right, rgba(16, 185, 129, 0.05), transparent);
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            color: var(--gray-900);
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .package-info {
+            background: var(--gray-100);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .links-table {
+            margin: 1rem 0;
+        }
+
+        .links-table td:first-child {
+            font-weight: 500;
+            width: 120px;
+        }
+
+        .links-table a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .links-table a:hover {
+            text-decoration: underline;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .pros, .cons {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .pros {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success);
+        }
+
+        .cons {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--danger);
+        }
+
+        .pros h4, .cons h4 {
+            margin-top: 0;
+        }
+
+        .pros h4 {
+            color: var(--success);
+        }
+
+        .cons h4 {
+            color: var(--danger);
+        }
+
+        .check {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .cross {
+            color: var(--danger);
+            font-weight: bold;
+        }
+
+        .warn {
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        .score {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .winner-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #9C27B0 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .winner-box h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .winner-box table {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+
+        .winner-box th {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .winner-box td {
+            color: white;
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        code {
+            background: var(--gray-100);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background: var(--gray-900);
+            color: #E5E7EB;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            header {
+                padding: 2rem 1rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Server-Driven UI (SDUI) Tools for Flutter</h1>
+        <p>Comprehensive comparison of top 8 SDUI frameworks for Stage App</p>
+        <p style="margin-top: 0.5rem; opacity: 0.8;">Last Updated: February 2026</p>
+    </header>
+
+    <div class="container">
+        <!-- Table of Contents -->
+        <nav class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#overview">1. Overview</a></li>
+                <li><a href="#comparison">2. Quick Comparison Matrix</a></li>
+                <li><a href="#tools">3. Top 8 Tools - Detailed Analysis</a></li>
+                <li><a href="#requirements">4. Requirements Comparison</a></li>
+                <li><a href="#recommendation">5. Final Recommendation</a></li>
+            </ul>
+        </nav>
+
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>1. Overview</h2>
+
+            <h3>What is Server-Driven UI (SDUI)?</h3>
+            <p>Server-Driven UI allows you to:</p>
+            <ul style="margin: 1rem 0 1rem 2rem;">
+                <li><strong>Update app UI without app store releases</strong></li>
+                <li><strong>Control screens from backend</strong></li>
+                <li><strong>A/B test layouts server-side</strong></li>
+                <li><strong>Push instant fixes and changes</strong></li>
+            </ul>
+
+            <h3>Key Requirements for Stage App</h3>
+            <table>
+                <tr>
+                    <th>Requirement</th>
+                    <th>Priority</th>
+                </tr>
+                <tr>
+                    <td>Dart → JSON conversion</td>
+                    <td><strong>Must Have</strong></td>
+                </tr>
+                <tr>
+                    <td>JSON → UI rendering</td>
+                    <td><strong>Must Have</strong></td>
+                </tr>
+                <tr>
+                    <td>UI Viewer/Preview</td>
+                    <td><strong>Must Have</strong></td>
+                </tr>
+                <tr>
+                    <td>Easy add new screens</td>
+                    <td><strong>Must Have</strong></td>
+                </tr>
+                <tr>
+                    <td>Easy update existing screens</td>
+                    <td><strong>Must Have</strong></td>
+                </tr>
+                <tr>
+                    <td>Self-hosted option</td>
+                    <td><strong>Must Have</strong></td>
+                </tr>
+                <tr>
+                    <td>Offline/Caching support</td>
+                    <td>Nice to Have</td>
+                </tr>
+                <tr>
+                    <td>Production proven</td>
+                    <td>Nice to Have</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Quick Comparison Matrix -->
+        <section id="comparison">
+            <h2>2. Quick Comparison Matrix</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Stac</th>
+                        <th>Codelessly</th>
+                        <th>DivKit</th>
+                        <th>Duit</th>
+                        <th>Shorebird</th>
+                        <th>json_dynamic_widget</th>
+                        <th>Mirai</th>
+                        <th>Server Driven Widgets</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Dart → JSON</strong></td>
+                        <td><span class="check">✅ CLI</span></td>
+                        <td><span class="check">✅ Visual</span></td>
+                        <td><span class="cross">❌ Manual</span></td>
+                        <td><span class="check">✅ Generator</span></td>
+                        <td><span class="warn">⚠️ N/A</span></td>
+                        <td><span class="cross">❌ Manual</span></td>
+                        <td><span class="cross">❌ Manual</span></td>
+                        <td><span class="cross">❌ Manual</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>JSON → UI</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️ Code Push</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>UI Viewer</strong></td>
+                        <td><span class="check">✅ Console</span></td>
+                        <td><span class="check">✅ Editor</span></td>
+                        <td><span class="warn">⚠️ Web</span></td>
+                        <td><span class="check">✅ DevTools</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="warn">⚠️ Playground</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Widgets</strong></td>
+                        <td>80+</td>
+                        <td>100+</td>
+                        <td>50+</td>
+                        <td>50+</td>
+                        <td>All Flutter</td>
+                        <td>80+</td>
+                        <td>40+</td>
+                        <td>30+</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Custom Widgets</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Actions/Events</strong></td>
+                        <td><span class="check">11+ built-in</span></td>
+                        <td><span class="check">✅ Visual</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅ Native</span></td>
+                        <td><span class="warn">⚠️ Limited</span></td>
+                        <td><span class="warn">⚠️ Limited</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>CLI Tools</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Offline/Cache</strong></td>
+                        <td><span class="check">✅ 5 strategies</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️ Manual</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Theming</strong></td>
+                        <td><span class="check">✅ Dynamic</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Self-Hosted</strong></td>
+                        <td><span class="check">✅ MIT</span></td>
+                        <td><span class="cross">❌ Cloud Only</span></td>
+                        <td><span class="check">✅ Apache</span></td>
+                        <td><span class="check">✅ MIT</span></td>
+                        <td><span class="cross">❌ Cloud Only</span></td>
+                        <td><span class="check">✅ MIT</span></td>
+                        <td><span class="check">✅ MIT</span></td>
+                        <td><span class="check">✅ MIT</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Production Ready</strong></td>
+                        <td><span class="check">✅ Vodafone</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅ Yandex</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Community</strong></td>
+                        <td>800+ stars</td>
+                        <td>Medium</td>
+                        <td>2k+ stars</td>
+                        <td>Growing</td>
+                        <td>2k+ stars</td>
+                        <td>Large</td>
+                        <td>Small</td>
+                        <td>Small</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>SDUI vs WebView vs Code Push</h3>
+            <div style="overflow-x: auto;">
+                <table>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Native SDUI</th>
+                        <th>WebView</th>
+                        <th>Code Push (Shorebird)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Change UI</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Change Business Logic</strong></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Native Feel & Performance</strong></td>
+                        <td><span class="check">✅ 60/120fps</span></td>
+                        <td><span class="cross">❌ JS overhead</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>App Store Safe</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️ Gray area</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Offline / Cache</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Device / App Integration</strong></td>
+                        <td><span class="check">✅ Full Dart</span></td>
+                        <td><span class="warn">⚠️ JS bridge</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Design System Consistency</strong></td>
+                        <td><span class="check">✅ Flutter theme</span></td>
+                        <td><span class="cross">❌ Two systems</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deep Linking</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌ Complex</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <h4>Business Logic Example (Cannot change with SDUI)</h4>
+            <p style="margin-bottom: 0.5rem;">From <code>payment_view_model.dart</code> - GST price calculation:</p>
+            <pre><code>String getPayablePrice(SubscriptionPlan? selectedPlan, String? country) {
+  if(selectedPlan == null) return '';
+
+  final gstExpStatus = Preferences.readSyncData(Preferences.gstExpStatus);
+
+  if(gstExpStatus == GstExperimentStatus.applied.name
+     && country?.toUpperCase() == Consts.countryIndia) {
+    return '$currencySymbol ${selectedPlan.payingPriceWithGst}/-';
+  }
+  return '$currencySymbol ${selectedPlan.payingPrice}/-';
+}</code></pre>
+            <p style="color: var(--gray-600);"><strong>Why SDUI can't change this:</strong> Experiment status check, country validation, and GST calculation must stay in code. SDUI can display the result, not modify the logic.</p>
+        </section>
+
+        <!-- Top 8 Tools -->
+        <section id="tools">
+            <h2>3. Top 8 Tools - Detailed Analysis</h2>
+
+            <!-- Tool 1: Stac -->
+            <div class="tool-card recommended">
+                <div class="tool-header">
+                    <span class="tool-title">#1. Stac</span>
+                    <span class="badge badge-success">Recommended</span>
+                </div>
+
+                <div class="package-info">stac: ^1.3.1</div>
+                <p style="margin: 0.5rem 0; color: var(--gray-600);">License: MIT (Open Source, Self-Hostable)</p>
+
+                <h4>Links</h4>
+                <table class="links-table">
+                    <tr><td>Website</td><td><a href="https://stac.dev" target="_blank">https://stac.dev</a></td></tr>
+                    <tr><td>Documentation</td><td><a href="https://docs.stac.dev" target="_blank">https://docs.stac.dev</a></td></tr>
+                    <tr><td>Quick Start</td><td><a href="https://docs.stac.dev/quickstart" target="_blank">https://docs.stac.dev/quickstart</a></td></tr>
+                    <tr><td>Pub.dev</td><td><a href="https://pub.dev/packages/stac" target="_blank">https://pub.dev/packages/stac</a></td></tr>
+                    <tr><td>GitHub</td><td><a href="https://github.com/StacDev/stac" target="_blank">https://github.com/StacDev/stac</a></td></tr>
+                    <tr><td>Console</td><td><a href="https://console.stac.dev" target="_blank">https://console.stac.dev</a></td></tr>
+                    <tr><td>CLI Docs</td><td><a href="https://docs.stac.dev/cli" target="_blank">https://docs.stac.dev/cli</a></td></tr>
+                    <tr><td>Discord</td><td><a href="https://discord.com/invite/vTGsVRK86V" target="_blank">https://discord.com/invite/vTGsVRK86V</a></td></tr>
+                    <tr><td>Flutter YT</td><td><a href="https://www.youtube.com/watch?v=DGJuBOWl-v0" target="_blank">Featured on Official Flutter Channel</a></td></tr>
+                </table>
+
+                <h4>Stats</h4>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">800+</div>
+                        <div class="stat-label">GitHub Stars</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">161</div>
+                        <div class="stat-label">Pub.dev Likes</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">80+</div>
+                        <div class="stat-label">Widgets</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">11+</div>
+                        <div class="stat-label">Actions</div>
+                    </div>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Dart → JSON CLI</strong> - <code>stac build</code> converts automatically</li>
+                            <li><strong>80+ built-in widgets</strong></li>
+                            <li><strong>11+ built-in actions</strong> - Navigate, API calls, dialogs, forms</li>
+                            <li><strong>UI Viewer</strong> - Stac Console for preview</li>
+                            <li><strong>5 caching strategies</strong> with offline support</li>
+                            <li><strong>Self-hosted</strong> - MIT License</li>
+                            <li><strong>Dynamic theming</strong> - Light/dark from server</li>
+                            <li><strong>CLI tools</strong> - init, build, deploy</li>
+                            <li><strong>Production proven</strong> - Used by Vodafone</li>
+                            <li><strong>Active development</strong> - 40+ contributors</li>
+                            <li><strong>Featured on Official Flutter YouTube</strong></li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li>Stac Cloud optional for console</li>
+                            <li>Learning curve for DSL syntax</li>
+                            <li>Newer framework (but production-tested)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 2: Duit -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-title">#2. Duit</span>
+                    <span class="badge badge-warning">Alternative</span>
+                </div>
+
+                <div class="package-info">duit: ^1.0.0</div>
+                <p style="margin: 0.5rem 0; color: var(--gray-600);">License: MIT (Open Source, Self-Hostable)</p>
+
+                <h4>Links</h4>
+                <table class="links-table">
+                    <tr><td>Pub.dev</td><td><a href="https://pub.dev/packages/duit" target="_blank">https://pub.dev/packages/duit</a></td></tr>
+                    <tr><td>GitHub</td><td><a href="https://github.com/Suspended/duit" target="_blank">https://github.com/Suspended/duit</a></td></tr>
+                    <tr><td>Documentation</td><td><a href="https://pub.dev/documentation/duit/latest/" target="_blank">https://pub.dev/documentation/duit/latest/</a></td></tr>
+                </table>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Dart → JSON Generator</strong> - Code generation</li>
+                            <li><strong>Type-safe</strong> - Bidirectional type safety</li>
+                            <li><strong>DevTools integration</strong> - Preview in Flutter DevTools</li>
+                            <li><strong>Self-hosted</strong> - MIT License</li>
+                            <li><strong>Custom widgets</strong> - Easy to extend</li>
+                            <li><strong>Action handling</strong> - Event system built-in</li>
+                            <li><strong>Active development</strong></li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li>Smaller community</li>
+                            <li>Less documentation</li>
+                            <li>Fewer widgets (50+)</li>
+                            <li>No built-in caching</li>
+                            <li>No CLI tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 3: json_dynamic_widget -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-title">#3. json_dynamic_widget</span>
+                </div>
+
+                <div class="package-info">json_dynamic_widget: ^7.0.0</div>
+                <p style="margin: 0.5rem 0; color: var(--gray-600);">License: MIT (Open Source, Self-Hostable)</p>
+
+                <h4>Links</h4>
+                <table class="links-table">
+                    <tr><td>Pub.dev</td><td><a href="https://pub.dev/packages/json_dynamic_widget" target="_blank">https://pub.dev/packages/json_dynamic_widget</a></td></tr>
+                    <tr><td>GitHub</td><td><a href="https://github.com/peiffer-innovations/json_dynamic_widget" target="_blank">https://github.com/peiffer-innovations/json_dynamic_widget</a></td></tr>
+                    <tr><td>Documentation</td><td><a href="https://pub.dev/documentation/json_dynamic_widget/latest/" target="_blank">https://pub.dev/documentation/json_dynamic_widget/latest/</a></td></tr>
+                    <tr><td>Playground</td><td><a href="https://peiffer-innovations.github.io/json_dynamic_widget/" target="_blank">https://peiffer-innovations.github.io/json_dynamic_widget/</a></td></tr>
+                </table>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Most mature</strong> - Longest-running package</li>
+                            <li><strong>80+ widgets</strong> - Comprehensive support</li>
+                            <li><strong>Large community</strong> - Many resources</li>
+                            <li><strong>Schema validation</strong></li>
+                            <li><strong>Expression support</strong></li>
+                            <li><strong>Self-hosted</strong> - MIT License</li>
+                            <li><strong>Well documented</strong></li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>No Dart → JSON</strong> - Must write JSON manually</li>
+                            <li><strong>No UI Viewer</strong> - Only playground</li>
+                            <li>Complex JSON structure</li>
+                            <li>Steep learning curve</li>
+                            <li>Limited actions</li>
+                            <li>No built-in caching</li>
+                            <li>No CLI tools</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 4: Codelessly -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-title">#4. Codelessly</span>
+                </div>
+
+                <div class="package-info">codelessly_sdk: ^1.0.0</div>
+                <p style="margin: 0.5rem 0; color: var(--gray-600);">License: Proprietary (Cloud Platform)</p>
+
+                <h4>Links</h4>
+                <table class="links-table">
+                    <tr><td>Website</td><td><a href="https://codelessly.com" target="_blank">https://codelessly.com</a></td></tr>
+                    <tr><td>Pub.dev</td><td><a href="https://pub.dev/packages/codelessly_sdk" target="_blank">https://pub.dev/packages/codelessly_sdk</a></td></tr>
+                    <tr><td>GitHub</td><td><a href="https://github.com/Codelessly/CodelesslySDK" target="_blank">https://github.com/Codelessly/CodelesslySDK</a></td></tr>
+                </table>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Visual drag-drop editor</strong></li>
+                            <li><strong>100+ widgets</strong></li>
+                            <li><strong>Figma import</strong></li>
+                            <li><strong>Real-time preview</strong></li>
+                            <li><strong>Action builder</strong></li>
+                            <li><strong>Data binding</strong></li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>No self-hosting</strong> - Cloud only</li>
+                            <li><strong>Paid plans</strong> for production</li>
+                            <li><strong>Vendor lock-in</strong></li>
+                            <li>Limited offline</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 5: DivKit -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-title">#5. DivKit (Yandex)</span>
+                </div>
+
+                <div class="package-info">divkit: ^0.4.0</div>
+                <p style="margin: 0.5rem 0; color: var(--gray-600);">License: Apache 2.0 (Open Source, Self-Hostable)</p>
+
+                <h4>Links</h4>
+                <table class="links-table">
+                    <tr><td>Website</td><td><a href="https://divkit.tech" target="_blank">https://divkit.tech</a></td></tr>
+                    <tr><td>GitHub</td><td><a href="https://github.com/divkit/divkit" target="_blank">https://github.com/divkit/divkit</a></td></tr>
+                    <tr><td>Playground</td><td><a href="https://divkit.tech/playground" target="_blank">https://divkit.tech/playground</a></td></tr>
+                </table>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Yandex production-proven</strong></li>
+                            <li><strong>Cross-platform</strong> (iOS, Android, Web, Flutter)</li>
+                            <li><strong>Self-hostable</strong> Apache 2.0</li>
+                            <li><strong>2k+ GitHub stars</strong></li>
+                            <li><strong>Built-in actions</strong></li>
+                            <li><strong>Expressions & conditions</strong></li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>No Dart → JSON</strong> - Manual JSON</li>
+                            <li><strong>Flutter SDK less mature</strong></li>
+                            <li><strong>Complex JSON schema</strong></li>
+                            <li>Limited Flutter docs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 6: Shorebird -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-title">#6. Shorebird</span>
+                    <span class="badge badge-warning">Different Approach</span>
+                </div>
+
+                <div class="package-info">shorebird_code_push: ^1.0.0</div>
+                <p style="margin: 0.5rem 0; color: var(--gray-600);">License: Proprietary (Cloud Service) - Free tier available</p>
+
+                <h4>Pricing (for 400K DAU / 8M MAU)</h4>
+                <table>
+                    <tr>
+                        <th>Plan</th>
+                        <th>Patch Installs</th>
+                        <th>Price</th>
+                    </tr>
+                    <tr>
+                        <td>Free</td>
+                        <td>5,000/month</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td>Team</td>
+                        <td>50,000/month</td>
+                        <td>$20/month</td>
+                    </tr>
+                    <tr>
+                        <td>Business</td>
+                        <td>500,000/month</td>
+                        <td>$200/month</td>
+                    </tr>
+                    <tr style="background: rgba(239, 68, 68, 0.1);">
+                        <td><strong>Stage Scale</strong></td>
+                        <td><strong>~8M/month</strong></td>
+                        <td><strong>~$3,200+/month (Enterprise)</strong></td>
+                    </tr>
+                </table>
+                <p style="color: var(--danger); margin: 0.5rem 0; font-size: 0.9rem;">⚠️ At 8M MAU with ~1 patch/user/month = ~$3,200+/month minimum. Multiple patches = higher cost.</p>
+
+                <h4>Links</h4>
+                <table class="links-table">
+                    <tr><td>Website</td><td><a href="https://shorebird.dev" target="_blank">https://shorebird.dev</a></td></tr>
+                    <tr><td>Docs</td><td><a href="https://docs.shorebird.dev" target="_blank">https://docs.shorebird.dev</a></td></tr>
+                    <tr><td>GitHub</td><td><a href="https://github.com/shorebirdtech/shorebird" target="_blank">https://github.com/shorebirdtech/shorebird</a></td></tr>
+                </table>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Code push</strong> - Update Dart code OTA</li>
+                            <li><strong>All Flutter widgets</strong> supported</li>
+                            <li><strong>No JSON needed</strong> - Write normal Dart</li>
+                            <li><strong>CLI tools</strong></li>
+                            <li><strong>2k+ GitHub stars</strong></li>
+                            <li><strong>Fast patches</strong></li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Not true SDUI</strong> - Code push only</li>
+                            <li><strong>No self-hosting</strong></li>
+                            <li><strong>Paid for teams</strong></li>
+                            <li>No visual editor</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 7: Mirai -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-title">#7. Mirai</span>
+                </div>
+
+                <div class="package-info">mirai: ^0.5.0</div>
+                <p style="margin: 0.5rem 0; color: var(--gray-600);">License: MIT (Open Source, Self-Hostable)</p>
+
+                <h4>Links</h4>
+                <table class="links-table">
+                    <tr><td>Pub.dev</td><td><a href="https://pub.dev/packages/mirai" target="_blank">https://pub.dev/packages/mirai</a></td></tr>
+                    <tr><td>GitHub</td><td><a href="https://github.com/anthropics/mirai" target="_blank">https://github.com/anthropics/mirai</a></td></tr>
+                    <tr><td>Documentation</td><td><a href="https://pub.dev/documentation/mirai/latest/" target="_blank">https://pub.dev/documentation/mirai/latest/</a></td></tr>
+                </table>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Flutter widget parity</strong> - Familiar names</li>
+                            <li><strong>Easy custom parsers</strong></li>
+                            <li><strong>Clean API</strong></li>
+                            <li><strong>Good for migration</strong></li>
+                            <li><strong>Self-hosted</strong> - MIT License</li>
+                            <li><strong>Lightweight</strong></li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>No Dart → JSON</strong></li>
+                            <li><strong>No UI Viewer</strong></li>
+                            <li>Smaller community</li>
+                            <li>Limited actions</li>
+                            <li>Some widgets missing</li>
+                            <li>No caching</li>
+                            <li>No CLI</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tool 8: Server Driven Widgets -->
+            <div class="tool-card">
+                <div class="tool-header">
+                    <span class="tool-title">#8. Server Driven Widgets</span>
+                </div>
+
+                <div class="package-info">flutter_server_driven_ui: ^0.0.3</div>
+                <p style="margin: 0.5rem 0; color: var(--gray-600);">License: MIT (Open Source, Self-Hostable)</p>
+
+                <h4>Links</h4>
+                <table class="links-table">
+                    <tr><td>Pub.dev</td><td><a href="https://pub.dev/packages/flutter_server_driven_ui" target="_blank">https://pub.dev/packages/flutter_server_driven_ui</a></td></tr>
+                    <tr><td>GitHub</td><td><a href="https://github.com/nicholascioli/flutter_server_driven_ui" target="_blank">https://github.com/nicholascioli/flutter_server_driven_ui</a></td></tr>
+                    <tr><td>Documentation</td><td><a href="https://pub.dev/documentation/flutter_server_driven_ui/latest/" target="_blank">https://pub.dev/documentation/flutter_server_driven_ui/latest/</a></td></tr>
+                </table>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>Pros</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>Simple to start</strong></li>
+                            <li><strong>Lightweight</strong></li>
+                            <li><strong>Basic use cases</strong></li>
+                            <li><strong>Self-hosted</strong> - MIT License</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>Cons</h4>
+                        <ul style="margin-left: 1.2rem;">
+                            <li><strong>No Dart → JSON</strong></li>
+                            <li><strong>No UI Viewer</strong></li>
+                            <li><strong>Limited maintenance</strong></li>
+                            <li><strong>Few widgets</strong> (30+)</li>
+                            <li><strong>No actions</strong></li>
+                            <li>Small community</li>
+                            <li>No caching</li>
+                            <li>Not production ready</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requirements Comparison -->
+        <section id="requirements">
+            <h2>4. Requirements Comparison</h2>
+
+            <h3>Stage App Requirements Check</h3>
+            <div style="overflow-x: auto;">
+                <table>
+                    <tr>
+                        <th>Requirement</th>
+                        <th>Stac</th>
+                        <th>Duit</th>
+                        <th>json_dynamic_widget</th>
+                        <th>Codelessly</th>
+                        <th>DivKit</th>
+                        <th>Shorebird</th>
+                        <th>Mirai</th>
+                        <th>Server Driven Widgets</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Dart → JSON conversion</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>JSON → UI rendering</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>UI Viewer/Preview</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Easy add new screens</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Easy update existing</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Self-hosted option</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reuse existing widgets</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Offline support</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Production ready</strong></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="check">✅</span></td>
+                        <td><span class="warn">⚠️</span></td>
+                        <td><span class="cross">❌</span></td>
+                    </tr>
+                    <tr style="background: var(--gray-100); font-weight: bold;">
+                        <td><strong>Requirements Met</strong></td>
+                        <td><span class="check">9/9</span></td>
+                        <td>6/9</td>
+                        <td>5/9</td>
+                        <td>7/9</td>
+                        <td>6/9</td>
+                        <td>5/9</td>
+                        <td>4/9</td>
+                        <td>3/9</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Final Recommendation -->
+        <section id="recommendation">
+            <h2>5. Final Recommendation</h2>
+
+            <h3>Ranking</h3>
+            <table>
+                <tr>
+                    <th>Rank</th>
+                    <th>Tool</th>
+                    <th>Score</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td><strong>1st</strong></td>
+                    <td><strong>Stac</strong></td>
+                    <td class="score">⭐⭐⭐⭐⭐</td>
+                    <td>Complete SDUI solution with all features</td>
+                </tr>
+                <tr>
+                    <td><strong>2nd</strong></td>
+                    <td>Duit</td>
+                    <td class="score">⭐⭐⭐⭐</td>
+                    <td>Type-safe solution with DevTools</td>
+                </tr>
+                <tr>
+                    <td><strong>3rd</strong></td>
+                    <td>DivKit</td>
+                    <td class="score">⭐⭐⭐⭐</td>
+                    <td>Cross-platform, Yandex-proven, self-hosted</td>
+                </tr>
+                <tr>
+                    <td><strong>4th</strong></td>
+                    <td>Codelessly</td>
+                    <td class="score">⭐⭐⭐⭐</td>
+                    <td>Visual builder, non-dev friendly (cloud only)</td>
+                </tr>
+                <tr>
+                    <td><strong>5th</strong></td>
+                    <td>json_dynamic_widget</td>
+                    <td class="score">⭐⭐⭐</td>
+                    <td>Teams comfortable with manual JSON</td>
+                </tr>
+                <tr>
+                    <td><strong>6th</strong></td>
+                    <td>Shorebird</td>
+                    <td class="score">⭐⭐⭐</td>
+                    <td>Code push OTA (not true SDUI)</td>
+                </tr>
+                <tr>
+                    <td><strong>7th</strong></td>
+                    <td>Mirai</td>
+                    <td class="score">⭐⭐⭐</td>
+                    <td>Simple SDUI with Flutter-like syntax</td>
+                </tr>
+                <tr>
+                    <td><strong>8th</strong></td>
+                    <td>Server Driven Widgets</td>
+                    <td class="score">⭐⭐</td>
+                    <td>Very basic SDUI needs only</td>
+                </tr>
+            </table>
+
+            <div class="winner-box">
+                <h3>🏆 Winner: Stac</h3>
+                <p style="margin-bottom: 1rem;">Stac is the only tool meeting ALL Stage requirements:</p>
+                <table>
+                    <tr>
+                        <th>Requirement</th>
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td>Dart → JSON conversion</td>
+                        <td>✅ <code>stac build</code> CLI</td>
+                    </tr>
+                    <tr>
+                        <td>JSON → UI rendering</td>
+                        <td>✅ Native Flutter rendering</td>
+                    </tr>
+                    <tr>
+                        <td>UI Viewer/Preview</td>
+                        <td>✅ Stac Console</td>
+                    </tr>
+                    <tr>
+                        <td>Easy add screens</td>
+                        <td>✅ Create in <code>/stac</code> folder</td>
+                    </tr>
+                    <tr>
+                        <td>Easy update existing</td>
+                        <td>✅ <code>stac deploy</code> instant</td>
+                    </tr>
+                    <tr>
+                        <td>Self-hosted</td>
+                        <td>✅ MIT, fully self-hostable</td>
+                    </tr>
+                    <tr>
+                        <td>Offline support</td>
+                        <td>✅ 5 caching strategies</td>
+                    </tr>
+                    <tr>
+                        <td>Production proven</td>
+                        <td>✅ Used by Vodafone</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Quick Start with Stac</h3>
+            <pre><code># Install CLI
+dart pub global activate stac_cli
+
+# Add dependencies
+flutter pub add stac stac_core
+
+# Initialize
+stac init
+
+# Build Dart → JSON
+stac build
+
+# Deploy (optional cloud)
+stac deploy</code></pre>
+        </section>
+    </div>
+
+    <footer>
+        <p>Document created for Stage App SDUI tool selection</p>
+        <p>Last Updated: February 2026</p>
+    </footer>
+</body>
+</html>
