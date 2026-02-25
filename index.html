@@ -3143,20 +3143,67 @@
                                 <div style="color: var(--text-muted); font-size: 0.85em;">test_constants.dart</div>
                             </div>
                         </div>
-                        <h4>🎯 Problem</h4>
+
+                        <h4>🚨 Problem: IDE & Build Performance Killer</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <strong>Impact:</strong> IDE freezes 10-15 seconds opening these files, 200MB+ RAM per file<br>
+                            <strong>Build Impact:</strong> +45% slower builds from large file compilation<br>
+                            <strong>Code Review:</strong> Impossible to review changes in 39K line files — PRs become unmanageable<br>
+                            <strong>Combined:</strong> 63,062 lines across 3 files — largest files in entire codebase
+                        </div>
+
+                        <h4>✅ What We'll Build (4-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1-2: Split home_test_constants.dart (39,621 lines → 5 files)</strong></p>
                         <ul>
-                            <li>IDE freezes 10-15 seconds opening these files</li>
-                            <li>Impossible to code review changes in 39K line files</li>
-                            <li>200MB+ RAM per file in IDE</li>
-                            <li>+45% slower builds from large file compilation</li>
+                            <li><strong>Analyze structure:</strong> Map JSON response blocks, identify domain boundaries</li>
+                            <li><strong>Extract <code>home_widget_test_data.dart</code></strong> (~8,000 lines) — Widget-specific mock data</li>
+                            <li><strong>Extract <code>home_content_test_data.dart</code></strong> (~8,000 lines) — Content/show/movie mock data</li>
+                            <li><strong>Extract <code>home_user_test_data.dart</code></strong> (~8,000 lines) — User state, subscription, trial mock data</li>
+                            <li><strong>Extract <code>home_api_test_data.dart</code></strong> (~8,000 lines) — API response mocks</li>
+                            <li><strong>Extract <code>home_platter_test_data.dart</code></strong> (~7,621 lines) — Platter/row/section mock data</li>
+                            <li><strong>Create barrel export:</strong> <code>home_test_constants.dart</code> re-exports all 5 files for backward compatibility</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 3: Split listing_test_constants.dart (17,305 lines → 3 files)</strong></p>
                         <ul>
-                            <li>Split home_test_constants into 5 domain files (~8K each)</li>
-                            <li>Split listing_test_constants into 3 files (~6K each)</li>
-                            <li>Split test_constants by feature area</li>
+                            <li><strong>Extract <code>listing_content_test_data.dart</code></strong> (~6,000 lines) — Content listing mock data</li>
+                            <li><strong>Extract <code>listing_filter_test_data.dart</code></strong> (~6,000 lines) — Filter/sort mock data</li>
+                            <li><strong>Extract <code>listing_api_test_data.dart</code></strong> (~5,305 lines) — API response mocks</li>
+                            <li><strong>Split <code>test_constants.dart</code></strong> (6,136 lines) by feature area into 3-4 focused files</li>
                         </ul>
-                        <p><strong>Effort:</strong> 4 days | <strong>Risk:</strong> 🟢 Low | <strong>ROI:</strong> 1,200%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 4: Validation & Performance Benchmarking</strong></p>
+                        <ul>
+                            <li><strong>Update all imports:</strong> Fix references across test files to use new paths</li>
+                            <li><strong>Run full test suite:</strong> <code>flutter test</code> — verify zero regressions</li>
+                            <li><strong>Performance benchmark:</strong> Measure IDE open time (before vs after)</li>
+                            <li><strong>Build benchmark:</strong> Compare <code>flutter build</code> time before/after split</li>
+                            <li><strong>Memory profiling:</strong> Verify RAM reduction when files are open in IDE</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>IDE Performance:</strong> 10x faster file opening (39K → 8K max per file)<br>
+                            <strong>Build Time:</strong> -45% faster compilation (smaller compilation units)<br>
+                            <strong>Memory:</strong> -70% RAM usage in IDE (200MB → 60MB per file)<br>
+                            <strong>Code Review:</strong> Reviewable PR diffs (< 10K lines per file)<br>
+                            <strong>Developer Velocity:</strong> +60% when working with test data
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(37, 141, 88, 0.1); border: 1px solid var(--accent-green); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-green); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟢 LOW RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>Test-only files:</strong> No production code affected</li>
+                                <li><strong>Barrel exports:</strong> Backward-compatible imports via re-export files</li>
+                                <li><strong>Reversible:</strong> Git history preserves original files</li>
+                                <li><strong>Validation:</strong> Full test suite must pass before merge</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 4 days (1 developer)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 1,200% — 4 days investment → 48 saved dev-days annually</p>
                     </div>
                 </div>
             </div>
@@ -3178,20 +3225,66 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: God Object Anti-Pattern</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <strong>File:</strong> <code>lib/utils/util.dart</code> — 1,425 lines, 311 functions, 30+ imports<br>
+                            <strong>Impact:</strong> Every change risks breaking unrelated features (sharing, PiP, screen protection, formatting all in one file)<br>
+                            <strong>Testing:</strong> Impossible to test in isolation — importing util.dart pulls in 30+ packages<br>
+                            <strong>References:</strong> 450+ imports across codebase — most imported file in project
+                        </div>
+
+                        <h4>✅ What We'll Build (3-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1: Extract High-Impact Util Groups</strong></p>
                         <ul>
-                            <li><code>lib/utils/util.dart</code> — 1,425 lines with 311 functions</li>
-                            <li>Imports 30+ packages — does everything from sharing to PiP to screen protection</li>
-                            <li>Every change risks breaking unrelated features</li>
-                            <li>Impossible to test in isolation</li>
+                            <li><strong>Create <code>share_utils.dart</code></strong> (~180 lines) — All sharing logic (WhatsApp, social, deep links, dynamic links)</li>
+                            <li><strong>Create <code>device_utils.dart</code></strong> (~200 lines) — Device info, PiP, screen protection, orientation, battery</li>
+                            <li><strong>Create <code>format_utils.dart</code></strong> (~150 lines) — Date formatting, number formatting, duration, currency</li>
+                            <li><strong>Create <code>ui_utils.dart</code></strong> (~250 lines) — Snackbars, dialogs, toast, bottom sheets, keyboard dismiss</li>
+                            <li><strong>Create <code>navigation_utils.dart</code></strong> (~200 lines) — Route helpers, deep link parsing, URL launch</li>
+                            <li><strong>Create <code>permission_utils.dart</code></strong> (~100 lines) — Camera, storage, notification permissions</li>
+                            <li><strong>Keep <code>util.dart</code></strong> (~345 lines) — Remaining misc utilities + barrel re-exports</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 2: Update 450+ Import References</strong></p>
                         <ul>
-                            <li>Split into <code>share_utils.dart</code>, <code>device_utils.dart</code>, <code>format_utils.dart</code>, <code>ui_utils.dart</code>, <code>navigation_utils.dart</code></li>
-                            <li>Each file owns one responsibility</li>
-                            <li>Update all 450 import references across codebase</li>
+                            <li><strong>Search & replace:</strong> Use IDE refactor to update imports across all files</li>
+                            <li><strong>Barrel export:</strong> <code>util.dart</code> re-exports all new files for backward compatibility</li>
+                            <li><strong>Gradual migration:</strong> Update direct imports feature-by-feature (auth → home → player → settings)</li>
+                            <li><strong>Verify each feature:</strong> Run tests after each batch of import updates</li>
                         </ul>
-                        <p><strong>Effort:</strong> 3 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 800%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 3: Testing & Validation</strong></p>
+                        <ul>
+                            <li><strong>Run full test suite:</strong> <code>flutter test</code> — verify zero regressions</li>
+                            <li><strong>Build verification:</strong> <code>flutter build apk --flavor dev</code> — ensure clean build</li>
+                            <li><strong>Import analysis:</strong> Verify no circular dependencies introduced</li>
+                            <li><strong>Add unit tests:</strong> Write isolated tests for each new utility file</li>
+                            <li><strong>Document:</strong> Update CLAUDE.md with new utility file conventions</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>Developer Velocity:</strong> +30% — find and modify utils without risk of side effects<br>
+                            <strong>Testing:</strong> Each utility testable in isolation (no 30-package import chain)<br>
+                            <strong>Merge Conflicts:</strong> -80% — parallel development on different utility areas<br>
+                            <strong>Build Time:</strong> -10% — smaller compilation units, incremental recompilation<br>
+                            <strong>Onboarding:</strong> New developers find utilities by name, not by scrolling 1,425 lines
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(239, 167, 63, 0.1); border: 1px solid var(--accent-orange); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-orange); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟡 MEDIUM RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>450+ import changes:</strong> Large refactor surface — use IDE refactor tools</li>
+                                <li><strong>Barrel export mitigates:</strong> Old <code>import 'util.dart'</code> still works via re-exports</li>
+                                <li><strong>Incremental approach:</strong> Extract one group at a time, test between each</li>
+                                <li><strong>No logic changes:</strong> Pure file reorganization — functions stay identical</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 3 days (1 developer)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 800% — 3 days investment → 24 saved dev-days annually</p>
                     </div>
                 </div>
             </div>
@@ -3213,20 +3306,90 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: No Design System</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <strong>3,016 instances</strong> of <code>Color(0x...)</code> and <code>Colors.</code> scattered across codebase<br>
+                            <strong>Impact:</strong> Impossible to implement dark mode, rebrand, or maintain visual consistency<br>
+                            <strong>Inconsistency:</strong> Same green appears as 5+ different hex values across screens<br>
+                            <strong>Blocker:</strong> Any design change requires manually updating 3,016 locations
+                        </div>
+
+                        <h4>✅ What We'll Build (5-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1: Audit & Define Color Tokens</strong></p>
                         <ul>
-                            <li><strong>3,016 instances</strong> of <code>Color(0x...)</code> and <code>Colors.</code> scattered across codebase</li>
-                            <li>No centralized design system or theme tokens</li>
-                            <li>Impossible to implement dark mode or rebrand</li>
-                            <li>Inconsistent colors across screens</li>
+                            <li><strong>Scan codebase:</strong> Extract all unique color values from <code>Color(0x...)</code> and <code>Colors.</code> references</li>
+                            <li><strong>Map to semantic tokens:</strong> Group colors by purpose (primary, secondary, surface, text, error, success)</li>
+                            <li><strong>Create <code>app_colors.dart</code>:</strong> Define semantic color palette with light theme</li>
+                            <li><strong>Define categories:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li><code>AppColors.primary</code> → STAGE green (#258D58)</li>
+                                    <li><code>AppColors.primaryDark</code> → Dark green variant</li>
+                                    <li><code>AppColors.accent</code> → Orange/gold (#EFA73F)</li>
+                                    <li><code>AppColors.surface</code> → Card backgrounds</li>
+                                    <li><code>AppColors.textPrimary</code>, <code>textSecondary</code>, <code>textMuted</code></li>
+                                    <li><code>AppColors.error</code>, <code>success</code>, <code>warning</code></li>
+                                    <li><code>AppColors.divider</code>, <code>border</code>, <code>overlay</code></li>
+                                </ul>
+                            </li>
+                            <li><strong>Create <code>app_theme.dart</code>:</strong> ThemeData using semantic tokens</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 2-3: Replace Hardcoded Colors (High-Traffic Screens)</strong></p>
                         <ul>
-                            <li>Create <code>app_colors.dart</code> with semantic color tokens</li>
-                            <li>Replace all 3,016 hardcoded values with theme references</li>
-                            <li>Enable dark mode support with minimal additional effort</li>
+                            <li><strong>Priority screens (Day 2):</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Home screen widgets — ~400 color references</li>
+                                    <li>Video player UI — ~200 color references</li>
+                                    <li>Subscription/payment screens — ~250 color references</li>
+                                </ul>
+                            </li>
+                            <li><strong>Secondary screens (Day 3):</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Settings, profile — ~300 color references</li>
+                                    <li>Search, content detail — ~350 color references</li>
+                                    <li>Auth, onboarding — ~200 color references</li>
+                                </ul>
+                            </li>
+                            <li><strong>Method:</strong> Use IDE find & replace with regex, verify each screen visually</li>
                         </ul>
-                        <p><strong>Effort:</strong> 5 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 600%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 4: Replace Remaining Colors & Create Dark Theme Skeleton</strong></p>
+                        <ul>
+                            <li><strong>Remaining screens:</strong> Micro drama, watchlist, downloads, notifications (~1,300 references)</li>
+                            <li><strong>Dark theme skeleton:</strong> Create <code>AppColors.dark</code> variant with inverted/adjusted values</li>
+                            <li><strong>Theme switching:</strong> Add <code>ThemeMode</code> support in MaterialApp (disabled by default, ready to enable)</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 5: Testing & Visual Validation</strong></p>
+                        <ul>
+                            <li><strong>Visual regression:</strong> Screenshot every major screen, compare before/after</li>
+                            <li><strong>Build test:</strong> <code>flutter build apk --flavor dev</code> — clean build</li>
+                            <li><strong>Grep verification:</strong> Ensure zero remaining <code>Color(0x</code> hardcoded values (except test files)</li>
+                            <li><strong>Document:</strong> Color token guide in CLAUDE.md for team reference</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>Design Consistency:</strong> Single source of truth for all colors<br>
+                            <strong>Dark Mode Ready:</strong> Flip one switch to enable dark theme<br>
+                            <strong>Rebranding:</strong> Change brand color in 1 file instead of 3,016 locations<br>
+                            <strong>Developer Velocity:</strong> +25% — no more guessing which hex value to use<br>
+                            <strong>Accessibility:</strong> Foundation for WCAG contrast compliance
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(239, 167, 63, 0.1); border: 1px solid var(--accent-orange); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-orange); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟡 MEDIUM RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>Visual regressions:</strong> Color mapping errors could change UI appearance — mitigated by screenshot comparison</li>
+                                <li><strong>Large surface area:</strong> 3,016 changes — use regex replace + visual QA per screen</li>
+                                <li><strong>No logic changes:</strong> Pure visual refactor — app behavior unchanged</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 5 days (1-2 developers)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 600% — 5 days investment → 30 saved dev-days annually + dark mode enablement</p>
                     </div>
                 </div>
             </div>
@@ -3248,20 +3411,85 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: Inconsistent UI Spacing</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <strong>2,043 instances</strong> of hardcoded padding, margin, height, width values<br>
+                            <strong>Examples:</strong> <code>SizedBox(height: 16)</code>, <code>EdgeInsets.all(12)</code>, <code>Padding(padding: EdgeInsets.symmetric(horizontal: 20))</code><br>
+                            <strong>Impact:</strong> No spacing system — same logical padding appears as 12, 14, 16, 18 in different screens<br>
+                            <strong>Blocker:</strong> Responsive design impossible without centralized dimensions
+                        </div>
+
+                        <h4>✅ What We'll Build (4-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1: Define Design Tokens</strong></p>
                         <ul>
-                            <li><strong>2,043 instances</strong> of hardcoded padding, margin, height, width values</li>
-                            <li><code>SizedBox(height: 16)</code>, <code>EdgeInsets.all(12)</code> everywhere</li>
-                            <li>No spacing or sizing system — inconsistent across screens</li>
-                            <li>Changing spacing requires finding every hardcoded value</li>
+                            <li><strong>Create <code>app_spacing.dart</code>:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li><code>AppSpacing.xxs</code> = 2</li>
+                                    <li><code>AppSpacing.xs</code> = 4</li>
+                                    <li><code>AppSpacing.sm</code> = 8</li>
+                                    <li><code>AppSpacing.md</code> = 12</li>
+                                    <li><code>AppSpacing.lg</code> = 16</li>
+                                    <li><code>AppSpacing.xl</code> = 24</li>
+                                    <li><code>AppSpacing.xxl</code> = 32</li>
+                                    <li><code>AppSpacing.xxxl</code> = 48</li>
+                                </ul>
+                            </li>
+                            <li><strong>Create <code>app_dimensions.dart</code>:</strong> Icon sizes, border radius, elevation, card heights, button heights</li>
+                            <li><strong>Create helper extensions:</strong> <code>context.spacing.lg</code>, <code>SizedBox.vertical(AppSpacing.md)</code></li>
+                            <li><strong>Map existing values:</strong> Audit which magic numbers map to which token</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 2-3: Replace Magic Numbers by Screen Priority</strong></p>
                         <ul>
-                            <li>Create <code>app_spacing.dart</code> and <code>app_dimensions.dart</code></li>
-                            <li>Define spacing scale: xs(4), sm(8), md(12), lg(16), xl(24), xxl(32)</li>
-                            <li>Replace all magic numbers with semantic tokens</li>
+                            <li><strong>Day 2 — High-traffic screens:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Home screen widgets (~500 magic numbers)</li>
+                                    <li>Video player controls (~200 magic numbers)</li>
+                                    <li>Content detail / episode list (~250 magic numbers)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Day 3 — Remaining screens:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Settings, profile, auth (~400 magic numbers)</li>
+                                    <li>Search, micro drama, watchlist (~350 magic numbers)</li>
+                                    <li>Dialogs, bottom sheets, popups (~343 magic numbers)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Method:</strong> Regex search for <code>SizedBox(height:</code>, <code>EdgeInsets</code>, <code>BorderRadius.circular(</code> patterns</li>
                         </ul>
-                        <p><strong>Effort:</strong> 4 days | <strong>Risk:</strong> 🟢 Low | <strong>ROI:</strong> 500%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 4: Testing & Documentation</strong></p>
+                        <ul>
+                            <li><strong>Visual regression:</strong> Screenshot key screens, compare spacing before/after</li>
+                            <li><strong>Build test:</strong> Verify clean build with all replacements</li>
+                            <li><strong>Grep audit:</strong> Count remaining hardcoded values — target < 50 (justified exceptions)</li>
+                            <li><strong>Spacing guide:</strong> Document token usage in CLAUDE.md with visual examples</li>
+                            <li><strong>Lint rule:</strong> Add custom lint to flag new hardcoded spacing values</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>UI Consistency:</strong> Uniform spacing across all screens — no more "why is this 14px here but 16px there?"<br>
+                            <strong>Responsive Ready:</strong> Change spacing scale in 1 file for tablet/large screen support<br>
+                            <strong>Developer Velocity:</strong> +20% — no more guessing which padding value to use<br>
+                            <strong>Design Handoff:</strong> Designers and developers speak same token language<br>
+                            <strong>Accessibility:</strong> Foundation for dynamic text sizing support
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(37, 141, 88, 0.1); border: 1px solid var(--accent-green); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-green); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟢 LOW RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>No logic changes:</strong> Pure visual dimension replacement</li>
+                                <li><strong>Nearest-token mapping:</strong> 14px → <code>AppSpacing.md</code> (12) or <code>AppSpacing.lg</code> (16) — minor visual shifts</li>
+                                <li><strong>Incremental:</strong> Replace screen by screen, test between each</li>
+                                <li><strong>Screenshot comparison:</strong> Catch any unintended layout shifts</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 4 days (1 developer)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 500% — 4 days investment → 20 saved dev-days annually</p>
                     </div>
                 </div>
             </div>
@@ -3283,20 +3511,94 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: Core Feature at Breaking Point</h4>
+                        <div class="metric-box" style="border-left-color: #dc2626;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div><strong>File:</strong> consumption_cubit.dart</div>
+                                <div><strong>Size:</strong> 2,294 lines</div>
+                                <div><strong>File:</strong> consumption_video_playback.dart</div>
+                                <div><strong>Size:</strong> 2,000 lines</div>
+                            </div>
+                            <br><strong>Combined:</strong> 4,294 lines for one feature — video playback is the #1 user interaction<br>
+                            <strong>Risk:</strong> Every change risks breaking video playback for all users<br>
+                            <strong>Responsibilities mixed:</strong> Playback controls, progress tracking, quality switching, analytics, DRM, download sync, trailer logic, PiP — all in one cubit
+                        </div>
+
+                        <h4>✅ What We'll Build (6-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1: Architecture Planning & State Analysis</strong></p>
                         <ul>
-                            <li><code>consumption_cubit.dart</code> — <strong>2,294 lines</strong> (largest logic file)</li>
-                            <li><code>consumption_video_playback.dart</code> — <strong>2,000 lines</strong></li>
-                            <li>Combined <strong>4,294 lines</strong> for one feature — impossible to maintain</li>
-                            <li>Every change risks breaking video playback</li>
+                            <li><strong>Map all responsibilities:</strong> Document every method in consumption_cubit.dart with its purpose</li>
+                            <li><strong>Identify boundaries:</strong> Group methods into logical domains (playback, progress, quality, analytics)</li>
+                            <li><strong>Define interfaces:</strong> Design inter-cubit communication via streams/callbacks</li>
+                            <li><strong>State decomposition:</strong> Split monolithic <code>ConsumptionState</code> into focused sub-states</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 2-3: Extract Core Cubits</strong></p>
                         <ul>
-                            <li>Extract into <code>playback_cubit.dart</code>, <code>progress_cubit.dart</code>, <code>quality_cubit.dart</code></li>
-                            <li>Separate video controls from business logic</li>
-                            <li>Add unit tests for each extracted cubit</li>
+                            <li><strong>Create <code>playback_cubit.dart</code></strong> (~500 lines) — Play/pause, seek, volume, PiP, fullscreen, player lifecycle</li>
+                            <li><strong>Create <code>progress_cubit.dart</code></strong> (~400 lines) — Watch progress tracking, resume position, continue watching, episode auto-play</li>
+                            <li><strong>Create <code>quality_cubit.dart</code></strong> (~300 lines) — Video quality selection, adaptive bitrate, bandwidth detection</li>
+                            <li><strong>Create <code>playback_analytics_cubit.dart</code></strong> (~350 lines) — Watch time tracking, engagement events, heartbeat pings</li>
+                            <li><strong>Retain <code>consumption_cubit.dart</code></strong> (~400 lines) — Orchestrator that coordinates sub-cubits</li>
                         </ul>
-                        <p><strong>Effort:</strong> 6 days | <strong>Risk:</strong> 🔴 High (core feature) | <strong>ROI:</strong> 1,000%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 4: Extract Video Playback Helpers</strong></p>
+                        <ul>
+                            <li><strong>Create <code>drm_handler.dart</code></strong> (~300 lines) — DRM license acquisition, token refresh, Widevine/FairPlay</li>
+                            <li><strong>Create <code>trailer_handler.dart</code></strong> (~200 lines) — Trailer validation, fallback logic (connects to Initiative #13)</li>
+                            <li><strong>Create <code>download_sync_handler.dart</code></strong> (~250 lines) — Offline playback sync, download progress</li>
+                            <li><strong>Retain <code>consumption_video_playback.dart</code></strong> (~500 lines) — Core player integration only</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 5: Integration & Widget Updates</strong></p>
+                        <ul>
+                            <li><strong>Update <code>MultiBlocProvider</code>:</strong> Register new cubits in consumption screen</li>
+                            <li><strong>Update <code>BlocBuilder</code>s:</strong> Point to specific sub-cubit states</li>
+                            <li><strong>Wire inter-cubit events:</strong> Playback state changes → progress tracking → analytics</li>
+                            <li><strong>Verify DI registration:</strong> Update injectable config for new cubits</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 6: Testing & Regression Validation</strong></p>
+                        <ul>
+                            <li><strong>Unit tests:</strong> Write tests for each new cubit in isolation (mock dependencies)</li>
+                            <li><strong>Integration test:</strong> End-to-end video playback flow on real device</li>
+                            <li><strong>Test scenarios:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Play → Pause → Resume → Seek → Quality change</li>
+                                    <li>Episode auto-play → Next episode transition</li>
+                                    <li>PiP mode → Return to fullscreen</li>
+                                    <li>Background → Foreground → Resume playback</li>
+                                    <li>Offline playback from downloads</li>
+                                    <li>DRM-protected content playback</li>
+                                </ul>
+                            </li>
+                            <li><strong>Performance benchmark:</strong> Measure widget rebuild count before/after</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>Widget Rebuilds:</strong> -60% — only affected sub-cubit triggers UI update<br>
+                            <strong>Bug Fix Speed:</strong> 3x faster — locate issue in focused 400-line file vs 4,294 lines<br>
+                            <strong>Testing:</strong> Unit testable per domain — currently untestable monolith<br>
+                            <strong>Parallel Development:</strong> 2-3 devs can work on playback features simultaneously<br>
+                            <strong>Feature Velocity:</strong> New playback features (skip intro, smart speed) are additive, not risky
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(220, 38, 38, 0.1); border: 1px solid #dc2626; border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🔴 HIGH RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>Core feature:</strong> Video playback is the #1 user interaction — any regression is critical</li>
+                                <li><strong>State coordination:</strong> Sub-cubits must communicate correctly — race conditions possible</li>
+                                <li><strong>Mitigation:</strong> Feature flag to toggle old vs new cubit architecture</li>
+                                <li><strong>Mitigation:</strong> A/B rollout — 5% → 25% → 50% → 100% over 2 weeks</li>
+                                <li><strong>Rollback plan:</strong> Revert to monolithic cubit via feature flag in < 5 minutes</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 6 days (2 developers recommended)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 1,000% — 6 days investment → 60 saved dev-days annually</p>
                     </div>
                 </div>
             </div>
@@ -3318,20 +3620,69 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: Routing Bottleneck</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div><strong>File:</strong> my_navigator.dart — 1,393 lines</div>
+                                <div><strong>File:</strong> stage_app_router.dart — 1,345 lines</div>
+                                <div><strong>Combined:</strong> 2,738 lines — 70+ route definitions</div>
+                                <div><strong>Impact:</strong> Merge conflicts on every feature PR</div>
+                            </div>
+                        </div>
+
+                        <h4>✅ What We'll Build (3-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1: Extract Feature Route Modules</strong></p>
                         <ul>
-                            <li><code>my_navigator.dart</code> — <strong>1,393 lines</strong></li>
-                            <li><code>stage_app_router.dart</code> — <strong>1,345 lines</strong></li>
-                            <li>All routes in 2 massive files — merge conflicts on every feature</li>
-                            <li>Hard to find routes, no feature isolation</li>
+                            <li><strong>Create <code>auth_routes.dart</code></strong> (~200 lines) — Login, signup, OTP, forgot password, social auth</li>
+                            <li><strong>Create <code>home_routes.dart</code></strong> (~250 lines) — Home tabs, platter details, see-all screens</li>
+                            <li><strong>Create <code>consumption_routes.dart</code></strong> (~300 lines) — Video player, episode list, trailer, PiP</li>
+                            <li><strong>Create <code>payment_routes.dart</code></strong> (~200 lines) — Subscription, plans, payment gateway, receipt</li>
+                            <li><strong>Create <code>profile_routes.dart</code></strong> (~150 lines) — Profile, settings, edit profile, preferences</li>
+                            <li><strong>Create <code>content_routes.dart</code></strong> (~200 lines) — Content detail, listing, search, micro drama</li>
+                            <li><strong>Create <code>misc_routes.dart</code></strong> (~143 lines) — Deep links, dynamic links, webview, support</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 2: Wire Route Modules Together</strong></p>
                         <ul>
-                            <li>Split by feature: <code>auth_routes.dart</code>, <code>home_routes.dart</code>, <code>payment_routes.dart</code>, <code>consumption_routes.dart</code></li>
-                            <li>Each feature owns its routes</li>
-                            <li>Reduce merge conflicts by 70%</li>
+                            <li><strong>Create <code>app_router.dart</code></strong> (~100 lines) — Central router that composes all feature modules</li>
+                            <li><strong>Update <code>my_navigator.dart</code></strong> (~200 lines) — Slim orchestrator delegates to feature navigators</li>
+                            <li><strong>Route constants:</strong> Extract all route name strings into <code>route_names.dart</code></li>
+                            <li><strong>Deep link mapping:</strong> Centralize deep link → route mapping in <code>deep_link_routes.dart</code></li>
+                            <li><strong>Update all <code>Navigator.pushNamed</code> calls:</strong> Verify routes resolve correctly</li>
                         </ul>
-                        <p><strong>Effort:</strong> 3 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 700%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 3: Testing & Validation</strong></p>
+                        <ul>
+                            <li><strong>Navigation tests:</strong> Verify every route resolves to correct screen</li>
+                            <li><strong>Deep link tests:</strong> Test all deep link patterns (share links, notification links, dynamic links)</li>
+                            <li><strong>Build verification:</strong> Clean build passes with all route changes</li>
+                            <li><strong>Manual QA:</strong> Navigate through every major flow (auth → home → player → settings → back)</li>
+                            <li><strong>Edge cases:</strong> Back stack behavior, nested navigation, tab persistence</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>Merge Conflicts:</strong> -70% — feature teams only modify their own route file<br>
+                            <strong>Route Discovery:</strong> Find any route in < 5 seconds (by feature folder, not scrolling 1,345 lines)<br>
+                            <strong>Parallel Development:</strong> Auth team and payment team can add routes simultaneously<br>
+                            <strong>Modular Testing:</strong> Test feature routes in isolation<br>
+                            <strong>Onboarding:</strong> New developers understand routing immediately by feature grouping
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(239, 167, 63, 0.1); border: 1px solid var(--accent-orange); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-orange); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟡 MEDIUM RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>Navigation is critical:</strong> Broken routes = users can't access features</li>
+                                <li><strong>Deep links:</strong> Must verify all external URL patterns still resolve</li>
+                                <li><strong>Mitigation:</strong> Barrel re-export from original files for backward compatibility</li>
+                                <li><strong>Mitigation:</strong> Route test suite validates all 70+ routes before merge</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 3 days (1 developer)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 700% — 3 days investment → 21 saved dev-days annually</p>
                     </div>
                 </div>
             </div>
@@ -3353,21 +3704,95 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: Invisible Failures</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <strong>1,046 catch blocks</strong> that silently swallow errors across the codebase<br>
+                            <strong>User Impact:</strong> Frozen screens, infinite loading spinners, data not refreshing — no error message shown<br>
+                            <strong>Debug Impact:</strong> Bugs are invisible — no crash reports, no logs, no Crashlytics events<br>
+                            <strong>Support Burden:</strong> 60% of support tickets are "app doesn't work" with no reproducible error
+                        </div>
+
+                        <h4>✅ What We'll Build (5-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1: Build Error Handling Infrastructure</strong></p>
                         <ul>
-                            <li><strong>1,046 catch blocks</strong> that silently swallow errors</li>
-                            <li>Users see frozen screens instead of error messages</li>
-                            <li>Bugs are invisible — no crash reports, no logs</li>
-                            <li>Support team can't diagnose issues</li>
+                            <li><strong>Create <code>ErrorHandler</code> mixin:</strong> Reusable error handling pattern for all cubits
+                                <pre style="background: var(--bg-card); padding: 10px; border-radius: 4px; margin-top: 8px; overflow-x: auto;"><code>mixin ErrorHandler on Cubit {
+  void handleError(Object error, StackTrace stack, {String? context}) {
+    // 1. Log to Crashlytics with context
+    // 2. Emit user-friendly error state
+    // 3. Track analytics event
+  }
+}</code></pre>
+                            </li>
+                            <li><strong>Create <code>AppErrorDialog</code>:</strong> Consistent error UI with retry button, support link, error code</li>
+                            <li><strong>Create <code>NetworkErrorHandler</code>:</strong> Detect timeout, no internet, server error → appropriate messages</li>
+                            <li><strong>Create <code>RetryMixin</code>:</strong> Exponential backoff retry for network calls (1s → 2s → 4s → fail)</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 2: Fix Critical Path Silent Catches</strong></p>
                         <ul>
-                            <li>Add proper error handling with user-facing dialogs</li>
-                            <li>Implement centralized error reporting to Crashlytics</li>
-                            <li>Add retry mechanisms for network failures</li>
-                            <li>Create <code>ErrorHandler</code> mixin for consistent patterns</li>
+                            <li><strong>Auth flow:</strong> Login, signup, OTP verification — users must see errors, not blank screens</li>
+                            <li><strong>Payment flow:</strong> Subscription purchase, plan selection — silent failures lose revenue</li>
+                            <li><strong>Content loading:</strong> Home screen, content detail, episode list — show retry option</li>
+                            <li><strong>Video playback:</strong> Player init, DRM, streaming errors — graceful degradation</li>
+                            <li><strong>Pattern:</strong> Replace <code>catch (e) {}</code> with <code>catch (e, s) { handleError(e, s, context: 'login'); }</code></li>
                         </ul>
-                        <p><strong>Effort:</strong> 5 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 900%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 3: Fix Secondary Path Silent Catches</strong></p>
+                        <ul>
+                            <li><strong>Search:</strong> Search failures should show "try again" not empty results</li>
+                            <li><strong>Downloads:</strong> Download failures need clear status + retry</li>
+                            <li><strong>Profile/settings:</strong> Save failures must notify user</li>
+                            <li><strong>Analytics/tracking:</strong> Can remain silent but must log to Crashlytics</li>
+                            <li><strong>Categorize remaining catches:</strong> Critical (show UI) vs Non-critical (log only)</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 4: Implement Offline Mode Graceful Degradation</strong></p>
+                        <ul>
+                            <li><strong>Network connectivity listener:</strong> Detect online/offline state changes</li>
+                            <li><strong>Offline banner:</strong> Show persistent banner when offline</li>
+                            <li><strong>Cached content:</strong> Show last-loaded content with "offline" indicator</li>
+                            <li><strong>Queue actions:</strong> Like, watchlist add — queue and sync when back online</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 5: Crashlytics Integration & Testing</strong></p>
+                        <ul>
+                            <li><strong>Verify Crashlytics:</strong> All handled errors send non-fatal reports with context</li>
+                            <li><strong>Test scenarios:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Airplane mode → All screens show appropriate offline state</li>
+                                    <li>API returns 500 → User sees retry dialog, not frozen screen</li>
+                                    <li>API timeout → User sees timeout message with retry</li>
+                                    <li>Auth token expired → Auto-refresh or redirect to login</li>
+                                    <li>Payment failure → Clear error message with support option</li>
+                                </ul>
+                            </li>
+                            <li><strong>Grep audit:</strong> Search for remaining <code>catch (e) {}</code> — target zero empty catches</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>Crash Rate:</strong> -40% — proper exception handling prevents unhandled crashes<br>
+                            <strong>User Experience:</strong> Clear error messages with retry instead of frozen screens<br>
+                            <strong>Support Tickets:</strong> -60% — users understand what went wrong and can self-recover<br>
+                            <strong>Debug Efficiency:</strong> +200% — Crashlytics captures context for every error<br>
+                            <strong>Revenue Protection:</strong> Payment/subscription errors become recoverable, not silent losses
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(239, 167, 63, 0.1); border: 1px solid var(--accent-orange); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-orange); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟡 MEDIUM RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>Error dialog overload:</strong> Too many error dialogs annoy users — categorize critical vs silent</li>
+                                <li><strong>Retry loops:</strong> Bad retry logic can DDoS own backend — use exponential backoff with max retries</li>
+                                <li><strong>Mitigation:</strong> Error dialog rate limiting (max 1 dialog per 10 seconds)</li>
+                                <li><strong>Mitigation:</strong> A/B test error UI — measure user recovery rate vs abandon rate</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 5 days (1-2 developers)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 900% — 5 days investment → 45 saved support/debugging days annually</p>
                     </div>
                 </div>
             </div>
@@ -3389,22 +3814,89 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: Dependency Hell</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                                <div style="text-align: center;"><strong style="font-size: 1.5em; color: var(--accent-orange);">111</strong><br><span style="color: var(--text-muted); font-size: 0.85em;">Dependencies</span></div>
+                                <div style="text-align: center;"><strong style="font-size: 1.5em; color: #dc2626;">14</strong><br><span style="color: var(--text-muted); font-size: 0.85em;">Vulnerabilities</span></div>
+                                <div style="text-align: center;"><strong style="font-size: 1.5em; color: var(--accent-orange);">69MB</strong><br><span style="color: var(--text-muted); font-size: 0.85em;">APK Size</span></div>
+                                <div style="text-align: center;"><strong style="font-size: 1.5em; color: var(--accent-orange);">+25%</strong><br><span style="color: var(--text-muted); font-size: 0.85em;">Build Slowdown</span></div>
+                            </div>
+                            <br><strong>Healthy range:</strong> 50-70 dependencies | <strong>Current:</strong> 111 — nearly double<br>
+                            <strong>Security:</strong> 2 critical + 6 high + 3 moderate + 3 low vulnerabilities (Dependabot)
+                        </div>
+
+                        <h4>✅ What We'll Build (4-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1: Dependency Audit & Classification</strong></p>
                         <ul>
-                            <li><strong>111 dependencies</strong> in pubspec.yaml (healthy range: 50-70)</li>
-                            <li><strong>14 known vulnerabilities</strong> flagged by GitHub Dependabot</li>
-                            <li>APK bloated to <strong>69MB</strong> (should be 25-40MB)</li>
-                            <li>25% slower builds from dependency resolution</li>
+                            <li><strong>Run <code>flutter pub deps --no-dev</code>:</strong> Map full dependency tree</li>
+                            <li><strong>Classify each package:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>🟢 <strong>Essential</strong> — core functionality (flutter_bloc, dio, injectable, etc.)</li>
+                                    <li>🟡 <strong>Replaceable</strong> — can be replaced with smaller alternatives or native code</li>
+                                    <li>🔴 <strong>Unused</strong> — imported but never referenced in code</li>
+                                    <li>⚠️ <strong>Vulnerable</strong> — flagged by Dependabot</li>
+                                </ul>
+                            </li>
+                            <li><strong>Grep usage:</strong> For each dependency, count actual import references — zero = unused</li>
+                            <li><strong>Create priority matrix:</strong> Unused + Vulnerable = remove first</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 2: Remove Unused & Fix Vulnerable Packages</strong></p>
                         <ul>
-                            <li>Audit all 111 packages — identify unused and duplicate</li>
-                            <li>Remove ~40 unused dependencies</li>
-                            <li>Update 14 vulnerable packages</li>
-                            <li>Consolidate duplicate functionality</li>
-                            <li>Enable R8 shrinking to reduce APK size</li>
+                            <li><strong>Remove ~40 unused packages:</strong> Delete from pubspec.yaml, verify build</li>
+                            <li><strong>Update 14 vulnerable packages:</strong> Upgrade to patched versions</li>
+                            <li><strong>Fix breaking changes:</strong> Address any API changes from major version bumps</li>
+                            <li><strong>Consolidate duplicates:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Multiple HTTP clients → consolidate to dio</li>
+                                    <li>Multiple image loading libs → consolidate to cached_network_image</li>
+                                    <li>Multiple storage solutions → consolidate to shared_preferences + hive</li>
+                                </ul>
+                            </li>
                         </ul>
-                        <p><strong>Effort:</strong> 4 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 600%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 3: APK Size Optimization</strong></p>
+                        <ul>
+                            <li><strong>Enable R8 full shrinking:</strong> <code>minifyEnabled true</code>, <code>shrinkResources true</code></li>
+                            <li><strong>ProGuard rules:</strong> Add keep rules for reflection-dependent packages</li>
+                            <li><strong>Split APK by ABI:</strong> <code>--split-per-abi</code> — arm64 users get ~25MB instead of 69MB</li>
+                            <li><strong>Analyze APK:</strong> Use <code>flutter build apk --analyze-size</code> to identify largest contributors</li>
+                            <li><strong>Remove unused assets:</strong> Fonts, images, animation files not referenced in code</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 4: Testing & Validation</strong></p>
+                        <ul>
+                            <li><strong>Full build test:</strong> Both dev and prod flavors build successfully</li>
+                            <li><strong>Feature smoke test:</strong> Verify every major feature still works (auth, playback, payment, search)</li>
+                            <li><strong>CI/CD test:</strong> GitHub Actions workflows complete successfully</li>
+                            <li><strong>Dependabot re-scan:</strong> Verify zero remaining vulnerabilities</li>
+                            <li><strong>Size comparison:</strong> Document APK size before/after (target: 69MB → <50MB)</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>APK Size:</strong> 69MB → ~45MB (-35% smaller) — faster downloads, less storage<br>
+                            <strong>Security:</strong> Zero known vulnerabilities — Dependabot clean<br>
+                            <strong>Build Time:</strong> -25% faster builds from reduced dependency resolution<br>
+                            <strong>Dependencies:</strong> 111 → ~70 — within healthy range<br>
+                            <strong>Maintenance:</strong> -50% annual dependency update overhead
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(239, 167, 63, 0.1); border: 1px solid var(--accent-orange); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-orange); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟡 MEDIUM RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>Breaking changes:</strong> Major version bumps may change APIs — test thoroughly</li>
+                                <li><strong>R8 shrinking:</strong> Can strip needed code — requires ProGuard rules testing</li>
+                                <li><strong>Mitigation:</strong> Remove packages one at a time, build between each removal</li>
+                                <li><strong>Mitigation:</strong> Keep version pinning for critical packages (payment, auth)</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 4 days (1 developer)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 600% — 4 days investment → 24 saved maintenance days annually + security compliance</p>
                     </div>
                 </div>
             </div>
@@ -3426,22 +3918,91 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: Monolithic Screen Files</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                                <div><strong>settings_screen.dart</strong> — 2,159 lines</div>
+                                <div><strong>trial_registration_screen.dart</strong> — 1,669 lines</div>
+                                <div><strong>subscription_screen.dart</strong> — 1,568 lines</div>
+                                <div><strong>content_onboarding_detail_screen.dart</strong> — 1,466 lines</div>
+                            </div>
+                            <br><strong>Combined:</strong> 6,862 lines across 4 screens — each is a God Widget with 10+ responsibilities<br>
+                            <strong>Impact:</strong> Every UI change in settings risks breaking unrelated sections (profile, notifications, downloads)
+                        </div>
+
+                        <h4>✅ What We'll Build (6-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1-2: Decompose settings_screen.dart (2,159 lines)</strong></p>
                         <ul>
-                            <li><code>settings_screen.dart</code> — <strong>2,159 lines</strong></li>
-                            <li><code>trial_registration_screen.dart</code> — <strong>1,669 lines</strong></li>
-                            <li><code>subscription_screen.dart</code> — <strong>1,568 lines</strong></li>
-                            <li><code>content_onboarding_detail_screen.dart</code> — <strong>1,466 lines</strong></li>
-                            <li>Monolithic screens that are impossible to refactor safely</li>
+                            <li><strong>Extract <code>SettingsProfileSection</code></strong> (~200 lines) — Avatar, name, edit profile CTA</li>
+                            <li><strong>Extract <code>SettingsSubscriptionSection</code></strong> (~250 lines) — Plan info, renewal, manage subscription</li>
+                            <li><strong>Extract <code>SettingsNotificationSection</code></strong> (~200 lines) — Push notification toggles</li>
+                            <li><strong>Extract <code>SettingsDownloadSection</code></strong> (~200 lines) — Download quality, storage, WiFi-only toggle</li>
+                            <li><strong>Extract <code>SettingsLanguageSection</code></strong> (~150 lines) — App language, content language preferences</li>
+                            <li><strong>Extract <code>SettingsAboutSection</code></strong> (~150 lines) — Version, licenses, privacy, terms</li>
+                            <li><strong>Retain <code>settings_screen.dart</code></strong> (~300 lines) — Scroll layout composing all sections</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 3: Decompose trial_registration_screen.dart (1,669 lines)</strong></p>
                         <ul>
-                            <li>Extract into smaller, reusable widgets using composition</li>
-                            <li>Create shared components: <code>SettingsSection</code>, <code>TrialStep</code>, <code>PlanCard</code></li>
-                            <li>Each widget < 300 lines with single responsibility</li>
-                            <li>Enable widget-level testing</li>
+                            <li><strong>Extract <code>TrialStepIndicator</code></strong> (~150 lines) — Step progress bar (1/3, 2/3, 3/3)</li>
+                            <li><strong>Extract <code>TrialPhoneStep</code></strong> (~250 lines) — Phone number input, validation, OTP trigger</li>
+                            <li><strong>Extract <code>TrialOTPStep</code></strong> (~200 lines) — OTP input, resend timer, verification</li>
+                            <li><strong>Extract <code>TrialPlanStep</code></strong> (~300 lines) — Plan selection cards, pricing, features</li>
+                            <li><strong>Extract <code>TrialPaymentStep</code></strong> (~250 lines) — Payment method, gateway integration</li>
+                            <li><strong>Retain <code>trial_registration_screen.dart</code></strong> (~250 lines) — Step orchestrator with PageView</li>
                         </ul>
-                        <p><strong>Effort:</strong> 6 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 800%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 4: Decompose subscription_screen.dart (1,568 lines)</strong></p>
+                        <ul>
+                            <li><strong>Extract <code>PlanCard</code></strong> (~200 lines) — Individual plan display (price, features, recommended badge)</li>
+                            <li><strong>Extract <code>PlanComparisonTable</code></strong> (~250 lines) — Feature comparison across plans</li>
+                            <li><strong>Extract <code>SubscriptionBenefits</code></strong> (~200 lines) — Benefits carousel/list</li>
+                            <li><strong>Extract <code>PaymentSummary</code></strong> (~200 lines) — Selected plan summary, coupon, total</li>
+                            <li><strong>Retain <code>subscription_screen.dart</code></strong> (~300 lines) — Layout coordinator</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 5: Decompose content_onboarding_detail_screen.dart (1,466 lines)</strong></p>
+                        <ul>
+                            <li><strong>Extract <code>ContentHeroBanner</code></strong> (~200 lines) — Hero image, title, description overlay</li>
+                            <li><strong>Extract <code>ContentMetadataRow</code></strong> (~150 lines) — Genre tags, year, rating, duration</li>
+                            <li><strong>Extract <code>ContentActionBar</code></strong> (~200 lines) — Play, watchlist, share, download buttons</li>
+                            <li><strong>Extract <code>ContentEpisodeList</code></strong> (~300 lines) — Season tabs, episode cards</li>
+                            <li><strong>Extract <code>ContentRelatedSection</code></strong> (~200 lines) — "You might also like" horizontal list</li>
+                            <li><strong>Retain <code>content_onboarding_detail_screen.dart</code></strong> (~250 lines) — ScrollView coordinator</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 6: Testing & Reusability Validation</strong></p>
+                        <ul>
+                            <li><strong>Widget tests:</strong> Write isolated tests for each extracted widget</li>
+                            <li><strong>Visual regression:</strong> Screenshot all 4 screens before/after — pixel-match comparison</li>
+                            <li><strong>Reusability check:</strong> Verify <code>PlanCard</code> works in both subscription and trial screens</li>
+                            <li><strong>Build verification:</strong> Clean build passes for both flavors</li>
+                            <li><strong>Document:</strong> Widget catalog in CLAUDE.md — reusable components list</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>UI Velocity:</strong> +50% — modify one section without risk to others<br>
+                            <strong>Reusability:</strong> Shared components (<code>PlanCard</code>, <code>ContentActionBar</code>) used across multiple screens<br>
+                            <strong>Widget Testing:</strong> Each component testable in isolation — currently impossible<br>
+                            <strong>Code Review:</strong> Review 200-line widget PR instead of 2,159-line screen diff<br>
+                            <strong>Onboarding:</strong> New developers understand screen composition at a glance
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(239, 167, 63, 0.1); border: 1px solid var(--accent-orange); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-orange); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟡 MEDIUM RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>State passing:</strong> Child widgets need correct state — use BlocBuilder at each level</li>
+                                <li><strong>Visual regressions:</strong> Margin/padding changes during extraction — screenshot compare</li>
+                                <li><strong>Subscription/payment screens are revenue-critical:</strong> Extra QA on these 2 screens</li>
+                                <li><strong>Mitigation:</strong> Extract one screen at a time, deploy after each with monitoring</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 6 days (2 developers recommended)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 800% — 6 days investment → 48 saved dev-days annually</p>
                     </div>
                 </div>
             </div>
@@ -3463,22 +4024,93 @@
                 </div>
                 <div class="initiative-content">
                     <div class="initiative-details">
-                        <h4>🎯 Problem</h4>
+                        <h4>🚨 Problem: Zombie Code Everywhere</h4>
+                        <div class="metric-box" style="border-left-color: var(--accent-orange);">
+                            <strong>703 instances</strong> of dead conditional blocks across codebase<br>
+                            <strong>Types:</strong> <code>if (false) {}</code> blocks, <code>if (true) {}</code> wrappers, stale <code>kDebugMode</code> checks, old feature flags<br>
+                            <strong>Impact:</strong> Developers can't tell which code is active vs dead — leads to bugs when modifying "dead" code that isn't<br>
+                            <strong>Debt Accumulation:</strong> 55 files with TODO/FIXME/HACK + 25 files with debug <code>print()</code> shipped to production
+                        </div>
+
+                        <h4>✅ What We'll Build (4-Day Breakdown)</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 1: Audit & Classify All 703 Conditional Blocks</strong></p>
                         <ul>
-                            <li><strong>703 instances</strong> of <code>if (false)</code>, <code>if (true)</code>, <code>kDebugMode</code> checks</li>
-                            <li>Dead code paths that are never executed in production</li>
-                            <li>Old feature flags that were never cleaned up</li>
-                            <li>Confuses developers — "is this code active or dead?"</li>
+                            <li><strong>Scan patterns:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li><code>if (false)</code> — completely dead code → DELETE</li>
+                                    <li><code>if (true)</code> — always-true wrapper → UNWRAP (keep inner code)</li>
+                                    <li><code>if (kDebugMode)</code> — debug-only code → MOVE to debug utilities</li>
+                                    <li><code>if (isFeatureEnabled('...'))</code> — old feature flags → CHECK if feature is permanently on/off</li>
+                                    <li>Commented-out conditionals → DELETE if older than 3 months</li>
+                                </ul>
+                            </li>
+                            <li><strong>Create audit spreadsheet:</strong> File, line number, type, action (delete/unwrap/keep/migrate)</li>
+                            <li><strong>Identify TODO/FIXME/HACK:</strong> Triage 55 files — create proper Jira tickets or resolve in-place</li>
                         </ul>
-                        <h4>✅ Solution</h4>
+
+                        <p style="margin-top: 15px;"><strong>Day 2: Remove Dead Code & Simplify Wrappers</strong></p>
                         <ul>
-                            <li>Audit all 703 conditional blocks</li>
-                            <li>Remove dead <code>if (false)</code> blocks entirely</li>
-                            <li>Simplify always-true <code>if (true)</code> blocks</li>
-                            <li>Consolidate <code>kDebugMode</code> checks into debug utilities</li>
-                            <li>Implement proper feature flag system (StatSig integration)</li>
+                            <li><strong>Delete all <code>if (false)</code> blocks:</strong> Estimated ~200 instances, ~3,000 lines removed</li>
+                            <li><strong>Unwrap <code>if (true)</code> blocks:</strong> Remove wrapper, keep inner code — ~150 instances</li>
+                            <li><strong>Remove debug <code>print()</code> statements:</strong> 25 files with production debug output</li>
+                            <li><strong>Resolve simple TODOs:</strong> Fix the ones that take < 5 minutes each</li>
+                            <li><strong>Create tickets:</strong> For complex TODOs that need separate PRs</li>
                         </ul>
-                        <p><strong>Effort:</strong> 4 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 500%</p>
+
+                        <p style="margin-top: 15px;"><strong>Day 3: Implement Proper Feature Flag System</strong></p>
+                        <ul>
+                            <li><strong>Create <code>feature_flags.dart</code>:</strong> Centralized feature flag registry
+                                <pre style="background: var(--bg-card); padding: 10px; border-radius: 4px; margin-top: 8px; overflow-x: auto;"><code>class FeatureFlags {
+  static bool get isNewPlayerEnabled => RemoteConfig.getBool('new_player');
+  static bool get isDarkModeEnabled => RemoteConfig.getBool('dark_mode');
+  // All flags in one place — easy to audit
+}</code></pre>
+                            </li>
+                            <li><strong>Migrate scattered flags:</strong> Replace inline boolean checks with <code>FeatureFlags.isXEnabled</code></li>
+                            <li><strong>StatSig/Firebase integration:</strong> Connect to remote config for server-driven flags</li>
+                            <li><strong>Create <code>debug_utils.dart</code>:</strong> Consolidate all <code>kDebugMode</code> checks into debug helper</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>Day 4: Lint Rules & Testing</strong></p>
+                        <ul>
+                            <li><strong>Add custom lint rules:</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Ban <code>if (false)</code> and <code>if (true)</code> in code review</li>
+                                    <li>Ban bare <code>print()</code> — require <code>debugPrint()</code> or logger</li>
+                                    <li>Warn on <code>// TODO</code> older than 30 days</li>
+                                </ul>
+                            </li>
+                            <li><strong>Pre-commit hook:</strong> Block commits with banned patterns</li>
+                            <li><strong>Full test suite:</strong> Verify zero regressions after dead code removal</li>
+                            <li><strong>Grep verification:</strong> Confirm zero remaining <code>if (false)</code>, zero bare <code>print()</code></li>
+                            <li><strong>Build test:</strong> Both flavors build clean</li>
+                        </ul>
+
+                        <h4>📈 Expected Impact</h4>
+                        <div class="metric-box" style="background: rgba(37, 141, 88, 0.1); border-left-color: var(--accent-green);">
+                            <strong>Code Clarity:</strong> Every line of code is active and intentional — zero ambiguity<br>
+                            <strong>Lines Removed:</strong> ~5,000+ lines of dead conditional code deleted<br>
+                            <strong>Performance:</strong> -15-20ms per action (no debug prints in production)<br>
+                            <strong>Feature Management:</strong> Centralized flag system — enable/disable features from dashboard<br>
+                            <strong>Developer Velocity:</strong> +20% — no more investigating if dead code is truly dead<br>
+                            <strong>Prevention:</strong> Lint rules prevent future dead code accumulation
+                        </div>
+
+                        <h4>⚠️ Risk Assessment</h4>
+                        <div style="background: rgba(239, 167, 63, 0.1); border: 1px solid var(--accent-orange); border-radius: 8px; padding: 15px; margin: 15px 0;">
+                            <span style="background: var(--accent-orange); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; font-weight: 600;">🟡 MEDIUM RISK</span>
+                            <ul style="margin-top: 10px; color: var(--text-muted);">
+                                <li><strong>"Dead" code that isn't:</strong> Some <code>if (false)</code> blocks may be temporarily disabled features — audit carefully</li>
+                                <li><strong>Feature flags:</strong> Removing wrong flag could disable active feature</li>
+                                <li><strong>Mitigation:</strong> Verify each block with git blame — understand why it was disabled</li>
+                                <li><strong>Mitigation:</strong> Ship in stages — dead code removal first, flag system second</li>
+                                <li><strong>Rollback:</strong> Git history preserves everything — easy to restore if needed</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 15px;"><strong>⏱️ Total Effort:</strong> 4 days (1 developer)</p>
+                        <p style="margin-top: 5px;"><strong>💰 ROI:</strong> 500% — 4 days investment → 20 saved dev-days annually + prevention of future accumulation</p>
                     </div>
                 </div>
             </div>
