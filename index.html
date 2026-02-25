@@ -3114,6 +3114,377 @@
 
         </div>
 
+            <!-- Initiative 16: Monster Test Files -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">16</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Split Monster Test Constants (63,062 Lines)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">🧹 TECH DEBT</span>
+                            <span class="badge badge-week">⏱️ 4 Days</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🚀 10x IDE Speed</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                            <div style="background: var(--bg-card); padding: 16px; border-radius: 12px; border-left: 4px solid var(--accent-orange); text-align: center;">
+                                <div style="font-size: 1.8em; font-weight: bold; color: var(--accent-orange);">39,621</div>
+                                <div style="color: var(--text-muted); font-size: 0.85em;">home_test_constants.dart</div>
+                            </div>
+                            <div style="background: var(--bg-card); padding: 16px; border-radius: 12px; border-left: 4px solid var(--accent-orange); text-align: center;">
+                                <div style="font-size: 1.8em; font-weight: bold; color: var(--accent-orange);">17,305</div>
+                                <div style="color: var(--text-muted); font-size: 0.85em;">listing_test_constants.dart</div>
+                            </div>
+                            <div style="background: var(--bg-card); padding: 16px; border-radius: 12px; border-left: 4px solid var(--accent-orange); text-align: center;">
+                                <div style="font-size: 1.8em; font-weight: bold; color: var(--accent-orange);">6,136</div>
+                                <div style="color: var(--text-muted); font-size: 0.85em;">test_constants.dart</div>
+                            </div>
+                        </div>
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li>IDE freezes 10-15 seconds opening these files</li>
+                            <li>Impossible to code review changes in 39K line files</li>
+                            <li>200MB+ RAM per file in IDE</li>
+                            <li>+45% slower builds from large file compilation</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Split home_test_constants into 5 domain files (~8K each)</li>
+                            <li>Split listing_test_constants into 3 files (~6K each)</li>
+                            <li>Split test_constants by feature area</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 4 days | <strong>Risk:</strong> 🟢 Low | <strong>ROI:</strong> 1,200%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 17: God Util File -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">17</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Decompose God Util File (1,425 Lines / 311 Functions)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">🧹 TECH DEBT</span>
+                            <span class="badge badge-week">⏱️ 3 Days</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🚀 +30% Velocity</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><code>lib/utils/util.dart</code> — 1,425 lines with 311 functions</li>
+                            <li>Imports 30+ packages — does everything from sharing to PiP to screen protection</li>
+                            <li>Every change risks breaking unrelated features</li>
+                            <li>Impossible to test in isolation</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Split into <code>share_utils.dart</code>, <code>device_utils.dart</code>, <code>format_utils.dart</code>, <code>ui_utils.dart</code>, <code>navigation_utils.dart</code></li>
+                            <li>Each file owns one responsibility</li>
+                            <li>Update all 450 import references across codebase</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 3 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 800%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 18: Hardcoded Colors -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">18</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Extract 3,016 Hardcoded Colors into Design System</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">🎨 DESIGN SYSTEM</span>
+                            <span class="badge badge-week">⏱️ 5 Days</span>
+                            <span class="badge badge-team">👥 1-2 Developers</span>
+                            <span class="badge badge-impact">🚀 Dark Mode Ready</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><strong>3,016 instances</strong> of <code>Color(0x...)</code> and <code>Colors.</code> scattered across codebase</li>
+                            <li>No centralized design system or theme tokens</li>
+                            <li>Impossible to implement dark mode or rebrand</li>
+                            <li>Inconsistent colors across screens</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Create <code>app_colors.dart</code> with semantic color tokens</li>
+                            <li>Replace all 3,016 hardcoded values with theme references</li>
+                            <li>Enable dark mode support with minimal additional effort</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 5 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 600%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 19: Magic Numbers -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">19</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Replace 2,043 Magic Numbers with Design Tokens</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">🎨 DESIGN SYSTEM</span>
+                            <span class="badge badge-week">⏱️ 4 Days</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🚀 Consistent UI</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><strong>2,043 instances</strong> of hardcoded padding, margin, height, width values</li>
+                            <li><code>SizedBox(height: 16)</code>, <code>EdgeInsets.all(12)</code> everywhere</li>
+                            <li>No spacing or sizing system — inconsistent across screens</li>
+                            <li>Changing spacing requires finding every hardcoded value</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Create <code>app_spacing.dart</code> and <code>app_dimensions.dart</code></li>
+                            <li>Define spacing scale: xs(4), sm(8), md(12), lg(16), xl(24), xxl(32)</li>
+                            <li>Replace all magic numbers with semantic tokens</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 4 days | <strong>Risk:</strong> 🟢 Low | <strong>ROI:</strong> 500%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 20: Consumption Cubit -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%); border: 2px solid #dc2626;">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, #dc2626, #b91c1c);">20</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Tame Consumption Cubit (4,294 Lines — Core Feature)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: #dc2626;">🔴 HIGH RISK</span>
+                            <span class="badge badge-week">⏱️ 6 Days</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">🚀 -60% Rebuilds</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><code>consumption_cubit.dart</code> — <strong>2,294 lines</strong> (largest logic file)</li>
+                            <li><code>consumption_video_playback.dart</code> — <strong>2,000 lines</strong></li>
+                            <li>Combined <strong>4,294 lines</strong> for one feature — impossible to maintain</li>
+                            <li>Every change risks breaking video playback</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Extract into <code>playback_cubit.dart</code>, <code>progress_cubit.dart</code>, <code>quality_cubit.dart</code></li>
+                            <li>Separate video controls from business logic</li>
+                            <li>Add unit tests for each extracted cubit</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 6 days | <strong>Risk:</strong> 🔴 High (core feature) | <strong>ROI:</strong> 1,000%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 21: Routing Monoliths -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">21</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Split Routing Monoliths (2,738 Lines)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">🧹 TECH DEBT</span>
+                            <span class="badge badge-week">⏱️ 3 Days</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🚀 Modular Routing</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><code>my_navigator.dart</code> — <strong>1,393 lines</strong></li>
+                            <li><code>stage_app_router.dart</code> — <strong>1,345 lines</strong></li>
+                            <li>All routes in 2 massive files — merge conflicts on every feature</li>
+                            <li>Hard to find routes, no feature isolation</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Split by feature: <code>auth_routes.dart</code>, <code>home_routes.dart</code>, <code>payment_routes.dart</code>, <code>consumption_routes.dart</code></li>
+                            <li>Each feature owns its routes</li>
+                            <li>Reduce merge conflicts by 70%</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 3 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 700%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 22: Silent Catch Blocks -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">22</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Fix 1,046 Silent Catch Blocks</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">⚠️ STABILITY</span>
+                            <span class="badge badge-week">⏱️ 5 Days</span>
+                            <span class="badge badge-team">👥 1-2 Developers</span>
+                            <span class="badge badge-impact">🚀 -40% Crashes</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><strong>1,046 catch blocks</strong> that silently swallow errors</li>
+                            <li>Users see frozen screens instead of error messages</li>
+                            <li>Bugs are invisible — no crash reports, no logs</li>
+                            <li>Support team can't diagnose issues</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Add proper error handling with user-facing dialogs</li>
+                            <li>Implement centralized error reporting to Crashlytics</li>
+                            <li>Add retry mechanisms for network failures</li>
+                            <li>Create <code>ErrorHandler</code> mixin for consistent patterns</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 5 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 900%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 23: Dependency Bloat -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">23</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Prune 111 Dependencies (14 Vulnerabilities)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">📦 DEPENDENCIES</span>
+                            <span class="badge badge-week">⏱️ 4 Days</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🚀 -30% APK Size</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><strong>111 dependencies</strong> in pubspec.yaml (healthy range: 50-70)</li>
+                            <li><strong>14 known vulnerabilities</strong> flagged by GitHub Dependabot</li>
+                            <li>APK bloated to <strong>69MB</strong> (should be 25-40MB)</li>
+                            <li>25% slower builds from dependency resolution</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Audit all 111 packages — identify unused and duplicate</li>
+                            <li>Remove ~40 unused dependencies</li>
+                            <li>Update 14 vulnerable packages</li>
+                            <li>Consolidate duplicate functionality</li>
+                            <li>Enable R8 shrinking to reduce APK size</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 4 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 600%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 24: UI God Screens -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">24</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Break Down UI God Screens (6,862 Lines)</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">🧹 TECH DEBT</span>
+                            <span class="badge badge-week">⏱️ 6 Days</span>
+                            <span class="badge badge-team">👥 2 Developers</span>
+                            <span class="badge badge-impact">🚀 +50% UI Velocity</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><code>settings_screen.dart</code> — <strong>2,159 lines</strong></li>
+                            <li><code>trial_registration_screen.dart</code> — <strong>1,669 lines</strong></li>
+                            <li><code>subscription_screen.dart</code> — <strong>1,568 lines</strong></li>
+                            <li><code>content_onboarding_detail_screen.dart</code> — <strong>1,466 lines</strong></li>
+                            <li>Monolithic screens that are impossible to refactor safely</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Extract into smaller, reusable widgets using composition</li>
+                            <li>Create shared components: <code>SettingsSection</code>, <code>TrialStep</code>, <code>PlanCard</code></li>
+                            <li>Each widget < 300 lines with single responsibility</li>
+                            <li>Enable widget-level testing</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 6 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 800%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initiative 25: Dead Feature Flags -->
+            <div class="initiative-card collapsed" style="background: linear-gradient(135deg, rgba(239, 167, 63, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); border: 2px solid var(--accent-orange);">
+                <div class="initiative-header" onclick="toggleInitiative(this)">
+                    <div class="initiative-number" style="background: linear-gradient(135deg, var(--accent-orange), #ff9800);">25</div>
+                    <div class="initiative-title-block">
+                        <div class="initiative-title">Clean 703 Dead Feature Flags & Unreachable Code</div>
+                        <div class="initiative-meta">
+                            <span class="badge badge-new" style="background: var(--accent-orange);">🧹 TECH DEBT</span>
+                            <span class="badge badge-week">⏱️ 4 Days</span>
+                            <span class="badge badge-team">👥 1 Developer</span>
+                            <span class="badge badge-impact">🚀 Cleaner Code</span>
+                        </div>
+                    </div>
+                    <div class="expand-toggle"></div>
+                </div>
+                <div class="initiative-content">
+                    <div class="initiative-details">
+                        <h4>🎯 Problem</h4>
+                        <ul>
+                            <li><strong>703 instances</strong> of <code>if (false)</code>, <code>if (true)</code>, <code>kDebugMode</code> checks</li>
+                            <li>Dead code paths that are never executed in production</li>
+                            <li>Old feature flags that were never cleaned up</li>
+                            <li>Confuses developers — "is this code active or dead?"</li>
+                        </ul>
+                        <h4>✅ Solution</h4>
+                        <ul>
+                            <li>Audit all 703 conditional blocks</li>
+                            <li>Remove dead <code>if (false)</code> blocks entirely</li>
+                            <li>Simplify always-true <code>if (true)</code> blocks</li>
+                            <li>Consolidate <code>kDebugMode</code> checks into debug utilities</li>
+                            <li>Implement proper feature flag system (StatSig integration)</li>
+                        </ul>
+                        <p><strong>Effort:</strong> 4 days | <strong>Risk:</strong> 🟡 Medium | <strong>ROI:</strong> 500%</p>
+                    </div>
+                </div>
+            </div>
+
         <!-- Summary Footer -->
         <div class="summary-footer">
             <h2 class="summary-title">📊 3-Month Impact Forecast</h2>
@@ -3181,8 +3552,8 @@
                 <strong>Author:</strong> Mofidul Islam, SDE III - Mobile<br>
                 <strong>Date:</strong> February 6, 2026 | <strong>Status:</strong> ✅ Ready for Execution<br>
                 <strong>Version:</strong> FINAL - Organized by Metrics<br>
-                <strong>Total Initiatives:</strong> 12 (6 P0 Critical | 1 P1 Important | 1 P2 Retention | 4 P2 Tech Debt)<br>
-                <strong>Focus:</strong> 🚀 Growth (1) | 🔄 Growth+Retention (4) | 📈 Retention (3) | 🛠️ Tech Debt (4)
+                <strong>Total Initiatives:</strong> 22 (6 P0 Critical | 1 P1 Important | 1 P2 Retention | 14 Tech Debt)<br>
+                <strong>Focus:</strong> 🚀 Growth (1) | 🔄 Growth+Retention (4) | 📈 Retention (3) | 🛠️ Tech Debt (14)
             </div>
         </div>
     </div>
